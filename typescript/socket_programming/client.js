@@ -3,7 +3,9 @@ const runner = require('child_process');
 let sprintf = require('sprintf-js').sprintf;
 var go_client_main = `
 import subprocess
-list_files_1 = subprocess.run(["goeval",'''\
+list_files_2 = subprocess.run(["python3","-c",'''
+import subprocess
+list_files_1 = subprocess.run(["goeval",\\'\\'\\'
 const (
         SERVER_HOST = "localhost"
         SERVER_PORT = "9988"
@@ -22,9 +24,11 @@ const (
     }
     fmt.Println("Received: ", string(buffer[:mLen]))
     defer connection.Close()
-'''],timeout=500)
+\\'\\'\\'],timeout=500)
 print("The exit code was: %d" % list_files_1.returncode)
+'''],timeout=500)
+print("The exit code was: %d" % list_files_2.returncode)
 `
-runner.execFile('python',["-c",go_client_main], (err, stdout, stderr) => { 
+runner.execFile('python3',["-c",go_client_main], (err, stdout, stderr) => { 
     console.log(stdout) // hi 
  });
