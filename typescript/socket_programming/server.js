@@ -1,10 +1,54 @@
+// // Node.js socket server script
+const net = require('net');
+
+var globe = {};
+// Create a server object
+const server = net.createServer((socket) => {
+  socket.on('data', (data) => {
+    console.log(data.toString());
+    
+  });
+
+  socket.write(`
+  SERVER: Hello! This is server speaking:
+  `);
+  socket.end('SERVER: Closing connection now.');
+}).on('error', (err) => {
+  console.error(err);
+});
+
+// Open server on port 9898
+server.listen(9898, () => {
+  console.log('opened server on', server.address().port);
+  
+  go_server();
+  go_server_1();
+});
+
+function go_server_1(){
+  const runner = require('child_process'); 
+  let sprintf = require('sprintf-js').sprintf;
+  globe.val = `  
+   const (
+         SERVER_HOST = "localhost"
+         SERVER_PORT = "9988"
+         SERVER_TYPE = "tcp"
+     )
+         fmt.Println("Server Running...") 
+         fmt.Println("Listening on " + SERVER_HOST + ":" + SERVER_PORT)
+         fmt.Println("Waiting for client...")
+ `
+ runner.execFile("goeval",[globe.val], (err, stdout, stderr) => { 
+     console.log(stdout) // hi 
+  });
+}
+
+
+//go_server()
+function go_server(){
   const runner = require('child_process'); 
   let sprintf = require('sprintf-js').sprintf;
   var go_server_main_1 = `
-import subprocess
-list_files_2 = subprocess.run(["python3","-c",'''
-from subprocess import run
-list_files_1 = run(["goeval",\\'\\'\\'
  const (
          SERVER_HOST = "localhost"
          SERVER_PORT = "9988"
@@ -20,7 +64,7 @@ list_files_1 = run(["goeval",\\'\\'\\'
          _, err = connection.Write([]byte("Thanks! Got your message:" + string(buffer[:mLen])))
          connection.Close()
      }
-     fmt.Println("Server Running...")
+     
      server, err := net.Listen(SERVER_TYPE, SERVER_HOST+":"+SERVER_PORT)
      if err != nil {
          fmt.Println("Error listening:", err.Error())
@@ -28,9 +72,7 @@ list_files_1 = run(["goeval",\\'\\'\\'
      }
      
      mains := func(){   
-         defer server.Close()      
-         fmt.Println("Listening on " + SERVER_HOST + ":" + SERVER_PORT)
-         fmt.Println("Waiting for client...")
+         defer server.Close()
          for {
              connection, err := server.Accept()
              if err != nil {
@@ -43,19 +85,9 @@ list_files_1 = run(["goeval",\\'\\'\\'
      }   
      
      mains()
-\\'\\'\\'],timeout=500)
-print("The exit code was: %d" % list_files_1.returncode)
-'''],timeout=500)
-print("The exit code was: %d" % list_files_2.returncode)
  `
- runner.execFile("python3",["-c",go_server_main_1], (err, stdout, stderr) => { 
+
+ runner.execFile("goeval",[go_server_main_1], (err, stdout, stderr) => { 
      console.log(stdout) // hi 
   });
-'''],timeout=500)
-print("The exit code was: %d" % list_files_3.returncode)
-`
-  
-
-  runner.execFile("python",["-c",go_server_main_1], (err, stdout, stderr) => { 
-    console.log(stdout) // hi 
- });
+}
