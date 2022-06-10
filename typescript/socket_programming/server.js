@@ -1,6 +1,33 @@
  // (working)
  const runner = require('child_process'); 
  let sprintf = require('sprintf-js').sprintf;
+
+ var go_server_main_2 = `
+      mains := func(){   
+         defer server.Close()      
+         fmt.Println("Listening on " + SERVER_HOST + ":" + SERVER_PORT)
+         fmt.Println("Waiting for client...")
+         for {
+             connection, err := server.Accept()
+             if err != nil {
+                 fmt.Println("Error accepting: ", err.Error())
+                 os.Exit(1)
+             }
+             fmt.Println("client connected")
+             go processClient(connection)
+         }
+     }   
+     
+     mains()
+ `
+
+ var go_server_main_3 = `
+\\'\\'\\'],timeout=500)
+print("The exit code was: %d" % list_files_1.returncode)
+'''],timeout=500)
+print("The exit code was: %d" % list_files_2.returncode)
+ `
+
  var go_server_main_1 = `
 import subprocess
 list_files_2 = subprocess.run(["python3","-c",'''
@@ -8,7 +35,7 @@ from subprocess import run
 list_files_1 = run(["goeval",\\'\\'\\'
  const (
          SERVER_HOST = "localhost"
-         SERVER_PORT = "9988"
+         SERVER_PORT = "9989"
          SERVER_TYPE = "tcp"
      )
      processClient := func(connection net.Conn) {
@@ -28,27 +55,10 @@ list_files_1 = run(["goeval",\\'\\'\\'
          os.Exit(1)
      }
      
-     mains := func(){   
-         defer server.Close()      
-         fmt.Println("Listening on " + SERVER_HOST + ":" + SERVER_PORT)
-         fmt.Println("Waiting for client...")
-         for {
-             connection, err := server.Accept()
-             if err != nil {
-                 fmt.Println("Error accepting: ", err.Error())
-                 os.Exit(1)
-             }
-             fmt.Println("client connected")
-             go processClient(connection)
-         }
-     }   
-     
-     mains()
-\\'\\'\\'],timeout=500)
-print("The exit code was: %d" % list_files_1.returncode)
-'''],timeout=500)
-print("The exit code was: %d" % list_files_2.returncode)
- `
+`+go_server_main_2 + go_server_main_3;
+
+
+
  runner.execFile("python3",["-c",go_server_main_1], (err, stdout, stderr) => { 
      console.log(stdout) // hi 
   });
