@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def classes():
     class rectangle:
         '''
@@ -78,3 +79,12 @@ A.x = 30
 print(A1.y + A2.x)
 
 
+=======
+# string = list(input("Enter a string:"))
+# print("No of alphabets:",filter(lambda x: x.isalpha(), string))
+# print("No of digits:",filter(lambda x: x.isnum(), string))
+
+
+#input = 
+print(",".join([str(i**2) for i in [int(i) for i in input("Enter the list:").split(",")] if(i%2!=0)]))
+>>>>>>> 259cfe8b3b1d32c221f8e6d3b25c40d1dc51d2cd
