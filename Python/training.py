@@ -1,7 +1,19 @@
-# string = list(input("Enter a string:"))
-# print("No of alphabets:",filter(lambda x: x.isalpha(), string))
-# print("No of digits:",filter(lambda x: x.isnum(), string))
+# import subprocess
+# import sys
 
+# def install(package):
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    
+# install("matplotlib")
+# print(sys.executable)
 
-#input = 
-print(",".join([str(i**2) for i in [int(i) for i in input("Enter the list:").split(",")] if(i%2!=0)]))
+# C:\Users\Padmaja\AppData\Local\Programs\Python\Python310\python.exe
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+product_category = np.array(['Furniture', 'Technology', 'Office Supplies'])
+sales = np.array ([4110451.90, 4744557.50, 3787492.52] )
+
+plt.bar(product_category, sales)
+plt.show()
