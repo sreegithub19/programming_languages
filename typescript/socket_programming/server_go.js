@@ -51,7 +51,7 @@ function go_server(){
  `
 
  var running = runner.execFile("goeval",[go_server_main_1], 
-  {timeout: 10000},   
+  {timeout: 1000000},   
  (err, stdout, stderr) => { 
      console.log(stdout) // hi 
      //console.log(err)
