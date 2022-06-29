@@ -1,13 +1,18 @@
 var child_process = require('child_process');
-let pythonBridge = require('python-bridge');
-//let express2 = require('nodemon');
-let python1 = pythonBridge();
-const http = require('http');
-//const open = require('open');
-python1.ex`
-import ast
-a = int(input("Enter a:"))
-print(a)
+const prompt = require('prompt-sync')();
+var child_process = require('child_process');
+
+const input = prompt();
+console.log(typeof(input))
+var a = "Hello"
+
+var python_string = `
+print("%s",${a})
+
 `
-python1.end();
+child_process.exec("python",["-c",python_string], 
+//{timeout:10000},
+(err, stdout, stderr) => { 
+    console.log(stdout)
+ });
 
