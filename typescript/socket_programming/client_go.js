@@ -8,7 +8,7 @@ let sprintf = require('sprintf-js').sprintf;
 var go_client_main = `
 const (
         SERVER_HOST = "localhost"
-        SERVER_PORT = "9899"
+        SERVER_PORT = "9897"
         SERVER_TYPE = "tcp"
     )
     connection, err := net.Dial(SERVER_TYPE, SERVER_HOST+":"+SERVER_PORT)

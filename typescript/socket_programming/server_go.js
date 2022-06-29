@@ -4,12 +4,13 @@
 go_server();
 
 function go_server(){
+
   const runner = require('child_process'); 
   let sprintf = require('sprintf-js').sprintf;
   var go_server_main_1 = `
  const (
          SERVER_HOST = "localhost"
-         SERVER_PORT = "9899"
+         SERVER_PORT = "9897"
          SERVER_TYPE = "tcp"
      )
 
@@ -57,5 +58,4 @@ function go_server(){
      //console.log(err)
   }
   );
-
 }
