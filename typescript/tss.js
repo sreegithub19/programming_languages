@@ -5,7 +5,7 @@ a = input().split()
 print(a[0]+"22")
 print(a[1]+"32")
 print(int(a[2])**2)
-`] 
+`]
 ,{ stdio: 'pipe'}
 );
 
