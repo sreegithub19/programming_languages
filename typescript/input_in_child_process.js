@@ -12,7 +12,7 @@ print(inp[2].upper())
 );
 
 var p1 = require('child_process').execFile('python3', ['-c',`
-print(input(),end=" ")
+print(input())
 `]
 ,{ stdio: 'pipe'}
 );
@@ -27,7 +27,7 @@ p1.stdout.on('data', function(data) {
 p.stdin.write(prompt("Enter p input:"));
 
 p1.stdin.write(prompt("Enter p1 first input:"));
-// p1.stdin.write(prompt("Enter p1 next input:"));  -> printing without space, attached to previous output
+p1.stdin.write(prompt("Enter p1 next input:")); //  -> printing without space, attached to previous output
 
 p.stdin.end();
 p1.stdin.end();
