@@ -1,3 +1,5 @@
+// workaround in tss.js
+
 var child_process = require('child_process');
 const prompt = require('prompt-sync')();
 
