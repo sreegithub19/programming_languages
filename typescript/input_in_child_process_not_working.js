@@ -6,7 +6,9 @@ const prompt = require('prompt-sync')();
 var a = "Hello"
 console.log(typeof(a))
 const python_string = `
-print("GoodBye!!")
+a = str(`+a+`)
+print(a)
+print("GoodBye!!",a)
 `
 child_process.execFile("python3",["-c",python_string], 
 {timeout:10000},
