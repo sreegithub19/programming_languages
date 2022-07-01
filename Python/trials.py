@@ -95,10 +95,28 @@
 
 import subprocess
 list_files_1 = subprocess.run(["node","-e",'''
-var child_process = require('child_process');
 const prompt = require('prompt-sync')();
 var a = prompt("Enter a number:")
 console.log(a+2);
+
+var p = require('child_process').execFile('python', ['-c',`
+print("hi")
+inp = input().split()
+a = int(inp[0])
+print(a+45)
+print(int(inp[1])**2)
+print("Enter the lowercase string:",inp[2])
+print(inp[2].upper())
+`]
+,{ stdio: 'pipe'}
+);
+
+p.stdout.on('data', function(data) {
+  console.log(data.toString());
+});
+
+p.stdin.write(prompt("Enter p input:"));
+p.stdin.end();
 '''],timeout=500)
 print("The exit code was: %d" % list_files_1.returncode)
 
