@@ -1,7 +1,7 @@
 const prompt = require('prompt-sync')();
 global.a = "";
 
-var p = require('child_process').execFile('python3', ['-c',`
+var p = require('child_process').execFile('python', ['-c',`
 print("hi")
 inp = input().split()
 a = int(inp[0])
@@ -13,14 +13,14 @@ print(inp[2].upper())
 ,{ stdio: 'pipe'}
 );
 
-var p1 = require('child_process').execFile('python3', ['-c',`
+var p1 = require('child_process').execFile('python', ['-c',`
 print(input())
 `]
 ,{ stdio: 'pipe'}
 );
 
-var p2 = require('child_process').execFile('python3', ['-c',`
-print(str(${a})+input())
+var p2 = require('child_process').execFile('python', ['-c',`
+print(input())
 `]
 ,{ stdio: 'pipe'}
 );
@@ -45,8 +45,8 @@ p1.stdin.write(prompt("Enter p1 first input:"));
 p2.stdin.write(prompt("Enter p2 first input:"));
 
 p.stdin.end();
-p1.stdin.end();
 p2.stdin.end();
+p1.stdin.end();
 
 
 /*
