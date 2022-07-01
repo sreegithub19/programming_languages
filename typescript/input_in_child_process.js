@@ -18,6 +18,7 @@ print(input())
 `]
 ,{ stdio: 'pipe'}
 );
+
 var p2 = require('child_process').execFile('python3', ['-c',`
 print(str(${a})+input())
 `]
