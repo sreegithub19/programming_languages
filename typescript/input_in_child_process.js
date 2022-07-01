@@ -1,4 +1,5 @@
 const prompt = require('prompt-sync')();
+global.a = "";
 
 var p = require('child_process').execFile('python3', ['-c',`
 print("hi")
@@ -18,7 +19,7 @@ print(input())
 ,{ stdio: 'pipe'}
 );
 var p2 = require('child_process').execFile('python3', ['-c',`
-print(input())
+print(str(${a})+input())
 `]
 ,{ stdio: 'pipe'}
 );
@@ -28,20 +29,42 @@ p.stdout.on('data', function(data) {
   console.log(data.toString());
 });
 p1.stdout.on('data', function(data) { 
-  global.a = data.toString()
-  console.log(a);
+  a = data.toString()
+  console.log(a);   // 1
 });
 p2.stdout.on('data', function(data) { 
-  console.log((a).concat(data.toString()));
-  console.log(parseInt(a) + parseInt(data.toString()));
+  console.log((a).concat(data.toString()));   // 1\n5
+  console.log(parseInt(a) + parseInt(data.toString()));     //addition of the integers
 });
 
 
 p.stdin.write(prompt("Enter p input:"));
 
 p1.stdin.write(prompt("Enter p1 first input:"));
-p2.stdin.write(prompt("Enter p2 first input:")); //  -> printing without space, attached to previous output
+p2.stdin.write(prompt("Enter p2 first input:"));
 
 p.stdin.end();
 p1.stdin.end();
 p2.stdin.end();
+
+
+/*
+Output:
+
+Enter p input:34 45 fdhethn
+Enter p1 first input:1
+Enter p2 first input:8
+hi
+79
+2025
+Enter the lowercase string: fdhethn
+FDHETHN
+
+1
+
+1
+8
+
+9
+
+*/
