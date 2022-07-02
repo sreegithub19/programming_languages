@@ -1,3 +1,5 @@
+ // working fine
+ 
  // use str(${prompt()}) instead of input() for taking input in child processes
 
 const prompt = require('prompt-sync')();

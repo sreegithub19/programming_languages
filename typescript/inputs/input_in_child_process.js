@@ -1,3 +1,5 @@
+// partially working (using workarounds)
+
 const prompt = require('prompt-sync')();
 global.a = "";
 
