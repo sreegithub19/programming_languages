@@ -31,11 +31,11 @@ p.stdout.on('data', function(data) {
 });
 p1.stdout.on('data', function(data) { 
   a = data.toString()
-  console.log(a);   // 1
+  console.log(a);
 });
 p2.stdout.on('data', function(data) { 
-  console.log((a).concat(data.toString()));   // 1\n5
-  console.log(parseInt(a) + parseInt(data.toString()));     //addition of the integers
+  console.log((a).concat(data.toString()));
+  console.log(parseInt(a) + parseInt(data.toString())); 
 });
 
 
@@ -50,7 +50,7 @@ p1.stdin.end();
 
 
 /*
-Output:
+Sample Output:
 
 Enter p input:34 45 fdhethn
 Enter p1 first input:1
