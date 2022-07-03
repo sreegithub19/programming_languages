@@ -10,12 +10,12 @@ print(int(a)+344)
 print(int(str(${prompt("Enter next:")}))+344)
 import subprocess
 list_files_1 = subprocess.run(["python","-c",'''\
-print("Input value in child process:",str(${prompt()}))
+print("Input value in child process:",str("${prompt()}")+"'!")
 '''],timeout=500)
 print("The exit code was: %d" % list_files_1.returncode)
 `]
 ,
-//  {timeout: 1000000},   
+ // {timeout: 10000},   
 (err, stdout, stderr) => { 
   console.log(stdout) // hi 
   //console.log(err)
