@@ -1,9 +1,9 @@
-# not working
+# working
 
 import subprocess
 file1 = open("/tmp/text", "w") 
 file1.write(input("Enter first name:")+"\n")
-file1.write(input("Enter last name:")+"\n")
+file1.write(input("Enter last name:"))
 file1.close()
 
 list_files_1 = subprocess.run(["goeval",'''
