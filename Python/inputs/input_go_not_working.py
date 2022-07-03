@@ -1,23 +1,22 @@
 # not working
 
 import subprocess
-inp = str(input())
-list_files_1 = subprocess.run(["goeval",'''\
-	fmt.Println("input text:")
-	line := {}
-	fmt.Printf("%T\\n", os.Stdin)
-	fmt.Printf("%T\\n", line)
-	fmt.Println(line)
-'''.format(inp)],timeout=500)
-print()
+file1 = open("/tmp/text", "w") 
+file1.write(input("Enter first name:")+"\n")
+file1.write(input("Enter last name:")+"\n")
+file1.close()
+
+list_files_1 = subprocess.run(["goeval",'''
+data, err := ioutil.ReadFile("/tmp/text")
+    if err != nil {
+        log.Panicf("failed reading data from file: %s", err)
+    }
+    fmt.Printf("\\nSize: %d bytes", len(data))
+    fmt.Printf("\\nData: %s\\n", data)
+    //fmt.Println()
+    lines := strings.Split(string(data), "\\n")
+    for i, line := range lines {
+      fmt.Printf("%d line: %s\\n",i+1,line)
+    }
+'''],timeout=500)
 print("The exit code was: %d" % list_files_1.returncode)
-
-'''
-Error:
-
-# command-line-arguments
-:2: assignment mismatch: 2 variables but 1 value
-:2: undefined: dfbgrntntr
-
-The exit code was: 2
-'''
