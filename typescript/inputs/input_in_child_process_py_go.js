@@ -10,7 +10,7 @@ var p = require('child_process').execFile('python', ["-c",`
 import subprocess
 file1 = open("/tmp/text", "w") 
 file1.write(str("${prompt("Enter first name:")}")+"\\n")
-file1.write(str("${prompt("Enter last name:")}")+"\\n")
+file1.write(str("${prompt("Enter last name:")}"))
 file1.close()
 
 list_files_1 = subprocess.run(["goeval",'''\
