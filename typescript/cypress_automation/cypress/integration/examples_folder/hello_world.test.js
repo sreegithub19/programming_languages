@@ -29,9 +29,6 @@ describe('Empty test',()=>{
             //cy.get('[data-testid=username]')
             // cy.get('[data-testid=homepage-cta]')
 
-
-
-
     })
 })
 
