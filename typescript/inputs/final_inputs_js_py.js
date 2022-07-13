@@ -1,7 +1,7 @@
 // https://stackoverflow.com/questions/53376908/capture-input-in-the-child-process-after-spawn-in-node
 // working
 
-
+console.log("final_inputs_js_py.js file")
 const { spawn } = require('child_process');
 var child = spawn("python3", ["-c",`
 import subprocess
