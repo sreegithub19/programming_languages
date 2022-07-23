@@ -1,0 +1,7 @@
+1. let vs var vs const 		
+        var - It can be declared without initialization.	
+        let - It can be declared without initialization.	
+        const - It cannot be declared without initialization.
+
+
+2. Symbol - a data type whose instances are unique and immutable
