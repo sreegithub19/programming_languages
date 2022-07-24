@@ -5,3 +5,5 @@
 
 
 2. Symbol - a data type whose instances are unique and immutable
+3. IIFE - Immediately Invoked Function Expression
+
