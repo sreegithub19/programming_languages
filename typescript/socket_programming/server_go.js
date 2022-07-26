@@ -1,12 +1,7 @@
 // // Node.js socket server script
 // https://mattsumme.rs/2015/nodejs-child-process-timeouts/
 
-go_server();
-
-function go_server(){
-
-  const runner = require('child_process'); 
-  let sprintf = require('sprintf-js').sprintf;
+  const { spawn , execFile } = require('child_process'); 
   var go_server_main_1 = `
  const (
          SERVER_HOST = "localhost"
@@ -51,6 +46,7 @@ function go_server(){
      mains()
  `
 
+/*
  var running = runner.execFile("goeval",[go_server_main_1], 
   {timeout: 1000000},   
  (err, stdout, stderr) => { 
@@ -58,4 +54,9 @@ function go_server(){
      //console.log(err)
   }
   );
-}
+*/
+var child = execFile('goeval',[go_server_main_1]);
+child.stdout.pipe(process.stdout);
+child.stderr.pipe(process.stderr);
+process.stdin.pipe(child.stdin);
+child.on('exit', () => process.exit());  

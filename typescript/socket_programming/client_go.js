@@ -1,10 +1,9 @@
 // // Node.js socket client script
 // https://mattsumme.rs/2015/nodejs-child-process-timeouts/
 
-go_client();
-function go_client(){
-const runner = require('child_process'); 
-let sprintf = require('sprintf-js').sprintf;
+
+const { spawn , execFile } = require('child_process'); 
+
 var go_client_main = `
 const (
         SERVER_HOST = "localhost"
@@ -25,12 +24,18 @@ const (
     fmt.Println("Received: ", string(buffer[:mLen]))
     defer connection.Close()
 `
-runner.execFile('goeval',[go_client_main],
+
+/*
+child.execFile('goeval',[go_client_main],
 
   (err, stdout, stderr) => { 
     console.log(stdout) // hi 
     console.log(err)
  });
+ */
 
-
-}
+var child = execFile('goeval',[go_client_main]);
+child.stdout.pipe(process.stdout);
+child.stderr.pipe(process.stderr);
+process.stdin.pipe(child.stdin);
+child.on('exit', () => process.exit());  
