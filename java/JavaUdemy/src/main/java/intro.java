@@ -2,6 +2,9 @@
 Important links:
 
 1. https://unicode-table.com/en/
+2. Operator precedence - https://www.cs.bilkent.edu.tr/~guvenir/courses/CS101/op_precedence.html
+3. Java keywords:  https://en.wikipedia.org/wiki/List_of_Java_keywords
+4. Diffmerge : https://sourcegear.com/diffmerge/downloads.html
 
 Topics covered:
 1. Print
@@ -14,7 +17,7 @@ Topics covered:
 
 import java.util.*;
 public class intro {
-    // for nested functions
+    // declaring interfaces for nested functions / methods
     interface input_interface1 {
         int subtract(int a , int b);
     }
@@ -29,16 +32,22 @@ public class intro {
         void intro();
         void formatting();
     }
+    interface conditional_interface4{
+        void bool();
+        void others();
+    }
 
     public static void main(String[] args) {
         //input();      // input_interface1
         //primitive();  // primitive_interface2
         //casting();
-        stringsMethod();   // strings_interface3
+        //stringsMethod();   // strings_interface3
         //charBoolean();
+        operators(50,40);
 
     }
-    // functions
+
+    // functions / methods
 
     public static void input(){
         Scanner sc = new Scanner(System.in);
@@ -117,6 +126,7 @@ public class intro {
     }
 
     public static void casting(){
+        // type of variables
         System.out.println((Integer)(Byte.MIN_VALUE/1));   // -128
         System.out.println(((Object) Byte.MIN_VALUE).getClass()); // class java.lang.Byte
         System.out.println(((Integer)(Byte.MIN_VALUE / 1)).getClass()); // class java.lang.Integer
@@ -160,6 +170,37 @@ public class intro {
         System.out.println(myUnicodeChar);   // D
         System.out.println(myUnicodeChar == myChar);  // true
     }
+
+    public static void operators(int a,int b){
+        conditional_interface4 ci4 = new conditional_interface4() {
+            @Override
+            public void bool() {
+                boolean isAlien = false;
+                if(isAlien == false){ System.out.println("It is not alien"); }
+            }
+            @Override
+            public void others() {
+
+                System.out.println(2*4*(3+-+-+-+-3));   // 48
+
+                boolean b = (2>3)?true:false;
+                System.out.println(b);
+                System.out.println(a);
+                int a = 3;
+                System.out.println(a);
+               // a = 45;
+                System.out.println(a);
+                // operator precedence
+                    // https://www.cs.bilkent.edu.tr/~guvenir/courses/CS101/op_precedence.html
+
+            }
+        };
+        ci4.bool();
+        ci4.others();
+
+
+    }
+
 
 
 }
