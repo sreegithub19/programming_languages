@@ -1,11 +1,17 @@
-# python graphs.py
-# or 
-# ipython graphs.py
-
+#%%
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+
 from IPython.display import display,HTML
+# reference: https://github.com/sreegithub19/upgrad/blob/main/1_Prep%20sessions/1_Python_basics/Prep%20session%20practice%202%20(classes%2C%20OOPS).ipynb
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    
+install("matplotlib")
+import matplotlib.pyplot as plt
 
 product_category = np.array(['Furniture', 'Technology', 'Office Supplies'])
 sales = np.array([4110451.90, 4744557.50, 3787492.52] )
