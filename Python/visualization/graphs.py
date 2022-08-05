@@ -11,8 +11,7 @@ from flask import Flask
 
 
 def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])   
 install("matplotlib")
 
 
@@ -32,14 +31,15 @@ display(pd.DataFrame(data))   # == print(pd.DataFrame(data)), in this case
 print(tabulate(pd.DataFrame(data),headers='keys', tablefmt='psql'))
 #s = (pd.DataFrame(data).to_html())
 
+def flask_app():
+    app = Flask(__name__)
 
-app = Flask(__name__)
+    @app.route('/')
+    def scrape_and_reformat():
+        return (pd.DataFrame(data).to_html())
 
-@app.route('/')
-def scrape_and_reformat():
-    return (pd.DataFrame(data).to_html())
-
-if __name__ == '__main__':
-    webbrowser.open('http://127.0.0.1:5000') 
-    app.run()
+    if __name__ == '__main__':
+        webbrowser.open('http://127.0.0.1:5000') 
+        app.run()
+flask_app()
 
