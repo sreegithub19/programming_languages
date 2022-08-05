@@ -1,17 +1,20 @@
-#%%
 import numpy as np
 import pandas as pd
-
+from tabulate import tabulate
+import webbrowser
 from IPython.display import display,HTML
 # reference: https://github.com/sreegithub19/upgrad/blob/main/1_Prep%20sessions/1_Python_basics/Prep%20session%20practice%202%20(classes%2C%20OOPS).ipynb
 import subprocess
 import sys
+import matplotlib.pyplot as plt
+from flask import Flask
+
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
     
 install("matplotlib")
-import matplotlib.pyplot as plt
+
 
 product_category = np.array(['Furniture', 'Technology', 'Office Supplies'])
 sales = np.array([4110451.90, 4744557.50, 3787492.52] )
@@ -24,6 +27,19 @@ cars_per_cap = [809, 731, 588, 18, 200, 70, 45]
 country = ['United States', 'Australia', 'Japan', 'India', 'Russia', 'Morocco', 'Egypt']
 drives_right = [True, False, False, False, True, True, True]
 data = {"cars_per_cap": cars_per_cap, "country": country, "drives_right": drives_right}
-display(pd.DataFrame(data))
-print(pd.DataFrame(data))
+display(pd.DataFrame(data))   # == print(pd.DataFrame(data)), in this case
+
+print(tabulate(pd.DataFrame(data),headers='keys', tablefmt='psql'))
+#s = (pd.DataFrame(data).to_html())
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def scrape_and_reformat():
+    return (pd.DataFrame(data).to_html())
+
+if __name__ == '__main__':
+    webbrowser.open('http://127.0.0.1:5000') 
+    app.run()
 
