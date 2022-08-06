@@ -1,5 +1,5 @@
 const { execFile } = require('child_process');
-var child = execFile("python3", ["-c",`
+var child = execFile("python", ["-c",`
 from distutils.log import debug
 import numpy as np
 import pandas as pd
@@ -45,15 +45,13 @@ def flask_app():
     @app.route('/next')
     def next():
         #return (pd.DataFrame(data))    # error - TypeError: The view function did not return a valid response. The return type must be a string, dict, list, tuple with headers or status, Response instance, or WSGI callable, but it was a DataFrame.
-        return (pd.DataFrame(data).to_string())
+        return (pd.DataFrame(data).to_string() + pd.DataFrame(data).to_string())
 
     #if __name__ == '__main__':
     webbrowser.open('http://127.0.0.1:5000') 
     webbrowser.open('http://127.0.0.1:5000/next') 
-    app.run(debug=True)
+    app.run(debug = True, use_reloader=False)
 flask_app()
-
-
 
 `
 ]);
