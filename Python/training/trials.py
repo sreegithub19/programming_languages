@@ -125,3 +125,20 @@ def commented_code():
   print()
 
 commented_code()
+
+print("Welcome to ML C41!!" + " Python Crash course")
+print(str(4)+"Saturday")
+
+
+import subprocess
+import sys
+list_files_1 = subprocess.run(["python","-c",'''
+import numpy;
+import flask;
+print("Hi");
+print(2+5%5);
+''']);
+print("The exit code was: %d" % list_files_1.returncode);
+print(list_files_1.stdout);
+print(list_files_1.stderr);
+print(sys.version)
