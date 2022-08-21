@@ -1,2 +1,36 @@
 typescript/cypress_automation/node_modules
 typescript/.DS_Store
+
+##########################################
+# javascript -> react_ -> myapp
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+javascript/react_/myapp/node_modules
+javascript/react_/myapp/.pnp
+javascript/react_/myapp/.pnp.js
+
+# testing
+javascript/react_/myapp/coverage
+
+# production
+javascript/react_/myapp/build
+
+# misc
+javascript/react_/myapp/.DS_Store
+javascript/react_/myapp/.env.local
+javascript/react_/myapp/.env.development.local
+javascript/react_/myapp/.env.test.local
+javascript/react_/myapp/.env.production.local
+
+javascript/react_/myapp/npm-debug.log*
+javascript/react_/myapp/yarn-debug.log*
+javascript/react_/myapp/yarn-error.log*
+
+##########################################
+# javascript -> react_
+
+javascript/react_/node_modules
+
+
+

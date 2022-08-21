@@ -1,0 +1,10 @@
+1. Functional language
+2. Statically typed + inference
+3. All data is immutable
+4. All functions are pure
+5. 'null' / 'undefined' / Exceptions do not exist
+
+6. Structure:
+    i. We define "Model", "Msg" values
+    ii. We write "Update","View" functions
+    iii. Elm does the rest
