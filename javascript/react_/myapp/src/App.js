@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import React from "react"; 
+import {Helmet} from "react-helmet";
 import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "react-router-dom"; 
 
-
-  const app_css = `
+//////////////////////////////////////////
+{/* Internal css in App.js*/}
+  const first_css = `
   .App {
     text-align: center;
   }
@@ -44,10 +46,10 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
   }
 
   `;
-  function App_1() {
+  function first() {
     return (
       <div className="App">
-        <style>{app_css}</style>
+        <style>{first_css}</style>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -66,18 +68,40 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
     );
   }
 //////////////////////////////////////////
-
-  const index_css = `
+{/*
+1. Routing in react
+2. Using <script> tag in react function returns using <Helmet> tag
+3. Regular HTML page rendering through these <script> tags
+*/}
+  const second_css = `
   #first_home {
     background-color: yellow;
   }
   `;
 
-  function Index() {
+  function second() {
     return (<div>
-    <style>{index_css}</style>
+    <style>{second_css}</style>
     <h2 id="first_home">Home</h2>
     <h2>Home</h2>
+    <p id="para"></p>
+    <Helmet>  {/* Helmet is to enable script tag in react jsx */}
+    <script>{`
+      alert('Hi');
+      document.getElementById('para').innerHTML = \`
+      Hello paragraph
+      \`;
+      document.write(\`
+        <h1>Hey!!</h1>
+        <p id="para"></p>
+        <script>
+        document.getElementById('para').innerHTML = "Hello nested paragraph";
+        </script>
+      \`)
+      console.log('Hi');
+      `}
+    </script>
+    </Helmet>
   </div>);
   }  
   
@@ -108,7 +132,7 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
           </nav> 
           <Routes>
             {/*https://stackoverflow.com/questions/69854011/matched-leaf-route-at-location-does-not-have-an-element */}
-          <Route path="/" exact element={<Index />} /> 
+          <Route path="/" exact element={<second />} /> 
           <Route path="/about/" element={<About />} /> 
           <Route path="/users/" element={<Users />} /> 
           </Routes>
@@ -117,5 +141,7 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
     ); 
   } 
 
-// export default App_1;
-export default App;
+//////////////////////////////////////////
+
+// export default first;
+export default second;
