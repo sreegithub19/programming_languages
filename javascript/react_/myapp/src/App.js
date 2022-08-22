@@ -86,6 +86,7 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
     <h2>Home</h2>
     <p id="para"></p>
     <Helmet>  {/* Helmet is to enable script tag in react jsx */}
+    {/* <script> tag overwrites everything in all routed links */}
     <script>{`
       alert('Hi');
       document.getElementById('para').innerHTML = \`
