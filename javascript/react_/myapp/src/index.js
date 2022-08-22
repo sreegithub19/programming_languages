@@ -23,10 +23,12 @@ code {
 
 const root = document.getElementById('root');
 render(
-  <React.StrictMode>
+  <div>
+  {/* <React.StrictMode> */}
     <style>{index_css}</style>
     <App />
-  </React.StrictMode>, root
+  {/* </React.StrictMode> */}
+  </div>, root
 );
 
 // If you want to start measuring performance in your app, pass a function

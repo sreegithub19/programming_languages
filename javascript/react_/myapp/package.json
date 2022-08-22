@@ -5,10 +5,10 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
     "dangerously-set-html-content": "^1.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-html-parser": "^2.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -40,6 +40,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
+  "proxy": "https://cdnjs.cloudflare.com/ajax/libs",
   "license": "ISC",
   "devDependencies": {}
 }
