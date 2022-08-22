@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {render} from 'react-dom';  // import ReactDOM from 'react-dom/client'; in React 18
 //import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -21,12 +21,12 @@ code {
 
 `;
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const root = document.getElementById('root');
+render(
   <React.StrictMode>
     <style>{index_css}</style>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>, root
 );
 
 // If you want to start measuring performance in your app, pass a function

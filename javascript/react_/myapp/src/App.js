@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import React from "react"; 
-import {Helmet} from "react-helmet";
 import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "react-router-dom"; 
 
 //////////////////////////////////////////
@@ -79,37 +78,15 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
   }
   `;
 
-  function second() {
-    return (<div>
-    <style>{second_css}</style>
-    <h2 id="first_home">Home</h2>
-    <h2>Home</h2>
-    <p id="para"></p>
-    <Helmet>  {/* Helmet is to enable script tag in react jsx */}
-    {/* <script> tag overwrites everything in all routed links */}
-    <script>{`
-      alert('Hi');
-      document.getElementById('para').innerHTML = \`
-      Hello paragraph
-      \`;
-      document.write(\`
-        <h1>Hey!!</h1>
-        <p id="para"></p>
-        <script>
-        document.getElementById('para').innerHTML = "Hello nested paragraph";
-        </script>
-      \`)
-      console.log('Hi');
-      `}
-    </script>
-    </Helmet>
-  </div>);
-  }  
-  
   function About() { 
     return <h2>About</h2>; 
   } 
   
+
+  function Second() { 
+    return <h2>Second</h2>; 
+  } 
+
   function Users() { 
     return <h2>Users</h2>; 
   } 
@@ -133,7 +110,7 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
           </nav> 
           <Routes>
             {/*https://stackoverflow.com/questions/69854011/matched-leaf-route-at-location-does-not-have-an-element */}
-          <Route path="/" exact element={<second />} /> 
+          <Route path="/" exact element={<Second />} /> 
           <Route path="/about/" element={<About />} /> 
           <Route path="/users/" element={<Users />} /> 
           </Routes>
@@ -145,4 +122,4 @@ import { BrowserRouter as Router, Routes,Route, Link, renderMatches } from "reac
 //////////////////////////////////////////
 
 // export default first;
-export default second;
+export default Second;
