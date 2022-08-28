@@ -1,17 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Html_2</title>
-  <style>body { padding: 0; margin: 0; }</style>
-</head>
-
-<body>
-
-<pre id="elm"></pre>
-
-<script>
-try {
 (function(scope){
 'use strict';
 
@@ -8388,21 +8374,3 @@ var $author$project$Html_2$main = A2(
 	_List_Nil,
 	$author$project$Html_2$textHtml('\n    <head>\n    <meta name="viewport" content="width=device-width, initial-scale=1">\n    <style> \n    input[type=text] {\n    width: 130px;\n    box-sizing: border-box;\n    border: 2px solid #ccc;\n    border-radius: 4px;\n    font-size: 16px;\n    background-color: white;\n    background-position: 10px 10px; \n    background-repeat: no-repeat;\n    padding: 12px 20px 12px 40px;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    }\n\n    input[type=text]:focus {\n    width: 100%;\n    }\n\n    #para {\n        color:red\n    }\n    </style>\n    </head>\n    <body>\n\n    <p id="para" onclick = "alert(\'hi\')">Animated search form:</p>\n\n    <form>\n    <input type="text" name="search" placeholder="Search..">\n    </form>\n    </body>\n    '));
 _Platform_export({'Html_2':{'init':_VirtualDom_init($author$project$Html_2$main)(0)(0)}});}(this));
-
-  var app = Elm.Html_2.init({ node: document.getElementById("elm") });
-}
-catch (e)
-{
-  // display initialization errors (e.g. bad flags, infinite recursion)
-  var header = document.createElement("h1");
-  header.style.fontFamily = "monospace";
-  header.innerText = "Initialization Error";
-  var pre = document.getElementById("elm");
-  document.body.insertBefore(header, pre);
-  pre.innerText = e;
-  throw e;
-}
-</script>
-
-</body>
-</html>
