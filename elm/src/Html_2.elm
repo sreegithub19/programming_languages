@@ -10,7 +10,7 @@ Elm 19:
 -}
 
 module Html_2 exposing (..)
-import Html exposing (Html, div,span)
+import Html exposing (Html, div,span,text)
 import Html.Attributes exposing (property)
 import Json.Encode exposing (string)
 import Html.Parser
@@ -19,42 +19,35 @@ import Html.Parser.Util
 main : Html msg
 main =
     span [] (textHtml """
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style> 
-    input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-    }
+    
+    </script><script>document.write(`
+    <h1 onclick='
+    alert("hi")
+    '>Hello</h1>
+    <hr><hr><hr><hr><hr><hr><hr><hr>
+    <script> <!-- to avoid error message in the browser-->
+    `)</script>
 
-    input[type=text]:focus {
-    width: 100%;
-    }
+    """++textHtml """
 
-    #para {
-        color:red
+    </script><script>document.write(`
+    <style>
+    #h_{
+        color:red;
     }
     </style>
-    </head>
-    <body>
+    <h1 id="h_" onclick='
+    alert("hi");
+    document.write("\\
+        hurray!!\\
+        ");
+    '>Hello again</h1>
+    <hr><hr><hr><hr><hr><hr><hr><hr>
+    <script> <!-- to avoid error message in the browser-->
+    `)</script>
 
-    <p id="para" onclick = "alert('hi')">Animated search form:</p>
-
-    <form>
-    <input type="text" name="search" placeholder="Search..">
-    </form>
-    </body>
     """)
-
+-- https://github.com/elm/compiler/issues/2039
 textHtml : String -> List (Html.Html msg)
 textHtml t =
     case Html.Parser.run t of

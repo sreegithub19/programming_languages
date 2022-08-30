@@ -8386,7 +8386,9 @@ var $author$project$Html_2$textHtml = function (t) {
 var $author$project$Html_2$main = A2(
 	$elm$html$Html$span,
 	_List_Nil,
-	$author$project$Html_2$textHtml('\n    <head>\n    <meta name="viewport" content="width=device-width, initial-scale=1">\n    <style> \n    input[type=text] {\n    width: 130px;\n    box-sizing: border-box;\n    border: 2px solid #ccc;\n    border-radius: 4px;\n    font-size: 16px;\n    background-color: white;\n    background-position: 10px 10px; \n    background-repeat: no-repeat;\n    padding: 12px 20px 12px 40px;\n    -webkit-transition: width 0.4s ease-in-out;\n    transition: width 0.4s ease-in-out;\n    }\n\n    input[type=text]:focus {\n    width: 100%;\n    }\n\n    #para {\n        color:red\n    }\n    </style>\n    </head>\n    <body>\n\n    <p id="para" onclick = "alert(\'hi\')">Animated search form:</p>\n\n    <form>\n    <input type="text" name="search" placeholder="Search..">\n    </form>\n    </body>\n    '));
+	_Utils_ap(
+		$author$project$Html_2$textHtml('\n    \n    </script><script>document.write(`\n    <h1 onclick=\'\n    alert("hi")\n    \'>Hello</h1>\n    <hr><hr><hr><hr><hr><hr><hr><hr>\n    <script> <!-- to avoid error message in the browser-->\n    `)</script>\n\n    '),
+		$author$project$Html_2$textHtml('\n\n    </script><script>document.write(`\n    <style>\n    #h_{\n        color:red;\n    }\n    </style>\n    <h1 id="h_" onclick=\'\n    alert("hi");\n    document.write("\\\n        hurray!!\\\n        ");\n    \'>Hello again</h1>\n    <hr><hr><hr><hr><hr><hr><hr><hr>\n    <script> <!-- to avoid error message in the browser-->\n    `)</script>\n\n    ')));
 _Platform_export({'Html_2':{'init':_VirtualDom_init($author$project$Html_2$main)(0)(0)}});}(this));
 
   var app = Elm.Html_2.init({ node: document.getElementById("elm") });
