@@ -67,6 +67,8 @@ var child3 = spawn("goeval", [`
     fmt.Print(first + " " + second+"\\n")
 `
 ]);
+
+function cascade(){
 child.stdout.pipe(process.stdout);
 child.stderr.pipe(process.stderr);
 process.stdin.pipe(child.stdin);
@@ -87,4 +89,6 @@ child.on('exit', () => {
         })
     })
 })
+}
 // setTimeOut() performs a task after a delay of a certain predefined number of milliseconds.
+cascade();      
