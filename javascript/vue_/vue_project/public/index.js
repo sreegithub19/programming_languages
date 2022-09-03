@@ -18,7 +18,9 @@ document.write(`
       <a href="/games/maze/maze.html">Maze</a><br>
       <a href="/games/solitaire/solitaire.html">Solitaire</a><br>
       <a href="/games/calculator/calculator.html">Calculator</a><br>
-
+      <a href="/games/dino/dino.html">Dino</a><br>
+      <a href="/games/tilt_maze/tilt_maze.html">Tilted maze</a><br>
+      <a href="/games/sass_/sass_.html">Sass</a><br>
       <div>
         <script src="/games/puzzles.js"></script>
       </div>

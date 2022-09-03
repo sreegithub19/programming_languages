@@ -27,3 +27,8 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### To check vue version: npm v vue
+
+### To convert .vue to .js file: https://stackoverflow.com/questions/43780134/compile-vue-file-into-js-file-without-webpack-or-browserify
+
