@@ -1,3 +1,6 @@
+import asyncio
+import time
+
 def commented_code():
   # '''
   # #print(",".join([str(i**2) for i in [int(i) for i in input("Enter the list:").split(",")] if(i%2!=0)]))
@@ -124,21 +127,22 @@ def commented_code():
   # '''
   print()
 
-commented_code()
+#commented_code()
 
-print("Welcome to ML C41!!" + " Python Crash course")
-print(str(4)+"Saturday")
+def commented_code_1():
+  import subprocess
+  import sys
+  print("Welcome to ML C41!!" + " Python Crash course")
+  print(str(4)+"Saturday")
+  list_files_1 = subprocess.run(["python","-c",'''
+  import numpy;
+  import flask;
+  print("Hi");
+  print(2+5%5);
+  ''']);
+  print("The exit code was: %d" % list_files_1.returncode);
+  print(list_files_1.stdout);
+  print(list_files_1.stderr);
+  print(sys.version)
 
-
-import subprocess
-import sys
-list_files_1 = subprocess.run(["python","-c",'''
-import numpy;
-import flask;
-print("Hi");
-print(2+5%5);
-''']);
-print("The exit code was: %d" % list_files_1.returncode);
-print(list_files_1.stdout);
-print(list_files_1.stderr);
-print(sys.version)
+#commented_code_1()
