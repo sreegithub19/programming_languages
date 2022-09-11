@@ -1,3 +1,4 @@
+document.write(`
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,12 +44,13 @@
         
         document.body.onkeyup = function(){
             code.open();
-            code.writeln(html.value+"<style>"+css.value+"</style>"+"<script>" + js.value + "<\/script>");
+            code.writeln(html.value+"<style>"+css.value+"</style>"+"<script>" + js.value + "<\\/script>");
             code.close();
         };
         };
     
-    compile();  
-    </script>
+    compile();
+    <\/script>
 </body>
 </html>
+`);

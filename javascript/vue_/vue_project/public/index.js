@@ -11,7 +11,7 @@ document.write(`
     <div id="app"></div>
     <!-- <script type="module" src="/main.js"></script> -->
       <a href="/games/chess/chess.html">Chess</a><br>
-      <a href="/games/codepen.html">Codepen</a><br>
+      <a href="/games/codepen/codepen.html">Codepen</a><br>
       <a href="/games/hangman/hangman.html">Hangman</a><br>
       <a href="/games/keyboard/keyboard.html">Keyboard</a><br>
       <a href="/games/clock/clock.html">Clock</a><br>
