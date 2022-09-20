@@ -28,7 +28,7 @@ flask_vercel:
     6. touch index.py (fill it)
     7. export FLASK_APP=index.py   
     8. export FLASK_ENV=development
-    9. flask run
+    9. (To run): FLASK_APP=index.py flask run   (https://github.com/huogerac/flask-vercel/tree/v1)
     10. touch vercel.json (fill it)
     11. touch requirements.txt (fill it)
     12. pip3 install -r requirements.txt

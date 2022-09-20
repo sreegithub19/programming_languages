@@ -1416,7 +1416,7 @@ def calculator(request):
       } else if (operator) {
         const result = calculate(firstOperand, inputValue, operator);
     
-        calculator.displayValue = \`\${parseFloat(result.toFixed(7))}\`;
+        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
         calculator.firstOperand = result;
       }
     
@@ -2815,7 +2815,7 @@ resetGame();
 balls.forEach(({ x, y }) => {
   const ball = document.createElement("div");
   ball.setAttribute("class", "ball");
-  ball.style.cssText = \`left: \${x}px; top: \${y}px; \`;
+  ball.style.cssText = `left: ${x}px; top: ${y}px; `;
 
   mazeElement.appendChild(ball);
   ballElements.push(ball);
@@ -2918,13 +2918,13 @@ const walls = [
 walls.forEach(({ x, y, horizontal, length }) => {
   const wall = document.createElement("div");
   wall.setAttribute("class", "wall");
-  wall.style.cssText = \`
-      left: \${x}px;
-      top: \${y}px;
-      width: \${wallW}px;
-      height: \${length}px;
-      transform: rotate(\${horizontal ? -90 : 0}deg);
-    \`;
+  wall.style.cssText = `
+      left: ${x}px;
+      top: ${y}px;
+      width: ${wallW}px;
+      height: ${length}px;
+      transform: rotate(${horizontal ? -90 : 0}deg);
+    `;
 
   mazeElement.appendChild(wall);
 });
@@ -2950,10 +2950,10 @@ joystickHeadElement.addEventListener("mousedown", function (event) {
     gameInProgress = true;
     window.requestAnimationFrame(main);
     noteElement.style.opacity = 0;
-    joystickHeadElement.style.cssText = \`
+    joystickHeadElement.style.cssText = `
         animation: none;
         cursor: grabbing;
-      \`;
+      `;
   }
 });
 
@@ -2962,19 +2962,19 @@ window.addEventListener("mousemove", function (event) {
     const mouseDeltaX = -Math.minmax(mouseStartX - event.clientX, 15);
     const mouseDeltaY = -Math.minmax(mouseStartY - event.clientY, 15);
 
-    joystickHeadElement.style.cssText = \`
-        left: \${mouseDeltaX}px;
-        top: \${mouseDeltaY}px;
+    joystickHeadElement.style.cssText = `
+        left: ${mouseDeltaX}px;
+        top: ${mouseDeltaY}px;
         animation: none;
         cursor: grabbing;
-      \`;
+      `;
 
     const rotationY = mouseDeltaX * 0.8; // Max rotation = 12
     const rotationX = mouseDeltaY * 0.8;
 
-    mazeElement.style.cssText = \`
-        transform: rotateY(\${rotationY}deg) rotateX(\${-rotationX}deg)
-      \`;
+    mazeElement.style.cssText = `
+        transform: rotateY(${rotationY}deg) rotateX(${-rotationX}deg)
+      `;
 
     const gravity = 2;
     const friction = 0.01; // Coefficients of friction
@@ -3024,23 +3024,23 @@ function resetGame() {
   frictionX = undefined;
   frictionY = undefined;
 
-  mazeElement.style.cssText = \`
+  mazeElement.style.cssText = `
       transform: rotateY(0deg) rotateX(0deg)
-    \`;
+    `;
 
-  joystickHeadElement.style.cssText = \`
+  joystickHeadElement.style.cssText = `
       left: 0;
       top: 0;
       animation: glow;
       cursor: grab;
-    \`;
+    `;
 
   if (hardMode) {
-    noteElement.innerHTML = \`Click the joystick to start!
-        <p>Hard mode, Avoid black holes. Back to easy mode? Press E</p>\`;
+    noteElement.innerHTML = `Click the joystick to start!
+        <p>Hard mode, Avoid black holes. Back to easy mode? Press E</p>`;
   } else {
-    noteElement.innerHTML = \`Click the joystick to start!
-        <p>Move every ball to the center. Ready for hard mode? Press H</p>\`;
+    noteElement.innerHTML = `Click the joystick to start!
+        <p>Move every ball to the center. Ready for hard mode? Press H</p>`;
   }
   noteElement.style.opacity = 1;
 
@@ -3058,7 +3058,7 @@ function resetGame() {
 
   if (ballElements.length) {
     balls.forEach(({ x, y }, index) => {
-      ballElements[index].style.cssText = \`left: \${x}px; top: \${y}px; \`;
+      ballElements[index].style.cssText = `left: ${x}px; top: ${y}px; `;
     });
   }
 
@@ -3073,7 +3073,7 @@ function resetGame() {
     holes.forEach(({ x, y }) => {
       const ball = document.createElement("div");
       ball.setAttribute("class", "black-hole");
-      ball.style.cssText = \`left: \${x}px; top: \${y}px; \`;
+      ball.style.cssText = `left: ${x}px; top: ${y}px; `;
 
       mazeElement.appendChild(ball);
       holeElements.push(ball);
@@ -3349,7 +3349,7 @@ function main(timestamp) {
 
       // Move balls to their new position on the UI
       balls.forEach(({ x, y }, index) => {
-        ballElements[index].style.cssText = \`left: \${x}px; top: \${y}px; \`;
+        ballElements[index].style.cssText = `left: ${x}px; top: ${y}px; `;
       });
     }
 
@@ -3359,14 +3359,14 @@ function main(timestamp) {
         (ball) => distance2D(ball, { x: 350 / 2, y: 315 / 2 }) < 65 / 2
       )
     ) {
-      noteElement.innerHTML = \`Congrats, you did it!
-        \${!hardMode ? "<p>Press H for hard mode</p>" : ""}
+      noteElement.innerHTML = `Congrats, you did it!
+        ${!hardMode ? "<p>Press H for hard mode</p>" : ""}
         <p>
           Follow me
           <a href="https://twitter.com/HunorBorbely" , target="_blank"
             >@HunorBorbely</a
           >
-        </p>\`;
+        </p>`;
       noteElement.style.opacity = 1;
       gameInProgress = false;
     } else {
@@ -3375,10 +3375,10 @@ function main(timestamp) {
     }
   } catch (error) {
     if (error.message == "The ball fell into a hole") {
-      noteElement.innerHTML = \`A ball fell into a black hole! Press space to reset the game.
+      noteElement.innerHTML = `A ball fell into a black hole! Press space to reset the game.
         <p>
           Back to easy? Press E
-        </p>\`;
+        </p>`;
       noteElement.style.opacity = 1;
       gameInProgress = false;
     } else throw error;
@@ -9714,9 +9714,9 @@ def tic_tac_toe(request):
 let gameActive = true;
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
-const winningMessage = () => \`Player \${currentPlayer} has won!\`;
-const drawMessage = () => \`Game ended in a draw!\`;
-const currentPlayerTurn = () => \`It's \${currentPlayer}'s turn\`;
+const winningMessage = () => `Player ${currentPlayer} has won!`;
+const drawMessage = () => `Game ended in a draw!`;
+const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 statusDisplay.innerHTML = currentPlayerTurn();
 const winningConditions = [
     [0, 1, 2],
@@ -9990,7 +9990,7 @@ p {
     </div>
     <script>
     const getPuzzle = async (wordCount) => {
-        const response = await fetch(\`https://puzzle.mead.io/puzzle?wordCount=\${wordCount}\`)
+        const response = await fetch(`https://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
             if (response.status === 200){
                 const data = await response.json()
                 return data.puzzle
@@ -10039,9 +10039,9 @@ p {
     
         get statusMessage(){
             if (this.status === 'playing'){
-                return \`Guesses left: \${this.remainingGuesses}\`
+                return `Guesses left: ${this.remainingGuesses}`
             } else if (this.status === 'failed') {
-                return \`Nice try! The word was "\${this.word.join('')}" \`
+                return `Nice try! The word was "${this.word.join('')}" `
             } else {
                 return 'Great work! You guessed the word!'
             }
