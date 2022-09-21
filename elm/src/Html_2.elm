@@ -40,6 +40,7 @@ main =
     alert("hi");
     document.write("\\
         hurray!!\\
+        <h1>Hi hurray!!</h1>\\
         ");
     '>Hello again</h1>
     <hr><hr><hr><hr><hr><hr><hr><hr>
