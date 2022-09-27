@@ -13,6 +13,7 @@
 [submodule "javascript/next_/nextjs_app"]
 	path = javascript/next_/nextjs_app
 	url = https://github.com/sreegithub19/nextjs_app.git
+	branch = main
 [submodule "javascript/react_/my_react_app"]
 	path = javascript/react_/my_react_app
 	url = https://github.com/sreegithub19/my_react_app.git
