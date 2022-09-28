@@ -30,3 +30,6 @@
 	path = javascript/express_/express_vercel_app
 	url = https://github.com/sreegithub19/express_vercel_app.git
 	branch = master
+[submodule "javascript/vue_/vue_project"]
+	path = javascript/vue_/vue_project
+	url = https://github.com/sreegithub19/vue_project.git
