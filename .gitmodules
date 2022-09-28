@@ -1,15 +1,19 @@
 [submodule "javascript/vue_/vuejs_training"]
 	path = javascript/vue_/vuejs_training
 	url = https://github.com/sreegithub19/vuejs_training.git
+	branch = master
 [submodule "Python/flask_/vercel_flask_app"]
 	path = Python/flask_/vercel_flask_app
 	url = https://github.com/sreegithub19/vercel_flask_app.git
+	branch = master
 [submodule "javascript/angular_/my_angular_app"]
 	path = javascript/angular_/my_angular_app
 	url = https://github.com/sreegithub19/my_angular_app.git
+	branch = master
 [submodule "javascript/nest_/nestjs_app"]
 	path = javascript/nest_/nestjs_app
 	url = https://github.com/sreegithub19/nestjs_app.git
+	branch = master
 [submodule "javascript/next_/nextjs_app"]
 	path = javascript/next_/nextjs_app
 	url = https://github.com/sreegithub19/nextjs_app.git
@@ -17,3 +21,8 @@
 [submodule "javascript/react_/my_react_app"]
 	path = javascript/react_/my_react_app
 	url = https://github.com/sreegithub19/my_react_app.git
+	branch = master
+[submodule "Python/django_/vercel_django_example"]
+	path = Python/django_/vercel_django_example
+	url = https://github.com/sreegithub19/vercel_django_example.git
+	branch = master
