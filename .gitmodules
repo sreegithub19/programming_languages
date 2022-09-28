@@ -26,3 +26,7 @@
 	path = Python/django_/vercel_django_example
 	url = https://github.com/sreegithub19/vercel_django_example.git
 	branch = master
+[submodule "javascript/express_/express_vercel_app"]
+	path = javascript/express_/express_vercel_app
+	url = https://github.com/sreegithub19/express_vercel_app.git
+	branch = master
