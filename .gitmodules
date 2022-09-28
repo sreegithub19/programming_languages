@@ -33,3 +33,8 @@
 [submodule "javascript/vue_/vue_project"]
 	path = javascript/vue_/vue_project
 	url = https://github.com/sreegithub19/vue_project.git
+	branch = master
+[submodule "javascript/express_/JavaScript-Applications"]
+	path = javascript/express_/JavaScript-Applications
+	url = https://github.com/sreegithub19/JavaScript-Applications.git
+	branch = main
