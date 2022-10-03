@@ -38,3 +38,7 @@
 	path = javascript/express_/JavaScript-Applications
 	url = https://github.com/sreegithub19/JavaScript-Applications.git
 	branch = main
+[submodule "typescript/solid_/solid_app"]
+	path = typescript/solid_/solid_app
+	url = https://github.com/sreegithub19/solid_app.git
+	branch = main
