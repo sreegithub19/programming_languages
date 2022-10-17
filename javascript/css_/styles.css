@@ -1,0 +1,22 @@
+section {
+    background: green
+}
+
+h1 {
+    background: turquoise
+}
+h2 {
+    background: red
+}
+
+.headings{
+    background: red
+}
+
+.heads {
+    background: aquamarine
+}
+
+#head{
+    background: blue
+}
