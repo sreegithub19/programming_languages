@@ -3,3 +3,4 @@
 1. ionic start ionic_app sidemenu --type react
 2. cd ionic_app
 3. ionic serve (to start in localhost) (http://localhost:8100)
+4. npm install react-router-dom axios
