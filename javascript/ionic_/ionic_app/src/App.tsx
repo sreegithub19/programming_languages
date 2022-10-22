@@ -39,7 +39,7 @@ setupIonicReact();
   .App-scroll {
     overflow-y:scroll; 
     width:600px; 
-    height: 300px;
+    height: 200px;
   }
 
   .App-logo {
