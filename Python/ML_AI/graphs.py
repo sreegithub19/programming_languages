@@ -10,6 +10,8 @@ import sys
 import matplotlib.pyplot as plt
 from flask import Flask
 import os
+import seaborn as sns
+df  = pd.read_csv("datasets/dm_office_sales.csv")
 
 def install(package):
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])   
@@ -126,19 +128,45 @@ display(
     )
 #display_()
 
-subprocess.run(["python3","-c",'''
-print("Inside matplotlib subprocess")
-import matplotlib.pyplot as plt
-import numpy as np
+def subs():
+    subprocess.run(["python3","-c",'''
+    print("Inside matplotlib subprocess")
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-t = np.arange(0.0, 2.0, 0.01)
-s = 1 + np.sin(2*np.pi*t)
-plt.plot(t, s)
+    t = np.arange(0.0, 2.0, 0.01)
+    s = 1 + np.sin(2*np.pi*t)
+    plt.plot(t, s)
 
-plt.xlabel('time (s)')
-plt.ylabel('voltage (mV)')
-plt.title('About as simple as it gets, folks')
-plt.grid(True)
-plt.savefig("test.png")
-plt.show()
-''']).stdout
+    plt.xlabel('time (s)')
+    plt.ylabel('voltage (mV)')
+    plt.title('About as simple as it gets, folks')
+    plt.grid(True)
+    plt.savefig("test.png")
+    plt.show()
+    ''']).stdout
+#subs()
+
+def seaborn_():
+    plt.figure(figsize=(12,4),dpi=200)
+    display(
+        sns.scatterplot(x='salary',y='sales',data=df,hue='sales'),
+        plt.show(),
+        sns.scatterplot(
+            x='salary',y='sales',data=df,hue='salary',
+            size='work experience',
+            alpha=0.2,  # for transparency/ opacity
+        ),
+        plt.show(),
+        sns.scatterplot(
+            x='salary',
+            y='sales',
+            data=df,
+            hue='level of education',
+            palette='Dark2',
+            style='level of education', # different shapes
+        ),
+        plt.show(),
+    )
+
+seaborn_()
