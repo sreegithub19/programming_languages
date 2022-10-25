@@ -26,7 +26,7 @@ urlpatterns = [
  path("about", about),
  path("then", then),
 ]
-
+print(input("Enter:"))
 #if name == "__main__":
 from django.core.management import execute_from_command_line
 
