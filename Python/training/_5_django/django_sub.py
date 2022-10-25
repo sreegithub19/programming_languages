@@ -1,3 +1,10 @@
+# error due to missing extra parameter
+import subprocess
+import sys
+list_files_1 = subprocess.run(["python","-c",'''
+
+print(input("Enter a number:"))
+
 import sys
 import pandas
 from django.conf import settings
@@ -32,4 +39,9 @@ from django.core.management import execute_from_command_line
 
 execute_from_command_line([sys.argv[0], 'runserver','7001'])  # to change port number
 
-
+''',
+#'runserver','7001'
+]);
+print("The exit code was: %d" % list_files_1.returncode);
+print(list_files_1.stdout);
+print(list_files_1.stderr);

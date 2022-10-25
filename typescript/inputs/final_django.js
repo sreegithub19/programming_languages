@@ -1,8 +1,11 @@
+// pip install Django==2.2.16
+
 var {PythonShell} = require('python-shell'); 
 const open = require('open'); 
 const concurrently = require('concurrently'); 
+const { spawn, execFile } = require('child_process');
 
-var child = PythonShell.runString(` 
+var child = PythonShell.runString(`
 import sys      
 import pandas 
 from django.conf import settings 
@@ -15,7 +18,6 @@ settings.configure(
  ROOT_URLCONF=__name__, 
 ) 
  
-#print(input("Enter:"))
 def home(request): 
  return HttpResponse("<h1>Welcome 7000!</h1>") 
 def next(request): 
@@ -43,8 +45,17 @@ console.log("Not Working");
 else { 
     console.log("Working"); 
 
-//  open('http://localhost:7000/'); 
-//  open('http://localhost:7000/next'); 
-//  open('http://localhost:7000/about'); 
-//  open('http://localhost:7000/then'); 
+
+    // // if below is commented or uncommented, and above is PythonShell.runString(), then Django server runs continuously (without being able to take any input)
+    // // if below is commented , and above is .execFile("python","-c","..."), then the Python script will only take input, Django server will not run (will show the "extra argument required" error)
+    // child.stdout.pipe(process.stdout);
+    // child.stderr.pipe(process.stderr);
+    // process.stdin.pipe(child.stdin);
+    // child.on('exit', () => {
+    //     //setTimeout(function(){ 
+    //         process.exit(); 
+    //     //}, 20000);
+    // });
+
+
 } 
