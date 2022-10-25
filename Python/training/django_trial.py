@@ -15,4 +15,4 @@ path(r'next', lambda r: HttpResponse('Hello, world next!')),
 #     execute_from_command_line([sys.argv[0], 'runserver'])
 if not settings.configured:
     settings.configure(DEBUG=True, MIDDLEWARE_CLASSES=[], ROOT_URLCONF=fname)
-execute_from_command_line([sys.argv[0], 'runserver'])
+execute_from_command_line([sys.argv[0], 'runserver','7001'])
