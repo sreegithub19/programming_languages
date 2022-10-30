@@ -3,7 +3,7 @@
 
 
 const { spawn } = require('child_process');
-var child = spawn("python", ["-c",`
+var child4 = spawn("python", ["-c",`
 print("------------------------------------------------------")
 print("Hi")
 print(input())
@@ -67,6 +67,16 @@ var child3 = spawn("goeval", [`
     fmt.Print(first + " " + second+"\\n")
 `
 ]);
+var child = spawn("python", ["-c",`
+from flask import Flask
+app=Flask('app')
+@app.route('/')
+def run_code_1():
+    return "2"
+app.run(host='0.0.0.0', port=8080)
+print(input("Enter:"))
+`
+]);
 
 function cascade(){
 child.stdout.pipe(process.stdout);
@@ -82,12 +92,17 @@ child.on('exit', () => {
         child1.stderr.pipe(process.stderr);
         process.stdin.pipe(child1.stdin);
         child1.on('exit', () => {
+            child4.stdout.pipe(process.stdout);
+            child4.stderr.pipe(process.stderr);
+            process.stdin.pipe(child4.stdin);
+            child4.on('exit', () => {
                 child3.stdout.pipe(process.stdout);
                 child3.stderr.pipe(process.stderr);
                 process.stdin.pipe(child3.stdin);
                 child3.on('exit', () => process.exit());
         })
     })
+})
 })
 }
 // setTimeOut() performs a task after a delay of a certain predefined number of milliseconds.

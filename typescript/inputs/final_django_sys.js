@@ -1,22 +1,81 @@
 // https://stackoverflow.com/questions/59062414/nodejs-get-output-of-python-shell-to-send-back-to-client
 // server running, but output from child process not working
 
-var ps = require('python-shell'); 
-const { spawn, execFile } = require('child_process');
-const prompt = require('prompt-sync')();
+// var ps = require('python-shell'); 
+// const { spawn, execFile } = require('child_process');
+// const prompt = require('prompt-sync')();
 
-let PythonShell = ps.PythonShell;
-const runPy = async (code) => {
-    const options = {
-       mode: 'text',
-       pythonOptions: ['-u'],
-       args: [prompt("Enter:"),'s'],
-    };
+// let PythonShell = ps.PythonShell;
+// const runPy = async (code) => {
+//     const options = {
+//        mode: 'text',
+//        pythonOptions: ['-u'],
+//        args: [prompt("Enter:"),'s'],
+//     };
  
-   // wrap it in a promise, and `await` the result
-   const result = await new Promise((resolve, reject) => {
-     PythonShell.runString(`
-import sys    
+//    // wrap it in a promise, and `await` the result
+//    const result = await new Promise((resolve, reject) => {
+//      PythonShell.runString(`
+// import sys    
+// import pandas 
+// from django.conf import settings 
+// from django.urls import path 
+// from django.http import HttpResponse 
+ 
+// settings.configure( 
+//  DEBUG=True,  # For debugging 
+//  SECRET_KEY="a-bad-secret",  # Insecure! change this 
+//  ROOT_URLCONF=__name__, 
+// ) 
+ 
+// sys.stdout.write(sys.argv[1])
+// sys.stdout.flush()
+// sys.stdout.write(sys.argv[1])
+// sys.stdout.flush()
+
+// def home(request): 
+//  return HttpResponse("<h1>Welcome 7000!</h1>") 
+// def next(request): 
+//  return HttpResponse("Welcome to next 7000!") 
+// def about(request): 
+//  return HttpResponse("Welcome to about 7000!") 
+// def then(request): 
+//  return HttpResponse("Welcome to then 7000!") 
+ 
+// urlpatterns = [ 
+//  path("", home), 
+//     path("next", next), 
+//  path("about", about), 
+//  path("then", then), 
+// ] 
+// #if name == "__main__": 
+// from django.core.management import execute_from_command_line 
+
+// execute_from_command_line([sys.argv[0], 'runserver','7000'])  # to change port number
+//      `, options, (err, results) => {
+//        if (err) return reject(err);
+//        return resolve(results);
+//      });
+//    });
+//    //console.log(result.stdout);
+//    return result;
+//  };
+
+//  runPy()
+// .then(
+//   x=>console.log(x)
+//   ,err=>console.warn("got rejected:",err)
+// );
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+const { spawn } = require('child_process');
+var ps = require('python-shell'); 
+
+let options = ps.options;
+let PythonShell = ps.PythonShell;
+var child = PythonShell.runString(`
+import sys      
 import pandas 
 from django.conf import settings 
 from django.urls import path 
@@ -28,11 +87,10 @@ settings.configure(
  ROOT_URLCONF=__name__, 
 ) 
  
-sys.stdout.write(sys.argv[1])
-sys.stdout.flush()
-sys.stdout.write(sys.argv[1])
-sys.stdout.flush()
-
+try:
+  print(input("Enter:"))
+except:
+  pass
 def home(request): 
  return HttpResponse("<h1>Welcome 7000!</h1>") 
 def next(request): 
@@ -52,17 +110,12 @@ urlpatterns = [
 from django.core.management import execute_from_command_line 
 
 execute_from_command_line([sys.argv[0], 'runserver','7000'])  # to change port number
-     `, options, (err, results) => {
-       if (err) return reject(err);
-       return resolve(results);
-     });
-   });
-   //console.log(result.stdout);
-   return result;
- };
+`);
 
- runPy()
-.then(
-  x=>console.log(x)
-  ,err=>console.warn("got rejected:",err)
-);
+child.stdout.pipe(process.stdout);
+child.stderr.pipe(process.stderr);
+process.stdin.pipe(child.stdin);
+child.on('exit', () => process.exit());
+
+
+/////////////////////////////////////////////////////////////////////////////////////
