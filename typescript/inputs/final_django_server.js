@@ -1,6 +1,8 @@
 // pip install Django==2.2.16
 
 // https://www.reddit.com/r/node/comments/at8uoi/how_to_call_python_program_with_std_input_in_node/
+// only server running
+
 var ps = require('python-shell'); 
 const open = require('open'); 
 const concurrently = require('concurrently'); 
