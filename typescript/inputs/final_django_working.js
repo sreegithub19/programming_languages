@@ -89,6 +89,8 @@ settings.configure(
  ROOT_URLCONF=__name__, 
 ) 
 t = "432" 
+sys.stdout.write("\\r%d , %d\\n" %(2,3))
+sys.stdout.writelines("\\r%d , %d\\n" %(2,3))
 try:
   t = input("Enter:")
   u = input("Enter:")
