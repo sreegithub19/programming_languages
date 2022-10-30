@@ -69,13 +69,14 @@
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-// input entering not working, only Django server running
+// working fine
+
 const { spawn } = require('child_process');
 var ps = require('python-shell'); 
 
 let options = ps.options;
 let PythonShell = ps.PythonShell;
-var child = PythonShell.runString(`
+let proc_string = `
 import sys      
 import pandas 
 from django.conf import settings 
@@ -87,13 +88,15 @@ settings.configure(
  SECRET_KEY="a-bad-secret",  # Insecure! change this 
  ROOT_URLCONF=__name__, 
 ) 
- 
+t = "432" 
 try:
-  print(input("Enter:"))
+  t = input("Enter:")
+  u = input("Enter:")
+  sys.stdout.write(t+"\\n")
 except:
   pass
 def home(request): 
- return HttpResponse("<h1>Welcome 7000!</h1>") 
+ return HttpResponse("<h1>Welcome 7000!</h1>"+t) 
 def next(request): 
  return HttpResponse("Welcome to next 7000!") 
 def about(request): 
@@ -110,13 +113,20 @@ urlpatterns = [
 #if name == "__main__": 
 from django.core.management import execute_from_command_line 
 
-execute_from_command_line([sys.argv[0], 'runserver','7000'])  # to change port number
-`);
+execute_from_command_line(['d', 'runserver','7000'])  # to change port number
+`
+
+var child = spawn("python", ["-c",proc_string]);
 
 child.stdout.pipe(process.stdout);
 child.stderr.pipe(process.stderr);
 process.stdin.pipe(child.stdin);
-child.on('exit', () => process.exit());
+child.on('exit', () => 
+PythonShell.runString(proc_string,function (err) {
+  if (err) throw err;
+  else console.log('finished');
+})
+);
 
 
 /////////////////////////////////////////////////////////////////////////////////////
