@@ -69,6 +69,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////
 
+// input entering not working, only Django server running
 const { spawn } = require('child_process');
 var ps = require('python-shell'); 
 
