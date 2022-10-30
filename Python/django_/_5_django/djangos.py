@@ -46,7 +46,7 @@ settings.configure(
  ROOT_URLCONF=__name__, 
 ) 
  
-#print(input("Enter:"))
+print(input("Enter:"))
 def home(request): 
  return HttpResponse("<h1>Welcome 7000!</h1>") 
 def next(request): 
