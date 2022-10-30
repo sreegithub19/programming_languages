@@ -112,7 +112,7 @@ urlpatterns = [
 ] 
 #if name == "__main__": 
 from django.core.management import execute_from_command_line 
-
+sys.stdout.write(str(int(t)+5)+"\\n")
 execute_from_command_line(['d', 'runserver','7000'])  # to change port number
 `
 
