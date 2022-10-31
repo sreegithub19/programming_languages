@@ -89,16 +89,17 @@ settings.configure(
  ROOT_URLCONF=__name__, 
 ) 
 t = "432" 
+print("Global t is:",t)
 sys.stdout.write("\\r%d , %d\\n" %(2,3))
 sys.stdout.writelines("\\r%d , %d\\n" %(2,3))
 try:
   t = input("Enter:")
-  u = input("Enter:")
+  u = print(input("Enter:"))
   sys.stdout.write(t+"\\n")
 except:
   pass
-def home(request): 
- return HttpResponse("<h1>Welcome 7000!</h1>"+t) 
+def home(request):
+  return HttpResponse("<h1>Welcome 7000!</h1>"+t) 
 def next(request): 
  return HttpResponse("Welcome to next 7000!") 
 def about(request): 
@@ -115,6 +116,7 @@ urlpatterns = [
 #if name == "__main__": 
 from django.core.management import execute_from_command_line 
 sys.stdout.write(str(int(t)+5)+"\\n")
+print("t+5 is:",str(int(t)+5))
 execute_from_command_line(['d', 'runserver','7000'])  # to change port number
 `
 
