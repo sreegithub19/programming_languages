@@ -1,7 +1,7 @@
 # oop
 # https://www.youtube.com/watch?v=Ej_02ICOIgs
 # github repo: https://github.com/jimdevops19/PythonOOP
-import csv
+import csv, os, sys
 
 class Item:
 
@@ -27,15 +27,24 @@ class Item:
     def apply_discount(self): # functions inside classes are called methods
         return self.price * self.pay_rate
 
-    # representing your objects
+    # representing your objects in output
     def __repr__(self):
         return f"Item('{self.name}',{self.price},{self.quantity})"
 
+    os.chdir(os.path.dirname(__file__))  # to avoid this error:- FileNotFoundError: [Errno 2] No such file or directory: 'datasets/items.csv
     @classmethod
     def instantiate_from_csv(cls):
         with open('datasets/items.csv','r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
+            for i in items:
+                print("i in items:",i)
+
+                Item(
+                    name = i.get('name'),
+                    price = int(i.get('price')),
+                    quantity = int(i.get('quantity')),
+                )
 
 
 def Item_(): 
@@ -54,7 +63,10 @@ def Item_():
         global item1 ; item1 = Item("Phone",100,5)  # calls __init__ method every time Item() is called
         global item2 ; item2 = Item("Laptop",1000,50)  # object of type "Item"
         global item3 ; item3 = Item("Cable",1000,50)
+        print(item3.calculate_total_price())
         global item4 ; item4 = Item("Mobile",1000,50)
+        print(item4.calculate_total_price())
+        print(item4.apply_discount())
         global item5 ; item5 = Item("Macbook",1000,50)
     to_csv_()
 
@@ -73,8 +85,19 @@ def Item_():
             print(instance.name)
     #prints()
     
-    print(Item.all) # [Item('Phone',100,5), Item('Laptop',1000,50), Item('Cable',1000,50), Item('Mobile',1000,50), Item('Macbook',1000,50)]
-    Item.instantiate_from_csv()
+    def prints_2():
+        print(Item.all) # [Item('Phone',100,5), Item('Laptop',1000,50), Item('Cable',1000,50), Item('Mobile',1000,50), Item('Macbook',1000,50)]
+        Item.instantiate_from_csv()
+        print(Item.pay_rate)
+        print(item1.pay_rate)  # accessible
+        print(item2.pay_rate) 
+
+        print(item2.__dict__) #All the attributes for instance-level
+        for i in(Item.__dict__.keys()): #All the attributes for class-level
+            sys.stdout.write("Key:%s ; Value:%s\n" %(i,Item.__dict__[i]))
+    prints_2()
+
+
 
 Item_()
 

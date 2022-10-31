@@ -69,7 +69,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-// working fine
+// working fine (in Windows (personal laptop))
 
 const { spawn } = require('child_process');
 var ps = require('python-shell'); 
