@@ -49,3 +49,4 @@
 [submodule "javascript/ionic__/ionic_app"]
 	path = javascript/ionic__/ionic_app
 	url = https://github.com/sreegithub19/ionic_app.git
+	branch = main
