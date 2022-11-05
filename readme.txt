@@ -16,7 +16,7 @@ git submodule update --recursive
 git pull --recurse-submodules
 
 4. Most important commands: 
-git submodule add <git_repo_link>   (in that specific folder)
+git submodule add <git_repo_link>   (in that specific folder - when adding the module for the first time)
 git submodule update --init --force --remote   (in the main folder)
 
 5. Steps:

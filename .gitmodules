@@ -46,3 +46,7 @@
 	path = javascript/ionic_/ionic_app
 	url = https://github.com/sreegithub19/ionic_app.git
 	branch = main
+[submodule "Python/ML_AI/upgrad"]
+	path = Python/ML_AI/upgrad
+	url = https://github.com/sreegithub19/upgrad.git
+	branch = main
