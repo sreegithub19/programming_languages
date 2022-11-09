@@ -1,6 +1,6 @@
 var md = require('markdown-it')();
 var result = md.render(`
-[ids](#ids)
+
 # markdown-it rulezz!
 ## markdown-it rulezz!
 ### markdown-it rulezz!
