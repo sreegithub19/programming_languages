@@ -1,15 +1,22 @@
 //"use strict";
 
+function one(){
 // var is changeable
+var x;
 var a = 23;
+var x = 34;
+var x = 54;
+var $sdcd3_3_3__ve$$$$vew = 5555;   // valid variable name
+document.write("x is:"+x) // works (x == 54)
 a = 43;
 document.write(a+"<br>");
 a = "vfvfv"+a
 document.write(a+"<br>")
+document.write("$sdcd3_3_3__ve$$$$vew :" + $sdcd3_3_3__ve$$$$vew+"<br>")
 
 // let is changeable
 let b = 23;
-b = 43;
+b = 43;  // (let b = 43) causes error: Cannot redeclare block-scoped variable 'b'.ts(2451)
 document.write(b+"<br>")
 b = "vfvfv"
 document.write(b+"<br>")
@@ -68,3 +75,7 @@ console.log(false+true*3) // 3 (false->0, true-> 1)
 
 // type conversion
 document.write(typeof(Number("22"))); // number
+
+}
+
+one();
