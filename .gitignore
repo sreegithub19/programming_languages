@@ -1,6 +1,8 @@
 typescript/cypress_automation/node_modules
 typescript/.DS_Store
 
+.vscode
+
 ##########################################
 # javascript -> react_ -> myapp
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.

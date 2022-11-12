@@ -1,79 +1,86 @@
-* {
-  box-sizing: border-box;
-}
-
 html {
-  font-family: 'Roboto', open-sans;
+  font-family: sans-serif;
 }
 
 body {
-  margin: 0;
+  background: #2c2c2c;
 }
 
-header {
-  background: #023d6d;
+h2 {
+  font-size: 1.25rem;
+  margin: 1rem 0.5rem;
+}
+
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 2rem;
+  color: #ff0062;
+  border: 1px solid #a927f5;
+}
+
+progress[value]::-webkit-progress-bar,
+progress[value] {
+  background-color: #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #a927f5;
+  transition: all 0.2s ease-out;
+}
+
+progress[value]::-moz-progress-bar {
+  background-color: #a927f5;
+  transition: all 0.2s ease-out;
+}
+
+button {
+  font: inherit;
+  background: #ff0062;
+  border: 1px solid #ff0062;
   color: white;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0.5rem;
 }
 
-#results,
-#calculator {
+button:focus {
+  outline: none;
+}
+
+button:hover,
+button:active {
+  background: #a927f5;
+  border-color: #a927f5;
+}
+
+#health-levels,
+#controls {
   margin: 2rem auto;
-  width: 40rem;
-  max-width: 90%;
-  border: 1px solid #023d6d;
+  width: 30rem;
+  text-align: center;
   border-radius: 10px;
   padding: 1rem;
-  color: #023d6d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  background: white;
 }
 
-#results {
-  text-align: center;
+#controls {
+  display: flex;
+  flex-direction: column;
 }
 
-#calculator input {
-  font: inherit;
-  font-size: 3rem;
-  border: 2px solid #023d6d;
-  width: 10rem;
-  padding: 0.15rem;
-  margin: auto;
-  display: block;
-  color: #023d6d;
-  text-align: center;
-}
-
-#calculator input:focus {
-  outline: none;
-}
-
-#calculator button {
-  font: inherit;
-  background: #023d6d;
+#bonus-life {
+  font-weight: bold;
   color: white;
-  border: 1px solid #023d6d;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-#calculator button:focus {
-  outline: none;
-}
-
-#calculator button:hover,
-#calculator button:active {
-  background: #084f88;
-  border-color: #084f88;
-}
-
-#calc-actions button {
-  width: 4rem;
-}
-
-#calc-actions {
-  margin-top: 1rem;
+  background: #ff0062;
+  border: 1px solid #ff0062;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
   text-align: center;
+  margin: 0 0.5rem;
 }

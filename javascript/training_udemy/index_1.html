@@ -1,4 +1,5 @@
 <!-- https://rakuten.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced/learn/lecture/15853228#overview -->
+<!-- https://javascript.info/script-async-defer -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/styles/app.css" />
+    <link rel="stylesheet" href="assets_calculator/styles/app.css" />
   </head>
   <body>
     <header>
@@ -25,17 +26,23 @@
         <button type="button" id="btn-subtract">-</button>
         <button type="button" id="btn-multiply">*</button>
         <button type="button" id="btn-divide">/</button>
+        <button type="button" id="btn-operators">Ops</button>
+        <button type="button" id="btn-arrays">Arr</button>
       </div>
     </section>
     <section id="results">
       <h2 id="current-calculation">0</h2>
       <h2>Result: <span id="current-result">0</span></h2>
     </section>
-    <!-- <script src="assets/scripts/1_intro.js"></script> -->
-    <!-- <script src="assets/scripts/2_variables.js"></script> -->
-    <script src="assets/scripts/vendor.js"></script>
-    <!-- <script src="assets/scripts/3_strings.js"></script> -->
-    <script src="assets/scripts/4_functions.js"></script>
+    <!-- <script src="assets_calculator/scripts/1_intro.js"></script> -->
+    <!-- <script src="assets_calculator/scripts/2_variables.js"></script> -->
+    <script src="assets_calculator/scripts/vendor.js"></script>
+    <!-- <script src="assets_calculator/scripts/3_strings.js"></script> -->
+    <!-- <script src="assets_calculator/scripts/4_functions.js" defer></script> -->
+    <script src="assets_calculator/scripts/5_operators.js" defer></script>
+    <script src="assets_calculator/scripts/6_arrays.js" defer></script>
+    <script src="assets_calculator/scripts/7_special_values.js" defer></script>
+    <script src="assets_calculator/scripts/8_control_structures.js" defer></script>
     
 
       <!--
@@ -56,8 +63,10 @@
       <!--
               <p id="one">Click one!</p>
               <p id="one_">Click one_!</p>
-              <script src="assets/scripts/1_intro.js"></script>
+              <script src="assets_calculator/scripts/1_intro.js"></script>
           -->
   
+  <div id="next">
+  </div>
   </body>
 </html>
