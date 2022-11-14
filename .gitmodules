@@ -50,3 +50,19 @@
 	path = javascript/ionic__/ionic_app
 	url = https://github.com/sreegithub19/ionic_app.git
 	branch = main
+[submodule "javascript/app_clones/whatsapp-2"]
+	path = javascript/app_clones/whatsapp-2
+	url = https://github.com/sreegithub19/whatsapp-2.git
+	branch = master
+[submodule "javascript/app_clones/jspaint"]
+	path = javascript/app_clones/jspaint
+	url = https://github.com/sreegithub19/jspaint.git
+	branch = master
+[submodule "javascript/app_clones/Video-Meeting"]
+	path = javascript/app_clones/Video-Meeting
+	url = https://github.com/sreegithub19/Video-Meeting.git
+	branch = master
+[submodule "javascript/app_clones/google-translate-clone"]
+	path = javascript/app_clones/google-translate-clone
+	url = https://github.com/sreegithub19/google-translate-clone.git
+	branch = master
