@@ -66,3 +66,6 @@
 	path = javascript/app_clones/google-translate-clone
 	url = https://github.com/sreegithub19/google-translate-clone.git
 	branch = master
+[submodule "javascript/app_clones/codepen"]
+	path = javascript/app_clones/codepen
+	url = https://github.com/sreegithub19/codepen.git
