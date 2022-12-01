@@ -25,5 +25,9 @@ git submodule update --init --force --remote   (in the main folder)
 (iii) git add .
 (iv) git commit -m "Message"
 (v) git push origin main
+
 (All in one step) :  
+
+git add . && git commit -m "Message" && git push origin main
+
 git pull origin main && git submodule update --init --force --remote && git add . && git commit -m "Message" && git push origin main

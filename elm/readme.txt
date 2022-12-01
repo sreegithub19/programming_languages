@@ -37,3 +37,24 @@ Execution:
 	{- Multi-line comment -}
 
 4. Embedding Elm in HTML: https://riptutorial.com/elm#embedding-into-html
+
+
+===================================================
+1. Elm install and running (in Mac):
+
+(i) brew install elm
+(ii)(In the elm folder),
+elm init
+(iii) elm make src/Hello.elm   # after filling in some code in the Hello.elm file
+
+#Hello.elm:
+module Hello exposing (..)
+import Html exposing (text)
+main = text "Hello!"
+-- Single line comment
+{- Multi-line comment -}
+
+(For sample codes: https://elm-lang.org/examples)
+(iv) Open the generated index.html file.
+
+===================================================
