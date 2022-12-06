@@ -70,3 +70,7 @@
 	path = javascript/app_clones/codepen
 	url = https://github.com/sreegithub19/codepen.git
 	branch = master
+[submodule "javascript/app_clones/App_clones"]
+	path = javascript/app_clones/App_clones
+	url = https://github.com/sreegithub19/App_clones.git
+	branch = main
