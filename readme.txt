@@ -19,6 +19,14 @@ git pull --recurse-submodules
 git submodule add <git_repo_link>   (in that specific folder - when adding the module for the first time)
 git submodule update --init --force --remote   (in the main folder)
 
+To remove a submodule:
+ - Delete the relevant section from the .gitmodules file.
+ - git add .gitmodules
+ - git rm --cached <path-to-submodule>  (no trailing slash).
+ - rm -rf .git/modules/<path_to_submodule>
+ - git commit -m "Removed submodule <name>"
+ - rm -rf <path_to_submodule>
+
 5. Steps:
 (i) git pull origin main
 (ii) git submodule update --init --force --remote
