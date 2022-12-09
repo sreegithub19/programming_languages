@@ -22,10 +22,6 @@
 	path = javascript/react_/my_react_app
 	url = https://github.com/sreegithub19/my_react_app.git
 	branch = master
-[submodule "Python/django_/vercel_django_example"]
-	path = Python/django_/vercel_django_example
-	url = https://github.com/sreegithub19/vercel_django_example.git
-	branch = master
 [submodule "javascript/express_/express_vercel_app"]
 	path = javascript/express_/express_vercel_app
 	url = https://github.com/sreegithub19/express_vercel_app.git
@@ -73,4 +69,8 @@
 [submodule "javascript/app_clones/App_clones"]
 	path = javascript/app_clones/App_clones
 	url = https://github.com/sreegithub19/App_clones.git
+	branch = main
+[submodule "Python/django_/vercel_django_example1"]
+	path = Python/django_/vercel_django_example1
+	url = https://github.com/sreegithub19/vercel_django_example1.git
 	branch = main
