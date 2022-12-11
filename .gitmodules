@@ -74,3 +74,7 @@
 	path = Python/django_/vercel_django_example1
 	url = https://github.com/sreegithub19/vercel_django_example1.git
 	branch = main
+[submodule "Python/fastapi_/fastapi_python"]
+	path = Python/fastapi_/fastapi_python
+	url = https://github.com/sreegithub19/fastapi_python.git
+	branch = main
