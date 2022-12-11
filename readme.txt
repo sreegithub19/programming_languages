@@ -35,7 +35,13 @@ To remove a submodule:
 (v) git push origin main
 
 (All in one step) :  
-
+Mac:
 git add . && git commit -m "Message" && git push origin main
-
 git pull origin main && git submodule update --init --force --remote && git add . && git commit -m "Message" && git push origin main
+Windows:
+git add . ; git commit -m "Message" ; git push origin main
+git pull origin main ; git submodule update --init --force --remote ; git add . ; git commit -m "Message" ; git push origin main
+
+
+Windows long file name issue:
+1. Execute this command in Powershell (run as Administrator):  git config --system core.longpaths true
