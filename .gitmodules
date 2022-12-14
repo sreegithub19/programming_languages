@@ -78,3 +78,7 @@
 	path = Python/fastapi_/fastapi_python
 	url = https://github.com/sreegithub19/fastapi_python.git
 	branch = main
+[submodule "javascript/koa_/koa_project"]
+	path = javascript/koa_/koa_project
+	url = https://github.com/sreegithub19/koa_project.git
+	branch = main
