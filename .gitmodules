@@ -82,3 +82,7 @@
 	path = javascript/koa_/koa_project
 	url = https://github.com/sreegithub19/koa_project.git
 	branch = main
+[submodule "javascript/hapi_/hapijs_vercel"]
+	path = javascript/hapi_/hapijs_vercel
+	url = https://github.com/sreegithub19/hapijs_vercel.git
+	branch = main
