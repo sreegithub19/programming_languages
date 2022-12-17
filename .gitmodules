@@ -86,3 +86,7 @@
 	path = javascript/hapi_/hapijs_vercel
 	url = https://github.com/sreegithub19/hapijs_vercel.git
 	branch = main
+[submodule "Python/python_server_/python_server"]
+	path = Python/python_server_/python_server
+	url = https://github.com/sreegithub19/python_server.git
+	branch = main
