@@ -90,3 +90,7 @@
 	path = Python/python_server_/python_server
 	url = https://github.com/sreegithub19/python_server.git
 	branch = main
+[submodule "javascript/node_/node_server"]
+	path = javascript/node_/node_server
+	url = https://github.com/sreegithub19/node_server.git
+	branch = main
