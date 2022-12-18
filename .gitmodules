@@ -98,3 +98,7 @@
 	path = javascript/brunch_/brunch
 	url = https://github.com/sreegithub19/brunch.git
 	branch = main
+[submodule "javascript/stencil_/stencil"]
+	path = javascript/stencil_/stencil
+	url = https://github.com/sreegithub19/stencil.git
+	branch = main
