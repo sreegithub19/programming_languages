@@ -94,3 +94,7 @@
 	path = javascript/node_/node_server
 	url = https://github.com/sreegithub19/node_server.git
 	branch = main
+[submodule "javascript/brunch_/brunch"]
+	path = javascript/brunch_/brunch
+	url = https://github.com/sreegithub19/brunch.git
+	branch = main
