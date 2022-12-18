@@ -106,3 +106,7 @@
 	path = javascript/umijs_/umijs
 	url = https://github.com/sreegithub19/umijs.git
 	branch = main
+[submodule "javascript/ember_/ember"]
+	path = javascript/ember_/ember
+	url = https://github.com/sreegithub19/ember.git
+	branch = main
