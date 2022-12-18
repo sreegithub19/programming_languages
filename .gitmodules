@@ -102,3 +102,7 @@
 	path = javascript/stencil_/stencil
 	url = https://github.com/sreegithub19/stencil.git
 	branch = main
+[submodule "javascript/umijs_/umijs"]
+	path = javascript/umijs_/umijs
+	url = https://github.com/sreegithub19/umijs.git
+	branch = main
