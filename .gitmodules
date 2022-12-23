@@ -114,3 +114,11 @@
 	path = javascript/svelte_/svelte
 	url = https://github.com/sreegithub19/svelte.git
 	branch = main
+[submodule "javascript/gatsby_/gatsby"]
+	path = javascript/gatsby_/gatsby
+	url = https://github.com/sreegithub19/gatsby.git
+	branch = main
+[submodule "javascript/remix_/remix"]
+	path = javascript/remix_/remix
+	url = https://github.com/sreegithub19/remix.git
+	branch = main
