@@ -110,3 +110,7 @@
 	path = javascript/ember_/ember
 	url = https://github.com/sreegithub19/ember.git
 	branch = main
+[submodule "javascript/svelte_/svelte"]
+	path = javascript/svelte_/svelte
+	url = https://github.com/sreegithub19/svelte.git
+	branch = main
