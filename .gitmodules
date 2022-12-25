@@ -122,3 +122,11 @@
 	path = javascript/remix_/remix
 	url = https://github.com/sreegithub19/remix.git
 	branch = main
+[submodule "javascript/backbone_/backbone_vercel"]
+	path = javascript/backbone_/backbone_vercel
+	url = https://github.com/sreegithub19/backbone_vercel.git
+	branch = main
+[submodule "javascript/knockout_/knockout_vercel"]
+	path = javascript/knockout_/knockout_vercel
+	url = https://github.com/sreegithub19/knockout_vercel.git
+	branch = main
