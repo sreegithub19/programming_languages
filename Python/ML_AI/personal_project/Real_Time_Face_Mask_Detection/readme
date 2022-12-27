@@ -1,0 +1,2 @@
+to run:  python main.py   
+output:  a new window opens up, showing the image of our face, along with percentage/probability of Mask/No mask.

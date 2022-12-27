@@ -1,0 +1,10 @@
+To install: 
+pip install CMake 
+pip install face_recognition 
+
+To run : output
+python facematch.py   :  (Sample_output) This is NOT Bill Gates
+python findfaces.py   :  (Sample_output) There are 11 people in this image
+python identify.py    :  Will show the result (recognizing the images) in a separate window
+python pullfaces.py   :  Will show the faces from the given image one after the other.
+
