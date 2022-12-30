@@ -74,6 +74,22 @@ def seaborn():
     console.log(`{x,type(x)}`)
     </script>
     '''
+#dynamic routing
+@app.route('/leetcode')
+def leetcode():
+    code = '''
+    import numpy as np
+    def func(a):
+        print(a)
+    func(23)
+    '''
+    return f'''
+    <code>
+    <pre>
+    {code}
+    </pre>
+    </code>
+    '''
 
 
 

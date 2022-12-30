@@ -17,5 +17,3 @@
 # """
 # print(s.exec(fibonacci))
 # print(s.eval("fibonacci(5)"))  # [0, 1, 1, 2, 3]
-
-print(len("rakuten_gora_lesson_b2b_gl_w01"))
