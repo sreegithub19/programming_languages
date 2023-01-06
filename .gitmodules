@@ -130,3 +130,7 @@
 	path = javascript/knockout_/knockout_vercel
 	url = https://github.com/sreegithub19/knockout_vercel.git
 	branch = main
+[submodule "typescript/ts_node_server/ts_node_server"]
+	path = typescript/ts_node_server/ts_node_server
+	url = https://github.com/sreegithub19/ts_node_server.git
+	branch = main
