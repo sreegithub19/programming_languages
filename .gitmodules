@@ -134,3 +134,7 @@
 	path = typescript/ts_node_server/ts_node_server
 	url = https://github.com/sreegithub19/ts_node_server.git
 	branch = main
+[submodule "typescript/express_/ts_express_vercel_app"]
+	path = typescript/express_/ts_express_vercel_app
+	url = https://github.com/sreegithub19/ts_express_vercel_app.git
+	branch = main
