@@ -142,3 +142,7 @@
 	path = typescript/express_/ts_express_vercel_app
 	url = https://github.com/sreegithub19/ts_express_vercel_app.git
 	branch = main
+[submodule "typescript/nest_/nestjs_js"]
+	path = typescript/nest_/nestjs_js
+	url = https://github.com/sreegithub19/nestjs_js.git
+	branch = main
