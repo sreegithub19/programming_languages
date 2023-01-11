@@ -142,13 +142,13 @@
 	path = typescript/nest_/nestjs_js
 	url = https://github.com/sreegithub19/nestjs_js.git
 	branch = main
+[submodule "golang/golang_/golang_vercel"]
+	path = golang/golang_/golang_vercel
+	url = https://github.com/sreegithub19/golang_vercel.git
+	branch = main
 ################################################################
 # not working as expected
 [submodule "Python/fastapi_/fastapi_python"]
 	path = Python/fastapi_/fastapi_python
 	url = https://github.com/sreegithub19/fastapi_python.git
-	branch = main
-[submodule "golang/golang_/golang_vercel"]
-	path = golang/golang_/golang_vercel
-	url = https://github.com/sreegithub19/golang_vercel.git
 	branch = main
