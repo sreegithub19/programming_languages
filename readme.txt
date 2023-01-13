@@ -19,6 +19,8 @@ git pull --recurse-submodules
 4. Most important commands: 
 git submodule add <git_repo_link>   (in that specific folder - when adding the module for the first time)
 git submodule update --init --force --remote   (in the main folder)
+git submodule add -b <branch A> --name <name A> --url <path A> 
+ -eg:  git submodule add -b main https://github.com/sreegithub19/my_angular_app.git javascript/angular_/my_angular_app_main
 
 To remove a submodule:
  - Delete the relevant section from the .gitmodules file.
