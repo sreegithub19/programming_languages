@@ -1,20 +1,23 @@
-{- 
-html and css working, but js is not (<script> tag not working)
-Installations: 
-    elm install elm/json
-    elm install hecrj/html-parser
+{-
+   html and css working, but js is not (<script> tag not working)
+   Installations:
+       elm install elm/json
+       elm install hecrj/html-parser
 
-Elm 19:
-1. Does not support "innerHTML" anymore
-2. Does not support "<script>" tag anymore
+   Elm 19:
+   1. Does not support "innerHTML" anymore
+   2. Does not support "<script>" tag anymore
 -}
 
+
 module Html_2 exposing (..)
-import Html exposing (Html, div,span,text)
+
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (property)
-import Json.Encode exposing (string)
 import Html.Parser
 import Html.Parser.Util
+import Json.Encode exposing (string)
+
 
 main : Html msg
 main =
@@ -22,13 +25,14 @@ main =
     
     </script><script>document.write(`
     <h1 onclick='
-    alert("hi")
+    alert("hi");
+    alert(2);
     '>Hello</h1>
     <hr><hr><hr><hr><hr><hr><hr><hr>
     <script> <!-- to avoid error message in the browser-->
     `)</script>
 
-    """++textHtml """
+    """ ++ textHtml """
 
     </script><script>document.write(`
     <style>
@@ -48,7 +52,12 @@ main =
     `)</script>
 
     """)
+
+
+
 -- https://github.com/elm/compiler/issues/2039
+
+
 textHtml : String -> List (Html.Html msg)
 textHtml t =
     case Html.Parser.run t of
