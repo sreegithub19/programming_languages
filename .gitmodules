@@ -172,3 +172,6 @@
 	path = Python/fastapi_/fastapi_python
 	url = https://github.com/sreegithub19/fastapi_python.git
 	branch = main
+[submodule "typescript/nest_/nestjs_tsx"]
+	path = typescript/nest_/nestjs_tsx
+	url = https://github.com/sreegithub19/nestjs_tsx.git

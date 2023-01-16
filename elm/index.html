@@ -4476,7 +4476,7 @@ var $author$project$Html_iframe$main = A2(
 				[
 					$elm$html$Html$Attributes$width(1000),
 					$elm$html$Html$Attributes$height(1000),
-					$elm$html$Html$Attributes$srcdoc('\n<div>\n<h1 onclick=\'\nalert(2);\ndocument.write(`\n<h1>Hi</h1>\n<h1 id="turn">Hi2</h1>\n\n\n<script>\nalert(2);\nalert(33123123213)\ndocument.getElementById("turn").onclick = function(){\n  document.write(\\`\n  finish\n  \\`)\n}\n<\\/script>\n\n\n`);\n\'>Inside the iframe</h1>\n</div>\n            ')
+					$elm$html$Html$Attributes$srcdoc('\n<div>\n<h1 onclick=\'\nalert(2);\ndocument.write(`\n<h1>Hi</h1>\n<h1 id="turn">Hi2</h1>\n\n\n<script>\nalert(2);\nalert(33123123213)\ndocument.getElementById("turn").onclick = function(){\n  document.write(\\`\n  <h1 style="color:red" onclick="\n  alert(222222222);\n  alert(-222222222);\n  ">finish</h1>\n  \\`)\n}\n<\\/script>\n\n\n`);\n\'>Inside the iframe</h1>\n</div>\n')
 				]),
 			_List_Nil)
 		]));

@@ -37,7 +37,10 @@ alert(2);
 alert(33123123213)
 document.getElementById("turn").onclick = function(){
   document.write(\\`
-  finish
+  <h1 style="color:red" onclick="
+  alert(222222222);
+  alert(-222222222);
+  ">finish</h1>
   \\`)
 }
 <\\/script>
@@ -46,7 +49,7 @@ document.getElementById("turn").onclick = function(){
 `);
 '>Inside the iframe</h1>
 </div>
-            """ ]
+""" ]
             []
         ]
 
