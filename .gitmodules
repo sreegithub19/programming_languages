@@ -166,12 +166,13 @@
 	path = typescript/qwik_/qwik-app
 	url = https://github.com/sreegithub19/qwik-app.git
 	branch = main
+[submodule "typescript/nest_/nestjs_tsx"]
+	path = typescript/nest_/nestjs_tsx
+	url = https://github.com/sreegithub19/nestjs_tsx.git
+	branch = main
 ################################################################
 # not working as expected
 [submodule "Python/fastapi_/fastapi_python"]
 	path = Python/fastapi_/fastapi_python
 	url = https://github.com/sreegithub19/fastapi_python.git
 	branch = main
-[submodule "typescript/nest_/nestjs_tsx"]
-	path = typescript/nest_/nestjs_tsx
-	url = https://github.com/sreegithub19/nestjs_tsx.git
