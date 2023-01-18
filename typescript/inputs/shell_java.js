@@ -1,3 +1,9 @@
+// Reference: https://stackoverflow.com/questions/70367655/execute-java-code-inline-in-terminal-java-java-code-here
+/*
+chmod +x stell.sh
+sudo ./stell.sh
+*/
+
 const { spawn,exec } = require('child_process');
 
 
