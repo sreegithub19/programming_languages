@@ -170,6 +170,10 @@
 	path = typescript/nest_/nestjs_tsx
 	url = https://github.com/sreegithub19/nestjs_tsx.git
 	branch = main
+[submodule "Python/flask_/flask_pythonanywhere"]
+	path = Python/flask_/flask_pythonanywhere
+	url = https://github.com/sreegithub19/flask_pythonanywhere.git
+	branch = main
 ################################################################
 # not working as expected
 [submodule "Python/fastapi_/fastapi_python"]
