@@ -2,6 +2,8 @@
 /*
 chmod +x stell.sh
 sudo ./stell.sh
+
+Use Java-11 for this
 */
 
 const { spawn,exec } = require('child_process');
