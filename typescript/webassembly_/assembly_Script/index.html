@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="module">
+import {add, subtract, multiply} from "./build/release.js";
+document.write(`
+    Add:${add(1,2)} 
+    <br>
+    Subtract:${subtract(1, 2)} 
+    <br>
+    Multiply:${multiply(1, 2)} 
+    <br>
+`);
+</script>
+</head>
+<body></body>
+</html>
