@@ -48,3 +48,6 @@ javascript/node_modules
 # typescript -> webassembly
 
 typescript/webassembly_/assembly_Script/node_modules
+typescript/webassembly_/2d_game_/node_modules
+typescript/webassembly_/2d_game_/build
+typescript/webassembly_/2d_game_/jspm_packages
