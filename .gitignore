@@ -1,3 +1,5 @@
+node_modules
+##########################################
 typescript/cypress_automation/node_modules
 typescript/.DS_Store
 
