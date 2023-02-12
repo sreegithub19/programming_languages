@@ -1,3 +1,17 @@
+Docker (in Windows):
+Reference:
+- https://www.sitepoint.com/docker-windows-10-home/
+- https://blog.jayway.com/2017/04/19/running-docker-on-bash-on-windows/
+
+- Steps to do (done so far):
+ - (In Windows Powershell as admin)
+    -   choco install virtualbox
+    -   choco install docker-machine
+ - (In Git bash)
+    -   docker-machine create --driver virtualbox default (causing this error: VT-x is disabled in the BIOS for all CPU modes (VERR_VMX_MSR_ALL_VMX_DISABLED).)
+
+################################################################################
+
 1. To add a git repo as submodule in another repo (in that specific folder):
 git submodule add https://github.com/sreegithub19/vuejs_training.git
 git submodule add https://github.com/sreegithub19/vercel_flask_app.git
