@@ -1,0 +1,14 @@
+# Weather configuration data
+degreeType = "F"
+
+cities = [
+"San Diego, CA",
+"Chicago, IL",
+"Tokyo, Japan"
+]
+
+fields = [
+"temperature",
+"windspeed",
+"skytext"
+]

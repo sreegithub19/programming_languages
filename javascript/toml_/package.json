@@ -1,0 +1,17 @@
+{
+  "name": "toml_",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ltd/j-toml": "^1.38.0",
+    "prompt-sync": "^4.2.0",
+    "toml": "^3.0.0"
+  }
+}
