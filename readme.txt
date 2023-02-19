@@ -67,3 +67,11 @@ git pull origin main ; git submodule update --init --force --remote ; git add . 
 
 Windows long file name issue:
 1. Execute this command in Powershell (run as Administrator):  git config --system core.longpaths true
+
+================================================================
+
+Youtube Channel content (in "Projects" playlist):
+https://studio.youtube.com/channel/UC-RGFZerA05PxdPGCBV9RTw/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D
+
+Video compressor: (10MB video size limit to upload videos directly onto Github)
+https://www.freeconvert.com/video-compressor
