@@ -1,0 +1,115 @@
+
+//// $reset
+a
+	color: inherit
+
+//// $color
+$black = #111
+$white = #fff
+
+$gray = lighten($black, 50%)
+$gray-light = lighten($gray, 20%)
+$gray-dark = darken($gray, 20%)
+
+$color = #FF6E40 // change me...
+$color-light = lighten($color, 40%)
+$color-dark = darken($color, 20%)
+
+//// $space
+$pad = .6rem // universal padding unit
+
+//// $break-points
+$break-point-1 = '(min-width: 500px)'
+$break-point-2 = '(min-width: 900px)'
+
+//// $type patterns
+standard-type()
+	font-size: 15px
+	line-height: 1.4
+	strong
+		font-weight: bold
+	em
+		font-style: italic
+	@media $break-point-1
+		font-size: 16px
+
+strong-voice()
+	font-size: 22px
+	font-weight: bold
+	line-height: 1.2
+	@media $break-point-1
+		font-size: 24px
+
+loud-voice()
+	font-size: 30px
+	line-height: 1.2
+	@media $break-point-1
+		font-size: 34px
+	@media $break-point-2
+		font-size: 40px
+
+//// $style
+body
+	padding: $pad
+
+// $article
+article
+	padding: $pad*2 0
+	p
+		standard-type()
+		max-width: 740px // people don't like to read long lines
+		color: $gray
+		&:not(:first-of-type) // all but the first
+			margin-top: $pad*2
+		a
+			color: $color-dark
+		+ h2
+			margin-top: $pad*4
+	h1
+		loud-voice()
+		color: $color
+		+ p // any paragraph following an h1
+			margin-top: $pad*2 // redunant here - but for example
+	h2
+		strong-voice()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* just for fun */
+.example-box // I don't know what this box has to do with anything... maybe to show the media query change?
+	width: 200px
+	height: 200px
+	background: $color
+	padding: $pad
+	color: $white
+	span
+		opacity: .7
+		&:after
+			content: 'Default styles → "cascade" top-down'
+	@media $break-point-1
+		background: $color-dark
+		span
+			&:after
+				content: 'After $break-point-1'
+	@media $break-point-2
+		background: $color-light
+		span
+			&:after
+				content: 'After $break-point-2'
+
+* 
+	transition: .2s
