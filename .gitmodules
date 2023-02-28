@@ -2,62 +2,77 @@
 	path = javascript/vue_/vuejs_training
 	url = https://github.com/sreegithub19/vuejs_training.git
 	branch = master
+	# https://vuejs-training.vercel.app/
 [submodule "javascript/vue_/vuejs_training_typescript"]
 	path = javascript/vue_/vuejs_training_typescript
 	url = https://github.com/sreegithub19/vuejs_training.git
 	branch = typescript
+	# https://vuejs-training-2bd4s4iu3-sreegithub19.vercel.app/
 [submodule "Python/flask_/vercel_flask_app"]
 	path = Python/flask_/vercel_flask_app
 	url = https://github.com/sreegithub19/vercel_flask_app.git
 	branch = master
+	# https://flask-vercel-1-sand.vercel.app/
 [submodule "javascript/angular_/my_angular_app"]
 	path = javascript/angular_/my_angular_app
 	url = https://github.com/sreegithub19/my_angular_app.git
 	branch = master
+	# https://my-angular-app-rust.vercel.app/
 [submodule "javascript/angular_/my_angular_app_main"]
 	path = javascript/angular_/my_angular_app_main
 	url = https://github.com/sreegithub19/my_angular_app.git
 	branch = main
+	# https://my-angular-q3ir60od6-sreegithub19.vercel.app/
 [submodule "javascript/nest_/nestjs_app"]
 	path = javascript/nest_/nestjs_app
 	url = https://github.com/sreegithub19/nestjs_app.git
 	branch = master
+	# https://nestjs-now-nine-olive.vercel.app/
 [submodule "javascript/next_/nextjs_app"]
 	path = javascript/next_/nextjs_app
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = main
+	# https://nextjs-sreegithub19.vercel.app/
 [submodule "javascript/next_/nextjs_app_typescript"]
 	path = javascript/next_/nextjs_app_typescript
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = typescript
+	# https://nextjs-a96gk3vig-sreegithub19.vercel.app/
 [submodule "javascript/next_/nextjs_app_ts_js"]
 	path = javascript/next_/nextjs_app_ts_js
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = ts_js
+	# https://nextjs-git-tsjs-sreegithub19.vercel.app/
 [submodule "javascript/react_/my_react_app"]
 	path = javascript/react_/my_react_app
 	url = https://github.com/sreegithub19/my_react_app.git
 	branch = master
+	# https://my-react-app-one-sigma.vercel.app/
 [submodule "javascript/react_/my_react_app_main"]
 	path = javascript/react_/my_react_app_main
 	url = https://github.com/sreegithub19/my_react_app.git
 	branch = main
+	# https://my-react-ouhg5z0db-sreegithub19.vercel.app/
 [submodule "javascript/express_/express_vercel_app"]
 	path = javascript/express_/express_vercel_app
 	url = https://github.com/sreegithub19/express_vercel_app.git
 	branch = master
+	# https://express-vercel-app-xi.vercel.app/
 [submodule "javascript/vue_/vue_project"]
 	path = javascript/vue_/vue_project
 	url = https://github.com/sreegithub19/vue_project.git
 	branch = master
+	# http://vue-project-liart.vercel.app/
 [submodule "javascript/express_/JavaScript-Applications"]
 	path = javascript/express_/JavaScript-Applications
 	url = https://github.com/sreegithub19/JavaScript-Applications.git
 	branch = main
+	# https://serene-stream-98532.herokuapp.com/
 [submodule "typescript/solid_/solid_app"]
 	path = typescript/solid_/solid_app
 	url = https://github.com/sreegithub19/solid_app.git
 	branch = main
+	# http://solid-app-alpha.vercel.app/
 [submodule "Python/ML_AI/upgrad"]
 	path = Python/ML_AI/upgrad
 	url = https://github.com/sreegithub19/upgrad.git
@@ -66,26 +81,32 @@
 	path = javascript/ionic__/ionic_app
 	url = https://github.com/sreegithub19/ionic_app.git
 	branch = main
+	# https://ionic-app-nu.vercel.app/
 [submodule "javascript/app_clones/whatsapp-2"]
 	path = javascript/app_clones/whatsapp-2
 	url = https://github.com/sreegithub19/whatsapp-2.git
 	branch = master
+	# http://whatsapp-2-gold.vercel.app/
 [submodule "javascript/app_clones/jspaint"]
 	path = javascript/app_clones/jspaint
 	url = https://github.com/sreegithub19/jspaint.git
 	branch = master
+	# https://jspaint-rosy.vercel.app/#local:dc7b637dd8b02
 [submodule "javascript/app_clones/Video-Meeting"]
 	path = javascript/app_clones/Video-Meeting
 	url = https://github.com/sreegithub19/Video-Meeting.git
 	branch = master
+	# https://video-meeting-2.vercel.app/
 [submodule "javascript/app_clones/google-translate-clone"]
 	path = javascript/app_clones/google-translate-clone
 	url = https://github.com/sreegithub19/google-translate-clone.git
 	branch = master
+	# https://google-translate-clone.vercel.app/
 [submodule "javascript/app_clones/codepen"]
 	path = javascript/app_clones/codepen
 	url = https://github.com/sreegithub19/codepen.git
 	branch = master
+	# https://codepen-jade.vercel.app/
 [submodule "javascript/app_clones/App_clones"]
 	path = javascript/app_clones/App_clones
 	url = https://github.com/sreegithub19/App_clones.git
@@ -94,91 +115,119 @@
 	path = Python/django_/vercel_django_example1
 	url = https://github.com/sreegithub19/vercel_django_example1.git
 	branch = main
+	# https://vercel-django-example-phi.vercel.app/
 [submodule "javascript/koa_/koa_project"]
 	path = javascript/koa_/koa_project
 	url = https://github.com/sreegithub19/koa_project.git
 	branch = main
+	# http://koa-project-one.vercel.app/
 [submodule "javascript/hapi_/hapijs_vercel"]
 	path = javascript/hapi_/hapijs_vercel
 	url = https://github.com/sreegithub19/hapijs_vercel.git
 	branch = main
+	# https://hapijs-vercel.vercel.app/
 [submodule "Python/python_server_/python_server"]
 	path = Python/python_server_/python_server
 	url = https://github.com/sreegithub19/python_server.git
 	branch = main
+	# https://python-server-beta.vercel.app/api
 [submodule "javascript/node_/node_server"]
 	path = javascript/node_/node_server
 	url = https://github.com/sreegithub19/node_server.git
 	branch = main
+	# https://node-server-self.vercel.app/
 [submodule "javascript/brunch_/brunch"]
 	path = javascript/brunch_/brunch
 	url = https://github.com/sreegithub19/brunch.git
 	branch = main
+	# http://brunch-alpha-sooty.vercel.app/
 [submodule "javascript/stencil_/stencil"]
 	path = javascript/stencil_/stencil
 	url = https://github.com/sreegithub19/stencil.git
 	branch = main
+	# http://stencil-pink-xi.vercel.app/
 [submodule "javascript/umijs_/umijs"]
 	path = javascript/umijs_/umijs
 	url = https://github.com/sreegithub19/umijs.git
 	branch = main
+	# http://umijs-smoky-nu.vercel.app/
 [submodule "javascript/ember_/ember"]
 	path = javascript/ember_/ember
 	url = https://github.com/sreegithub19/ember.git
 	branch = main
+	# http://ember-omega-seven.vercel.app/
 [submodule "javascript/svelte_/svelte"]
 	path = javascript/svelte_/svelte
 	url = https://github.com/sreegithub19/svelte.git
 	branch = main
+	# http://svelte-one-topaz.vercel.app/
 [submodule "javascript/gatsby_/gatsby"]
 	path = javascript/gatsby_/gatsby
 	url = https://github.com/sreegithub19/gatsby.git
 	branch = main
+	# http://gatsby-three-kohl.vercel.app/
 [submodule "javascript/remix_/remix"]
 	path = javascript/remix_/remix
 	url = https://github.com/sreegithub19/remix.git
 	branch = main
+	# http://remix-delta-eight.vercel.app/
 [submodule "javascript/backbone_/backbone_vercel"]
 	path = javascript/backbone_/backbone_vercel
 	url = https://github.com/sreegithub19/backbone_vercel.git
 	branch = main
+	# https://backbone-vercel.vercel.app/
 [submodule "javascript/knockout_/knockout_vercel"]
 	path = javascript/knockout_/knockout_vercel
 	url = https://github.com/sreegithub19/knockout_vercel.git
 	branch = main
+	# https://knockout-vercel.vercel.app/
 [submodule "typescript/ts_node_server/ts_node_server"]
 	path = typescript/ts_node_server/ts_node_server
 	url = https://github.com/sreegithub19/ts_node_server.git
 	branch = main
+	# https://ts-node-server.vercel.app/
 [submodule "typescript/express_/ts_express_vercel_app"]
 	path = typescript/express_/ts_express_vercel_app
 	url = https://github.com/sreegithub19/ts_express_vercel_app.git
 	branch = main
+	# https://ts-express-vercel-app.vercel.app/
 [submodule "typescript/nest_/nestjs_js"]
 	path = typescript/nest_/nestjs_js
 	url = https://github.com/sreegithub19/nestjs_js.git
 	branch = main
+	# https://nestjs-js.vercel.app/
 [submodule "golang/golang_/golang_vercel"]
 	path = golang/golang_/golang_vercel
 	url = https://github.com/sreegithub19/golang_vercel.git
 	branch = main
+	# https://golang-vercel-ten.vercel.app/api/applications
 [submodule "typescript/qwik_/qwik-app"]
 	path = typescript/qwik_/qwik-app
 	url = https://github.com/sreegithub19/qwik-app.git
 	branch = main
+	# https://wondrous-stardust-ebf056.netlify.app/
 [submodule "typescript/nest_/nestjs_tsx"]
 	path = typescript/nest_/nestjs_tsx
 	url = https://github.com/sreegithub19/nestjs_tsx.git
 	branch = main
+	# https://nest-tsx.vercel.app/
 [submodule "Python/flask_/flask_pythonanywhere"]
 	path = Python/flask_/flask_pythonanywhere
 	url = https://github.com/sreegithub19/flask_pythonanywhere.git
 	branch = main
+	# https://sree8pythonanywhere.pythonanywhere.com/
 [submodule "Python/fastapi_/fastapi_python"]
 	path = Python/fastapi_/fastapi_python
 	url = https://github.com/sreegithub19/fastapi_python.git
 	branch = main
+	# https://fastapi-python.vercel.app/
 [submodule "javascript/graphql_/apollo_graphql"]
 	path = javascript/graphql_/apollo_graphql
 	url = https://github.com/sreegithub19/apollo_graphql.git
 	branch = main
+	# https://apollo-graphql.vercel.app/applications
+[submodule "typescript/solid_/solid_ts/solid_app"]
+	path = typescript/solid_/solid_ts/solid_app
+	url = https://github.com/sreegithub19/solid_app.git
+	branch = typescript
+	# https://solid-c3aqyyctd-sreegithub19.vercel.app/
