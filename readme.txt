@@ -75,3 +75,6 @@ https://studio.youtube.com/channel/UC-RGFZerA05PxdPGCBV9RTw/videos/upload?filter
 
 Video compressor: (10MB video size limit to upload videos directly onto Github)
 https://www.freeconvert.com/video-compressor
+
+Video splitter:
+https://split-video.com/

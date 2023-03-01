@@ -3,65 +3,110 @@
 	url = https://github.com/sreegithub19/vuejs_training.git
 	branch = master
 	# https://vuejs-training.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222188722-2cdfd352-51ba-4c5d-8b3a-aff3e742197a.mp4
 [submodule "javascript/vue_/vuejs_training_typescript"]
 	path = javascript/vue_/vuejs_training_typescript
 	url = https://github.com/sreegithub19/vuejs_training.git
 	branch = typescript
 	# https://vuejs-training-2bd4s4iu3-sreegithub19.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222189612-b888b9d0-fcef-4f9f-9581-11254ddd77ad.mp4
 [submodule "Python/flask_/vercel_flask_app"]
 	path = Python/flask_/vercel_flask_app
 	url = https://github.com/sreegithub19/vercel_flask_app.git
 	branch = master
 	# https://flask-vercel-1-sand.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222208210-5677c17c-fc11-4303-9a15-1374fef650bd.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222208234-ed848685-f20c-4a86-9da3-06b42a2c2299.mp4
+	###
 [submodule "javascript/angular_/my_angular_app"]
 	path = javascript/angular_/my_angular_app
 	url = https://github.com/sreegithub19/my_angular_app.git
 	branch = master
 	# https://my-angular-app-rust.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222205692-e5c91b9c-ac81-4d95-8b31-b265b1eb1575.mp4
 [submodule "javascript/angular_/my_angular_app_main"]
 	path = javascript/angular_/my_angular_app_main
 	url = https://github.com/sreegithub19/my_angular_app.git
 	branch = main
 	# https://my-angular-q3ir60od6-sreegithub19.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222205929-e920b964-548f-43fe-9343-98a7f0401b1a.mp4
 [submodule "javascript/nest_/nestjs_app"]
 	path = javascript/nest_/nestjs_app
 	url = https://github.com/sreegithub19/nestjs_app.git
 	branch = master
 	# https://nestjs-now-nine-olive.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/219962373-01ca79b7-a247-4839-9994-9c540bdd402d.mp4
 [submodule "javascript/next_/nextjs_app"]
 	path = javascript/next_/nextjs_app
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = main
 	# https://nextjs-sreegithub19.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222212597-f4025ba5-d077-4895-bc87-539931582f7a.mp4
 [submodule "javascript/next_/nextjs_app_typescript"]
 	path = javascript/next_/nextjs_app_typescript
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = typescript
 	# https://nextjs-a96gk3vig-sreegithub19.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222212901-3bd8a9d7-d1cb-45cc-9e56-e96282ea65a1.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222212922-8cfddef9-59c4-4d32-85f0-d14f8c7be4b6.mp4
+	###
 [submodule "javascript/next_/nextjs_app_ts_js"]
 	path = javascript/next_/nextjs_app_ts_js
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = ts_js
 	# https://nextjs-git-tsjs-sreegithub19.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222213291-4996342f-5a55-4263-802d-38e2719a6aab.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222213309-0073403f-78ad-4acf-b66a-64659570b89a.mp4
+	###
 [submodule "javascript/react_/my_react_app"]
 	path = javascript/react_/my_react_app
 	url = https://github.com/sreegithub19/my_react_app.git
 	branch = master
 	# https://my-react-app-one-sigma.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222191518-85d7202b-fa88-4f94-97eb-944506b5c0ec.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222191537-960f7c15-12db-481c-a032-d2fcd1c82fe8.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222191556-b84973c3-e8d2-447b-a480-2e3746994a9b.mp4
+	###
 [submodule "javascript/react_/my_react_app_main"]
 	path = javascript/react_/my_react_app_main
 	url = https://github.com/sreegithub19/my_react_app.git
 	branch = main
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222205203-34eaac6d-22de-409e-9ff0-d6bb34b65cc3.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222205225-81996aef-5829-4168-a25a-5331000aa77e.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222205239-66bad1ff-770c-4985-be63-0355d57e9af9.mp4
+	###
 	# https://my-react-ouhg5z0db-sreegithub19.vercel.app/
 [submodule "javascript/express_/express_vercel_app"]
 	path = javascript/express_/express_vercel_app
 	url = https://github.com/sreegithub19/express_vercel_app.git
 	branch = master
 	# https://express-vercel-app-xi.vercel.app/
+	###
+	#Video: 
+	#Part 1:https://user-images.githubusercontent.com/55496113/222186415-39768340-1116-413d-956d-ef40d5265935.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222186432-73246f37-888b-4f2a-ad35-6a44669233c5.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222186445-d84b5a41-9c59-4d9b-933e-51456427e6a9.mp4
+	###
 [submodule "javascript/vue_/vue_project"]
 	path = javascript/vue_/vue_project
 	url = https://github.com/sreegithub19/vue_project.git
 	branch = master
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222188144-579838b8-5aa2-40b3-b9bc-9aa4f8425eb7.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222188169-4598f9b6-d14d-4a9e-9688-c00257b2b04b.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222188181-e3fb8911-49c5-4c82-9671-0ccd6edc1e8b.mp4
+	###
 	# http://vue-project-liart.vercel.app/
 [submodule "javascript/express_/JavaScript-Applications"]
 	path = javascript/express_/JavaScript-Applications
@@ -73,6 +118,12 @@
 	url = https://github.com/sreegithub19/solid_app.git
 	branch = main
 	# http://solid-app-alpha.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222206719-d38e3cba-c537-4454-aabf-2a54748bd906.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222206739-0734c767-515e-4983-aaf8-6ae063ac1304.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222206754-811f8975-0191-47a8-afe9-a66f7be50d81.mp4
+	###
 [submodule "Python/ML_AI/upgrad"]
 	path = Python/ML_AI/upgrad
 	url = https://github.com/sreegithub19/upgrad.git
@@ -82,6 +133,12 @@
 	url = https://github.com/sreegithub19/ionic_app.git
 	branch = main
 	# https://ionic-app-nu.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222206305-db738ef9-cbac-4b45-b2a5-a571f12c64f9.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222206326-40b73e00-22cc-4dbb-9e63-46f786b9f611.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222206345-d784a940-54a4-4a68-9751-2b70c91574b6.mp4
+	###
 [submodule "javascript/app_clones/whatsapp-2"]
 	path = javascript/app_clones/whatsapp-2
 	url = https://github.com/sreegithub19/whatsapp-2.git
@@ -97,6 +154,7 @@
 	url = https://github.com/sreegithub19/Video-Meeting.git
 	branch = master
 	# https://video-meeting-2.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222215213-5d76f153-d9aa-46b8-9fbf-13a32904190f.mp4
 [submodule "javascript/app_clones/google-translate-clone"]
 	path = javascript/app_clones/google-translate-clone
 	url = https://github.com/sreegithub19/google-translate-clone.git
@@ -115,12 +173,22 @@
 	path = Python/django_/vercel_django_example1
 	url = https://github.com/sreegithub19/vercel_django_example1.git
 	branch = main
-	# https://vercel-django-example-phi.vercel.app/
+	# https://vercel-django-example1.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222208872-fa49f89c-fb8a-4f10-a7cd-c5bc45cd341c.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222208903-d9be5d03-477f-4e8e-b8d9-fde50ed72255.mp4
+	###
 [submodule "javascript/koa_/koa_project"]
 	path = javascript/koa_/koa_project
 	url = https://github.com/sreegithub19/koa_project.git
 	branch = main
 	# http://koa-project-one.vercel.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222214457-a972a3d1-d3c6-4b83-a250-72aa8fd573c9.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222214472-3781388e-6dc5-405d-8554-5a1c9fa74cfb.mp4
+	###
 [submodule "javascript/hapi_/hapijs_vercel"]
 	path = javascript/hapi_/hapijs_vercel
 	url = https://github.com/sreegithub19/hapijs_vercel.git
@@ -206,6 +274,12 @@
 	url = https://github.com/sreegithub19/qwik-app.git
 	branch = main
 	# https://wondrous-stardust-ebf056.netlify.app/
+	###
+	#Video:
+	#Part 1:https://user-images.githubusercontent.com/55496113/222214793-eb4bc76b-69c1-4125-b016-be74299b1f6e.mp4
+	#Part 2:https://user-images.githubusercontent.com/55496113/222214804-ec596fdc-2159-4760-8079-684bfc664960.mp4
+	#Part 3:https://user-images.githubusercontent.com/55496113/222214813-b632c398-4dac-48ea-a477-67a6732f24d1.mp4
+	###
 [submodule "typescript/nest_/nestjs_tsx"]
 	path = typescript/nest_/nestjs_tsx
 	url = https://github.com/sreegithub19/nestjs_tsx.git
@@ -221,6 +295,7 @@
 	url = https://github.com/sreegithub19/fastapi_python.git
 	branch = main
 	# https://fastapi-python.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/219962220-89d63a90-639e-437a-a44d-0ad6dcda5c02.mp4
 [submodule "javascript/graphql_/apollo_graphql"]
 	path = javascript/graphql_/apollo_graphql
 	url = https://github.com/sreegithub19/apollo_graphql.git
@@ -231,3 +306,4 @@
 	url = https://github.com/sreegithub19/solid_app.git
 	branch = typescript
 	# https://solid-c3aqyyctd-sreegithub19.vercel.app/
+	# #Video: https://user-images.githubusercontent.com/55496113/222207821-6a9d94c2-6f16-4043-83a0-8502ea9956e5.mp4
