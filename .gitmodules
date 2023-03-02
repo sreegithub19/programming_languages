@@ -307,3 +307,7 @@
 	branch = typescript
 	# https://solid-c3aqyyctd-sreegithub19.vercel.app/
 	# #Video: https://user-images.githubusercontent.com/55496113/222207821-6a9d94c2-6f16-4043-83a0-8502ea9956e5.mp4
+[submodule "credentials_/credentials"]
+	path = credentials_/credentials
+	url = https://github.com/sreegithub19/credentials.git
+	branch = main
