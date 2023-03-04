@@ -57,3 +57,24 @@ typescript/webassembly_/assembly_Script/node_modules
 typescript/webassembly_/2d_game_/node_modules
 typescript/webassembly_/2d_game_/build
 typescript/webassembly_/2d_game_/jspm_packages
+
+
+##########################################
+# java
+
+java/.idea
+
+java/java_applications/.idea
+java/java_applications/target
+
+java/JavaUdemy/.idea
+java/JavaUdemy/target
+
+java/spring_rabbitmq/.idea
+java/spring_rabbitmq/target
+
+java/springboot_starter/.idea
+java/springboot_starter/target
+
+java/java_mysql/.idea
+##########################################
