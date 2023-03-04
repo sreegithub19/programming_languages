@@ -1,5 +1,6 @@
 - MySQL Workbench download link: https://dev.mysql.com/downloads/workbench/
 - MySQL connector download link: https://dev.mysql.com/downloads/connector/j/
+  - Add the mysql connect .jar file s dependency in IntelliJ project structure
 
 MySQL commands:
 
