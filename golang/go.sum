@@ -2,6 +2,8 @@ github.com/GoesToEleven/go-programming v0.0.0-20181228215051-5519dbb87bc5 h1:WKp
 github.com/GoesToEleven/go-programming v0.0.0-20181228215051-5519dbb87bc5/go.mod h1:LldzOPaKdMOUfSPvqxm1wFrOU8CE1XhRhWn+tbMPe+w=
 github.com/dolmen-go/goeval v0.0.0-20220406230453-7ae029eb57a6 h1:dP2CcIVGwVdiOYSwWDKQNAyY5daDJ28M8Z24AfdLEN8=
 github.com/dolmen-go/goeval v0.0.0-20220406230453-7ae029eb57a6/go.mod h1:nhtUwKv2dnBaZcNQFYzKw8g268uUx1Ep/4/X9zhz4H4=
+github.com/go-sql-driver/mysql v1.7.0 h1:ueSltNNllEqE3qcWBTD0iQd3IpL/6U+mJxLkazJ7YPc=
+github.com/go-sql-driver/mysql v1.7.0/go.mod h1:OXbVy3sEdcQ2Doequ6Z5BW6fXNQTmx+9S1MCJN5yJMI=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636 h1:aSISeOcal5irEhJd1M+IrApc0PdcN7e7Aj4yuEnOrfQ=
