@@ -9,9 +9,7 @@ var con = mysql.createConnection({
 
 con.connect(function(err:any) {
   if (err) throw err;
-  con.query("SELECT * FROM EEngineeringStudents", function (err:any, result:any, fields:any) {
-    if (err) throw err;
-    console.log(result);
-  });
+  con.query("SELECT * FROM EEngineeringStudents", function (err:any, result:any, fields:any) {if (err) throw err;console.log(result);});
+  con.query("SELECT Student_ID FROM EEngineeringStudents", function (err:any, result:any, fields:any) {if (err) throw err;console.log(result);});
   con.end();
 });
