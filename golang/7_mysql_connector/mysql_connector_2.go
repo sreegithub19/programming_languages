@@ -40,7 +40,7 @@ func main() {
 	// it executes a database query, but it does
 	// not return any row as result.
 	// Here we create a database table with a SQL query.
-	results, err := db.Query("select * from EEngineeringStudents")
+	results, err := db.Query("select Student_ID from EEngineeringStudents")
 
 	// handle error
 	if err != nil {
@@ -52,11 +52,11 @@ func main() {
 		var universal universal
 		err := results.Scan(
 			&universal.Student_ID,
-			&universal.Department,
-			&universal.First_Name,
-			&universal.Last_Name,
-			&universal.PassOutYear,
-			&universal.UniversityRank,
+			// &universal.Department,
+			// &universal.First_Name,
+			// &universal.Last_Name,
+			// &universal.PassOutYear,
+			// &universal.UniversityRank,
 		)
 
 		if err != nil {
