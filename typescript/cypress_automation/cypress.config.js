@@ -1,4 +1,4 @@
-// this is the required cyperess.config.js file 
+// this is the required cypress.config.js file 
 
 
 const { defineConfig } = require('cypress')
@@ -9,6 +9,12 @@ module.exports = defineConfig({
     experimentalSessionAndOrigin: true,
     setupNodeEvents(on, config) {
       //implement node event listeners here
+      on('task', {
+        log(message) {
+          console.log(message)
+          return null
+        },
+      })
     },
   },
 });

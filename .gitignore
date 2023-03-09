@@ -79,3 +79,6 @@ java/springboot_starter/target
 java/java_mysql/.idea
 java/java_mysql/out
 ##########################################
+# typescript -> cypress_automation
+
+typescript/cypress_automation/cypress/videos

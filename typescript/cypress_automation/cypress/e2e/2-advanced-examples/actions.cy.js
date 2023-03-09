@@ -3,6 +3,7 @@
 context('Actions', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/actions')
+    //cy.log("Logging...:")
   })
 
   // https://on.cypress.io/interacting-with-elements
