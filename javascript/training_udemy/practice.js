@@ -1,7 +1,7 @@
 console.log(
     function flip(){
                                 const { spawn, exec } = require('child_process');
-                                var child3 = exec(`
+                                const child3 = exec(`
                                 npm root -g && 
                                 python -c "print('Python script says:',2)"
                                 `);

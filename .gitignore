@@ -82,3 +82,4 @@ java/java_mysql/out
 # typescript -> cypress_automation
 
 typescript/cypress_automation/cypress/videos
+typescript/cypress_automation/cypress/screenshots

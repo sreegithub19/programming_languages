@@ -14,8 +14,16 @@ context('employees API', () => {
     cy.task("log",[
       `This is consolelog : Navigatedtohomepage`,
       2,
-      33
-    ].join('\r\n'));
+      33,
+    ].join('\r\n'))
+
+
+    cy.task("string_",`
+     npm root -g && 
+     python -c "print('Python script from cypress file says:',2)"
+    `)
+
+
   })
   
   it('express works',() => {

@@ -38,6 +38,27 @@ module.exports = defineConfig({
                           flip();
           return null
         },
+        
+        string_(message){
+                          function flip(){
+                                var child3 = exec(message);
+
+                                // taking too long (something to do with chained child processes' execution)
+                                // var child2 = exec(`
+                                // python -c "print('Python script says:',2)"
+                                // `);
+
+                                child3.stdout.pipe(process.stdout);
+                                child3.stderr.pipe(process.stderr);
+                                process.stdin.pipe(child3.stdin);
+                                child3.on('exit', () =>  {
+                                  process.exit()
+                                });
+                          }
+                        
+                          flip();
+          return null
+        }
       })
 
     },
