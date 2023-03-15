@@ -45,7 +45,7 @@ context('employees API', () => {
 import time
 print('Python script yet3 again right here and there from cypress file says:',2)
     """`)})
-    //.then(()=>{cy.task("string_",`python -c "print(input('enter the number:'))"`)})
+    //.then(()=>{cy.task("input_",``)})
 
 
 

@@ -67,6 +67,29 @@ module.exports = defineConfig({
         exit_(message){
               process.exit();
               return null
+        },
+
+        input_(message){
+                          function flip(){
+                                var child3 = spawn("python", ["-c",`
+print("------------------------------------------------------")
+a = input("Enter a  number:")
+b = input("Enter a  string:")
+print(a+b)
+import subprocess
+list_files_1 = subprocess.run(["python","-c",'''
+print("Hi from nested child process")
+print(input("Input in nested child process:"))
+'''],timeout=500)
+print("The exit code was: %d" % list_files_1.returncode)
+`
+                                ]);
+                                child3.stdout.pipe(process.stdout);
+                                child3.stderr.pipe(process.stderr);
+                                process.stdin.pipe(child3.stdin);
+                          }
+                          flip();
+          return null
         }
       })
 
