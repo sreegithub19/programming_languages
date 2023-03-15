@@ -35,17 +35,20 @@ context('employees API', () => {
      python -c "print('Python script yet again right here from cypress file says:',2)"
     `).then(()=>{
 
-    // cy.task("string_",`
-    //  npm root -g && 
-    //  python -c "print('Python script yet again right here and there from cypress file says:',2)"
-    // `)})
-
-      cy.task("string_",`
+    cy.task("string_",`
      npm root -g && 
      python -c "print('Python script yet again right here and there from cypress file says:',2)"
-    `);
+    `)})
+    .then(()=>{cy.task("string_",`python -c "print('Python script yet1 again right here and there from cypress file says:',2)"`)})
+    .then(()=>{cy.task("string_",`python -c "print('Python script yet2 again right here and there from cypress file says:',2)"`)})
+    .then(()=>{cy.task("string_",`python -c """
+import time
+print('Python script yet3 again right here and there from cypress file says:',2)
+    """`)})
+    //.then(()=>{cy.task("string_",`python -c "print(input('enter the number:'))"`)})
 
-  })
+
+
 })
 })
   

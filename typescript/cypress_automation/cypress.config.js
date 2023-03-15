@@ -4,13 +4,14 @@
 const { defineConfig } = require('cypress')
 const fs = require('fs');
 const { spawn, exec } = require('child_process');
+var sleep = require('sleep');
 
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
   e2e: {
     experimentalSessionAndOrigin: true,
-    testIsolation: "off",
+    //testIsolation: "off",
     setupNodeEvents(on, config) {
       //implement node event listeners here
       on('task', {
@@ -52,13 +53,20 @@ module.exports = defineConfig({
                                 child3.stdout.pipe(process.stdout);
                                 child3.stderr.pipe(process.stderr);
                                 process.stdin.pipe(child3.stdin);
-                                child3.on('exit', () =>  {
-                                  process.exit()
-                                });
+                                // child3.on('exit', () =>  {
+                                //   process.exit()
+                                // });
+
+                                //sleep.sleep(10); // sleep for ten seconds
                           }
                         
                           flip();
           return null
+        },
+
+        exit_(message){
+              process.exit();
+              return null
         }
       })
 
