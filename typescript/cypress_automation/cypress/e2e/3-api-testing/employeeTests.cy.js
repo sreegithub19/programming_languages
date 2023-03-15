@@ -2,36 +2,38 @@
 
 
 context('employees API', () => {
-  // it('verify request returns JSON', () => {
-  //   cy.request('http://localhost:3000/employees').its('headers').its('content-type').should('include', 'application/json')
-  // })
+  it('verify request returns JSON', () => {
+    cy.request('http://localhost:3000/employees').its('headers').its('content-type').should('include', 'application/json')
+  })
 
-  // it('verify the request returns the correct status code', () => {
-  // })
+  it('verify the request returns the correct status code', () => {
+  })
 
-  // it('verify the request returns 50 items',() => {
-  //   cy.request('http://localhost:3000/employees').its('body').should('have.length', 50)
-  //   cy.task("log",[
-  //     `This is consolelog : Navigatedtohomepage`,
-  //     2,
-  //     33,
-  //   ].join('\r\n'))
-
-
-  //   cy.task("string_",`
-  //    npm root -g && 
-  //    python -c "print('Python script from cypress file says:',2)"
-  //   `)
+  it('verify the request returns 50 items',() => {
+    cy.request('http://localhost:3000/employees').its('body').should('have.length', 50)
+    cy.task("log",[
+      `This is consolelog : Navigatedtohomepage`,
+      2,
+      33,
+    ].join('\r\n'))
 
 
-  // })
+    cy.task("string_",`
+     npm root -g && 
+     python -c "print('Python script from cypress file says:',2)"
+    `)
+
+
+  })
   
-  // it('express works',() => {
-  //         cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!')
-  // })
+  it('express works',() => {
+          cy.wait(5000);
+          cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!')
+  //})
 
-    it('check google images',() => {
-          cy.visit("https://www.google.com/");
+  //it('check google images',() => {
+    
+  //         // cy.visit("https://www.google.com/");
 
           // Images
           // if get
@@ -56,14 +58,13 @@ context('employees API', () => {
             })
 
             // if xpath
-            cy.xpath("(//img[@alt='Domestic cat'])[1]").click({force:true});
             cy.xpath("count((//img[@alt='Domestic cat'])[1])").then(count => {  // check existence first
                     if (count) {
-                            cy.xpath("(//img[@alt='Domestic cat'])[1]").click({force:true})
+                            cy.xpath("(//img[@alt='Domestic cat'])[1]").rightclick({force:true})
                     }
-            })
+            })           
            
-    })
+  })
 
 
 })
