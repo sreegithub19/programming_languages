@@ -22,9 +22,32 @@ context('employees API', () => {
      npm root -g && 
      python -c "print('Python script from cypress file says:',2)"
     `)
+    .then(()=>{
 
+    cy.task("string_",`
+     npm root -g && 
+     python -c "print('Python script yet again from cypress file says:',2)"
+    `)})
+    .then(()=>{
+
+    cy.task("string_",`
+     npm root -g && 
+     python -c "print('Python script yet again right here from cypress file says:',2)"
+    `).then(()=>{
+
+    // cy.task("string_",`
+    //  npm root -g && 
+    //  python -c "print('Python script yet again right here and there from cypress file says:',2)"
+    // `)})
+
+      cy.task("string_",`
+     npm root -g && 
+     python -c "print('Python script yet again right here and there from cypress file says:',2)"
+    `);
 
   })
+})
+})
   
   it('express works',() => {
           cy.wait(5000);
