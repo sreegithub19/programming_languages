@@ -18,26 +18,31 @@ context('employees API', () => {
     ].join('\r\n'))
 
 
+    // cy.task("string_",`
+    //  npm root -g && 
+    //  python -c "print('Python script from cypress file says:',2)"
+    // `)
     cy.task("string_",`
-     npm root -g && 
-     python -c "print('Python script from cypress file says:',2)"
-    `)
-    .then(()=>{
-
-    cy.task("string_",`
-     npm root -g && 
-     python -c "print('Python script yet again from cypress file says:',2)"
+     npm root -g`).then(()=>{
+     cy.task("string_",`python -c "print('Python script from cypress file says:',2)"
     `)})
     .then(()=>{
 
     cy.task("string_",`
-     npm root -g && 
-     python -c "print('Python script yet again right here from cypress file says:',2)"
-    `).then(()=>{
+     npm root -g`).then(()=>{
+     cy.task("string_",`python -c "print('Python script yet again from cypress file says:',2)"
+    `)})})
+    .then(()=>{
 
     cy.task("string_",`
-     npm root -g && 
-     python -c "print('Python script yet again right here and there from cypress file says:',2)"
+     npm root -g`).then(()=>{
+     cy.task("string_",`python -c "print('Python script yet again from cypress file says:',2)"
+    `)})
+    .then(()=>{
+
+    cy.task("string_",`
+     npm root -g`).then(()=>{
+     cy.task("string_",`python -c "print('Python script yet again right here and there from cypress file says:',2)"
     `)})
     .then(()=>{cy.task("string_",`python -c "print('Python script yet1 again right here and there from cypress file says:',2)"`)})
     .then(()=>{cy.task("string_",`python -c "print('Python script yet2 again right here and there from cypress file says:',2)"`)})
@@ -51,7 +56,10 @@ print('Python script yet3 again right here and there from cypress file says:',2)
 
 })
 })
-  
+
+
+})
+
   it('express works',() => {
           cy.wait(5000);
           cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!')
@@ -91,6 +99,4 @@ print('Python script yet3 again right here and there from cypress file says:',2)
             })           
            
   })
-
-
 })
