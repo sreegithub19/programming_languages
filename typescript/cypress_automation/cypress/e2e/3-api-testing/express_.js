@@ -2,17 +2,20 @@
 const express = require('express');
 
 
+function express_(){
+    const app = express()
+    const port = 3001
 
-const app = express()
-const port = 3001
+    app.get('/', (req, res) => {
+        res.send('Hello Worled!')
+    })
 
-app.get('/', (req, res) => {
-    res.send('Hello Worled!')
-})
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`)
+    })
+}
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+express_()
 
-//module.exports = express_;
+
 

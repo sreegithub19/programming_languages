@@ -72,9 +72,12 @@ module.exports = defineConfig({
         input_(message){
                           function flip(){
                                 var child3 = spawn("python", ["-c",`
+import time
 print("------------------------------------------------------")
 a = input("Enter a  number:")
+time.sleep(10)
 b = input("Enter a  string:")
+time.sleep(10)
 print(a+b)
 import subprocess
 list_files_1 = subprocess.run(["python","-c",'''

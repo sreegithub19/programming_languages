@@ -50,7 +50,7 @@ context('employees API', () => {
 import time
 print('Python script yet3 again right here and there from cypress file says:',2)
     """`)})
-    //.then(()=>{cy.task("input_",``)})
+    //.then(()=>{cy.task("input_",``,{ timeout: 200000 })})
 
 
 
@@ -60,9 +60,11 @@ print('Python script yet3 again right here and there from cypress file says:',2)
 
 })
 
-  it('express works',() => {
+  it('express and flask work',() => {
           cy.wait(5000);
-          cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!')
+          cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!');
+          cy.wait(3000);
+          cy.request('http://localhost:3002').its('body').should('include', 'Hello World!')
   //})
 
   //it('check google images',() => {
