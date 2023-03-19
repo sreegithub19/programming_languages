@@ -1,30 +1,7 @@
-
-const express = require('express');
-
-
-function express_(){
-    const app = express()
-    const port = 3001
-
-    app.get('/', (req, res) => {
-        res.send('Hello Worled!')
-    })
-
-    app.listen(port, () => {
-        console.log(`Example app listening on port ${port}`)
-    })
-}
-
-express_()
-
-function http_python_(){
-
-    const { spawn } = require('child_process');
-var child = spawn("python", ["-c",`
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 hostName = "localhost"
-serverPort = 3002
+serverPort = 8080
 
 class handler(BaseHTTPRequestHandler):
         def calculator(self):
@@ -53,13 +30,3 @@ except KeyboardInterrupt:
 
 webServer.server_close()
 print("Server stopped.")
-`]);
-    
-
-    child.stdout.pipe(process.stdout);
-    child.stderr.pipe(process.stderr);
-    process.stdin.pipe(child.stdin);
-    child.on('exit', () => process.exit());
-}
-
-http_python_()
