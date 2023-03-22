@@ -311,3 +311,7 @@
 	path = credentials_/credentials
 	url = https://github.com/sreegithub19/credentials.git
 	branch = main
+[submodule "javascript/nuxt_/nuxtjs-boilerplate"]
+	path = javascript/nuxt_/nuxtjs-boilerplate
+	url = https://github.com/sreegithub19/nuxtjs-boilerplate.git
+	branch = main
