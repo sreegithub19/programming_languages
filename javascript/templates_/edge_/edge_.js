@@ -26,4 +26,14 @@ console.log(html)
 f()
 
 // ----------------------------------------------------------------//
-// reading from string (for now edge supports only reading from file)
+// reading from string
+async function f() {
+
+const html = await edge.renderRaw('<p> Hi {{ greeting }} </p>', {
+  greeting: 'Hello world'
+})
+
+console.log(html)
+
+}
+f()
