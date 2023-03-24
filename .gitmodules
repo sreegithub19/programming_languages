@@ -184,6 +184,10 @@
 	url = https://github.com/sreegithub19/koa_project.git
 	branch = main
 	# http://koa-project-one.vercel.app/
+[submodule "typescript/koa_/koa_project"]
+	path = typescript/koa_/koa_project
+	url = https://github.com/sreegithub19/koa_project.git
+	branch = typescript
 	###
 	#Video:
 	#Part 1:https://user-images.githubusercontent.com/55496113/222214457-a972a3d1-d3c6-4b83-a250-72aa8fd573c9.mp4
