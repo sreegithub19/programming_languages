@@ -4,7 +4,9 @@
     // Use && (double ampersand) for sequential execution.
     // Use & (single ampersand) for parallel execution.
 
-console.log("final_inputs_js_py_1 part-1.js")
+const ab = (() => {
+
+    console.log("final_inputs_js_py_1 part-1.js")
 const { spawn } = require('child_process');
 var child = spawn("python3", ["-c",`
 import subprocess
@@ -212,3 +214,6 @@ child.on('exit', () => {
     child1.on('exit', () => process.exit());   
 });
 
+
+
+})()   
