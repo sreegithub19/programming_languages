@@ -323,3 +323,7 @@
 	path = javascript/redwood_/netlify-deploy
 	url = https://github.com/sreegithub19/netlify-deploy.git
 	branch = master
+[submodule "javascript/adonis/serverless-adonis"]
+	path = javascript/adonis/serverless-adonis
+	url = https://github.com/sreegithub19/serverless-adonis.git
+	branch = master
