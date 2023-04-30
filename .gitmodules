@@ -319,3 +319,7 @@
 	path = javascript/nuxt_/nuxtjs-boilerplate
 	url = https://github.com/sreegithub19/nuxtjs-boilerplate.git
 	branch = main
+[submodule "javascript/redwood_/netlify-deploy"]
+	path = javascript/redwood_/netlify-deploy
+	url = https://github.com/sreegithub19/netlify-deploy.git
+	branch = master
