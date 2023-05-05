@@ -331,3 +331,7 @@
 	path = typescript/redwood_/netlify-deploy
 	url = https://github.com/sreegithub19/netlify-deploy.git
 	branch = typescript
+[submodule "typescript/adonis_/serverless-adonis"]
+	path = typescript/adonis_/serverless-adonis
+	url = https://github.com/sreegithub19/serverless-adonis.git
+	branch = typescript
