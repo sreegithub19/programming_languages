@@ -23,7 +23,21 @@ fn handle_connection(mut stream: TcpStream) {
         .collect();
 
     let status_line = "HTTP/1.1 200 OK";
-    let contents = fs::read_to_string("_3_index.html").unwrap();    
+    //let contents = fs::read_to_string("_3_index.html").unwrap(); 
+    let contents = "
+<html>
+<head>
+    <meta charset=\"utf-8\">
+    <title>Hello!</title>
+</head>
+
+<body>
+    <h1>Hello!</h1>
+    <p>Hi from Rust</p>
+    <script>alert(2)</script>
+</body>
+
+</html>";
     let length = contents.len();
 
     let response =
