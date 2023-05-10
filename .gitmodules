@@ -42,6 +42,9 @@
 	path = javascript/next_/nextjs_app
 	url = https://github.com/sreegithub19/nextjs_app.git
 	branch = main
+	# Related pages:
+		# https://nextjs-sreegithub19.vercel.app/api/hello
+		# Golang applications: https://nextjs-sreegithub19.vercel.app/api/applications
 	# https://nextjs-sreegithub19.vercel.app/
 	# #Video: https://user-images.githubusercontent.com/55496113/222212597-f4025ba5-d077-4895-bc87-539931582f7a.mp4
 [submodule "javascript/next_/nextjs_app_typescript"]
@@ -335,3 +338,11 @@
 	path = typescript/adonis_/serverless-adonis
 	url = https://github.com/sreegithub19/serverless-adonis.git
 	branch = typescript
+[submodule "javascript/next_/nextjs_project"]
+	path = javascript/next_/nextjs_project
+	url = https://github.com/sreegithub19/nextjs_project.git
+	branch = main
+	# Related pages:
+		# https://nextjs-project-tau-eight.vercel.app/
+		# https://nextjs-project-tau-eight.vercel.app/hello
+		# https://nextjs-project-tau-eight.vercel.app/api/py (Python project)
