@@ -346,3 +346,7 @@
 		# https://nextjs-project-tau-eight.vercel.app/
 		# https://nextjs-project-tau-eight.vercel.app/hello
 		# https://nextjs-project-tau-eight.vercel.app/api/py (Python project)
+[submodule "typescript/adonis_/serverless-adonis-ts"]
+	path = typescript/adonis_/serverless-adonis-ts
+	url = https://github.com/sreegithub19/serverless-adonis-ts.git
+	branch = main
