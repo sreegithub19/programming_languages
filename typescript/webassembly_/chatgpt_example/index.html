@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script>
+        async function loadWebAssembly(url) {
+            const response = await fetch(url);
+            const bytes = await response.arrayBuffer();
+            const module = await WebAssembly.instantiate(bytes);
+            return module.instance.exports;
+        }
+
+        loadWebAssembly('example.wasm').then((exports) => {
+            // Call the AssemblyScript function
+            const result = exports.add(5, 3);
+            console.log('Result:', result);
+        });
+
+        loadWebAssembly('example.wasm').then((exports) => {
+                // Call the AssemblyScript function
+                document.write(exports.render());
+        })
+    </script>
+</head>
+
+<body>
+    <!-- Content of your HTML body goes here -->
+</body>
+
+</html>
