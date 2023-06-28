@@ -59,7 +59,6 @@ outputResult(current,"Add: "+subtract(2,20));
 outputResult(current,"Add: "+ function(){return(2+3)}());
 
 
-// shadowing of variables - https://rakuten.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced/learn/lecture/15854644#overview
 function shadowing(){
   let userName = 'Max';
   function greetUser(name) {
@@ -73,7 +72,6 @@ function shadowing(){
 
  // add() vs add_input
 function indirect_execution()
-// https://rakuten.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced/learn/lecture/15853244#overview
 {
   nested_operations();
   document.getElementById('btn-add').addEventListener('click', nested_operations.add_input);
