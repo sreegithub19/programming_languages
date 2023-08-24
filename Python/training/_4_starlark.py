@@ -17,3 +17,23 @@
 # """
 # print(s.exec(fibonacci))
 # print(s.eval("fibonacci(5)"))  # [0, 1, 1, 2, 3]
+
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return '''
+<b>Web App with Python Flask!</b>
+    '''
+
+@app.route('/next')
+def index_():
+    return '''
+<b>Web App with Python Flask next!</b>
+    '''
+
+app.run(host='0.0.0.0', port=5000)
+app.debug = True
