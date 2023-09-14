@@ -350,3 +350,19 @@
 	path = typescript/adonis_/serverless-adonis-ts
 	url = https://github.com/sreegithub19/serverless-adonis-ts.git
 	branch = main
+[submodule "javascript/stackblitz_/angular_nest_stackblitz"]
+	path = javascript/stackblitz_/angular_nest_stackblitz
+	url = https://github.com/sreegithub19/angular_nest_stackblitz.git
+	branch = main
+[submodule "javascript/stackblitz_/nx_react_nestjs_graphql"]
+	path = javascript/stackblitz_/nx_react_nestjs_graphql
+	url = https://github.com/sreegithub19/nx_react_nestjs_graphql.git
+	branch = main
+[submodule "javascript/nx_/nx-monorepo"]
+	path = javascript/nx_/nx-monorepo
+	url = https://github.com/sreegithub19/nx-monorepo.git
+	branch = main
+[submodule "javascript/next_/nextjs-fastapi-starter-1"]
+	path = javascript/next_/nextjs-fastapi-starter-1
+	url = https://github.com/sreegithub19/nextjs-fastapi-starter-1.git
+	branch = main
