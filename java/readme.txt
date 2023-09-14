@@ -1,6 +1,3 @@
-Embedding other languages: 
-/Users/sreedhar.k/Desktop/Rakuten_FTE/Java/j2v8
-
 ============================================================================
 
 1. Nodejs embedded in Java:
@@ -214,12 +211,6 @@ public class javet {
 
 (iii) Python embedding (python-bridge): Not working.
 Error :
-/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=50330:/Applications/IntelliJ IDEA CE.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/charsets.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/cldrdata.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/dnsns.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/jaccess.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/jfxrt.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/localedata.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/nashorn.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/sunec.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/ext/zipfs.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/jce.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/jfr.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/jfxswt.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/jsse.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/management-agent.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/resources.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/jre/lib/rt.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/ant-javafx.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/dt.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/javafx-mx.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/jconsole.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/packager.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/sa-jdi.jar:/Users/sreedhar.k/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home/lib/tools.jar:/Users/sreedhar.k/Desktop/Rakuten_FTE/Java/javet/target/classes:/Users/sreedhar.k/.m2/repository/com/caoccao/javet/javet-macos/1.0.5/javet-macos-1.0.5.jar com.javet.javet
-Traceback (most recent call last):
-  File "/Users/sreedhar.k/Desktop/Rakuten_FTE/Java/javet/node_modules/python-bridge/node_python_bridge.py", line 111, in <module>
-    write_data(writer, data)
-  File "/Users/sreedhar.k/Desktop/Rakuten_FTE/Java/javet/node_modules/python-bridge/node_python_bridge.py", line 46, in write_data
-    f.flush()
 IOError: [Errno 32] Broken pipe
 close failed in file object destructor:
 IOError: [Errno 9] Bad file descriptor

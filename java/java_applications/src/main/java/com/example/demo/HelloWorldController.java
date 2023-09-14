@@ -7300,15 +7300,6 @@ public class HelloWorldController {
 
 	@RequestMapping("/dino")
 	public String dino() throws IOException {
-		/* Method-1
-		String s="";
-		try {
-			s = Files.readString(Path.of("/Users/sreedhar.k/Desktop/Rakuten_FTE/programming_languages/java/java_applications/src/main/java/com/example/demo/dino.html"), StandardCharsets.UTF_8);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return s;
-		 */
 
 
 		// Method-2

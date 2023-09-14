@@ -21,9 +21,9 @@ child3.on('exit', () => {
 //console.log(path.join(`${child4.toString().trim()}`,"config.toml"));
 
 //var config = toml.parse(fs.readFileSync(path.join(`${child4.toString().trim()}`,"config.toml"), 'utf-8'));
-if(`${require("child_process").execSync(`pwd`).toString().trim()}` == "/Users/sreedhar.k/Desktop/Rakuten_FTE/programming_languages")
+if(`${require("child_process").execSync(`pwd`).toString().trim()}` == "/programming_languages")
     var config = toml.parse(fs.readFileSync(path.join(`${require("child_process").execSync(`pwd`).toString().trim()}`,"javascript/toml_/config.toml")), 'utf-8');
-else if(`${require("child_process").execSync(`pwd`).toString().trim()}` == "/Users/sreedhar.k/Desktop/Rakuten_FTE/programming_languages/javascript/toml_")
+else if(`${require("child_process").execSync(`pwd`).toString().trim()}` == "/programming_languages/javascript/toml_")
     var config = toml.parse(fs.readFileSync(path.join(`${require("child_process").execSync(`pwd`).toString().trim()}`,"config.toml")), 'utf-8');
 
 
