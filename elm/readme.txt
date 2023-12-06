@@ -23,7 +23,7 @@
 
     7. Ways to compile Elm:
         i. (<script> not working in embedded html as string) elm make Main.elm  -> then open index.html in browser
-        ii. (Not working) elm make Main.elm --output=elm.js -> src="elm.js" in index.html (https://riptutorial.com/elm#embedding-into-html)
+        ii. (Not working) elm make src/Hello_1.elm --output=elm.js -> src="elm.js" in index.html (https://riptutorial.com/elm#embedding-into-html)
 
 
 ===================================================
@@ -45,7 +45,8 @@ Execution:
 (i) brew install elm
 (ii)(In the elm folder),
 elm init
-(iii) elm make src/Hello.elm   # after filling in some code in the Hello.elm file
+(iii) elm make src/Hello_1.elm   # after filling in some code in the Hello.elm file
+(iv) elm-live src/Hello_1.elm --open --start-page=index.html -- --output=elm_app.js
 
 #Hello.elm:
 module Hello exposing (..)
@@ -55,6 +56,6 @@ main = text "Hello!"
 {- Multi-line comment -}
 
 (For sample codes: https://elm-lang.org/examples)
-(iv) Open the generated index.html file.
+(v) Open the generated index.html file.
 
 ===================================================

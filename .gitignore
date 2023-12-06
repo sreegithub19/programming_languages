@@ -83,3 +83,8 @@ java/java_mysql/out
 
 typescript/cypress_automation/cypress/videos
 typescript/cypress_automation/cypress/screenshots
+
+
+##########################################
+# Elm
+elm/elm-stuff
