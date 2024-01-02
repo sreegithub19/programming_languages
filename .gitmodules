@@ -366,3 +366,7 @@
 	path = javascript/next_/nextjs-fastapi-starter-1
 	url = https://github.com/sreegithub19/nextjs-fastapi-starter-1.git
 	branch = main
+[submodule "Languages"]
+	path = Languages
+	url = https://github.com/sreegithub19/Languages.git
+	branch = main
