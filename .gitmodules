@@ -366,3 +366,7 @@
 	path = javascript/next_/nextjs-fastapi-starter-1
 	url = https://github.com/sreegithub19/nextjs-fastapi-starter-1.git
 	branch = main
+[submodule "resumes"]
+	path = resumes
+	url = https://github.com/sreegithub19/resumes.git
+	branch = main
