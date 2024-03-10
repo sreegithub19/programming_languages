@@ -153,6 +153,7 @@
 	url = https://github.com/sreegithub19/jspaint.git
 	branch = master
 	# https://jspaint-rosy.vercel.app/#local:dc7b637dd8b02
+# Not working
 [submodule "javascript/app_clones/Video-Meeting"]
 	path = javascript/app_clones/Video-Meeting
 	url = https://github.com/sreegithub19/Video-Meeting.git
@@ -197,6 +198,7 @@
 	#Part 1:https://user-images.githubusercontent.com/55496113/222214457-a972a3d1-d3c6-4b83-a250-72aa8fd573c9.mp4
 	#Part 2:https://user-images.githubusercontent.com/55496113/222214472-3781388e-6dc5-405d-8554-5a1c9fa74cfb.mp4
 	###
+	# https://koa-project-ts.vercel.app/
 [submodule "javascript/hapi_/hapijs_vercel"]
 	path = javascript/hapi_/hapijs_vercel
 	url = https://github.com/sreegithub19/hapijs_vercel.git
