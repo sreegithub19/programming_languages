@@ -115,7 +115,7 @@
 	path = javascript/express_/JavaScript-Applications
 	url = https://github.com/sreegithub19/JavaScript-Applications.git
 	branch = main
-	# https://serene-stream-98532.herokuapp.com/
+	# https://serene-stream-98532.herokuapp.com/     (this will not work now since Heroku has terminated free tier for hosting webapps)
 [submodule "typescript/solid_/solid_app"]
 	path = typescript/solid_/solid_app
 	url = https://github.com/sreegithub19/solid_app.git
