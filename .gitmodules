@@ -295,6 +295,7 @@
 	url = https://github.com/sreegithub19/nestjs_tsx.git
 	branch = main
 	# https://nest-tsx.vercel.app/
+# Login issues, and requires paid subscription
 [submodule "Python/flask_/flask_pythonanywhere"]
 	path = Python/flask_/flask_pythonanywhere
 	url = https://github.com/sreegithub19/flask_pythonanywhere.git
@@ -325,50 +326,63 @@
 	path = javascript/nuxt_/nuxtjs-boilerplate
 	url = https://github.com/sreegithub19/nuxtjs-boilerplate.git
 	branch = main
+	# https://nuxtjs-boilerplate-weld-eight.vercel.app/
 [submodule "javascript/redwood_/netlify-deploy"]
 	path = javascript/redwood_/netlify-deploy
 	url = https://github.com/sreegithub19/netlify-deploy.git
 	branch = master
+	# https://astounding-quokka-827299.netlify.app/
 [submodule "javascript/adonis/serverless-adonis"]
 	path = javascript/adonis/serverless-adonis
 	url = https://github.com/sreegithub19/serverless-adonis.git
 	branch = master
+	# https://serverless-adonis-three.vercel.app/
 [submodule "typescript/redwood_/netlify-deploy"]
 	path = typescript/redwood_/netlify-deploy
 	url = https://github.com/sreegithub19/netlify-deploy.git
 	branch = typescript
+	# https://papaya-madeleine-bae90b.netlify.app/
 [submodule "typescript/adonis_/serverless-adonis"]
 	path = typescript/adonis_/serverless-adonis
 	url = https://github.com/sreegithub19/serverless-adonis.git
 	branch = typescript
+	# https://serverless-adonis-ts.vercel.app/
 [submodule "javascript/next_/nextjs_project"]
 	path = javascript/next_/nextjs_project
 	url = https://github.com/sreegithub19/nextjs_project.git
 	branch = main
 	# Related pages:
-		# https://nextjs-project-tau-eight.vercel.app/
-		# https://nextjs-project-tau-eight.vercel.app/hello
-		# https://nextjs-project-tau-eight.vercel.app/api/py (Python project)
+		# https://nextjs-project-39d2.vercel.app/
+		# https://nextjs-project-39d2.vercel.app/hello
+		# https://nextjs-project-39d2.vercel.app/api/py (Python project)
 [submodule "typescript/adonis_/serverless-adonis-ts"]
 	path = typescript/adonis_/serverless-adonis-ts
 	url = https://github.com/sreegithub19/serverless-adonis-ts.git
 	branch = main
+	# https://serverless-adonis-ts-1.vercel.app/
 [submodule "javascript/stackblitz_/angular_nest_stackblitz"]
 	path = javascript/stackblitz_/angular_nest_stackblitz
 	url = https://github.com/sreegithub19/angular_nest_stackblitz.git
 	branch = main
+	# https://stackblitz.com/edit/mugifly-angular-nest-kwtvtl   (open in Firefox)
+	# App link in Stackblitz : https://mugiflyangularnestkwtvtl-5crd--3000--7259293c.local-credentialless.webcontainer.io
 [submodule "javascript/stackblitz_/nx_react_nestjs_graphql"]
 	path = javascript/stackblitz_/nx_react_nestjs_graphql
 	url = https://github.com/sreegithub19/nx_react_nestjs_graphql.git
 	branch = main
+	# https://stackblitz.com/edit/github-yzwzpi-gskgfp?file=README.md    (open in Firefox)
+	# Backend App link in Stackblitz :  https://githubyzwzpigskgfp-owch--3333--7259293c.local-credentialless.webcontainer.io/api/applications
+	# Frontend App link in Stackblitz : https://githubyzwzpigskgfp-owch--4200--7259293c.local-credentialless.webcontainer.io/
 [submodule "javascript/nx_/nx-monorepo"]
 	path = javascript/nx_/nx-monorepo
 	url = https://github.com/sreegithub19/nx-monorepo.git
 	branch = main
+	# https://nx-monorepo-rouge-ten.vercel.app/
 [submodule "javascript/next_/nextjs-fastapi-starter-1"]
 	path = javascript/next_/nextjs-fastapi-starter-1
 	url = https://github.com/sreegithub19/nextjs-fastapi-starter-1.git
 	branch = main
+	# https://nextjs-fastapi-starter-1.vercel.app/api/python
 [submodule "resumes"]
 	path = resumes
 	url = https://github.com/sreegithub19/resumes.git
