@@ -142,6 +142,7 @@
 	#Part 2:https://user-images.githubusercontent.com/55496113/222206326-40b73e00-22cc-4dbb-9e63-46f786b9f611.mp4
 	#Part 3:https://user-images.githubusercontent.com/55496113/222206345-d784a940-54a4-4a68-9751-2b70c91574b6.mp4
 	###
+# Not working
 [submodule "javascript/app_clones/whatsapp-2"]
 	path = javascript/app_clones/whatsapp-2
 	url = https://github.com/sreegithub19/whatsapp-2.git
