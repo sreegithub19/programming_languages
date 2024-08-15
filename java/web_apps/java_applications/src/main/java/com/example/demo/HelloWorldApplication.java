@@ -16,16 +16,3 @@ public class HelloWorldApplication {
 	}
 
 }
-
-//@RestController
-//class HelloWorldController {
-//
-//	@RequestMapping
-//	public String helloWorld(){
-//		return
-//				"""
-//				Hello from Vert.x!
-//				""";
-//	}
-//
-//}

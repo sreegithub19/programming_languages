@@ -3,11 +3,11 @@
 import java.sql.*;
 
 public class javaMysql{
-    static final String DB_URL = "jdbc:mysql://localhost/university";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/university";
     static final String USER = "root";
-    static final String PASS = "sree@sql2021";
-    static final String QUERY = "SELECT * FROM EEngineeringStudents";
-    static final String QUERY1 = "SELECT * FROM EEngineeringStudents";
+    static final String PASS = "sree@mysql2021";
+    static final String QUERY = "SELECT * FROM EngineeringStudents";
+    static final String QUERY1 = "SELECT * FROM EngineeringStudents";
 
     public static void main(String[] args) {
         // Open a connection
