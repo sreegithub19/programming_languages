@@ -127,10 +127,10 @@
 	#Part 2:https://user-images.githubusercontent.com/55496113/222206739-0734c767-515e-4983-aaf8-6ae063ac1304.mp4
 	#Part 3:https://user-images.githubusercontent.com/55496113/222206754-811f8975-0191-47a8-afe9-a66f7be50d81.mp4
 	###
-[submodule "Python/ML_AI/upgrad"]
-	path = Python/ML_AI/upgrad
-	url = https://github.com/sreegithub19/upgrad.git
-	branch = main
+# [submodule "Python/ML_AI/upgrad"]
+# 	path = Python/ML_AI/upgrad
+# 	url = https://github.com/sreegithub19/upgrad.git
+# 	branch = main
 [submodule "javascript/ionic__/ionic_app"]
 	path = javascript/ionic__/ionic_app
 	url = https://github.com/sreegithub19/ionic_app.git
