@@ -1,10 +1,3 @@
-/*
-Steps:
-- go mod init example.com/m
-- go get -u github.com/go-sql-driver/mysql
-- go run mysql_connector_.go
-*/
-
 package main
 
 import (
@@ -29,7 +22,7 @@ func main() {
 	// create a database object which can be used
 	// to connect with database.
 	//db, err := sql.Open("mysql", "<username>:<passwd>@tcp(0.0.0.0:3306)/<db_name>")
-	db, err := sql.Open("mysql", "root:sree@sql2021@tcp(0.0.0.0:3306)/university?multiStatements=true")
+	db, err := sql.Open("mysql", "root:sree@mysql2021@tcp(0.0.0.0:3306)/University?multiStatements=true")
 
 	// handle error, if any.
 	if err != nil {
@@ -40,7 +33,7 @@ func main() {
 	// it executes a database query, but it does
 	// not return any row as result.
 	// Here we create a database table with a SQL query.
-	results, err := db.Query("select * from EEngineeringStudents")
+	results, err := db.Query("select * from EngineeringStudents")
 
 	// handle error
 	if err != nil {
