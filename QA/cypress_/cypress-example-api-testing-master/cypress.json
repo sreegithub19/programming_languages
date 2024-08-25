@@ -1,5 +1,14 @@
 {
   "baseUrl": "http://localhost:3000",
   "projectId": "ghvcei",
-  "video": false
+  "video": false,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/reports",
+    "reportFilename": "report",
+    "quiet": true,
+    "overwrite": false,
+    "html": true,
+    "json": true
+  }
 }

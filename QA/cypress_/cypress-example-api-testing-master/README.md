@@ -25,3 +25,8 @@ See related blog post [Add GUI to your E2E API tests](https://www.cypress.io/blo
 - `npm run cy:open` - runs Cypress in GUI mode
 - `npm test` - starts the local API server and runs Cypress tests against it in headless mode
 ![alt text](image.png)
+
+
+## To incorporate html reports:
+- npm install mochawesome mochawesome-report-generator --save-dev
+- 

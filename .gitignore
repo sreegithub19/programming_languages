@@ -16,7 +16,8 @@ javascript/react_/myapp/.pnp.js
 
 # QA testing
 javascript/react_/myapp/coverage
-QA/cypress-example-api-testing-master/node_modules
+QA/cypress_/cypress-example-api-testing-master/node_modules
+QA/cypress_/cypress-example-api-testing-master/cypress/reports
 
 # production
 javascript/react_/myapp/build
