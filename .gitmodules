@@ -391,7 +391,7 @@
 	path = gate
 	url = https://github.com/sreegithub19/gate.git
 	branch = main
-# [submodule "profiles"]
-# 	path = profiles
-# 	url = https://github.com/sreegithub19/profiles.git
-# 	branch = main
+[submodule "profiles"]
+	path = profiles
+	url = https://github.com/sreegithub19/profiles.git
+	branch = main
