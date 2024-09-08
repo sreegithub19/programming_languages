@@ -395,3 +395,6 @@
 	path = profiles
 	url = https://github.com/sreegithub19/profiles.git
 	branch = main
+[submodule "javascript/codeforces_web"]
+	path = javascript/codeforces_web
+	url = https://github.com/sreegithub19/codeforces_web.git
