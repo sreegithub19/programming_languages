@@ -398,3 +398,24 @@
 [submodule "javascript/codeforces_web"]
 	path = javascript/codeforces_web
 	url = https://github.com/sreegithub19/codeforces_web.git
+	branch = main
+[submodule "javascript/codeforces_script"]
+	path = javascript/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = main
+[submodule "javascript/java_embed/codeforces_script"]
+	path = javascript/java_embed/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = java_
+[submodule "java/codeforces_script"]
+	path = java/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = javac_
+[submodule "java/test-swing11"]
+	path = java/test-swing11
+	url = https://github.com/sreegithub19/test-swing11.git
+	branch = master
+[submodule "java/java_web/test-swing11"]
+	path = java/java_web/test-swing11
+	url = https://github.com/sreegithub19/test-swing11.git
+	branch = gh-pages
