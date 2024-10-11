@@ -419,3 +419,7 @@
 	path = java/java_web/test-swing11
 	url = https://github.com/sreegithub19/test-swing11.git
 	branch = gh-pages
+[submodule "kotlin/codeforces_script"]
+	path = kotlin/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = kotlin1_
