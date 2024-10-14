@@ -423,3 +423,23 @@
 	path = kotlin/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = kotlin1_
+[submodule "CPP/codeforces_script"]
+	path = CPP/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = cpp_
+[submodule "julia_/codeforces_script"]
+	path = julia_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = julia_
+[submodule "Python/codeforces_script"]
+	path = Python/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = python_
+[submodule "ruby/codeforces_script"]
+	path = ruby/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = ruby_
+[submodule "rust/codeforces_script"]
+	path = rust/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = rust_
