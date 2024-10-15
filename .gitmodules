@@ -447,3 +447,7 @@
 	path = elm/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = elm_
+[submodule "kotlin/java_embed/codeforces_script"]
+	path = kotlin/java_embed/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = kotlin_
