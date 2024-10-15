@@ -443,3 +443,7 @@
 	path = rust/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = rust_
+[submodule "elm/codeforces_script"]
+	path = elm/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = elm_
