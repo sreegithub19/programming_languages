@@ -38,7 +38,7 @@ jobs:
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then
             git commit -m "Your commit message"
-            git push
+            git push origin main
           else
             echo "No changes to commit."
           fi
