@@ -21,7 +21,8 @@ jobs:
       - name: Checkout code with submodules
         uses: actions/checkout@v2
         with:
-          submodules: false
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}  # Your PAT secret
 
       - name: Initialize and update submodules
         run: git submodule update --init --recursive
