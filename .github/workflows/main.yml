@@ -1,0 +1,24 @@
+name: Git submodules sync
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+
+      - name: Run Git submodules sync
+        run: |
+          git pull origin main 
+          git submodule update --init --force --remote 
+          git add . 
+          git commit -m "Message" 
+          git push origin main
