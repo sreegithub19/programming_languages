@@ -31,7 +31,7 @@ jobs:
       - name: Run Git submodules sync
         run: |
           git pull origin main 
-          git submodule update --init --force --remote 
+          git submodule update --init --force --recursive 
           git add . 
           git commit -m "Message" 
           git push origin main
