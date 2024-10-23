@@ -33,8 +33,9 @@ jobs:
           git config --global user.name "sreegithub19"
           git config --global pull.rebase false
 
-          # Update each submodule and allow unrelated histories
+
           #git submodule foreach --recursive 'git pull origin HEAD --allow-unrelated-histories'
+          cd CPP/codeforces_script && git fetch && git checkout cpp_ && git pull
 
           git add .
 
