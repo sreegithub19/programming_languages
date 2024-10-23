@@ -18,6 +18,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
+      - name: Checkout code with submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'  # This enables submodule checkout
+
 
       - name: Run Git submodules sync
         run: |
