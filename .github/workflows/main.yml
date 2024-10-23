@@ -34,7 +34,7 @@ jobs:
           git config --global pull.rebase false
 
           # Update each submodule and allow unrelated histories
-          git submodule foreach --recursive 'git pull origin HEAD --allow-unrelated-histories'
+          #git submodule foreach --recursive 'git pull origin HEAD --allow-unrelated-histories'
 
           git add .
 
