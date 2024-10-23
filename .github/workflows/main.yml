@@ -18,14 +18,11 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-      - name: Set up GitHub CLI
-        uses: cli/cli-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
-
       - name: Change visibility of another repository
         run: |
           gh repo edit sreegithub19/resumes --visibility public  # Change to 'public' if needed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
       # - name: Checkout code with submodules
