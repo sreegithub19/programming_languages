@@ -425,7 +425,7 @@
 	branch = kotlin1_
 [submodule "CPP/codeforces_script"]
 	path = CPP/codeforces_script
-	url = https://github.com/sreegithub19/codeforces_script.git
+	url = git@github.com:sreegithub19/codeforces_script.git
 	branch = cpp_
 [submodule "julia_/codeforces_script"]
 	path = julia_/codeforces_script
