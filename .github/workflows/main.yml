@@ -35,7 +35,8 @@ jobs:
 
 
           #git submodule foreach --recursive 'git pull origin HEAD --allow-unrelated-histories'
-          cd CPP/codeforces_script && git fetch && git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories
+          cd CPP/codeforces_script && git fetch && git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories && cd ../..
+          cd resumes && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ..
 
           git add .
 
