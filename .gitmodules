@@ -385,7 +385,7 @@
 	# https://nextjs-fastapi-starter-1.vercel.app/api/python
 [submodule "resumes"]
 	path = resumes
-	url = git@github.com/sreegithub19/resumes.git
+	url = git@github.com:sreegithub19/resumes.git
 	branch = main
 [submodule "gate"]
 	path = gate
