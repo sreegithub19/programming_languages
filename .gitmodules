@@ -1,3 +1,15 @@
+[submodule "resumes"]
+	path = resumes
+	url = git@github.com:sreegithub19/resumes.git
+	branch = main
+[submodule "gate"]
+	path = gate
+	url = https://github.com/sreegithub19/gate.git
+	branch = main
+[submodule "profiles"]
+	path = profiles
+	url = https://github.com/sreegithub19/profiles.git
+	branch = main
 [submodule "javascript/vue_/vuejs_training"]
 	path = javascript/vue_/vuejs_training
 	url = https://github.com/sreegithub19/vuejs_training.git
@@ -383,18 +395,6 @@
 	url = https://github.com/sreegithub19/nextjs-fastapi-starter-1.git
 	branch = main
 	# https://nextjs-fastapi-starter-1.vercel.app/api/python
-[submodule "resumes"]
-	path = resumes
-	url = git@github.com:sreegithub19/resumes.git
-	branch = main
-[submodule "gate"]
-	path = gate
-	url = https://github.com/sreegithub19/gate.git
-	branch = main
-[submodule "profiles"]
-	path = profiles
-	url = https://github.com/sreegithub19/profiles.git
-	branch = main
 [submodule "javascript/codeforces_web"]
 	path = javascript/codeforces_web
 	url = https://github.com/sreegithub19/codeforces_web.git

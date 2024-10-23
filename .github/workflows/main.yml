@@ -18,18 +18,28 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-      - name: Checkout code with submodules
-        uses: actions/checkout@v2
+      - name: Set up GitHub CLI
+        uses: cli/cli-action@v2
         with:
-          submodules: 'true'  # This enables submodule checkout
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
 
-
-      - name: Run Git submodules sync
+      - name: Change visibility of another repository
         run: |
-          git pull origin main 
-          git submodule update --init --force --remote 
-          git add . 
-          git commit -m "Message" 
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          gh repo edit sreegithub19/resumes --visibility public  # Change to 'public' if needed
+
+
+      # - name: Checkout code with submodules
+      #   uses: actions/checkout@v2
+      #   with:
+      #     submodules: 'true'  # This enables submodule checkout
+
+
+      # - name: Run Git submodules sync
+      #   run: |
+      #     git pull origin main 
+      #     git submodule update --init --force --remote 
+      #     git add . 
+      #     git commit -m "Message" 
+      #     git push origin main
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
