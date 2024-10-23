@@ -31,7 +31,7 @@ jobs:
       - name: Run Git submodules sync
         run: |
           git pull origin main 
-          git submodule update --init --force --recursive 
+          git submodule update --init --force --recursive --remote
           git config --global user.email "cpadmaja2003@gmail.com"
           git config --global user.name "sreegithub19"
           git add . 
