@@ -1,15 +1,19 @@
-[submodule "resumes"]
-	path = resumes
-	url = git@github.com:sreegithub19/resumes.git
-	branch = main
-[submodule "gate"]
-	path = gate
-	url = https://github.com/sreegithub19/gate.git
-	branch = main
-[submodule "profiles"]
-	path = profiles
-	url = https://github.com/sreegithub19/profiles.git
-	branch = main
+# [submodule "resumes"]
+# 	path = resumes
+# 	url = https://github.com/sreegithub19/resumes.git
+# 	branch = main
+# [submodule "gate"]
+# 	path = gate
+# 	url = https://github.com/sreegithub19/gate.git
+# 	branch = main
+# [submodule "profiles"]
+# 	path = profiles
+# 	url = https://github.com/sreegithub19/profiles.git
+# 	branch = main
+# [submodule "credentials_/credentials"]
+# 	path = credentials_/credentials
+# 	url = https://github.com/sreegithub19/credentials.git
+# 	branch = main
 [submodule "javascript/vue_/vuejs_training"]
 	path = javascript/vue_/vuejs_training
 	url = https://github.com/sreegithub19/vuejs_training.git
@@ -330,10 +334,6 @@
 	branch = typescript
 	# https://solid-c3aqyyctd-sreegithub19.vercel.app/
 	# #Video: https://user-images.githubusercontent.com/55496113/222207821-6a9d94c2-6f16-4043-83a0-8502ea9956e5.mp4
-[submodule "credentials_/credentials"]
-	path = credentials_/credentials
-	url = https://github.com/sreegithub19/credentials.git
-	branch = main
 [submodule "javascript/nuxt_/nuxtjs-boilerplate"]
 	path = javascript/nuxt_/nuxtjs-boilerplate
 	url = https://github.com/sreegithub19/nuxtjs-boilerplate.git

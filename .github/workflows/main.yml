@@ -18,25 +18,19 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-      - name: Change visibility of another repository
+
+      - name: Checkout code with submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'  # This enables submodule checkout
+
+
+      - name: Run Git submodules sync
         run: |
-          gh repo edit sreegithub19/resumes --visibility public  # Change to 'public' if needed
+          git pull origin main 
+          git submodule update --init --force --remote 
+          git add . 
+          git commit -m "Message" 
+          git push origin main
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-      # - name: Checkout code with submodules
-      #   uses: actions/checkout@v2
-      #   with:
-      #     submodules: 'true'  # This enables submodule checkout
-
-
-      # - name: Run Git submodules sync
-      #   run: |
-      #     git pull origin main 
-      #     git submodule update --init --force --remote 
-      #     git add . 
-      #     git commit -m "Message" 
-      #     git push origin main
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
