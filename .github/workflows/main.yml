@@ -13,12 +13,24 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+        with:
+          submodules: 'true'  # Checkout submodules
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure token is passed
 
-
-      - name: Run Git submodules sync
+      - name: Configure SSH
         run: |
-          git pull origin main 
-          git submodule update --init --force --remote 
-          git add . 
-          git commit -m "Message" 
-          git push origin main
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+
+      # - name: Run Git submodules sync
+      #   run: |
+      #     git pull origin main 
+      #     git submodule update --init --force --remote 
+      #     git add . 
+      #     git commit -m "Message" 
+      #     git push origin main
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
