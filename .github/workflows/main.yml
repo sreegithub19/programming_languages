@@ -11,12 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-        with:
-          submodules: 'true'  # Checkout submodules
-          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure token is passed
-
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
