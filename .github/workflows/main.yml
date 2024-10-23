@@ -27,12 +27,12 @@ jobs:
         run: git submodule update --init --recursive
 
 
-      # - name: Run Git submodules sync
-      #   run: |
-      #     git pull origin main 
-      #     git submodule update --init --force --remote 
-      #     git add . 
-      #     git commit -m "Message" 
-      #     git push origin main
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Git submodules sync
+        run: |
+          git pull origin main 
+          git submodule update --init --force --remote 
+          git add . 
+          git commit -m "Message" 
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
