@@ -32,6 +32,8 @@ jobs:
         run: |
           git pull origin main 
           git submodule update --init --force --recursive 
+          git config --global user.email "cpadmaja2003@gmail.com"
+          git config --global user.name "sreegithub19"
           git add . 
           git commit -m "Message" 
           git push origin main
