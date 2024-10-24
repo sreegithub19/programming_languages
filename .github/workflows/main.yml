@@ -51,7 +51,7 @@ jobs:
           cd javascript/next_/nextjs_app_typescript && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
           cd javascript/next_/nextjs_app_ts_js && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout ts_js && git pull origin ts_js --allow-unrelated-histories && cd ../../..
           cd javascript/react_/my_react_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
-          cd javascript/react_/my_react_app_main && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/react_/my_react_app_main && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/express_/express_vercel_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd javascript/vue_/vue_project && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd javascript/express_/JavaScript-Applications && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
@@ -65,7 +65,7 @@ jobs:
           cd javascript/app_clones/App_clones && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd Python/django_/vercel_django_example1 && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/koa_/koa_project && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
-          cd typescript/koa_/koa_project && git fetch --all &&   git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd typescript/koa_/koa_project && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
           cd javascript/hapi_/hapijs_vercel && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd Python/python_server_/python_server && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/node_/node_server && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
