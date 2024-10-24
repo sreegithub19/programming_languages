@@ -45,11 +45,11 @@ jobs:
           cd javascript/vue_/vuejs_training_typescript && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&  git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
           cd Python/flask_/vercel_flask_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd javascript/angular_/my_angular_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
-          cd javascript/angular_/my_angular_app_main && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/angular_/my_angular_app_main && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/nest_/nestjs_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd javascript/next_/nextjs_app && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
-          cd javascript/next_/nextjs_app_typescript && git fetch --all &&   git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
-          cd javascript/next_/nextjs_app_ts_js && git fetch --all &&   git checkout ts_js && git pull origin ts_js --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_app_typescript && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_app_ts_js && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout ts_js && git pull origin ts_js --allow-unrelated-histories && cd ../../..
           cd javascript/react_/my_react_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd javascript/react_/my_react_app_main && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/express_/express_vercel_app && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
