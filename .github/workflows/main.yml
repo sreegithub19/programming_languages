@@ -38,7 +38,11 @@ jobs:
           git pull origin main --allow-unrelated-histories
           cd CPP/codeforces_script && git fetch && git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories && cd ../..
           cd resumes && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ..
-
+          cd gate && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ..
+          cd profiles && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ..
+          cd credentials_/credentials && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
+          cd javascript/vue_/vuejs_training && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then
