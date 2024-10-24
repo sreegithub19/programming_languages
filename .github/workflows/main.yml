@@ -42,7 +42,78 @@ jobs:
           cd profiles && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ..
           cd credentials_/credentials && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
           cd javascript/vue_/vuejs_training && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
-          
+          cd javascript/vue_/vuejs_training_typescript && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd Python/flask_/vercel_flask_app && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/angular_/my_angular_app && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/angular_/my_angular_app_main && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/nest_/nestjs_app && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_app && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_app_typescript && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_app_ts_js && git fetch && git checkout ts_js && git pull origin ts_js --allow-unrelated-histories && cd ../../..
+          cd javascript/react_/my_react_app && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/react_/my_react_app_main && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/express_/express_vercel_app && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/vue_/vue_project && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/express_/JavaScript-Applications && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/solid_/solid_app && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/ionic__/ionic_app && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/whatsapp-2 && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/jspaint && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/Video-Meeting && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/google-translate-clone && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/codepen && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/app_clones/App_clones && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd Python/django_/vercel_django_example1 && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/koa_/koa_project && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/koa_/koa_project && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd javascript/hapi_/hapijs_vercel && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd Python/python_server_/python_server && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/node_/node_server && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/brunch_/brunch && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/stencil_/stencil && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/umijs_/umijs && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/ember_/ember && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/svelte_/svelte && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/gatsby_/gatsby && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/remix_/remix && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/backbone_/backbone_vercel && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/knockout_/knockout_vercel && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/ts_node_server/ts_node_server && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/express_/ts_express_vercel_app && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/nest_/nestjs_js && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd golang/golang_/golang_vercel && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/qwik_/qwik-app && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/nest_/nestjs_tsx && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd Python/flask_/flask_pythonanywhere && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd Python/fastapi_/fastapi_python && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/graphql_/apollo_graphql && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/solid_/solid_ts/solid_app && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd javascript/nuxt_/nuxtjs-boilerplate && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/redwood_/netlify-deploy && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd javascript/adonis/serverless-adonis && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd typescript/redwood_/netlify-deploy && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd typescript/adonis_/serverless-adonis && git fetch && git checkout typescript && git pull origin typescript --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs_project && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd typescript/adonis_/serverless-adonis-ts && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/stackblitz_/angular_nest_stackblitz && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/stackblitz_/nx_react_nestjs_graphql && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/nx_/nx-monorepo && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/next_/nextjs-fastapi-starter-1 && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd javascript/codeforces_web && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
+          cd javascript/codeforces_script && git fetch && git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
+          cd javascript/java_embed/codeforces_script && git fetch && git checkout java_ && git pull origin java_ --allow-unrelated-histories && cd ../../..
+          cd java/codeforces_script && git fetch && git checkout javac_ && git pull origin javac_ --allow-unrelated-histories && cd ../..
+          cd java/test-swing11 && git fetch && git checkout master && git pull origin master --allow-unrelated-histories && cd ../..
+          cd java/java_web/test-swing11 && git fetch && git checkout gh-pages && git pull origin gh-pages --allow-unrelated-histories && cd ../../..
+          cd kotlin/codeforces_script && git fetch && git checkout kotlin1_ && git pull origin kotlin1_ --allow-unrelated-histories && cd ../..
+          cd CPP/codeforces_script && git fetch && git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories && cd ../..
+          cd julia_/codeforces_script && git fetch && git checkout julia_ && git pull origin julia_ --allow-unrelated-histories && cd ../..
+          cd Python/codeforces_script && git fetch && git checkout python_ && git pull origin python_ --allow-unrelated-histories && cd ../..
+          cd ruby/codeforces_script && git fetch && git checkout ruby_ && git pull origin ruby_ --allow-unrelated-histories && cd ../..
+          cd rust/codeforces_script && git fetch && git checkout rust_ && git pull origin rust_ --allow-unrelated-histories && cd ../..
+          cd elm/codeforces_script && git fetch && git checkout elm_ && git pull origin elm_ --allow-unrelated-histories && cd ../..
+          cd kotlin/java_embed/codeforces_script && git fetch && git checkout kotlin_ && git pull origin kotlin_ --allow-unrelated-histories && cd ../../..
+
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then
