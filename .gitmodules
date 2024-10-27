@@ -451,3 +451,7 @@
 	path = kotlin/java_embed/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = kotlin_
+[submodule "dart/codeforces_script"]
+	path = dart/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = dart_
