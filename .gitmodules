@@ -455,3 +455,7 @@
 	path = dart/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = dart_
+[submodule "csharp/codeforces_script"]
+	path = csharp/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = c_sharp

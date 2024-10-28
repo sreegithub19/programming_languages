@@ -113,6 +113,7 @@ jobs:
           cd elm/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout elm_ && git pull origin elm_ --allow-unrelated-histories && cd ../..
           cd dart/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout dart_ && git pull origin dart_ --allow-unrelated-histories && cd ../..
           cd kotlin/java_embed/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout kotlin_ && git pull origin kotlin_ --allow-unrelated-histories && cd ../../..
+          cd csharp/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout csharp && git pull origin csharp --allow-unrelated-histories && cd ../..
 
           git add .
 
