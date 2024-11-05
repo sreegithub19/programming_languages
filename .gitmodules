@@ -459,15 +459,15 @@
 	path = csharp/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = c_sharp
-[submodule "lua_/codeforces_script"]
-	path = lua_/codeforces_script
+[submodule "lua__/codeforces_script"]
+	path = lua__/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = lua_
 [submodule "objective_c_cpp/codeforces_script"]
 	path = objective_c_cpp/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = objective_c_
-[submodule "solidity_/codeforces_script"]
-	path = solidity_/codeforces_script
+[submodule "solidity__/codeforces_script"]
+	path = solidity__/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = solidity_

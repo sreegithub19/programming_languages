@@ -114,9 +114,9 @@ jobs:
           cd dart/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout dart_ && git pull origin dart_ --allow-unrelated-histories && cd ../..
           cd kotlin/java_embed/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout kotlin_ && git pull origin kotlin_ --allow-unrelated-histories && cd ../../..
           cd csharp/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout c_sharp && git pull origin c_sharp --allow-unrelated-histories && cd ../..
-          cd lua_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout lua_ && git pull origin lua_ --allow-unrelated-histories && cd ../..
+          cd lua__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout lua_ && git pull origin lua_ --allow-unrelated-histories && cd ../..
           cd objective_c_cpp/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout objective_c_ && git pull origin objective_c_ --allow-unrelated-histories && cd ../..
-          cd solidity_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout solidity_ && git pull origin solidity_ --allow-unrelated-histories && cd ../..
+          cd solidity__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout solidity_ && git pull origin solidity_ --allow-unrelated-histories && cd ../..
           
           git add .
 
