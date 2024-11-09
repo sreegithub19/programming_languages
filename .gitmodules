@@ -471,3 +471,7 @@
 	path = solidity__/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = solidity_
+[submodule "swift_code/codeforces_script"]
+	path = swift_code/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = swift_

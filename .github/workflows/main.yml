@@ -117,7 +117,8 @@ jobs:
           cd lua__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout lua_ && git pull origin lua_ --allow-unrelated-histories && cd ../..
           cd objective_c_cpp/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout objective_c_ && git pull origin objective_c_ --allow-unrelated-histories && cd ../..
           cd solidity__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout solidity_ && git pull origin solidity_ --allow-unrelated-histories && cd ../..
-          
+          cd swift_code/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout swift_ && git pull origin swift_ --allow-unrelated-histories && cd ../..
+
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then
