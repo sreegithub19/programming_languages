@@ -475,3 +475,15 @@
 	path = swift_code/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = swift_
+[submodule "matlab__/codeforces_script"]
+	path = matlab__/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = matlab_
+[submodule "scilab__/codeforces_script"]
+	path = scilab__/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = scilab_
+[submodule "java/cucumber_/codeforces_script"]
+	path = java/cucumber_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = java_cucumber
