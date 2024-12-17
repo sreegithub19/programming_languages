@@ -18,7 +18,7 @@ Reference:
     -   docker-machine create --driver virtualbox default (causing this error: VT-x is disabled in the BIOS for all CPU modes (VERR_VMX_MSR_ALL_VMX_DISABLED).)
 
 #################################################################################
-## Git_submodules
+## Git_submodules 
 
 1. To add a git repo as submodule in another repo (in that specific folder):
 git submodule add https://github.com/sreegithub19/vuejs_training.git
