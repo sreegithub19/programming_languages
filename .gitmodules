@@ -487,3 +487,11 @@
 	path = java/cucumber_/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = java_cucumber
+[submodule "scala/codeforces_script"]
+	path = scala/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = scala_
+[submodule "golang/codeforces_script"]
+	path = golang/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = golang_
