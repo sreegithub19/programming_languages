@@ -121,6 +121,9 @@ jobs:
           cd matlab__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout matlab_ && git pull origin matlab_ --allow-unrelated-histories && cd ../..
           cd scilab__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout scilab_ && git pull origin scilab_ --allow-unrelated-histories && cd ../..
           cd java/cucumber_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout java_cucumber && git pull origin java_cucumber --allow-unrelated-histories && cd ../../..
+          cd golang/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout golang_ && git pull origin golang_ --allow-unrelated-histories && cd ../..
+          cd scala/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout scala_ && git pull origin scala_ --allow-unrelated-histories && cd ../..
+
           
           git add .
 
