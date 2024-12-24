@@ -495,3 +495,7 @@
 	path = golang/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = golang_
+[submodule "perl/codeforces_script"]
+	path = perl/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = perl_
