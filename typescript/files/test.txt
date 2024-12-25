@@ -1,5 +1,0 @@
-hi
-you
-are
-from
-python
