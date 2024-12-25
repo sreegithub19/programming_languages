@@ -124,7 +124,10 @@ jobs:
           cd golang/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout golang_ && git pull origin golang_ --allow-unrelated-histories && cd ../..
           cd scala/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout scala_ && git pull origin scala_ --allow-unrelated-histories && cd ../..
           cd perl/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout perl_ && git pull origin perl_ --allow-unrelated-histories && cd ../..
-          
+          cd pascal/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout pascal_ && git pull origin pascal_ --allow-unrelated-histories && cd ../..
+          cd QA/cypress_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing && git pull origin cypress_testing --allow-unrelated-histories && cd ../../..
+          cd QA/cypress_1/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing_1 && git pull origin cypress_testing_1 --allow-unrelated-histories && cd ../../..
+
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then

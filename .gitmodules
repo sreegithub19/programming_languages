@@ -499,3 +499,15 @@
 	path = perl/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = perl_
+[submodule "pascal/codeforces_script"]
+	path = pascal/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = pascal_
+[submodule "QA/cypress_/codeforces_script"]
+	path = QA/cypress_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = cypress_testing
+[submodule "QA/cypress_1/codeforces_script"]
+	path = QA/cypress_1/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = cypress_testing_1
