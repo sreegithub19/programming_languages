@@ -511,3 +511,7 @@
 	path = QA/cypress_1/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = cypress_testing_1
+[submodule "R__/codeforces_script"]
+	path = R__/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = R_
