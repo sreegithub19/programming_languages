@@ -26,8 +26,7 @@ jobs:
        npm run asbuild
        npm start
        sleep 5
-       curl -O http://localhost:3000/index.html
-       curl -O http://localhost:3000/hello-world.wasm
+       curl http://localhost:3000 -o index.html
 
     - name: Upload WASM artifact
       uses: actions/upload-artifact@v4
@@ -35,4 +34,3 @@ jobs:
         name: wasm
         path: |
          typescript/webassembly_/assembly_Script/index.html
-         typescript/webassembly_/assembly_Script/hello-world.wasm
