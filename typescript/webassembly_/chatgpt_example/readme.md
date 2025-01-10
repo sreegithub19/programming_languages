@@ -1,2 +1,0 @@
-- asc example.ts -o example.wasm --optimize
-- open index.html in browser

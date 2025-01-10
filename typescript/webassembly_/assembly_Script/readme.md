@@ -11,9 +11,10 @@ https://www.assemblyscript.org/getting-started.html#setting-up-a-new-project
 ## Steps to run:
 
 - npm init
-- npm install --save-dev assemblyscript
 - npx asinit .
-- npm install
+
+- npm install --save-dev assemblyscript && npm install
+- npm install serve@14.2.4
 - npm run asbuild
 - npm test (optional)
 - npm start
