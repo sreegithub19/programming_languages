@@ -59,7 +59,7 @@ print("Server stopped.")
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
     process.stdin.pipe(child.stdin);
-    child.on('exit', () => process.exit());
+    //child.on('exit', () => process.exit());
 }
 
 http_python_()

@@ -30,3 +30,9 @@ Steps:
   
   kill -9 $(lsof -t -i:3000) || true && kill -9 $(lsof -t -i:3001) || true && json-server cypress/e2e/3-api-testing/employee.js & node cypress/e2e/3-api-testing/express_.js & npx cypress run --spec cypress/e2e/3-api-testing/employeeTests.cy.js
   <pre>
+
+
+Steps:
+- npm install && npm install sleep
+- npm run every
+- Artifact: cypress_automation/cypress/videos/employeeTests.cy.js.mp4

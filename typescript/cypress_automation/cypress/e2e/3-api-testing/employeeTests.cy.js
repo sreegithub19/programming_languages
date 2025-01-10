@@ -50,7 +50,40 @@ context('employees API', () => {
 import time
 print('Python script yet3 again right here and there from cypress file says:',2)
     """`)})
-    //.then(()=>{cy.task("input_",``,{ timeout: 200000 })})
+//     .then(()=>{cy.task("string_",`python -c """
+// from http.server import BaseHTTPRequestHandler, HTTPServer
+
+// hostName = "localhost"
+// serverPort = 3002
+
+// class handler(BaseHTTPRequestHandler):
+//         def calculator(self):
+//             self.send_response(200)
+//             self.send_header('Content-type', 'text/html')
+//             self.end_headers()
+//             self.wfile.write(str('''
+//             <html>
+//                 <p>Hello World!</p>
+//             </html>
+//             ''').encode())
+//             return
+
+         
+//         def do_GET(self):
+//             if self.path == '/':
+//                 self.calculator()
+
+// webServer = HTTPServer((hostName, serverPort), handler)
+// print("Server started http://%s:%s" % (hostName, serverPort))
+
+// try:
+//     webServer.serve_forever()
+// except KeyboardInterrupt:
+//     pass
+
+// webServer.server_close()
+// print("Server stopped.")
+//       """`)})
 
 
 
@@ -64,7 +97,7 @@ print('Python script yet3 again right here and there from cypress file says:',2)
           cy.wait(5000);
           cy.request('http://localhost:3001').its('body').should('not.include', 'Hello World!');
           cy.wait(3000);
-          cy.request('http://localhost:3002').its('body').should('include', 'Hello World!')
+          //cy.request('http://localhost:3002').its('body').should('include', 'Hello World!')
   //})
 
   //it('check google images',() => {

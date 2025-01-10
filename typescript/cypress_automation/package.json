@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "kill_": "kill -9 $(lsof -t -i:3000) || true && kill -9 $(lsof -t -i:3001) || true && kill -9 $(lsof -t -i:3002) || true",
-    "all": "json-server cypress/e2e/3-api-testing/employee.js & node cypress/e2e/3-api-testing/express_.js & npx cypress run --spec cypress/e2e/3-api-testing/employeeTests.cy.js & npx cypress open",
+    "all": "json-server cypress/e2e/3-api-testing/employee.js & node cypress/e2e/3-api-testing/express_.js & npx cypress run --spec cypress/e2e/3-api-testing/employeeTests.cy.js",
     "every": "npm run kill_ && npm run all"
   },
   "author": "",
@@ -149,6 +149,7 @@
     "shebang-command": "^2.0.0",
     "shebang-regex": "^3.0.0",
     "signal-exit": "^3.0.7",
+    "sleep": "^6.3.0",
     "slice-ansi": "^3.0.0",
     "sshpk": "^1.17.0",
     "string-width": "^4.2.3",
