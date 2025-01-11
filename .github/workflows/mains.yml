@@ -36,20 +36,20 @@ jobs:
     #     path: |
     #      typescript/webassembly_/assembly_Script/index.html
 
-    - name: Install Puppeteer
+    - name: Install Playwright
       run: |
-       npm install puppeteer  # Install Puppeteer
+        npm install playwright  # Install Playwright
 
-    - name: Capture screenshot using Puppeteer
+    - name: Capture screenshot using Playwright
       run: |
         node -e "
-        const puppeteer = require('puppeteer');
+        const { firefox } = require('playwright');
         (async () => {
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.goto('http://localhost:3000');  // URL to capture
-            await page.screenshot({ path: 'screenshot.png' });
-            await browser.close();
+          const browser = await firefox.launch();  // You can use 'chromium', 'firefox', or 'webkit'
+          const page = await browser.newPage();
+          await page.goto('http://localhost:3000');  // Navigate to localhost
+          await page.screenshot({ path: 'screenshot.png' });  // Capture screenshot
+          await browser.close();
         })();
         "
 
