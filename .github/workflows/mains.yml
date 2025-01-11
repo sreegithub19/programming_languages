@@ -29,6 +29,13 @@ jobs:
        #curl http://localhost:3000 -o index.html
        cd .. && cd .. && cd ..
 
+       cd typescript/webassembly_/2d_game_
+       npm install
+       npm run asbuild:optimized -- --memoryBase 40000
+       npx ws -p 1234 &
+       sleep 5
+       cd .. && cd .. && cd ..
+
     # - name: Upload WASM artifact
     #   uses: actions/upload-artifact@v4
     #   with:
@@ -48,8 +55,12 @@ jobs:
         (async () => {
           const browser = await firefox.launch();  // You can use 'chromium', 'firefox', or 'webkit'
           const page = await browser.newPage();
+
           await page.goto('http://localhost:3000');  // Navigate to localhost
-          await page.screenshot({ path: 'screenshot.png' });  // Capture screenshot
+          await page.screenshot({ path: 'screenshot_assembly_Script.png' });  // Capture screenshot
+          await page.goto('http://localhost:1234');  // Navigate to localhost
+          await page.screenshot({ path: 'screenshot_2d_game.png' });  // Capture screenshot
+
           await browser.close();
         })();
         "
@@ -57,5 +68,7 @@ jobs:
     - name: Upload screenshot as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: screenshot
-        path: screenshot.png  # Upload the screenshot
+        name: screenshots
+        path: |
+         screenshot_assembly_Script.png
+         screenshot_2d_game.png
