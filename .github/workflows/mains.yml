@@ -39,6 +39,7 @@ jobs:
     - name: Install Playwright
       run: |
         npm install playwright  # Install Playwright
+        npx playwright install
 
     - name: Capture screenshot using Playwright
       run: |
