@@ -33,7 +33,7 @@ jobs:
        npm install
        npm run asbuild:optimized -- --memoryBase 40000
        npx ws -p 1234 &
-       sleep 5
+       sleep 10
        cd .. && cd .. && cd ..
 
     # - name: Upload WASM artifact
@@ -59,6 +59,8 @@ jobs:
           await page.goto('http://localhost:3000');  // Navigate to localhost
           await page.screenshot({ path: 'screenshot_assembly_Script.png' });  // Capture screenshot
           await page.goto('http://localhost:1234');  // Navigate to localhost
+          // Wait for 5 seconds to ensure content is loaded
+          await page.waitForTimeout(5000);  // Wait for 5 seconds
           await page.screenshot({ path: 'screenshot_2d_game.png' });  // Capture screenshot
 
           await browser.close();
