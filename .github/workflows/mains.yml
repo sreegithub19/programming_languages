@@ -51,20 +51,35 @@ jobs:
     - name: Capture screenshot using Playwright
       run: |
         node -e "
-        const { firefox } = require('playwright');
+        const fs = require('fs');
+        const path = require('path');
+
         (async () => {
-          const browser = await firefox.launch();  // You can use 'chromium', 'firefox', or 'webkit'
-          const page = await browser.newPage();
+          const browser = await firefox.launch();
+          const context = await browser.newContext({
+            recordVideo: { dir: './videos', size: { width: 1280, height: 720 } },
+          });
+          const page = await context.newPage();
 
-          await page.goto('http://localhost:3000');  // Navigate to localhost
-          await page.screenshot({ path: 'screenshot_assembly_Script.png' });  // Capture screenshot
-          await page.goto('http://localhost:1234');  // Navigate to localhost
-          // Wait for 5 seconds to ensure content is loaded
-          await page.waitForTimeout(5000);  // Wait for 5 seconds
-          await page.screenshot({ path: 'screenshot_2d_game.png' });  // Capture screenshot
+          await page.goto('http://localhost:3000');
+          await page.screenshot({ path: 'screenshot_assembly_Script.png' });
 
+          await page.goto('http://localhost:1234');
+          await page.waitForTimeout(10000);
+          await page.screenshot({ path: 'screenshot_2d_game.png' });
+
+          await context.close();
           await browser.close();
+
+          // Rename the video file
+          const videoDir = './videos';
+          const videoFile = fs.readdirSync(videoDir).find(file => file.endsWith('.webm'));
+          if (videoFile) {
+            fs.renameSync(path.join(videoDir, videoFile), path.join(videoDir, '2d_game_video.webm'));
+            console.log('Video saved as 2d_game_video.webm');
+          }
         })();
+
         "
 
     - name: Upload screenshot as artifact
@@ -74,3 +89,4 @@ jobs:
         path: |
          screenshot_assembly_Script.png
          screenshot_2d_game.png
+         ./videos
