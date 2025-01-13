@@ -53,6 +53,8 @@ jobs:
         node -e "
         const fs = require('fs');
         const path = require('path');
+        const { firefox } = require('playwright');
+
 
         (async () => {
           const browser = await firefox.launch();
