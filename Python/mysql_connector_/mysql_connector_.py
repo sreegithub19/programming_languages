@@ -45,18 +45,18 @@ sudo apt-get update && sudo apt-get install -y mysql-client
                      
 echo "Connecting to MySQL and creating a table..."
 mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users1 (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL
 );
-INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');
-INSERT INTO users (name, email) VALUES ('Jane Smith', 'jane.smith@example.com');
+INSERT INTO users1 (name, email) VALUES ('John Doe', 'john.doe@example.com');
+INSERT INTO users1 (name, email) VALUES ('Jane Smith', 'jane.smith@example.com');
 "
 
 echo "Querying the database..."
 mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
-SELECT * FROM users;
+SELECT * FROM users1;
 "                                      
 """, shell=True, text=True, capture_output=True).stdout)
 
