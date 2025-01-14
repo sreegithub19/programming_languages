@@ -33,11 +33,11 @@ jobs:
         with:
           node-version: '18'
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: |
-         npm install mysql
-         npm install ts-node typescript --save-dev
+    #   # Step 3: Install dependencies
+    #   - name: Install dependencies
+    #     run: |
+    #      npm install mysql
+    #      npm install ts-node typescript --save-dev
 
       # Step 4: Wait for MySQL to be ready
       - name: Wait for MySQL
@@ -65,4 +65,8 @@ jobs:
 
       # Step 6: Run the Node.js script
       - name: Run Node.js script
-        run: ts-node typescript/mysql_connector_/mysql_connector_.ts
+        run: |
+         cd typescript/mysql_connector_
+         npm install mysql
+         npm install ts-node typescript --save-dev
+         ts-node mysql_connector_.ts
