@@ -68,5 +68,5 @@ jobs:
         run: |
          cd typescript/mysql_connector_
          npm install mysql
-         npm install ts-node typescript --save-dev
-         ts-node mysql_connector_.ts
+         npm install typescript --save-dev
+         tsc mysql_connector_.ts && node mysql_connector_.js
