@@ -1,4 +1,4 @@
-name: MySQL Workflow
+name: MySQL Example Workflow
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test-mysql:
+  mysql-job:
     runs-on: ubuntu-latest
 
     services:
@@ -15,35 +15,25 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping --silent"
+          --health-cmd="mysqladmin ping -h localhost -u root --password=example --silent"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
         env:
-          MYSQL_ROOT_PASSWORD: sree
-          MYSQL_DATABASE: university
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: sample_db
+          MYSQL_USER: sample_user
+          MYSQL_PASSWORD: sample_password
 
     steps:
-      # Step 1: Check out the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-
-    #   # Step 3: Install dependencies
-    #   - name: Install dependencies
-    #     run: |
-    #      npm install mysql
-    #      npm install ts-node typescript --save-dev
-
-      # Step 4: Wait for MySQL to be ready
-      - name: Wait for MySQL
+      - name: Wait for MySQL to be ready
         run: |
+          echo "Waiting for MySQL to be ready..."
           for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u root -psree --silent; then
+            if mysqladmin ping -h 127.0.0.1 -u root --password=example --silent; then
               echo "MySQL is ready!"
               break
             fi
@@ -51,22 +41,25 @@ jobs:
             sleep 2
           done
 
-      # Step 5: Initialize the database
-      - name: Initialize database
-        run: |
-          mysql -h 127.0.0.1 -u root -psree university <<EOF
-          CREATE TABLE EEngineeringStudents (
-            Student_ID INT AUTO_INCREMENT PRIMARY KEY,
-            Name VARCHAR(255),
-            Age INT
-          );
-          INSERT INTO EEngineeringStudents (Name, Age) VALUES ('Alice', 22), ('Bob', 23);
-          EOF
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
 
-      # Step 6: Run the Node.js script
-      - name: Run Node.js script
+      - name: Create a table and insert data
         run: |
-         cd typescript/mysql_connector_
-         npm install mysql2
-         npm install typescript --save-dev
-         node mysql_connector_.js
+          echo "Connecting to MySQL and creating a table..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+          CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL
+          );
+          INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');
+          INSERT INTO users (name, email) VALUES ('Jane Smith', 'jane.smith@example.com');
+          "
+
+      - name: Query the database
+        run: |
+          echo "Querying the database..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+          SELECT * FROM users;
+          "
