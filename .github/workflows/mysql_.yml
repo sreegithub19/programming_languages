@@ -63,3 +63,8 @@ jobs:
           mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
           SELECT * FROM users;
           "
+
+      - name: Query the database from Python
+        run: |
+          python3 Python/mysql_connector_/mysql_connector_.py
+
