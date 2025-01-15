@@ -44,7 +44,8 @@ jobs:
       - name: Wait for Cassandra to be ready
         run: |
           echo "Waiting for Cassandra to be ready..."
-          until ./bin/cqlsh -e "DESCRIBE KEYSPACES"; do
+          # Ensure we're in the correct directory before calling cqlsh
+          until /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "DESCRIBE KEYSPACES"; do
             echo "Waiting for Cassandra to start..."
             sleep 10
           done
@@ -54,7 +55,7 @@ jobs:
       - name: Setup Cassandra Schema
         run: |
           echo "Creating keyspace and table..."
-          ./bin/cqlsh -e "
+          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
             CREATE KEYSPACE IF NOT EXISTS test_keyspace 
             WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
             USE test_keyspace;
@@ -70,7 +71,7 @@ jobs:
       - name: Insert Test Data into Cassandra
         run: |
           echo "Inserting test data into Cassandra..."
-          ./bin/cqlsh -e "
+          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
             USE test_keyspace;
             INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john@example.com');
             INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane@example.com');
@@ -81,7 +82,7 @@ jobs:
       - name: Query Cassandra
         run: |
           echo "Querying Cassandra for inserted data..."
-          ./bin/cqlsh -e "
+          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
             USE test_keyspace;
             SELECT * FROM users;
           "
