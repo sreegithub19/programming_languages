@@ -1,4 +1,4 @@
-name: Cassandra Example Workflow
+name: Cassandra DB Setup and Test
 
 on:
   push:
@@ -6,59 +6,66 @@ on:
       - main
 
 jobs:
-  cassandra-job:
+  cassandra_setup:
     runs-on: ubuntu-latest
-
     services:
       cassandra:
-        image: cassandra:4.0
+        image: cassandra:4.0  # Using Cassandra 4.0 Docker image
         ports:
-          - 9042:9042
+          - 9042:9042  # Exposing port for Cassandra CQL
         options: >-
           --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
           --health-interval=10s
-          --health-timeout=25s
+          --health-timeout=5s
           --health-retries=3
 
     steps:
+      # Step 1: Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
+      # Step 2: Wait for Cassandra to be ready
       - name: Wait for Cassandra to be ready
         run: |
           echo "Waiting for Cassandra to be ready..."
-          for i in {1..30}; do
-            if cqlsh -e "DESCRIBE KEYSPACES"; then
-              echo "Cassandra is ready!"
-              break
-            fi
-            echo "Waiting for Cassandra..."
-            sleep 2
+          until cqlsh -u cassandra -e "DESCRIBE KEYSPACES"; do
+            echo "Waiting for Cassandra to start..."
+            sleep 5
           done
+          echo "Cassandra is ready."
 
-      - name: Install Cassandra client
-        run: sudo apt-get update && sudo apt-get install -y cassandra-cql
-
-      - name: Create a keyspace and table, and insert data
+      # Step 3: Setup Cassandra schema (keyspace, table) using a shell script
+      - name: Setup Cassandra Schema
         run: |
-          echo "Connecting to Cassandra and creating a keyspace and table..."
-          cqlsh -e "
-          CREATE KEYSPACE IF NOT EXISTS sample_keyspace
-          WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
-          USE sample_keyspace;
-          CREATE TABLE IF NOT EXISTS users (
-            id UUID PRIMARY KEY,
-            name TEXT,
-            email TEXT
-          );
-          INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john.doe@example.com');
-          INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane.smith@example.com');
+          echo "Creating keyspace and table..."
+          cqlsh -u cassandra -e "
+            CREATE KEYSPACE IF NOT EXISTS test_keyspace 
+            WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+            USE test_keyspace;
+            CREATE TABLE IF NOT EXISTS users (
+              id UUID PRIMARY KEY,
+              name TEXT,
+              email TEXT
+            );
           "
+          echo "Keyspace and table created."
 
-      - name: Query the database
+      # Step 4: Insert some test data
+      - name: Insert Test Data into Cassandra
         run: |
-          echo "Querying the database..."
-          cqlsh -e "
-          USE sample_keyspace;
-          SELECT * FROM users;
+          echo "Inserting test data into Cassandra..."
+          cqlsh -u cassandra -e "
+            USE test_keyspace;
+            INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john@example.com');
+            INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane@example.com');
+          "
+          echo "Test data inserted."
+
+      # Step 5: Query Cassandra to verify data
+      - name: Query Cassandra
+        run: |
+          echo "Querying Cassandra for inserted data..."
+          cqlsh -u cassandra -e "
+            USE test_keyspace;
+            SELECT * FROM users;
           "
