@@ -1,66 +1,59 @@
-name: Cassandra Workflow on Ubuntu
+name: Cassandra Setup
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  cassandra-job:
+  setup-cassandra:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Check out the repository
+      uses: actions/checkout@v2
 
-      - name: Install Cassandra
-        run: |
-          echo "Installing Cassandra..."
-          sudo apt-get update
-          sudo apt-get install -y gnupg2 curl
-          echo "deb https://downloads.apache.org/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
-          curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
-          sudo apt-get update
-          sudo apt-get install -y cassandra
+    - name: Update system and install Java
+      run: |
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install openjdk-11-jdk -y
+        java -version
 
-      - name: Start Cassandra Service
-        run: |
-          echo "Starting Cassandra service..."
-          sudo systemctl start cassandra
-          sudo systemctl enable cassandra
+    - name: Add Apache Cassandra repository
+      run: |
+        curl https://downloads.apache.org/cassandra/keys.asc | sudo apt-key add -
+        echo "deb https://downloads.apache.org/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
 
-      - name: Wait for Cassandra to be ready
-        run: |
-          echo "Waiting for Cassandra to be ready..."
-          for i in {1..30}; do
-            if cqlsh -e "DESCRIBE KEYSPACES"; then
-              echo "Cassandra is ready!"
-              break
-            fi
-            echo "Waiting for Cassandra..."
-            sleep 2
-          done
+    - name: Install Apache Cassandra
+      run: |
+        sudo apt update
+        sudo apt install cassandra -y
 
-      - name: Create a keyspace and table, and insert data
-        run: |
-          echo "Connecting to Cassandra and creating a keyspace and table..."
-          cqlsh -e "
-          CREATE KEYSPACE IF NOT EXISTS sample_keyspace
-          WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
-          USE sample_keyspace;
-          CREATE TABLE IF NOT EXISTS users (
-            id UUID PRIMARY KEY,
-            name TEXT,
-            email TEXT
-          );
-          INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john.doe@example.com');
-          INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane.smith@example.com');
-          "
+    - name: Start Cassandra service
+      run: |
+        sudo systemctl start cassandra
+        sudo systemctl enable cassandra
 
-      - name: Query the database
-        run: |
-          echo "Querying the database..."
-          cqlsh -e "
-          USE sample_keyspace;
-          SELECT * FROM users;
-          "
+    - name: Verify Cassandra is running
+      run: |
+        sudo systemctl status cassandra
+        nodetool status
+
+    - name: Install Python and Cassandra CQLSH (for example to test)
+      run: |
+        sudo apt install python3 -y
+        curl -L https://github.com/python-driver/cassandra-driver/archive/refs/tags/3.25.0.tar.gz | tar xz
+        cd cassandra-driver-3.25.0
+        sudo python3 setup.py install
+
+    - name: Connect to Cassandra with CQLSH
+      run: |
+        cqlsh -e "DESCRIBE KEYSPACES;"
+        cqlsh -e "CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
+        cqlsh -e "USE test_keyspace; CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name text, age int);"
+        cqlsh -e "INSERT INTO test_keyspace.users (id, name, age) VALUES (uuid(), 'Alice', 30);"
+        cqlsh -e "SELECT * FROM test_keyspace.users;"
