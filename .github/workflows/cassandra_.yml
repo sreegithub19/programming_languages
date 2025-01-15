@@ -32,7 +32,8 @@ jobs:
       # Step 4: Install Python dependencies for cqlsh
       - name: Install Python dependencies for cqlsh
         run: |
-          pip3 install requests PyYAML six
+          pip3 install requests PyYAML
+          pip3 install --user six
 
       # Step 5: Start Cassandra manually
       - name: Start Cassandra
