@@ -64,7 +64,8 @@ jobs:
           SELECT * FROM users;
           "
 
-      - name: Query the database from Python
+      - name: Query the database from Python , Nodejs
         run: |
           python3 Python/mysql_connector_/mysql_connector_.py
+          node javascript/mysql_connector_/mysql_connector_.js
 
