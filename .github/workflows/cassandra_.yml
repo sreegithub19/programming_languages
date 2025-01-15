@@ -27,24 +27,3 @@ jobs:
             INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);
             SELECT * FROM users;
           " | docker exec -i ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042
-
-
-    #   - name: Create keyspace and table in Cassandra
-    #     run: |
-    #         docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
-    #         docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
-
-    #   - name: Insert data into Cassandra table
-    #     run: |
-    #        docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="
-    #         CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
-    #         USE test_keyspace;
-    #         CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name TEXT, age INT);
-    #         INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);
-    #         INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);
-    #         "
-           
-    #   - name: Query the inserted data
-    #     run: |
-    #         docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
-    #         docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="SELECT * FROM users;"
