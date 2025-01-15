@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Install dependencies
+      # Step 1: Install required dependencies
       - name: Install required dependencies
         run: |
           sudo apt-get update
@@ -32,8 +32,7 @@ jobs:
       # Step 4: Install Python dependencies for cqlsh
       - name: Install Python dependencies for cqlsh
         run: |
-          cd /tmp/apache-cassandra-4.0.14
-          pip3 install -r conf/requirements.txt
+          pip3 install requests PyYAML six
 
       # Step 5: Setup Cassandra service
       - name: Start Cassandra service
