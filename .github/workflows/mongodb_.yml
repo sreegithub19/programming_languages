@@ -11,17 +11,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Start mongo
+      - name: Start MongoDB
         id: start-mongo
-        run: docker run --rm -d -p 27017:27017 --name mongo  mongo:6.0 --replSet test --bind_ip_all
+        run: docker run --rm -d -p 27017:27017 --name mongo mongo:6.0 --replSet test --bind_ip_all
 
       - name: Initialize MongoDB Replica Set
         run: |
-          sleep 5 # Give mongo a chance to start up
+          sleep 5  # Give MongoDB a chance to start up
           docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval 'rs.initiate({_id: "test", members: [{_id: 0, host: "172.17.0.1:27017"}]})'
-      - name: Test MongoDB
+
+      - name: Create Database, Collection, and Insert Data into MongoDB
         run: |
-          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval 'db.testDocs.insertOne({ok: true})'
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
+            use test_db;
+            db.createCollection('users');
+            db.users.insert({ name: 'Alice', age: 30 });
+            db.users.insert({ name: 'Bob', age: 25 });
+          "
+
+      - name: Update Data in MongoDB
+        run: |
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
+            use test_db;
+            db.users.updateOne({ name: 'Alice' }, { \$set: { age: 31 } });
+          "
+
+      - name: Query the inserted data
+        run: |
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
+            use test_db;
+            db.users.find().pretty();
+          "
+
+      - name: Delete Data from MongoDB
+        run: |
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
+            use test_db;
+            db.users.deleteOne({ name: 'Bob' });
+          "
+
       - name: Stop MongoDB
         run: |
           docker rm -f mongo
