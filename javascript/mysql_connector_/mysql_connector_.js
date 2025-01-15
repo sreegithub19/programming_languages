@@ -40,7 +40,7 @@ SELECT * FROM users2;
 `;
 
 try {
-    const output = execSync(`python3 -c ${pythonCode}`, { 
+    const output = execSync(`python3 -c "${pythonCode}"`, { 
         stdio: 'inherit',
         cwd: __dirname // Set the current working directory to where the script is
     });
