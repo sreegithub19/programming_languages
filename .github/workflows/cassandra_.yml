@@ -8,7 +8,7 @@ on:
 jobs:
   cassandra_setup:
     runs-on: ubuntu-latest
-    
+
     steps:
       # Step 1: Install required dependencies
       - name: Install required dependencies
@@ -28,28 +28,23 @@ jobs:
       - name: Extract Cassandra tarball
         run: |
           tar -xzvf /tmp/apache-cassandra-4.0.14-bin.tar.gz -C /tmp/
-          
+
       # Step 4: Install Python dependencies for cqlsh
       - name: Install Python dependencies for cqlsh
         run: |
           pip3 install requests PyYAML six
 
-      # Step 5: Setup Cassandra service
-      - name: Start Cassandra service
-        uses: docker://cassandra:4.0.14
-        id: cassandra
-        # options: |
-        #   -p 9042:9042
-        #   --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
-        #   --health-interval=10s
-        #   --health-timeout=5s
-        #   --health-retries=3
+      # Step 5: Start Cassandra manually
+      - name: Start Cassandra
+        run: |
+          cd /tmp/apache-cassandra-4.0.14
+          ./bin/cassandra -f &  # Run Cassandra in the foreground (background in CI/CD)
 
       # Step 6: Wait for Cassandra to be ready
       - name: Wait for Cassandra to be ready
         run: |
           echo "Waiting for Cassandra to be ready..."
-          until cqlsh -u cassandra -e "DESCRIBE KEYSPACES"; do
+          until ./bin/cqlsh -e "DESCRIBE KEYSPACES"; do
             echo "Waiting for Cassandra to start..."
             sleep 10
           done
@@ -59,7 +54,7 @@ jobs:
       - name: Setup Cassandra Schema
         run: |
           echo "Creating keyspace and table..."
-          cqlsh -u cassandra -e "
+          ./bin/cqlsh -e "
             CREATE KEYSPACE IF NOT EXISTS test_keyspace 
             WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
             USE test_keyspace;
@@ -75,7 +70,7 @@ jobs:
       - name: Insert Test Data into Cassandra
         run: |
           echo "Inserting test data into Cassandra..."
-          cqlsh -u cassandra -e "
+          ./bin/cqlsh -e "
             USE test_keyspace;
             INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john@example.com');
             INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane@example.com');
@@ -86,7 +81,7 @@ jobs:
       - name: Query Cassandra
         run: |
           echo "Querying Cassandra for inserted data..."
-          cqlsh -u cassandra -e "
+          ./bin/cqlsh -e "
             USE test_keyspace;
             SELECT * FROM users;
           "
