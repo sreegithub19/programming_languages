@@ -1,4 +1,4 @@
-name: Cassandra DB Setup and Test
+name: Install cqlsh from Tarball
 
 on:
   push:
@@ -8,50 +8,55 @@ on:
 jobs:
   cassandra_setup:
     runs-on: ubuntu-latest
-    services:
-      cassandra:
-        image: cassandra:3.11  # Using Cassandra 4.0 Docker image
-        ports:
-          - 9042:9042  # Exposing port for Cassandra CQL
-        # options: >-
+    
+    steps:
+      # Step 1: Install dependencies
+      - name: Install required dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget python3 python3-pip python3-dev
+
+      # Step 2: Download Cassandra tarball
+      - name: Download Cassandra tarball
+        run: |
+          CASSANDRA_VERSION=4.0.14
+          CASSANDRA_TARBALL="apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
+          DOWNLOAD_URL="https://downloads.apache.org/cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
+          wget $DOWNLOAD_URL -O /tmp/$CASSANDRA_TARBALL
+
+      # Step 3: Extract Cassandra tarball
+      - name: Extract Cassandra tarball
+        run: |
+          tar -xzvf /tmp/apache-cassandra-4.0-bin.tar.gz -C /tmp/
+          
+      # Step 4: Install Python dependencies for cqlsh
+      - name: Install Python dependencies for cqlsh
+        run: |
+          cd /tmp/apache-cassandra-4.0
+          pip3 install -r conf/requirements.txt
+
+      # Step 5: Setup Cassandra service
+      - name: Start Cassandra service
+        uses: docker://cassandra:4.0
+        id: cassandra
+        # options: |
+        #   -p 9042:9042
         #   --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
         #   --health-interval=10s
         #   --health-timeout=5s
         #   --health-retries=3
-        #   --memory=4g
-        #   --cpus=2
 
-    steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install cqlsh
-        run: |
-            #   echo "Installing cqlsh..."
-            #   sudo apt-get update
-            #   sudo apt-get install -y python3-pip
-            #   pip3 install cassandra-driver
-            #   wget https://downloads.apache.org/cassandra/3.11.17/apache-cassandra-3.11.17-bin.tar.gz
-            #   tar -xvzf cqlsh-astra-20230517.tar.gz
-            #   sudo mv cqlsh-astra/bin/cqlsh /usr/local/bin/cqlsh
-            #   sudo chmod +x /usr/local/bin/cqlsh
-
-            sudo apt-get update
-            sudo apt-get install -y python3-pip python3-dev libpq-dev
-            pip3 install cqlsh
-            
-      # Step 2: Wait for Cassandra to be ready
+      # Step 6: Wait for Cassandra to be ready
       - name: Wait for Cassandra to be ready
         run: |
           echo "Waiting for Cassandra to be ready..."
           until cqlsh -u cassandra -e "DESCRIBE KEYSPACES"; do
             echo "Waiting for Cassandra to start..."
-            sleep 5
+            sleep 10
           done
           echo "Cassandra is ready."
 
-      # Step 3: Setup Cassandra schema (keyspace, table) using a shell script
+      # Step 7: Create keyspace and table
       - name: Setup Cassandra Schema
         run: |
           echo "Creating keyspace and table..."
@@ -67,7 +72,7 @@ jobs:
           "
           echo "Keyspace and table created."
 
-      # Step 4: Insert some test data
+      # Step 8: Insert test data
       - name: Insert Test Data into Cassandra
         run: |
           echo "Inserting test data into Cassandra..."
@@ -78,7 +83,7 @@ jobs:
           "
           echo "Test data inserted."
 
-      # Step 5: Query Cassandra to verify data
+      # Step 9: Query Cassandra
       - name: Query Cassandra
         run: |
           echo "Querying Cassandra for inserted data..."
