@@ -13,9 +13,16 @@ jobs:
         image: cassandra
         ports:
           - 9042:9042
-        options: --health-cmd "cqlsh --debug" --health-interval 5s --health-retries 10
+        options: --health-cmd "cqlsh --debug" --health-interval 10s --health-retries 10
     steps:
       - run: docker ps
+
+
+      - name: Wait for Cassandra to initialize
+        run: |
+         # Sleep to ensure Cassandra has started fully
+         sleep 60  # Increase the sleep time if needed
+
 
       - name: Create keyspace, table, and insert data into Cassandra
         run: |
