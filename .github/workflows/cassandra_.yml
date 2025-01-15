@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     services:
       cassandra:
-        image: cassandra:4.0  # Using Cassandra 4.0 Docker image
+        image: cassandra:3.11  # Using Cassandra 4.0 Docker image
         ports:
           - 9042:9042  # Exposing port for Cassandra CQL
-        options: >-
-          --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+        # options: >-
+        #   --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
+        #   --health-interval=10s
+        #   --health-timeout=5s
+        #   --health-retries=3
+        #   --memory=4g
+        #   --cpus=2
 
     steps:
       # Step 1: Checkout the code
