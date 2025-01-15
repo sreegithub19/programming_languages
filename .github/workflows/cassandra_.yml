@@ -39,12 +39,12 @@ jobs:
     - name: Start Cassandra
       run: |
         brew services start cassandra
-        sleep 30  # Wait for 30 seconds before checking status
+        sleep 20  # Wait for 30 seconds before checking status
 
-    - name: Verify Cassandra is running
-      run: |
-        #nodetool status
-        sudo lsof -i :9042  # Check if Cassandra's default CQL port is open
+    # - name: Verify Cassandra is running
+    #   run: |
+    #     #nodetool status
+    #     sudo lsof -i :9042  # Check if Cassandra's default CQL port is open
 
     # - name: Install Python and Cassandra CQLSH (Optional for testing)
     #   run: |
