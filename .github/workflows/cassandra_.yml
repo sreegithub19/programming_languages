@@ -16,7 +16,7 @@ jobs:
         options: --health-cmd "cqlsh --debug" --health-interval 5s --health-retries 10
     steps:
       - run: docker ps
-      
+
       - name: Create keyspace, table, and insert data into Cassandra
         run: |
           echo "
@@ -25,6 +25,7 @@ jobs:
             CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name TEXT, age INT);
             INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);
             INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);
+            SELECT * FROM users;
           " | docker exec -i ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042
 
 
