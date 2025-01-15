@@ -20,17 +20,18 @@ jobs:
 
       - name: Create keyspace and table in Cassandra
         run: |
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "USE test_keyspace;"
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name TEXT, age INT);"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
 
       - name: Insert data into Cassandra table
         run: |
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "USE test_keyspace;"
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);"
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name TEXT, age INT);"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);"
 
       - name: Query the inserted data
         run: |
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "USE test_keyspace;"
-            docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "SELECT * FROM users;"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="USE test_keyspace;"
+            docker exec ${{ job.services.cassandra.id }} cqlsh --debug localhost 9042 --execute="SELECT * FROM users;"
