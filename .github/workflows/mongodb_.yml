@@ -6,30 +6,22 @@ on:
       - main
 
 jobs:
-  test:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    services:
-      mongodb:
-        image: mongo
-        ports:
-          - 27017:27017
-        options: --health-cmd "mongo --eval 'db.runCommand({ connectionStatus:\ 1 })'" --health-interval 15s --health-retries 10
+
     steps:
-      - name: Wait for MongoDB to initialize
-        run: |
-          # Sleep to ensure MongoDB has started
-          sleep 30
+      - name: Start mongo
+        id: start-mongo
+        run: docker run --rm -d -p 27017:27017 --name mongo  mongo:6.0 --replSet test --bind_ip_all
 
-      - name: Create database, collection, and insert data into MongoDB
+      - name: Initialize MongoDB Replica Set
         run: |
-          echo "
-            use test_db;
-            db.createCollection('users');
-            db.users.insert({ name: 'Alice', age: 30 });
-            db.users.insert({ name: 'Bob', age: 25 });
-            db.users.find();
-          " | docker exec -i ${{ job.services.mongodb.id }} mongo --eval "var db = db.getSiblingDB('test_db');" --quiet
-
-      - name: Query the inserted data
+          sleep 5 # Give mongo a chance to start up
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval 'rs.initiate({_id: "test", members: [{_id: 0, host: "172.17.0.1:27017"}]})'
+      - name: Test MongoDB
         run: |
-          docker exec ${{ job.services.mongodb.id }} mongo --eval "db = db.getSiblingDB('test_db'); db.users.find().pretty();"
+          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval 'db.testDocs.insertOne({ok: true})'
+      - name: Stop MongoDB
+        run: |
+          docker rm -f mongo
