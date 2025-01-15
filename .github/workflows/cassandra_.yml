@@ -17,7 +17,7 @@ jobs:
         options: >-
           --health-cmd="cqlsh -e 'DESCRIBE KEYSPACES'"
           --health-interval=10s
-          --health-timeout=5s
+          --health-timeout=25s
           --health-retries=3
 
     steps:
