@@ -1,4 +1,4 @@
-name: Install cqlsh from Tarball
+name: Cassandra Workflow on Ubuntu
 
 on:
   push:
@@ -6,84 +6,61 @@ on:
       - main
 
 jobs:
-  cassandra_setup:
+  cassandra-job:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Install required dependencies
-      - name: Install required dependencies
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Cassandra
         run: |
+          echo "Installing Cassandra..."
           sudo apt-get update
-          sudo apt-get install -y wget python3 python3-pip python3-dev
+          sudo apt-get install -y gnupg2 curl
+          echo "deb https://downloads.apache.org/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+          curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get install -y cassandra
 
-      # Step 2: Download Cassandra tarball
-      - name: Download Cassandra tarball
+      - name: Start Cassandra Service
         run: |
-          CASSANDRA_VERSION=4.0.14
-          CASSANDRA_TARBALL="apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
-          DOWNLOAD_URL="https://downloads.apache.org/cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
-          wget $DOWNLOAD_URL -O /tmp/$CASSANDRA_TARBALL
+          echo "Starting Cassandra service..."
+          sudo systemctl start cassandra
+          sudo systemctl enable cassandra
 
-      # Step 3: Extract Cassandra tarball
-      - name: Extract Cassandra tarball
-        run: |
-          tar -xzvf /tmp/apache-cassandra-4.0.14-bin.tar.gz -C /tmp/
-
-      # Step 4: Install Python dependencies for cqlsh
-      - name: Install Python dependencies for cqlsh
-        run: |
-          pip3 install requests PyYAML
-          pip3 install --user six
-
-      # Step 5: Start Cassandra manually
-      - name: Start Cassandra
-        run: |
-          cd /tmp/apache-cassandra-4.0.14
-          ./bin/cassandra -f &  # Run Cassandra in the foreground (background in CI/CD)
-
-      # Step 6: Wait for Cassandra to be ready
       - name: Wait for Cassandra to be ready
         run: |
           echo "Waiting for Cassandra to be ready..."
-          # Ensure we're in the correct directory before calling cqlsh
-          until /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "DESCRIBE KEYSPACES"; do
-            echo "Waiting for Cassandra to start..."
-            sleep 10
+          for i in {1..30}; do
+            if cqlsh -e "DESCRIBE KEYSPACES"; then
+              echo "Cassandra is ready!"
+              break
+            fi
+            echo "Waiting for Cassandra..."
+            sleep 2
           done
-          echo "Cassandra is ready."
 
-      # Step 7: Create keyspace and table
-      - name: Setup Cassandra Schema
+      - name: Create a keyspace and table, and insert data
         run: |
-          echo "Creating keyspace and table..."
-          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
-            CREATE KEYSPACE IF NOT EXISTS test_keyspace 
-            WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
-            USE test_keyspace;
-            CREATE TABLE IF NOT EXISTS users (
-              id UUID PRIMARY KEY,
-              name TEXT,
-              email TEXT
-            );
+          echo "Connecting to Cassandra and creating a keyspace and table..."
+          cqlsh -e "
+          CREATE KEYSPACE IF NOT EXISTS sample_keyspace
+          WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+          USE sample_keyspace;
+          CREATE TABLE IF NOT EXISTS users (
+            id UUID PRIMARY KEY,
+            name TEXT,
+            email TEXT
+          );
+          INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john.doe@example.com');
+          INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane.smith@example.com');
           "
-          echo "Keyspace and table created."
 
-      # Step 8: Insert test data
-      - name: Insert Test Data into Cassandra
+      - name: Query the database
         run: |
-          echo "Inserting test data into Cassandra..."
-          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
-            USE test_keyspace;
-            INSERT INTO users (id, name, email) VALUES (uuid(), 'John Doe', 'john@example.com');
-            INSERT INTO users (id, name, email) VALUES (uuid(), 'Jane Smith', 'jane@example.com');
-          "
-          echo "Test data inserted."
-
-      # Step 9: Query Cassandra
-      - name: Query Cassandra
-        run: |
-          echo "Querying Cassandra for inserted data..."
-          /tmp/apache-cassandra-4.0.14/bin/cqlsh -e "
-            USE test_keyspace;
-            SELECT * FROM users;
+          echo "Querying the database..."
+          cqlsh -e "
+          USE sample_keyspace;
+          SELECT * FROM users;
           "
