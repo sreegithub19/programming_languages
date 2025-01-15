@@ -1,0 +1,59 @@
+name: MongoDB Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mongodb-job:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:5.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongo --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Wait for MongoDB to be ready
+        run: |
+          echo "Waiting for MongoDB to be ready..."
+          for i in {1..30}; do
+            if mongo --eval "db.runCommand({ ping: 1 })"; then
+              echo "MongoDB is ready!"
+              break
+            fi
+            echo "Waiting for MongoDB..."
+            sleep 2
+          done
+
+      - name: Install MongoDB client
+        run: sudo apt-get update && sudo apt-get install -y mongodb-clients
+
+      - name: Create a database and collection, and insert data
+        run: |
+          echo "Connecting to MongoDB and creating a database and collection..."
+          mongo --eval "
+          use sample_db;
+          db.users.insertMany([
+            { name: 'John Doe', email: 'john.doe@example.com' },
+            { name: 'Jane Smith', email: 'jane.smith@example.com' }
+          ]);
+          "
+
+      - name: Query the database
+        run: |
+          echo "Querying the database..."
+          mongo --eval "
+          use sample_db;
+          db.users.find().forEach(printjson);
+          "
