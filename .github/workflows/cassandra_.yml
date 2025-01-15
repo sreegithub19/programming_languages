@@ -27,17 +27,17 @@ jobs:
       # Step 3: Extract Cassandra tarball
       - name: Extract Cassandra tarball
         run: |
-          tar -xzvf /tmp/apache-cassandra-4.0-bin.tar.gz -C /tmp/
+          tar -xzvf /tmp/apache-cassandra-4.0.14-bin.tar.gz -C /tmp/
           
       # Step 4: Install Python dependencies for cqlsh
       - name: Install Python dependencies for cqlsh
         run: |
-          cd /tmp/apache-cassandra-4.0
+          cd /tmp/apache-cassandra-4.0.14
           pip3 install -r conf/requirements.txt
 
       # Step 5: Setup Cassandra service
       - name: Start Cassandra service
-        uses: docker://cassandra:4.0
+        uses: docker://cassandra:4.0.14
         id: cassandra
         # options: |
         #   -p 9042:9042
