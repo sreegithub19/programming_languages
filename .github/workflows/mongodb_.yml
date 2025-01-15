@@ -27,30 +27,14 @@ jobs:
               db.createCollection('users');
               db.users.insert({ name: 'Alice', age: 30 });
               db.users.insert({ name: 'Bob', age: 25 });
-              db.users.updateOne({ name: 'Alice' }, { \$set: { age: 31 } });
+              db.users.updateOne({ name: 'Alice' }, { \$set: { age: 33 } });
               printjson(db.users.find().pretty());
+
+              db.users.deleteOne({ name: 'Bob' });
+              printjson(db.users.find().pretty());
+
             " | docker exec -i mongo mongosh --host 172.17.0.1
 
-      - name: Update Data in MongoDB
-        run: |
-          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
-            use test_db;
-            db.users.updateOne({ name: 'Alice' }, { \$set: { age: 31 } });
-          "
-
-      - name: Query the inserted data
-        run: |
-          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
-            use test_db;
-            printjson(db.users.find().pretty());
-          "
-
-      - name: Delete Data from MongoDB
-        run: |
-          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
-            use test_db;
-            db.users.deleteOne({ name: 'Bob' });
-          "
 
       - name: Stop MongoDB
         run: |
