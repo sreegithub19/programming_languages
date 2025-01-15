@@ -40,7 +40,7 @@ jobs:
         run: |
           docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
             use test_db;
-            db.users.find().pretty();
+            printjson(db.users.find().pretty());
           "
 
       - name: Delete Data from MongoDB
