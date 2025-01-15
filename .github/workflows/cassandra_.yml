@@ -38,7 +38,8 @@ jobs:
 
     - name: Start Cassandra
       run: |
-        brew services start cassandra
+        #brew services start cassandra
+        /opt/homebrew/opt/cassandra/bin/cassandra -f
         sleep 20  # Wait for 30 seconds before checking status
         sudo lsof -i :9042
 
