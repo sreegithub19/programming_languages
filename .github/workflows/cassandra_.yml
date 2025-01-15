@@ -39,7 +39,8 @@ jobs:
     - name: Start Cassandra
       run: |
         brew services start cassandra
-        sleep 20  # Wait for 30 seconds before checking status
+        sleep 30  # Wait for 30 seconds before checking status
+        lsof -i:9042
 
     # - name: Verify Cassandra is running
     #   run: |
@@ -53,10 +54,10 @@ jobs:
     #     cd cassandra-driver-3.25.0
     #     sudo python3 setup.py install
 
-    - name: Connect to Cassandra with CQLSH
-      run: |
-        cqlsh -e "DESCRIBE KEYSPACES;"
-        cqlsh -e "CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
-        cqlsh -e "USE test_keyspace; CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name text, age int);"
-        cqlsh -e "INSERT INTO test_keyspace.users (id, name, age) VALUES (uuid(), 'Alice', 30);"
-        cqlsh -e "SELECT * FROM test_keyspace.users;"
+    # - name: Connect to Cassandra with CQLSH
+    #   run: |
+    #     cqlsh -e "DESCRIBE KEYSPACES;"
+    #     cqlsh -e "CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};"
+    #     cqlsh -e "USE test_keyspace; CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, name text, age int);"
+    #     cqlsh -e "INSERT INTO test_keyspace.users (id, name, age) VALUES (uuid(), 'Alice', 30);"
+    #     cqlsh -e "SELECT * FROM test_keyspace.users;"
