@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execSync,spawnSync } = require('child_process');
 const path = require('path');
 
 const pythonCode = `
@@ -39,11 +39,23 @@ SELECT * FROM users2;
 """, shell=True, text=True, capture_output=True).stdout)
 `;
 
+// Use spawnSync to execute the Python code
 try {
-    const output = execSync(`python3 -c "${pythonCode}"`, { 
-        stdio: 'inherit',
-        cwd: __dirname // Set the current working directory to where the script is
-    });
+  const result = spawnSync('python3', ['-c', pythonCode], {
+      stdio: 'inherit', // Inherit stdio to see Python output in real-time
+      cwd: __dirname    // Set the current working directory
+  });
+
+  // Check for errors
+  if (result.error) {
+      throw result.error;
+  }
+
+  // Check the exit code
+  if (result.status !== 0) {
+      console.error(`Python script exited with code ${result.status}`);
+      process.exit(result.status);
+  }
 } catch (error) {
-    console.error(`Error: ${error.message}`);
+  console.error(`Error: ${error.message}`);
 }
