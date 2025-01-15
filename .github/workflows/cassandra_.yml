@@ -30,7 +30,7 @@ jobs:
             docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "INSERT INTO users (id, name, age) VALUES (uuid(), 'Alice', 30);"
             docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "INSERT INTO users (id, name, age) VALUES (uuid(), 'Bob', 25);"
 
-       - name: Query the inserted data
+      - name: Query the inserted data
         run: |
             docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "USE test_keyspace;"
             docker exec ${{ job.services.cassandra.id }} cqlsh --debug -e "SELECT * FROM users;"
