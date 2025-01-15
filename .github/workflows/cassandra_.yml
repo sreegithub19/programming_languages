@@ -26,6 +26,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install cqlsh
+        run: |
+          echo "Installing cqlsh..."
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install cassandra-driver
+          wget https://downloads.apache.org/cassandra/tools/cqlsh-astra/cqlsh-astra-20230517.tar.gz
+          tar -xvzf cqlsh-astra-20230517.tar.gz
+          sudo mv cqlsh-astra/bin/cqlsh /usr/local/bin/cqlsh
+          sudo chmod +x /usr/local/bin/cqlsh
+
       # Step 2: Wait for Cassandra to be ready
       - name: Wait for Cassandra to be ready
         run: |
