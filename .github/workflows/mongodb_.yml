@@ -22,12 +22,14 @@ jobs:
 
       - name: Create Database, Collection, and Insert Data into MongoDB
         run: |
-          docker run --rm mongo:6.0 mongosh --host 172.17.0.1 --eval "
-            use test_db;
-            db.createCollection('users');
-            db.users.insert({ name: 'Alice', age: 30 });
-            db.users.insert({ name: 'Bob', age: 25 });
-          "
+            echo "
+              use test_db;
+              db.createCollection('users');
+              db.users.insert({ name: 'Alice', age: 30 });
+              db.users.insert({ name: 'Bob', age: 25 });
+              db.users.updateOne({ name: 'Alice' }, { \$set: { age: 31 } });
+              printjson(db.users.find().pretty());
+            " | docker exec -i mongo mongosh --host 172.17.0.1
 
       - name: Update Data in MongoDB
         run: |
