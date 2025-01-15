@@ -1,4 +1,4 @@
-name: Cassandra Setup
+name: Cassandra Setup on macOS
 
 on:
   push:
@@ -10,42 +10,44 @@ on:
 
 jobs:
   setup-cassandra:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest  # Specify macOS as the runner
 
     steps:
     - name: Check out the repository
       uses: actions/checkout@v2
 
-    - name: Update system and install Java
+    - name: Install Homebrew (if not installed)
       run: |
-        sudo apt update
-        sudo apt upgrade -y
-        sudo apt install openjdk-11-jdk -y
+        if ! command -v brew &> /dev/null
+        then
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+        brew update
+
+    - name: Install Java
+      run: |
+        brew install openjdk@11
+        echo 'export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"' >> ~/.zshrc
+        source ~/.zshrc
         java -version
 
-    - name: Add Apache Cassandra repository
+    - name: Install Cassandra
       run: |
-        curl https://downloads.apache.org/cassandra/keys.asc | sudo apt-key add -
-        echo "deb https://downloads.apache.org/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+        brew tap homebrew/cask
+        brew install cassandra
 
-    - name: Install Apache Cassandra
+    - name: Start Cassandra
       run: |
-        sudo apt update
-        sudo apt install cassandra -y
-
-    - name: Start Cassandra service
-      run: |
-        sudo systemctl start cassandra
-        sudo systemctl enable cassandra
+        brew services start cassandra
 
     - name: Verify Cassandra is running
       run: |
-        sudo systemctl status cassandra
         nodetool status
+        sudo lsof -i :9042  # Check if Cassandra's default CQL port is open
 
-    - name: Install Python and Cassandra CQLSH (for example to test)
+    - name: Install Python and Cassandra CQLSH (Optional for testing)
       run: |
-        sudo apt install python3 -y
+        brew install python
         curl -L https://github.com/python-driver/cassandra-driver/archive/refs/tags/3.25.0.tar.gz | tar xz
         cd cassandra-driver-3.25.0
         sudo python3 setup.py install
