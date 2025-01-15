@@ -13,7 +13,7 @@ jobs:
         image: mongo
         ports:
           - 27017:27017
-        options: --health-cmd "mongo --eval 'db.runCommand({ connectionStatus:\ 1 })'" --health-interval 5s --health-retries 10
+        options: --health-cmd "mongo --eval 'db.runCommand({ connectionStatus:\ 1 })'" --health-interval 15s --health-retries 10
     steps:
       - name: Wait for MongoDB to initialize
         run: |
