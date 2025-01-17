@@ -6,6 +6,7 @@ section .data
 
 section .bss
     result resd 1               ; Variable to store the result
+    buffer resb 12              ; Buffer to store the string representation of the result
 
 section .text
     global _start               ; Entry point for the program
@@ -55,11 +56,13 @@ print_result:
 
     ; Convert the result to a string and print it
     mov eax, [result]           ; Load the result into EAX
+    mov edi, buffer             ; Address of the buffer
     call int_to_string          ; Convert the integer to a string
     mov eax, 4                  ; System call number for sys_write
     mov ebx, 1                  ; File descriptor 1 (stdout)
-    mov ecx, esp                ; Address of the string (on the stack)
-    mov edx, 11                 ; Max length of the string (including null terminator)
+    mov ecx, buffer             ; Address of the string
+    mov edx, edi                ; Length of the string
+    sub edx, buffer             ; Calculate the length of the string
     int 0x80                    ; Trigger the system call
 
     ; Print a newline
@@ -73,30 +76,19 @@ print_result:
 
 ; Subroutine to convert an integer to a string
 int_to_string:
-    ; Input: EAX = integer to convert
-    ; Output: ESP = pointer to the resulting string (on the stack)
-    push ebx                    ; Save EBX
-    push ecx                    ; Save ECX
-    push edx                    ; Save EDX
-
-    mov ebx, 10                 ; Divisor for base 10
+    ; Input: EAX = integer to convert, EDI = address of the buffer
+    ; Output: EDI = end of the string (null terminator)
     xor ecx, ecx                ; Digit counter
 
 convert_loop:
     xor edx, edx                ; Clear EDX (remainder)
-    div ebx                     ; Divide EAX by 10, result in EAX, remainder in EDX
+    div dword [num2]            ; Divide EAX by 10, result in EAX, remainder in EDX
     add dl, '0'                 ; Convert remainder to ASCII
-    push dx                     ; Push the ASCII character onto the stack
+    dec edi                     ; Move buffer pointer backward
+    mov [edi], dl               ; Store the ASCII character in the buffer
     inc ecx                     ; Increment the digit counter
     test eax, eax               ; Check if EAX is 0
     jnz convert_loop            ; Repeat if EAX is not 0
 
-    mov eax, esp                ; Set EAX to the address of the string
-    add ecx, 1                  ; Add space for null terminator
-    sub esp, ecx                ; Adjust stack pointer
-    mov byte [esp + ecx - 1], 0 ; Add null terminator
-
-    pop edx                     ; Restore EDX
-    pop ecx                     ; Restore ECX
-    pop ebx                     ; Restore EBX
+    mov byte [edi - 1], 0       ; Add null terminator
     ret                         ; Return from the subroutine
