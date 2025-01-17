@@ -1,0 +1,22 @@
+name: Build and Run Assembly Code
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install NASM
+      run: sudo apt-get update && sudo apt-get install -y nasm
+
+    - name: Assemble the code, Link the object file, Run the program
+      run: |
+       cd assembly_
+       nasm -f elf32 math.asm -o math.o && ld -m elf_i386 math.o -o math && ./math
