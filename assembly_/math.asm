@@ -57,7 +57,7 @@ print_result:
 
     ; Convert the result to a string and print it
     mov eax, [result]           ; Load the result into EAX
-    mov edi, buffer             ; Address of the buffer
+    mov edi, buffer + 11        ; Set EDI to the end of the buffer
     call int_to_string          ; Convert the integer to a string
     mov eax, 4                  ; System call number for sys_write
     mov ebx, 1                  ; File descriptor 1 (stdout)
@@ -99,6 +99,6 @@ convert_loop:
     test eax, eax               ; Check if EAX is 0
     jnz convert_loop            ; Repeat if EAX is not 0
 
-    add edi, ecx                ; Move EDI to the end of the string
-    mov byte [edi], 0           ; Null-terminate the string
+    ; Fix the buffer pointer: move EDI forward to the end of the string
+    mov byte [edi + ecx], 0     ; Null-terminate the string
     ret                         ; Return from the subroutine
