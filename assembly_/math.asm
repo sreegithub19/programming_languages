@@ -1,9 +1,7 @@
 section .data
     num1 dd 10          ; First number (10)
     num2 dd 5           ; Second number (5)
-
-section .bss
-    result dd 0         ; Variable to store the result
+    result dd 0         ; Variable to store the result, initialized to 0
 
 section .text
     global _start       ; Entry point for the program
