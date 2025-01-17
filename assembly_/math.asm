@@ -83,7 +83,10 @@ int_to_string:
 
     ; Handle zero case
     test eax, eax               ; Check if EAX is 0
-    jnz convert_loop            ; If not zero, continue
+    jz handle_zero              ; If zero, jump to handle_zero
+    jmp convert_loop            ; Otherwise, continue to convert_loop
+
+handle_zero:
     mov byte [edi], '0'         ; If zero, store '0'
     inc edi                     ; Move to the next position
     mov byte [edi], 0           ; Null-terminate the string
