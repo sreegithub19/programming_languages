@@ -3,6 +3,7 @@ section .data
     num2 dd 5                   ; Second number (5)
     result_msg db "Result: ", 0 ; Message prefix
     newline db 0xA, 0           ; Newline character
+    ten dd 10                   ; Constant for division by 10
 
 section .bss
     result resd 1               ; Variable to store the result
@@ -78,11 +79,19 @@ print_result:
 int_to_string:
     ; Input: EAX = integer to convert, EDI = address of the buffer
     ; Output: EDI = end of the string (null terminator)
-    xor ecx, ecx                ; Digit counter
+    xor ecx, ecx                ; Clear digit counter
+
+    ; Handle zero case
+    test eax, eax               ; Check if EAX is 0
+    jnz convert_loop            ; If not zero, continue
+    mov byte [edi], '0'         ; If zero, store '0'
+    inc edi                     ; Move to the next position
+    mov byte [edi], 0           ; Null-terminate the string
+    ret                         ; Return
 
 convert_loop:
     xor edx, edx                ; Clear EDX (remainder)
-    div dword [num2]            ; Divide EAX by 10, result in EAX, remainder in EDX
+    div dword [ten]             ; Divide EAX by 10, result in EAX, remainder in EDX
     add dl, '0'                 ; Convert remainder to ASCII
     dec edi                     ; Move buffer pointer backward
     mov [edi], dl               ; Store the ASCII character in the buffer
@@ -90,5 +99,6 @@ convert_loop:
     test eax, eax               ; Check if EAX is 0
     jnz convert_loop            ; Repeat if EAX is not 0
 
-    mov byte [edi - 1], 0       ; Add null terminator
+    add edi, ecx                ; Move EDI to the end of the string
+    mov byte [edi], 0           ; Null-terminate the string
     ret                         ; Return from the subroutine
