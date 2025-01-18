@@ -66,6 +66,7 @@ print_number:
     mov rdi, buffer               ; Address of buffer
     add rdi, 4                    ; Point to the end of the buffer
     mov rcx, 0                    ; Digit counter
+    mov byte [rdi], 0             ; Null-terminate the buffer
 
 convert_loop:
     xor rdx, rdx                  ; Clear RDX (remainder)
