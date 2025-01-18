@@ -1,7 +1,10 @@
 section .data
     array db 5, 3, 8, 6, 2       ; Array to be sorted
-    len equ 5                     ; Length of the array
-    newline db 10                 ; Newline character (for formatting)
+    len equ 5                    ; Length of the array
+    newline db 0xA               ; Newline character (ASCII 10)
+
+section .bss
+    buffer resb 4                ; Buffer to store ASCII representation of numbers
 
 section .text
     global _start
@@ -34,44 +37,56 @@ _start:
 
     inc rbx
     cmp rbx, len
-    jge .done
+    jge .print_array
 
     jmp .outer_loop
 
-.done:
+.print_array:
     ; Print the sorted array
-    mov rsi, array                ; Load base address of array
-    mov rcx, len                  ; Set length of array
-    
+    mov rbx, 0                    ; Index for array
+
 .print_loop:
-    mov al, [rsi]                 ; Load element from array
-    add al, '0'                   ; Convert to ASCII ('0' = 48 in ASCII)
+    mov rsi, array                ; Load base address of array
+    movzx rax, byte [rsi + rbx]   ; Load array[rbx] into rax (zero-extend to 64 bits)
+    call print_number             ; Print the number
+    mov rax, 1                    ; sys_write
     mov rdi, 1                    ; File descriptor (stdout)
-    mov rdx, 1                    ; Length (1 byte per character)
-    mov rax, 1                    ; sys_write system call
-    syscall                       ; Call sys_write to print the number
+    mov rsi, newline              ; Address of newline character
+    mov rdx, 1                    ; Length of newline character
+    syscall                       ; Print newline
 
-    ; Print space between numbers
-    mov rsi, space                ; Load space character
-    mov rax, 1                    ; sys_write system call
+    inc rbx
+    cmp rbx, len
+    jl .print_loop
+
+    jmp .done
+
+print_number:
+    ; Convert number in RAX to ASCII and store in buffer
+    mov rdi, buffer               ; Address of buffer
+    mov rcx, 0                    ; Digit counter
+
+.convert_loop:
+    xor rdx, rdx                  ; Clear RDX (remainder)
+    mov rbx, 10                   ; Divisor (base 10)
+    div rbx                       ; RAX = RAX / 10, RDX = RAX % 10
+    add dl, '0'                   ; Convert remainder to ASCII
+    dec rdi                       ; Move buffer pointer backward
+    mov [rdi], dl                 ; Store ASCII character in buffer
+    inc rcx                       ; Increment digit counter
+    test rax, rax                 ; Check if RAX is 0
+    jnz .convert_loop             ; Repeat if RAX != 0
+
+    ; Write the number to stdout
+    mov rax, 1                    ; sys_write
     mov rdi, 1                    ; File descriptor (stdout)
-    mov rdx, 1                    ; Length (1 byte per space)
-    syscall                       ; Call sys_write
-
-    inc rsi                        ; Move to the next number in the array
-    loop .print_loop               ; Repeat for all elements
-
-    ; Print newline after the array
-    mov rsi, newline
-    mov rax, 1
-    mov rdi, 1
-    mov rdx, 1
+    mov rsi, rdi                  ; Address of buffer
+    mov rdx, rcx                  ; Length of the number
     syscall
+    ret
 
+.done:
     ; Exit program
-    mov rax, 60                   ; sys_exit system call
+    mov rax, 60                   ; sys_exit
     xor rdi, rdi                  ; exit status 0
     syscall
-
-section .data
-    space db ' '                  ; Space between numbers
