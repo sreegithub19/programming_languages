@@ -21,6 +21,17 @@ jobs:
         #!/bin/bash
         cd assembly_
 
+        nasm -f elf64 hello.asm -o hello.o
+        ld hello.o -o hello
+        ./hello
+
+        cd ..
+
+    - name: Assemble the code, Link the object file, Run the program again
+      run: |
+        #!/bin/bash
+        cd assembly_
+
         for asm_file in *.asm; do
             # Check if the file exists
             if [ -f "$asm_file" ]; then
