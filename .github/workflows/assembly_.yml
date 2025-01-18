@@ -19,7 +19,26 @@ jobs:
     - name: Assemble the code, Link the object file, Run the program
       run: |
        cd assembly_
-       nasm -f elf32 -o calc.o calc.asm
-        ld -m elf_i386 -o calc calc.o
-        ./calc
+
+        # Compile all .asm files into .o files
+        for file in *.asm; do
+            echo "Compiling $file..."
+            nasm -f elf32 -o "${file%.asm}.o" "$file"
+        done
+
+        # Link all .o files into executables
+        for obj in *.o; do
+            echo "Linking $obj..."
+            ld -m elf_i386 -o "${obj%.o}" "$obj"
+        done
+
+        # Run all executables
+        for exe in *; do
+            if [[ -x "$exe" && ! "$exe" =~ \. ]]; then
+                echo "Running $exe:"
+                ./"$exe"
+                echo ""
+            fi
+        done
+
 
