@@ -6,6 +6,7 @@ section .data
     result_prod db 'Product: ', 0
     result_div db 'Quotient: ', 0
     newline db 0xA, 0    ; Newline character
+    result_char db 0     ; Temporary storage for ASCII character
 
 section .text
     global _start
@@ -27,9 +28,10 @@ _start:
 
     ; Print sum result (converted to ASCII)
     add al, '0'         ; Convert sum to ASCII (8 -> '8')
+    mov [result_char], al ; Store ASCII value in memory
+    mov ecx, result_char ; Load memory address into ECX
     mov eax, 4          ; sys_write
     mov ebx, 1          ; file descriptor (stdout)
-    mov ecx, al         ; pointer to sum in ASCII (8)
     mov edx, 1          ; length of 1 byte (single digit)
     int 0x80            ; interrupt to make syscall
 
@@ -41,6 +43,7 @@ _start:
     int 0x80            ; interrupt to make syscall
 
     ; Difference = al - bl
+    mov al, [num1]      ; Reload num1 into AL
     sub al, bl          ; AL now contains the difference (5 - 3 = 2)
 
     ; Print Difference
@@ -52,9 +55,10 @@ _start:
 
     ; Print difference result (converted to ASCII)
     add al, '0'         ; Convert difference to ASCII (2 -> '2')
+    mov [result_char], al ; Store ASCII value in memory
+    mov ecx, result_char ; Load memory address into ECX
     mov eax, 4          ; sys_write
     mov ebx, 1          ; file descriptor (stdout)
-    mov ecx, al         ; pointer to difference in ASCII (2)
     mov edx, 1          ; length of 1 byte (single digit)
     int 0x80            ; interrupt to make syscall
 
@@ -66,6 +70,7 @@ _start:
     int 0x80            ; interrupt to make syscall
 
     ; Product = al * bl
+    mov al, [num1]      ; Reload num1 into AL
     imul al, bl         ; AL now contains the product (5 * 3 = 15)
 
     ; Print Product
@@ -75,19 +80,27 @@ _start:
     mov edx, 9          ; length of "Product: "
     int 0x80            ; interrupt to make syscall
 
-    ; Print product result (converted to ASCII)
-    add al, '0'         ; Convert product to ASCII (15 -> '1', '5')
+    ; Convert multi-digit product to ASCII
+    xor ah, ah          ; Clear AH for division
+    mov bl, 10          ; Divisor
+    div bl              ; AL = quotient, AH = remainder
+
+    ; Print higher-order digit (quotient)
+    add al, '0'         ; Convert to ASCII
+    mov [result_char], al ; Store ASCII value in memory
+    mov ecx, result_char ; Load memory address into ECX
     mov eax, 4          ; sys_write
     mov ebx, 1          ; file descriptor (stdout)
-    mov ecx, al         ; pointer to product in ASCII
-    mov edx, 1          ; length of 1 byte (first digit of product)
+    mov edx, 1          ; length of 1 byte
     int 0x80            ; interrupt to make syscall
 
-    ; Print second digit of product (5)
-    mov al, '5'         ; Load ASCII value of '5' (second digit of 15)
+    ; Print lower-order digit (remainder)
+    mov al, ah          ; Move remainder to AL
+    add al, '0'         ; Convert to ASCII
+    mov [result_char], al ; Store ASCII value in memory
+    mov ecx, result_char ; Load memory address into ECX
     mov eax, 4          ; sys_write
     mov ebx, 1          ; file descriptor (stdout)
-    mov ecx, al         ; pointer to '5'
     mov edx, 1          ; length of 1 byte
     int 0x80            ; interrupt to make syscall
 
@@ -99,6 +112,7 @@ _start:
     int 0x80            ; interrupt to make syscall
 
     ; Division = al / bl (quotient)
+    mov al, [num1]      ; Reload num1 into AL
     xor ah, ah          ; Clear AH to prepare for division
     div bl              ; AX = quotient, AH = remainder (5 / 3 = quotient 1)
 
@@ -111,9 +125,10 @@ _start:
 
     ; Print quotient result (converted to ASCII)
     add al, '0'         ; Convert quotient to ASCII (1 -> '1')
+    mov [result_char], al ; Store ASCII value in memory
+    mov ecx, result_char ; Load memory address into ECX
     mov eax, 4          ; sys_write
     mov ebx, 1          ; file descriptor (stdout)
-    mov ecx, al         ; pointer to quotient in ASCII (1)
     mov edx, 1          ; length of 1 byte
     int 0x80            ; interrupt to make syscall
 
