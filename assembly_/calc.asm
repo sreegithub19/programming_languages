@@ -100,7 +100,7 @@ _start:
 
     ; Division = al / bl (quotient)
     xor ah, ah          ; Clear AH to prepare for division
-    div bl              ; AL = quotient, AH = remainder (5 / 3 = quotient 1)
+    div bl              ; AX = quotient, AH = remainder (5 / 3 = quotient 1)
 
     ; Print Quotient
     mov eax, 4          ; sys_write
