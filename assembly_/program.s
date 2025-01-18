@@ -18,3 +18,5 @@ main:
     mov     rax, 60              ; syscall: exit
     xor     rdi, rdi             ; exit code: 0
     syscall                      ; Exit program
+
+section .note.GNU-stack noalloc noexec nowrite progbits
