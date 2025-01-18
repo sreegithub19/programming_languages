@@ -18,27 +18,28 @@ jobs:
 
     - name: Assemble the code, Link the object file, Run the program
       run: |
-       cd assembly_
+        #!/bin/bash
+        cd assembly_
 
         # Compile all .asm files into .o files
         for file in *.asm; do
-            echo "Compiling $file..."
-            nasm -f elf32 -o "${file%.asm}.o" "$file"
-        done
-
-        # Link all .o files into executables
-        for obj in *.o; do
-            echo "Linking $obj..."
-            ld -m elf_i386 -o "${obj%.o}" "$obj"
-        done
-
-        # Run all executables
-        for exe in *; do
-            if [[ -x "$exe" && ! "$exe" =~ \. ]]; then
-                echo "Running $exe:"
-                ./"$exe"
-                echo ""
+            if [[ -f "$file" ]]; then  # Only process regular files
+                echo "Compiling $file..."
+                nasm -f elf32 -o "${file%.asm}.o" "$file"
             fi
         done
+
+        # Link all .o files into a single executable (optional: adjust as needed)
+        echo "Linking object files into the executable..."
+        ld -m elf_i386 -o my_program *.o
+
+        # Check if the executable exists and run it
+        if [[ -f my_program && -x my_program ]]; then
+            echo "Running the program..."
+            ./my_program
+        else
+            echo "Error: Executable 'my_program' not found or is not executable."
+        fi
+
 
 
