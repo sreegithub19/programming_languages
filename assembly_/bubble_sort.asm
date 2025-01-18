@@ -64,6 +64,7 @@ print_loop:
 print_number:
     ; Convert number in RAX to ASCII and store in buffer
     mov rdi, buffer               ; Address of buffer
+    add rdi, 4                    ; Point to the end of the buffer
     mov rcx, 0                    ; Digit counter
 
 convert_loop:
