@@ -66,7 +66,6 @@ print_number:
     mov rdi, buffer               ; Address of buffer
     add rdi, 4                    ; Point to the end of the buffer
     mov rcx, 0                    ; Digit counter
-    mov byte [rdi], 0             ; Null-terminate the buffer
 
 convert_loop:
     xor rdx, rdx                  ; Clear RDX (remainder)
@@ -83,6 +82,7 @@ convert_loop:
     mov rax, 1                    ; sys_write
     mov rdi, 1                    ; File descriptor (stdout)
     mov rsi, rdi                  ; Address of buffer
+    mov rsi, rdi                  ; Correctly set RSI to the buffer address
     mov rdx, rcx                  ; Length of the number
     syscall
     ret
