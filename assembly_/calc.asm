@@ -71,7 +71,8 @@ _start:
 
     ; Product = al * bl
     mov al, [num1]      ; Reload num1 into AL
-    imul al, bl         ; AL now contains the product (5 * 3 = 15)
+    mov bl, [num2]      ; Reload num2 into BL
+    imul bl             ; Multiply AL by BL, result in AX (AL = lower byte, AH = upper byte)
 
     ; Print Product
     mov eax, 4          ; sys_write
@@ -81,9 +82,9 @@ _start:
     int 0x80            ; interrupt to make syscall
 
     ; Convert multi-digit product to ASCII
-    xor ah, ah          ; Clear AH for division
     mov bl, 10          ; Divisor
-    div bl              ; AL = quotient, AH = remainder
+    xor ah, ah          ; Clear AH for division
+    div bl              ; Divide AX by 10, AL = quotient (higher digit), AH = remainder (lower digit)
 
     ; Print higher-order digit (quotient)
     add al, '0'         ; Convert to ASCII
