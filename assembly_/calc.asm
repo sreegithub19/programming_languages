@@ -1,147 +1,130 @@
 section .data
-    prompt db 'Enter two numbers: ', 0
+    num1 db 5           ; First number (hardcoded)
+    num2 db 3           ; Second number (hardcoded)
     result_sum db 'Sum: ', 0
     result_diff db 'Difference: ', 0
     result_prod db 'Product: ', 0
     result_div db 'Quotient: ', 0
-    newline db 0xA, 0
-
-section .bss
-    num1 resb 4
-    num2 resb 4
+    newline db 0xA, 0    ; Newline character
 
 section .text
     global _start
 
 _start:
-    ; Print prompt
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, prompt      ; pointer to prompt
-    mov edx, 18          ; length of prompt
-    int 0x80             ; interrupt to make syscall
+    ; Load the hardcoded numbers into registers
+    mov al, [num1]      ; Load num1 (5) into AL register
+    mov bl, [num2]      ; Load num2 (3) into BL register
 
-    ; Read first number (num1)
-    mov eax, 3           ; sys_read
-    mov ebx, 0           ; file descriptor (stdin)
-    mov ecx, num1        ; buffer to store input
-    mov edx, 4           ; number of bytes to read
-    int 0x80             ; interrupt to make syscall
+    ; Sum = al + bl
+    add al, bl          ; AL now contains the sum (5 + 3 = 8)
 
-    ; Read second number (num2)
-    mov eax, 3           ; sys_read
-    mov ebx, 0           ; file descriptor (stdin)
-    mov ecx, num2        ; buffer to store input
-    mov edx, 4           ; number of bytes to read
-    int 0x80             ; interrupt to make syscall
+    ; Print Sum
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, result_sum ; pointer to result_sum message
+    mov edx, 6          ; length of "Sum: "
+    int 0x80            ; interrupt to make syscall
 
-    ; Convert num1 from string to integer (ASCII to integer)
-    mov ecx, num1        ; pointer to num1
-    movzx eax, byte [ecx]
-    sub eax, '0'         ; convert ASCII to integer (assuming single digit)
-    mov ebx, eax         ; store the first digit in ebx
-
-    ; Convert num2 from string to integer (ASCII to integer)
-    mov ecx, num2        ; pointer to num2
-    movzx eax, byte [ecx]
-    sub eax, '0'         ; convert ASCII to integer (assuming single digit)
-    mov edx, eax         ; store the second digit in edx
-
-    ; Sum = ebx + edx
-    add ebx, edx         ; ebx now contains the sum
-
-    ; Print sum
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, result_sum  ; pointer to result_sum message
-    mov edx, 6           ; length of "Sum: "
-    int 0x80             ; interrupt to make syscall
-
-    ; Print result_sum (converted to ASCII)
-    add ebx, '0'         ; convert sum to ASCII
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, ebx         ; pointer to sum in ASCII
-    mov edx, 1           ; length of sum (single digit)
-    int 0x80             ; interrupt to make syscall
+    ; Print sum result (converted to ASCII)
+    add al, '0'         ; Convert sum to ASCII (8 -> '8')
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, al         ; pointer to sum in ASCII (8)
+    mov edx, 1          ; length of 1 byte (single digit)
+    int 0x80            ; interrupt to make syscall
 
     ; Print newline
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, newline     ; pointer to newline
-    mov edx, 1           ; length of newline
-    int 0x80             ; interrupt to make syscall
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, newline    ; pointer to newline
+    mov edx, 1          ; length of newline
+    int 0x80            ; interrupt to make syscall
 
-    ; Difference = ebx - edx
-    sub ebx, edx         ; ebx now contains the difference
+    ; Difference = al - bl
+    sub al, bl          ; AL now contains the difference (5 - 3 = 2)
 
-    ; Print difference
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
+    ; Print Difference
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
     mov ecx, result_diff ; pointer to result_diff message
-    mov edx, 12          ; length of "Difference: "
-    int 0x80             ; interrupt to make syscall
+    mov edx, 12         ; length of "Difference: "
+    int 0x80            ; interrupt to make syscall
 
-    ; Print result_diff (converted to ASCII)
-    add ebx, '0'         ; convert difference to ASCII
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, ebx         ; pointer to difference in ASCII
-    mov edx, 1           ; length of difference (single digit)
-    int 0x80             ; interrupt to make syscall
+    ; Print difference result (converted to ASCII)
+    add al, '0'         ; Convert difference to ASCII (2 -> '2')
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, al         ; pointer to difference in ASCII (2)
+    mov edx, 1          ; length of 1 byte (single digit)
+    int 0x80            ; interrupt to make syscall
 
     ; Print newline
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, newline     ; pointer to newline
-    mov edx, 1           ; length of newline
-    int 0x80             ; interrupt to make syscall
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, newline    ; pointer to newline
+    mov edx, 1          ; length of newline
+    int 0x80            ; interrupt to make syscall
 
-    ; Product = ebx * edx
-    imul ebx, edx        ; ebx now contains the product
+    ; Product = al * bl
+    imul al, bl         ; AL now contains the product (5 * 3 = 15)
 
-    ; Print product
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
+    ; Print Product
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
     mov ecx, result_prod ; pointer to result_prod message
-    mov edx, 9           ; length of "Product: "
-    int 0x80             ; interrupt to make syscall
+    mov edx, 9          ; length of "Product: "
+    int 0x80            ; interrupt to make syscall
 
-    ; Print result_prod (converted to ASCII)
-    add ebx, '0'         ; convert product to ASCII
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, ebx         ; pointer to product in ASCII
-    mov edx, 1           ; length of product (single digit)
-    int 0x80             ; interrupt to make syscall
+    ; Print product result (converted to ASCII)
+    add al, '0'         ; Convert product to ASCII (15 -> '1', '5')
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, al         ; pointer to product in ASCII
+    mov edx, 1          ; length of 1 byte (first digit of product)
+    int 0x80            ; interrupt to make syscall
+
+    ; Print second digit of product (5)
+    mov al, '5'         ; Load ASCII value of '5' (second digit of 15)
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, al         ; pointer to '5'
+    mov edx, 1          ; length of 1 byte
+    int 0x80            ; interrupt to make syscall
 
     ; Print newline
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, newline     ; pointer to newline
-    mov edx, 1           ; length of newline
-    int 0x80             ; interrupt to make syscall
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, newline    ; pointer to newline
+    mov edx, 1          ; length of newline
+    int 0x80            ; interrupt to make syscall
 
-    ; Division = ebx / edx (quotient)
-    xor edx, edx         ; Clear edx (remainder)
-    div ebx              ; eax = quotient, edx = remainder
+    ; Division = al / bl (quotient)
+    xor ah, ah          ; Clear AH to prepare for division
+    div bl              ; AL = quotient, AH = remainder (5 / 3 = quotient 1)
 
-    ; Print quotient
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, result_div  ; pointer to result_div message
-    mov edx, 10          ; length of "Quotient: "
-    int 0x80             ; interrupt to make syscall
+    ; Print Quotient
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, result_div ; pointer to result_div message
+    mov edx, 10         ; length of "Quotient: "
+    int 0x80            ; interrupt to make syscall
 
-    ; Print quotient (converted to ASCII)
-    add eax, '0'         ; convert quotient to ASCII
-    mov eax, 4           ; sys_write
-    mov ebx, 1           ; file descriptor (stdout)
-    mov ecx, eax         ; pointer to quotient in ASCII
-    mov edx, 1           ; length of quotient (single digit)
-    int 0x80             ; interrupt to make syscall
+    ; Print quotient result (converted to ASCII)
+    add al, '0'         ; Convert quotient to ASCII (1 -> '1')
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, al         ; pointer to quotient in ASCII (1)
+    mov edx, 1          ; length of 1 byte
+    int 0x80            ; interrupt to make syscall
+
+    ; Print newline
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; file descriptor (stdout)
+    mov ecx, newline    ; pointer to newline
+    mov edx, 1          ; length of newline
+    int 0x80            ; interrupt to make syscall
 
     ; Exit the program
-    mov eax, 1           ; sys_exit
-    xor ebx, ebx         ; status code 0
-    int 0x80             ; interrupt to make syscall
+    mov eax, 1          ; sys_exit
+    xor ebx, ebx        ; exit status 0
+    int 0x80            ; interrupt to make syscall
