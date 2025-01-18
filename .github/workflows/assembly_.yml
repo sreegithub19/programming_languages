@@ -21,25 +21,28 @@ jobs:
         #!/bin/bash
         cd assembly_
 
-        # Compile all .asm files into .o files
-        for file in *.asm; do
-            if [[ -f "$file" ]]; then  # Only process regular files
-                echo "Compiling $file..."
-                nasm -f elf32 -o "${file%.asm}.o" "$file"
+        for asm_file in *.asm; do
+            # Check if the file exists
+            if [ -f "$asm_file" ]; then
+                echo "Assembling and running $asm_file..."
+
+                # Get the file name without the extension
+                filename=$(basename -- "$asm_file")
+                filename_noext="${filename%.*}"
+
+                # Assemble the file using NASM (assuming it's x86-64, adjust for other architectures)
+                nasm -f elf64 "$asm_file" -o "$filename_noext.o"
+                
+                # Link the object file to create an executable
+                ld "$filename_noext.o" -o "$filename_noext"
+
+                # Run the resulting executable
+                ./"$filename_noext"
+
+                # Clean up the object and executable files after running
+                rm "$filename_noext.o" "$filename_noext"
             fi
         done
-
-        # Link all .o files into a single executable (optional: adjust as needed)
-        echo "Linking object files into the executable..."
-        ld -m elf_i386 -o my_program *.o
-
-        # Check if the executable exists and run it
-        if [[ -f my_program && -x my_program ]]; then
-            echo "Running the program..."
-            ./my_program
-        else
-            echo "Error: Executable 'my_program' not found or is not executable."
-        fi
 
 
 
