@@ -58,3 +58,11 @@ jobs:
        cd assembly_
        chmod +x run_asm.sh
        ./run_asm.sh
+       cd ..
+
+    - name: Upload file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+           name: captured-html-artifacts
+           path: |
+            assembly_/hello.asm

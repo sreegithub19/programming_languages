@@ -80,6 +80,8 @@ docker exec $container_id /app/hello
 # Check if the assembly program exists and output its file details
 docker exec $container_id ls -l /app/hello
 
+docker cp $container_id:/app/hello.asm "./hello.asm"
+
 # Stop and remove the container
 docker stop $container_id
 docker rm $container_id
