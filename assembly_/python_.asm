@@ -1,9 +1,9 @@
 section .data
     python_command db '/usr/bin/python3', 0
     arg1 db '-c', 0
-    python_script db 'import sys;', 50, \
-                  'print("Hello from Python");', 50, \
-                  'print(sorted([5,4,3,2,1]));', 50, \
+    python_script db 'import sys;', 10, \
+                  'print("Hello from Python");', 10, \
+                  'print(sorted([5,4,3,2,1]));', 10, \
                   'sys.exit(0)', 0
 
 section .bss
