@@ -5,7 +5,7 @@ section .data
     newline db 10, 0                     ; Newline character
 
 section .bss
-    result resb 1                        ; Reserve a byte for the result buffer
+    result resb 4                        ; Reserve 4 bytes for the ASCII result buffer (to handle multi-digit numbers)
 
 section .text
     global _start                        ; Entry point for the linker
@@ -49,16 +49,19 @@ check_swap:
     mov rsi, array                       ; rsi points to the start of the sorted array
 
 print_sorted_array:
-    mov al, [rsi]                        ; Load the current element into al
-    cmp al, 0                            ; Check if the current element is zero (end of array)
+    movzx eax, byte [rsi]                ; Load the current element into eax and zero-extend
+    cmp eax, 0                           ; Check if the current element is zero (end of array)
     je end_program                       ; If yes, end the program
 
-    add al, '0'                          ; Convert the element to ASCII
-    mov [result], al                     ; Store the ASCII character in result
+    ; Convert the number to ASCII string
+    mov rdi, result                      ; rdi points to the result buffer
+    call int_to_string                   ; Convert integer to string
+
+    ; Print the ASCII string
     mov rax, 1                           ; sys_write system call number (1 = write)
     mov rdi, 1                           ; file descriptor (1 = stdout)
     mov rsi, result                      ; pointer to the result buffer
-    mov rdx, 1                           ; length of the element (1 byte)
+    mov rdx, rbx                         ; length of the result string
     syscall                              ; invoke the system call
 
     ; Print a space character
@@ -83,3 +86,22 @@ end_program:
     mov rax, 60                          ; sys_exit system call number
     xor rdi, rdi                         ; exit status (0)
     syscall                              ; invoke the system call
+
+; Convert integer in eax to ASCII string in rdi buffer
+int_to_string:
+    mov rbx, 0                           ; Clear rbx (string length)
+    mov rcx, 10                          ; Base 10 for division
+
+convert_loop:
+    xor rdx, rdx                         ; Clear rdx
+    div rcx                              ; Divide eax by 10, quotient in eax, remainder in rdx
+    add dl, '0'                          ; Convert remainder to ASCII
+    dec rdi                              ; Move buffer pointer backwards
+    mov [rdi], dl                        ; Store ASCII character in buffer
+    inc rbx                              ; Increment string length
+    test eax, eax                        ; Check if quotient is 0
+    jnz convert_loop                     ; Repeat if quotient is not 0
+
+    mov rsi, rdi                         ; rsi points to the start of the string
+    add rsi, rbx                         ; rsi points to the end of the string
+    ret
