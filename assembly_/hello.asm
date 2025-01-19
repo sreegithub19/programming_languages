@@ -1,9 +1,9 @@
 section .data
     hello1 db 'Hello world!', 0                    ; Null-terminated string for the first line
-    sum_msg db 'The sum is: ', 0      ; Null-terminated string for the sum message
-    sub_msg db 'The difference is: ', 0 ; Null-terminated string for the subtraction message
-    mul_msg db 'The product is: ', 0  ; Null-terminated string for the multiplication message
-    div_msg db 'The quotient is: ', 0 ; Null-terminated string for the division message
+    sum_msg db 'The sum of 14 and 10 is: ', 0      ; Null-terminated string for the sum message
+    sub_msg db 'The difference of 14 and 10 is: ', 0 ; Null-terminated string for the subtraction message
+    mul_msg db 'The product of 14 and 10 is: ', 0  ; Null-terminated string for the multiplication message
+    div_msg db 'The quotient of 14 and 10 is: ', 0 ; Null-terminated string for the division message
     newline db 10, 0                               ; Newline character
     result db '0000', 0                            ; Placeholder for the result (four digits, null-terminated)
 
@@ -43,6 +43,13 @@ _start:
     add rax, 10                  ; Add 10 to rax (result in rax)
     call print_result            ; Print the result
 
+    ; Print a newline character
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
+
     ; ============================
     ; Calculate and print the difference
     ; ============================
@@ -58,6 +65,13 @@ _start:
     sub rax, 10                  ; Subtract 10 from rax (result in rax)
     call print_result            ; Print the result
 
+    ; Print a newline character
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
+
     ; ============================
     ; Calculate and print the product
     ; ============================
@@ -72,6 +86,13 @@ _start:
     mov rax, 14                  ; Load 14 into rax
     imul rax, 10                 ; Multiply rax by 10 (result in rax)
     call print_result            ; Print the result
+
+    ; Print a newline character
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
 
     ; ============================
     ; Calculate and print the quotient
