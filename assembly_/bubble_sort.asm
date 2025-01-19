@@ -53,13 +53,14 @@ print_sorted_array:
     je end_program               ; If yes, end the program
 
     add al, '0'                  ; Convert the element to ASCII
-    mov [rsi], al                ; Store the ASCII character back in the array
-
+    mov [result], al             ; Store the ASCII character in result
     mov rax, 1                   ; sys_write system call number (1 = write)
     mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, result              ; pointer to the result buffer
     mov rdx, 1                   ; length of the element (1 byte)
     syscall                      ; invoke the system call
 
+    ; Print a space or newline character
     mov rax, 1                   ; sys_write system call number (1 = write)
     mov rdi, 1                   ; file descriptor (1 = stdout)
     mov rsi, newline             ; pointer to the newline character
@@ -74,3 +75,6 @@ end_program:
     mov rax, 60                  ; sys_exit system call number
     xor rdi, rdi                 ; exit status (0)
     syscall                      ; invoke the system call
+
+section .bss
+result resb 1                    ; Reserve a byte for the result buffer
