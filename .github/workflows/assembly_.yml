@@ -16,16 +16,6 @@ jobs:
     - name: Install NASM
       run: sudo apt-get update && sudo apt-get install -y nasm gcc
 
-    - name: Assemble the code, Link the object file, Run the program
-      run: |
-        #!/bin/bash
-        cd assembly_
-
-        nasm -f elf64 hello.asm -o hello.o
-        ld hello.o -o hello
-        ./hello
-
-        cd ..
 
     - name: Assemble the code, Link the object file, Run the program again
       run: |

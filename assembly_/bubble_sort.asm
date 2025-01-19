@@ -1,94 +1,76 @@
 section .data
-    array db 5, 3, 8, 6, 2       ; Array to be sorted
-    len equ 5                    ; Length of the array
-    newline db 0xA               ; Newline character (ASCII 10)
+    array db 5, 3, 8, 4, 2, 7, 1, 6, 0  ; Array to be sorted (last element is 0 to mark the end)
+    msg db 'Sorted array: ', 0           ; Message to print before the sorted array
+    newline db 10, 0                     ; Newline character
 
 section .bss
-    buffer resb 4                ; Buffer to store ASCII representation of numbers
+    ; No uninitialized data
 
 section .text
-    global _start
+    global _start                ; Entry point for the linker
 
 _start:
-    ; Sort the array using bubble sort
-    mov rbx, 0                    ; outer loop counter (i)
-    
-outer_loop:
-    mov rcx, len                  ; Set length for inner loop
-    sub rcx, 1
-    mov rdx, rbx                  ; Set inner loop counter (j)
-    
+    ; Initialize pointers
+    mov rsi, array               ; rsi points to the start of the array
+
+bubble_sort:
+    mov rdi, array               ; rdi points to the start of the array
+    mov rcx, 0                   ; Reset the swap flag
+
 inner_loop:
-    ; Compare array[j] and array[j+1]
-    mov rsi, array                ; Load base address of array
-    mov al, [rsi + rdx]           ; Load array[j]
-    mov bl, [rsi + rdx + 1]       ; Load array[j+1]
-    cmp al, bl
-    jle no_swap                   ; If array[j] <= array[j+1], no swap
+    mov al, [rdi]                ; Load the current element into al
+    cmp byte [rdi + 1], 0        ; Check if the next element is zero (end of array)
+    je check_swap                ; If yes, jump to check_swap
+    mov bl, [rdi + 1]            ; Load the next element into bl
+    cmp al, bl                   ; Compare the current element with the next element
+    jle next_element             ; If current element <= next element, go to next_element
 
-    ; Swap array[j] and array[j+1]
-    mov [rsi + rdx], bl           ; array[j] = array[j+1]
-    mov [rsi + rdx + 1], al       ; array[j+1] = array[j]
-    
-no_swap:
-    inc rdx
-    cmp rdx, rcx
-    jl inner_loop
+    ; Swap elements
+    mov [rdi], bl                ; Move the next element to the current position
+    mov [rdi + 1], al            ; Move the current element to the next position
+    mov rcx, 1                   ; Set the swap flag
 
-    inc rbx
-    cmp rbx, len
-    jge print_array
+next_element:
+    inc rdi                      ; Move to the next element
+    jmp inner_loop               ; Repeat the inner loop
 
-    jmp outer_loop
+check_swap:
+    cmp rcx, 1                   ; Check if any swaps were made
+    je bubble_sort               ; If yes, repeat the bubble sort
 
-print_array:
     ; Print the sorted array
-    mov rbx, 0                    ; Index for array
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, msg                 ; pointer to the message string
+    mov rdx, 14                  ; length of the message string
+    syscall                      ; invoke the system call
 
-print_loop:
-    mov rsi, array                ; Load base address of array
-    movzx rax, byte [rsi + rbx]   ; Load array[rbx] into rax (zero-extend to 64 bits)
-    call print_number             ; Print the number
-    mov rax, 1                    ; sys_write
-    mov rdi, 1                    ; File descriptor (stdout)
-    mov rsi, newline              ; Address of newline character
-    mov rdx, 1                    ; Length of newline character
-    syscall                       ; Print newline
+    mov rsi, array               ; rsi points to the start of the sorted array
 
-    inc rbx
-    cmp rbx, len
-    jl print_loop
+print_sorted_array:
+    mov al, [rsi]                ; Load the current element into al
+    cmp al, 0                    ; Check if the current element is zero (end of array)
+    je end_program               ; If yes, end the program
 
-    jmp done
+    add al, '0'                  ; Convert the element to ASCII
+    mov [rsi], al                ; Store the ASCII character back in the array
 
-print_number:
-    ; Convert number in RAX to ASCII and store in buffer
-    mov rdi, buffer               ; Address of buffer
-    add rdi, 4                    ; Point to the end of the buffer
-    mov rcx, 0                    ; Digit counter
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rdx, 1                   ; length of the element (1 byte)
+    syscall                      ; invoke the system call
 
-convert_loop:
-    xor rdx, rdx                  ; Clear RDX (remainder)
-    mov rbx, 10                   ; Divisor (base 10)
-    div rbx                       ; RAX = RAX / 10, RDX = RAX % 10
-    add dl, '0'                   ; Convert remainder to ASCII
-    dec rdi                       ; Move buffer pointer backward
-    mov [rdi], dl                 ; Store ASCII character in buffer
-    inc rcx                       ; Increment digit counter
-    test rax, rax                 ; Check if RAX is 0
-    jnz convert_loop              ; Repeat if RAX != 0
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
 
-    ; Write the number to stdout
-    mov rax, 1                    ; sys_write
-    mov rdi, 1                    ; File descriptor (stdout)
-    mov rsi, rdi                  ; Address of buffer
-    mov rsi, rdi                  ; Correctly set RSI to the buffer address
-    mov rdx, rcx                  ; Length of the number
-    syscall
-    ret
+    inc rsi                      ; Move to the next element
+    jmp print_sorted_array       ; Repeat the loop
 
-done:
-    ; Exit program
-    mov rax, 60                   ; sys_exit
-    xor rdi, rdi                  ; exit status 0
-    syscall
+end_program:
+    ; Exit the program
+    mov rax, 60                  ; sys_exit system call number
+    xor rdi, rdi                 ; exit status (0)
+    syscall                      ; invoke the system call
