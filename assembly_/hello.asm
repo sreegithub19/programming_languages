@@ -1,5 +1,5 @@
 section .data
-    hello db 'Hello world! ', 0        ; Null-terminated string with space at the end
+    hello db 'ello world! ', 0        ; Null-terminated string with space at the end
     result db 'The sum is: ', 0        ; Null-terminated string for the sum message
     num db '00', 0                     ; Placeholder for the result (two digits, null-terminated)
 
