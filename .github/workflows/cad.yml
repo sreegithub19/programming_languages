@@ -29,19 +29,18 @@ jobs:
         # Start a virtual X server
         Xvfb :99 -screen 0 1024x768x24 &
 
-        # Create the output directory if it doesn't exist
-        mkdir -p cad_output
-
-        openscad -o cad_output/example.png cad/example.scad
+        #openscad -o cad_output/example.png cad/example.scad
 
         # # Run OpenSCAD in headless mode to render the diagram
-        # for scad_file in cad/*.scad; do
-        #   output_file="cad_output/$(basename "$scad_file" .scad).png"
-        #   openscad -o "$output_file" "$scad_file"
-        # done
+        cd cad
+        mkdir -p cad_output
+        for scad_file in *.scad; do
+          output_file="cad_output/$(basename "$scad_file" .scad).png"
+          openscad -o "$output_file" "$scad_file"
+        done
 
     - name: Upload rendered diagram
       uses: actions/upload-artifact@v4
       with:
         name: cad-diagram
-        path: cad_output
+        path: cad/cad_output
