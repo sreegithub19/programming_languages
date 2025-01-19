@@ -3,7 +3,7 @@
 # Define the assembly code
 asm_code=$(cat << 'EOF'
 section .data
-    fmt db "Hello, Docker World!", 10, 0
+    fmt db "Hello, World!", 10, 0
 
 section .text
     global _start
@@ -60,7 +60,7 @@ docker exec -i $container_id sh -c "cat > /mnt/tmpfs/hello.asm" <<< "$asm_code"
 
 echo "Assembling and linking the assembly code inside the container..."
 # Assemble and link the assembly code inside the container
-docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
+docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
 
 echo "Executing the assembly program within the container..."
 # Execute the assembly program within the container
