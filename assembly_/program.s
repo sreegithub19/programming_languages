@@ -22,4 +22,4 @@ main:
     xor     rdi, rdi             ; exit code: 0
     syscall                      ; Exit program
 
-section .note.GNU-stack noalloc noexec nowrite progbits
+;section .note.GNU-stack noalloc noexec nowrite progbits
