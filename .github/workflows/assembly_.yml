@@ -25,10 +25,6 @@ jobs:
         ld hello.o -o hello
         ./hello
 
-        nasm -f elf64 -o program.o program.s
-        gcc -no-pie -o program program.o
-        ./program
-
         cd ..
 
     - name: Assemble the code, Link the object file, Run the program again
