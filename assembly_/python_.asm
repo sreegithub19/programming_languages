@@ -1,7 +1,10 @@
 section .data
     python_command db '/usr/bin/python3', 0
     arg1 db '-c', 0
-    arg2 db 'print("Hello from Python")', 0
+    python_script db 'import sys', 10
+                  db 'print("Hello from Python")', 10
+                  db 'sorted([5,4,3,2,1])', 10
+                  db 'sys.exit(0)', 0
 
 section .bss
     nullbyte resb 1
@@ -14,12 +17,12 @@ _start:
     mov rax, 59               ; sys_execve syscall number
     lea rdi, [rel python_command] ; pointer to the command
     lea rsi, [rel arg1]           ; argv[0] = -c
-    lea rdx, [rel arg2]           ; argv[1] = 'print("Hello from Python")'
-
+    lea rdx, [rel python_script]  ; argv[1] = python_script
+    
     ; Setup stack for argv
     mov r10, 0                ; null terminator
     push r10                  ; argv[2] = NULL
-    push rdx                  ; argv[1] = arg2
+    push rdx                  ; argv[1] = python_script
     push rsi                  ; argv[0] = arg1
     push rdi                  ; argv[0] = python_command
 
