@@ -3,7 +3,7 @@
 # Define the assembly code
 asm_code=$(cat << 'EOF'
 section .data
-    fmt db "Hello, World!", 10, 0
+    fmt db "Hello, Docker World!", 10, 0
 
 section .text
     global _start
@@ -13,7 +13,7 @@ _start:
     mov rax, 1          ; syscall number for sys_write
     mov rdi, 1          ; file descriptor 1 is stdout
     mov rsi, fmt        ; address of the string
-    mov rdx, 14         ; number of bytes
+    mov rdx, 20         ; number of bytes
     syscall
 
     ; Exit the program
