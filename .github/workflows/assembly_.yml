@@ -49,3 +49,12 @@ jobs:
         nasm -f elf64 -o bubble_sort.o bubble_sort.asm
         gcc -no-pie -o bubble_sort bubble_sort.o -lc
         ./bubble_sort
+
+        cd ../..
+
+    - name: Assemble the code, Link the object file, Run the program again inline
+      run: |
+       #!/bin/bash
+       cd assembly_
+       chmod +x run_asm.sh
+       ./run_asm.sh
