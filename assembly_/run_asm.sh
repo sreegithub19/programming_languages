@@ -5,10 +5,6 @@ asm_code=$(cat << 'EOF'
 section .data
     fmt db "Hello, World!", 10, 0
 
-section .bss
-    array resq 5
-    cnt resq 1
-
 section .text
     global _start
 
@@ -45,34 +41,54 @@ WORKDIR /app
 COPY hello.asm .
 
 # Assemble and link the assembly file
-RUN nasm -f elf64 -o hello.o hello.asm && gcc -no-pie -o hello hello.o
+RUN nasm -f elf64 -o hello.o hello.asm && gcc -nostartfiles -no-pie -o hello hello.o
 
-# Command to run the executable
-CMD ["./hello"]
+# Command to keep the container running
+CMD ["tail", "-f", "/dev/null"]
 EOF
 )
 
-# Create an assembly file
-echo "$asm_code" > hello.asm
-
-# Create a Dockerfile
-echo "$dockerfile_content" > Dockerfile
+# Create a temporary directory for the Docker context
+tmpdir=$(mktemp -d)
+echo "$dockerfile_content" > "$tmpdir/Dockerfile"
+echo "$asm_code" > "$tmpdir/hello.asm"
 
 # Build the Docker image
-docker build -t hello-asm .
+docker build -t hello-asm "$tmpdir"
 
-# Run the Docker container in the background
-container_id=$(docker run -d hello-asm)
+# Check if the image was built successfully
+if [ $? -ne 0 ]; then
+    echo "Docker image build failed"
+    exit 1
+fi
+
+# Run the Docker container with a tmpfs mount
+container_id=$(docker run -d --tmpfs /mnt/tmpfs:rw,size=64m hello-asm)
 
 # Wait for the container to start
 sleep 2
 
+echo "Copying assembly code to container's tmpfs..."
+# Copy the assembly code into the container's tmpfs
+docker exec -i $container_id sh -c "cat > /mnt/tmpfs/hello.asm" < "$tmpdir/hello.asm"
+
+echo "Assembling and linking the assembly code inside the container..."
+# Assemble and link the assembly code inside the container
+docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
+
+# Ensure the executable has the correct permissions
+docker exec $container_id sh -c "chmod +x /mnt/tmpfs/hello"
+
+echo "Executing the assembly program within the container..."
 # Execute the assembly program within the container
-docker exec -it $container_id ./hello
+docker exec $container_id /mnt/tmpfs/hello
+
+# Check if the assembly program exists and output its file details
+docker exec $container_id ls -l /mnt/tmpfs/hello
 
 # Stop and remove the container
 docker stop $container_id
 docker rm $container_id
 
 # Clean up
-rm hello.asm Dockerfile
+rm -r "$tmpdir"
