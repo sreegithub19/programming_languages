@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Check for required commands
+if ! command -v nasm &> /dev/null
+then
+    echo "nasm could not be found, please install it."
+    exit 1
+fi
+
+if ! command -v gcc &> /dev/null
+then
+    echo "gcc could not be found, please install it."
+    exit 1
+fi
+
 # Define the assembly code
 asm_code=$(cat << 'EOF'
 section .data
@@ -16,7 +29,7 @@ _start:
     ; Define the array
     mov qword [array+0*8], 7
     mov qword [array+1*8], 13
-    mov qword [array+2*8], 20
+    mov qword [array+2*8], 2
     mov qword [array+3*8], 10
     mov qword [array+4*8], 6
 
@@ -44,28 +57,24 @@ no_swap:
     jnz outer_loop
 
     ; Print the 3rd largest number
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, fmt
-    mov rdx, [array+2*8]
+    mov rdi, 1            ; file descriptor 1 is stdout
+    mov rsi, array+16     ; address of the 3rd largest number
+    mov rdx, 8            ; number of bytes to write
+    mov rax, 1            ; syscall number for sys_write
     syscall
 
     ; Exit
-    mov rax, 60
-    xor rdi, rdi
+    mov rax, 60           ; syscall number for sys_exit
+    xor rdi, rdi          ; exit status 0
     syscall
 EOF
 )
 
 # Convert assembly code to machine code using nasm
-machine_code=$(echo "$asm_code" | nasm -f bin -o /dev/stdout /dev/stdin | xxd -p | tr -d '\n')
+machine_code=$(echo "$asm_code" | nasm -f bin -o /dev/stdout /dev/stdin 2>/dev/null | hexdump -v -e '1/1 "0x%02X,"')
 
 # Convert machine code to C byte array
-c_code="unsigned char code[] = {"
-for ((i=0; i<${#machine_code}; i+=2)); do
-    c_code+="0x${machine_code:$i:2},"
-done
-c_code="${c_code%,}};"
+c_code="unsigned char code[] = {$machine_code 0};"
 
 # Define the C program to execute the machine code
 c_program=$(cat << EOF
