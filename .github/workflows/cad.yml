@@ -13,18 +13,30 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up OpenSCAD
+    - name: Set up dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y openscad
+        sudo apt-get install -y openscad mesa-utils libgl1-mesa-dri xvfb
 
     - name: Render CAD Diagram
       run: |
+        # Set up environment variables for software rendering
+        export DISPLAY=:99
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export MESA_GL_VERSION_OVERRIDE=3.3
+        export MESA_GLSL_VERSION_OVERRIDE=330
+
+        # Start a virtual X server
+        Xvfb :99 -screen 0 1024x768x24 &
+
+        # Create the output directory if it doesn't exist
         mkdir -p cad_output
+
+        # Run OpenSCAD in headless mode to render the diagram
         openscad -o cad_output/example.png cad/example.scad
 
     - name: Upload rendered diagram
       uses: actions/upload-artifact@v4
       with:
         name: cad-diagram
-        path: cad_output
+        path: cad_output/example.png
