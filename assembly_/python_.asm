@@ -1,10 +1,10 @@
 section .data
     python_command db '/usr/bin/python3', 0
     arg1 db '-c', 0
-    python_script db 'import sys', 10
-                  db 'print("Hello from Python")', 10
-                  db 'print(sorted([5,4,3,2,1]))', 10
-                  db 'sys.exit(0)', 0
+    python_script db 'import sys;', 10, \
+                  'print("Hello from Python");', 10, \
+                  'print(sorted([5,4,3,2,1]));', 10, \
+                  'sys.exit(0)', 0
 
 section .bss
     nullbyte resb 1
