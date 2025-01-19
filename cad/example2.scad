@@ -1,89 +1,46 @@
-// Parameters for the piston
-piston_diameter = 80;
-piston_height = 120;
-piston_pin_diameter = 20;
-piston_pin_length = 60;
-piston_ring_groove_depth = 2;
-piston_ring_groove_width = 4;
-num_piston_rings = 3;
-piston_head_dome_height = 10;
-connecting_rod_hole_diameter = 40;
-skirt_height = 30;
-skirt_thickness = 5;
+// Parameters
+base_width = 100;
+base_length = 150;
+base_height = 10;
+hole_diameter = 5;
+hole_spacing = 20;
+cutout_width = 30;
+cutout_height = 10;
+cutout_depth = 5;
 
-// Main piston module
-module piston() {
-    // Create the main body of the piston
-    difference() {
-        cylinder(d = piston_diameter, h = piston_height, $fn=100);
-        // Create the piston pin hole
-        translate([0, 0, piston_height/2 - piston_pin_diameter/2])
-            rotate([90, 0, 0])
-                cylinder(d = piston_pin_diameter, h = piston_pin_length + 2, $fn=100);
-    }
+// Main function to create the part
+module mechanical_part() {
+    // Create the base
+    base();
     
-    // Create the piston head dome
-    translate([0, 0, piston_height])
-        cylinder(d1 = 0, d2 = piston_diameter, h = piston_head_dome_height, $fn=100);
-    
-    // Create the connecting rod hole
-    difference() {
-        translate([0, 0, piston_height / 4])
-            cylinder(d = connecting_rod_hole_diameter, h = piston_height / 2, $fn=100);
-        // Create the inner hole for the connecting rod
-        translate([0, 0, piston_height / 4])
-            cylinder(d = piston_pin_diameter, h = piston_height / 2 + 2, $fn=100);
-    }
-    
-    // Create the piston skirt
-    translate([0, 0, -skirt_height])
-        cylinder(d = piston_diameter, h = skirt_height, $fn=100);
-    
-    // Create the piston ring grooves
-    for (i = [0: num_piston_rings - 1]) {
-        translate([0, 0, piston_height - (i + 1) * (piston_ring_groove_width + piston_ring_groove_depth)])
-            difference() {
-                cylinder(d = piston_diameter, h = piston_ring_groove_depth, $fn=100);
-                translate([0, 0, -0.01])
-                    cylinder(d = piston_diameter - 2 * piston_ring_groove_width, h = piston_ring_groove_depth + 0.02, $fn=100);
-            }
-    }
-}
-
-// Generate top view
-module top_view() {
-    projection(cut = true) {
-        piston();
-    }
-}
-
-// Generate front view
-module front_view() {
-    rotate([90, 0, 0]) {
-        projection(cut = true) {
-            piston();
+    // Add holes to the base
+    for (x = [hole_spacing : hole_spacing : base_width - hole_spacing]) {
+        for (y = [hole_spacing : hole_spacing : base_length - hole_spacing]) {
+            translate([x, y, base_height/2])
+                hole(hole_diameter);
         }
     }
+
+    // Add a cutout to the base
+    translate([base_width/2 - cutout_width/2, base_length/2 - cutout_height/2, 0])
+        cutout(cutout_width, cutout_height, cutout_depth);
 }
 
-// Generate side view
-module side_view() {
-    rotate([0, 90, 0]) {
-        projection(cut = true) {
-            piston();
-        }
-    }
+// Function to create the base
+module base() {
+    cube([base_width, base_length, base_height]);
 }
 
-// Render the views
-translate([-150, 0, 0]) {
-    top_view();
+// Function to create a hole
+module hole(diameter) {
+    cylinder(h = base_height, d = diameter, $fn=100);
 }
 
-translate([0, 0, 0]) {
-    front_view();
+// Function to create a cutout
+module cutout(width, height, depth) {
+    translate([0, 0, -1]) // Slightly lower the cutout to ensure it cuts through the base
+        cube([width, height, depth + 2]);
 }
 
-translate([150, 0, 0]) {
-    side_view();
-}
+// Render the mechanical part
+mechanical_part();
