@@ -29,9 +29,9 @@ jobs:
         Xvfb :99 -screen 0 1024x768x24 &
         cd cad
         mkdir -p cad_output
-        openscad -o cad_output/example.png example.scad
-        openscad -o cad_output/example1.png example1.scad
-        #openscad -o cad_output/example2.png example2.scad
+        #openscad -o cad_output/example.png example.scad
+        #openscad -o cad_output/example1.png example1.scad
+        openscad -o cad_output/example2.png example2.scad
 
     - name: Upload rendered diagram
       uses: actions/upload-artifact@v4
