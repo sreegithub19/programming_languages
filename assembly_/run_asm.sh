@@ -54,14 +54,20 @@ container_id=$(docker run -d --tmpfs /mnt/tmpfs:rw,size=64m hello-asm)
 # Wait for the container to start
 sleep 2
 
+echo "Copying assembly code to container's tmpfs..."
 # Copy the assembly code into the container's tmpfs
 docker exec -i $container_id sh -c "cat > /mnt/tmpfs/hello.asm" <<< "$asm_code"
 
+echo "Assembling and linking the assembly code inside the container..."
 # Assemble and link the assembly code inside the container
 docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
 
+echo "Executing the assembly program within the container..."
 # Execute the assembly program within the container
 docker exec $container_id /mnt/tmpfs/hello
+
+# Check if the assembly program exists and output its file details
+docker exec $container_id ls -l /mnt/tmpfs/hello
 
 # Stop and remove the container
 docker stop $container_id
