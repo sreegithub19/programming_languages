@@ -1,10 +1,11 @@
 section .data
     array db 5, 3, 8, 4, 2, 7, 1, 6, 0  ; Array to be sorted (last element is 0 to mark the end)
     msg db 'Sorted array: ', 0           ; Message to print before the sorted array
+    space db ' ', 0                      ; Space character
     newline db 10, 0                     ; Newline character
 
 section .bss
-    ; No uninitialized data
+    result resb 1                        ; Reserve a byte for the result buffer
 
 section .text
     global _start                ; Entry point for the linker
@@ -60,21 +61,25 @@ print_sorted_array:
     mov rdx, 1                   ; length of the element (1 byte)
     syscall                      ; invoke the system call
 
-    ; Print a space or newline character
+    ; Print a space character
     mov rax, 1                   ; sys_write system call number (1 = write)
     mov rdi, 1                   ; file descriptor (1 = stdout)
-    mov rsi, newline             ; pointer to the newline character
-    mov rdx, 1                   ; length of the newline character
+    mov rsi, space               ; pointer to the space character
+    mov rdx, 1                   ; length of the space character
     syscall                      ; invoke the system call
 
     inc rsi                      ; Move to the next element
     jmp print_sorted_array       ; Repeat the loop
 
 end_program:
+    ; Print a newline character to end the output
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
+
     ; Exit the program
     mov rax, 60                  ; sys_exit system call number
     xor rdi, rdi                 ; exit status (0)
     syscall                      ; invoke the system call
-
-section .bss
-result resb 1                    ; Reserve a byte for the result buffer
