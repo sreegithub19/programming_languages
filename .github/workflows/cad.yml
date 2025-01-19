@@ -1,0 +1,30 @@
+name: Render CAD Diagram
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up OpenSCAD
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openscad
+
+    - name: Render CAD Diagram
+      run: |
+        mkdir -p cad_output
+        openscad -o cad_output/example.png cad/example.scad
+
+    - name: Upload rendered diagram
+      uses: actions/upload-artifact@v4
+      with:
+        name: cad-diagram
+        path: cad_output
