@@ -33,10 +33,14 @@ jobs:
         mkdir -p cad_output
 
         # Run OpenSCAD in headless mode to render the diagram
-        openscad -o cad_output/example.png cad/example.scad
+        # Find and render each .scad file in the cad_output directory
+        for scad_file in cad_output/*.scad; do
+          output_file="cad_output/$(basename "$scad_file" .scad).png"
+          openscad -o "$output_file" "$scad_file"
+        done
 
     - name: Upload rendered diagram
       uses: actions/upload-artifact@v4
       with:
         name: cad-diagram
-        path: cad_output/example.png
+        path: cad_output
