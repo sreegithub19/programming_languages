@@ -54,14 +54,23 @@ print_sorted_array:
     je end_program                       ; If yes, end the program
 
     ; Convert the number to ASCII string
-    mov rdi, result                      ; rdi points to the result buffer
-    call int_to_string                   ; Convert integer to string
+    mov rdi, result + 3                  ; rdi points to the end of the result buffer
+    mov rcx, 0                           ; Clear rcx (counter)
 
-    ; Print the ASCII string
+convert_loop:
+    xor rdx, rdx                         ; Clear rdx
+    div byte [ten]                       ; Divide eax by 10, quotient in eax, remainder in rdx
+    add dl, '0'                          ; Convert remainder to ASCII
+    dec rdi                              ; Move buffer pointer backwards
+    mov [rdi], dl                        ; Store ASCII character in buffer
+    inc rcx                              ; Increment counter
+    test eax, eax                        ; Check if quotient is 0
+    jnz convert_loop                     ; Repeat if quotient is not 0
+
     mov rax, 1                           ; sys_write system call number (1 = write)
     mov rdi, 1                           ; file descriptor (1 = stdout)
-    mov rsi, result                      ; pointer to the result buffer
-    mov rdx, rbx                         ; length of the result string
+    mov rsi, rdi                         ; pointer to the start of the result string
+    mov rdx, rcx                         ; length of the result string
     syscall                              ; invoke the system call
 
     ; Print a space character
@@ -87,21 +96,5 @@ end_program:
     xor rdi, rdi                         ; exit status (0)
     syscall                              ; invoke the system call
 
-; Convert integer in eax to ASCII string in rdi buffer
-int_to_string:
-    mov rbx, 0                           ; Clear rbx (string length)
-    mov rcx, 10                          ; Base 10 for division
-
-convert_loop:
-    xor rdx, rdx                         ; Clear rdx
-    div rcx                              ; Divide eax by 10, quotient in eax, remainder in rdx
-    add dl, '0'                          ; Convert remainder to ASCII
-    dec rdi                              ; Move buffer pointer backwards
-    mov [rdi], dl                        ; Store ASCII character in buffer
-    inc rbx                              ; Increment string length
-    test eax, eax                        ; Check if quotient is 0
-    jnz convert_loop                     ; Repeat if quotient is not 0
-
-    mov rsi, rdi                         ; rsi points to the start of the string
-    add rsi, rbx                         ; rsi points to the end of the string
-    ret
+section .data
+ten db 10                                ; Define a constant for the divisor in division
