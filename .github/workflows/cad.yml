@@ -34,7 +34,7 @@ jobs:
 
         # Run OpenSCAD in headless mode to render the diagram
         # Find and render each .scad file in the cad_output directory
-        for scad_file in cad_output/*.scad; do
+        for scad_file in cad/*.scad; do
           output_file="cad_output/$(basename "$scad_file" .scad).png"
           openscad -o "$output_file" "$scad_file"
         done
