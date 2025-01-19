@@ -37,12 +37,6 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory
 WORKDIR /app
 
-# Copy the assembly file into the container
-COPY hello.asm .
-
-# Assemble and link the assembly file
-RUN nasm -f elf64 -o hello.o hello.asm && gcc -nostartfiles -no-pie -o hello hello.o
-
 # Command to keep the container running
 CMD ["tail", "-f", "/dev/null"]
 EOF
@@ -70,7 +64,7 @@ sleep 2
 
 echo "Copying assembly code to container's tmpfs..."
 # Copy the assembly code into the container's tmpfs
-docker exec -i $container_id sh -c "cat > /mnt/tmpfs/hello.asm" < "$tmpdir/hello.asm"
+docker cp "$tmpdir/hello.asm" "$container_id:/mnt/tmpfs/hello.asm"
 
 echo "Assembling and linking the assembly code inside the container..."
 # Assemble and link the assembly code inside the container
