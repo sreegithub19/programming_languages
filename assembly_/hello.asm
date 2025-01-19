@@ -14,7 +14,7 @@ _start:
     mov rax, 1                   ; sys_write system call number (1 = write)
     mov rdi, 1                   ; file descriptor (1 = stdout)
     mov rsi, hello               ; pointer to the hello string
-    mov rdx, 34                  ; length of the hello string
+    mov rdx, 37                  ; length of the hello string (including "is: ")
     syscall                      ; invoke the system call
 
     ; Calculate the sum of two numbers
