@@ -1,7 +1,8 @@
 section .data
-    hello db 'Hello world! The sum of 14 and 10 is: ', 0  ; Null-terminated string with space at the end
-    newline db 10, 0                                      ; Newline character
-    sum db '00', 0                                        ; Placeholder for the result (two digits, null-terminated)
+    hello1 db 'Hello world!', 0                    ; Null-terminated string for the first line
+    hello2 db 'The sum of 14 and 10 is: ', 0       ; Null-terminated string for the second line
+    newline db 10, 0                               ; Newline character
+    sum db '00', 0                                 ; Placeholder for the result (two digits, null-terminated)
 
 section .bss
     ; No uninitialized data
@@ -13,8 +14,22 @@ _start:
     ; Write the "Hello world!" string to stdout
     mov rax, 1                   ; sys_write system call number (1 = write)
     mov rdi, 1                   ; file descriptor (1 = stdout)
-    mov rsi, hello               ; pointer to the hello string
-    mov rdx, 37                  ; length of the hello string (including "is: ")
+    mov rsi, hello1              ; pointer to the hello1 string
+    mov rdx, 13                  ; length of the hello1 string
+    syscall                      ; invoke the system call
+
+    ; Print a newline character
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, newline             ; pointer to the newline character
+    mov rdx, 1                   ; length of the newline character
+    syscall                      ; invoke the system call
+
+    ; Write the "The sum of 14 and 10 is: " string to stdout
+    mov rax, 1                   ; sys_write system call number (1 = write)
+    mov rdi, 1                   ; file descriptor (1 = stdout)
+    mov rsi, hello2              ; pointer to the hello2 string
+    mov rdx, 25                  ; length of the hello2 string
     syscall                      ; invoke the system call
 
     ; Calculate the sum of two numbers
