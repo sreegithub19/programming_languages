@@ -3,7 +3,7 @@ section .data
     arg1 db '-c', 0
     python_script db 'import sys', 10
                   db 'print("Hello from Python")', 10
-                  db 'sorted([5,4,3,2,1])', 10
+                  db 'print(sorted([5,4,3,2,1]))', 10
                   db 'sys.exit(0)', 0
 
 section .bss
