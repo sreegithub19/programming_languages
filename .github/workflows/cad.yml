@@ -27,11 +27,12 @@ jobs:
         export MESA_GLSL_VERSION_OVERRIDE=330
         # Start a virtual X server
         Xvfb :99 -screen 0 1024x768x24 &
-        sleep 5  # Give Xvfb some time to start
+        sleep 7  # Give Xvfb some time to start
+
         cd cad
         mkdir -p cad_output
-        #openscad -o cad_output/example.png example.scad
-        #openscad -o cad_output/example1.png example1.scad
+        openscad -o cad_output/example.png example.scad
+        openscad -o cad_output/example1.png example1.scad
         openscad -o cad_output/example2.png example2.scad
 
     - name: Upload rendered diagram
