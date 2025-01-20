@@ -30,7 +30,7 @@ Perform Task
     [Arguments]    ${url}
     ${response}=   GET    ${url}
     Should Be Equal As Numbers    ${response.status_code}    200
-    Log    Response content: ${response.body}
+    Log    Response content: ${response.text}  # Use response.text to log the response body
 
 *** Test Cases ***
 Test Robot Get Data
