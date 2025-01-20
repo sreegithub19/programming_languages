@@ -36,4 +36,4 @@ jobs:
 
     - name: Run Robot Framework tests
       run: |
-        robot github_search_test.robot
+        robot Python/robot_/search_test.robot
