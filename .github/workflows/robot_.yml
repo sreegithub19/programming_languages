@@ -14,25 +14,33 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install robotframework
         pip install robotframework-seleniumlibrary
+        pip install selenium
 
-    - name: Set up Chrome and ChromeDriver
+    - name: Install Google Chrome
       run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip curl
-          CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-          unzip /tmp/chromedriver.zip -d /usr/local/bin/
-          sudo apt-get install -y google-chrome-stable
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        
+      # Verify Chrome version
+    - name: Check Chrome version
+      run: google-chrome --version
+
+    - name: Install ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget -N "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+      # Verify ChromeDriver version
+    - name: Check ChromeDriver version
+      run: chromedriver --version
 
     - name: Run Robot Framework tests
       run: |
