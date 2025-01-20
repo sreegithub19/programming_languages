@@ -9,7 +9,7 @@ ${SEARCH_TERM}   Robot Framework
 *** Keywords ***
 Open Browser to Google
     [Arguments]    ${url}
-    Open Browser    ${url}    ${BROWSER}    options=add_chrome_options
+    Open Browser    ${url}    ${BROWSER}    options=add_argument
     Maximize Browser Window
 
 Add Chrome Options
