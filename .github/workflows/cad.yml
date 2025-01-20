@@ -36,6 +36,8 @@ jobs:
         openscad -o cad_output/example2.png example2.scad
         openscad -o cad_output/example3.png example3.scad
         openscad -o cad_output/abacus.png abacus.scad
+        chmod +x cad_.sh
+        ./cad_.sh
 
     - name: Upload rendered diagram
       uses: actions/upload-artifact@v4
