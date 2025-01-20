@@ -1,6 +1,10 @@
 name: Robot Framework Web Tests
 
-on: [push, pull_request]
+on:
+    push:
+      branches:
+        - main
+  
 
 jobs:
   test:
@@ -24,11 +28,12 @@ jobs:
     - name: Set up Chrome and ChromeDriver
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip
-        wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/91.0.4472.101/chromedriver_linux64.zip
+        sudo apt-get install -y wget unzip curl
+        CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+        wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
         unzip /tmp/chromedriver.zip -d /usr/local/bin/
         sudo apt-get install -y google-chrome-stable
 
     - name: Run Robot Framework tests
       run: |
-        robot Python/robot_/search_test.robot
+        robot github_search_test.robot
