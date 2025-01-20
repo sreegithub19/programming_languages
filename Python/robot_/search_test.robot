@@ -9,16 +9,14 @@ ${SEARCH_TERM}   Robot Framework
 *** Keywords ***
 Open Browser to Google
     [Arguments]    ${url}
-    Open Browser    ${url}    ${BROWSER}    options=add_argument
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${chrome_options}    add_argument    --headless
+    Call Method    ${chrome_options}    add_argument    --disable-gpu
+    Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
+    Open Browser    ${url}    ${BROWSER}    options=${chrome_options}
     Maximize Browser Window
-
-Add Chrome Options
-    [Arguments]    ${options}
-    ${options.add_argument}    --no-sandbox
-    ${options.add_argument}    --disable-dev-shm-usage
-    ${options.add_argument}    --headless
-    ${options.add_argument}    --disable-gpu
-    ${options.add_argument}    --window-size=1920,1080
 
 *** Test Cases ***
 Search in Google
