@@ -14,8 +14,8 @@ Open Browser to Google
     Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
     Call Method    ${chrome_options}    add_argument    --headless
     Call Method    ${chrome_options}    add_argument    --disable-gpu
-    Call Method    ${chrome_options}    add_argument    --window-size=1920x1080
     Create WebDriver    Chrome    options=${chrome_options}
+    Set Window Size ${1920} ${1080}
     Go To    ${url}
     Maximize Browser Window
 
