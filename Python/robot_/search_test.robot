@@ -1,29 +1,37 @@
 *** Settings ***
-Library    SeleniumLibrary
+Library           OperatingSystem
+Library           Collections
+Library           RequestsLibrary
+Library           String
+
+Suite Setup       Setup Suite
+Suite Teardown    Teardown Suite
+
+Test Setup        Setup Test
+Test Teardown     Teardown Test
 
 *** Variables ***
-${BROWSER}       chrome
-${URL}           https://www.google.com
-${SEARCH_TERM}   Robot Framework
+${BASE_URL}       https://jsonplaceholder.typicode.com/posts  # Just an example URL
 
 *** Keywords ***
-Open Browser to Google
+Setup Suite
+    Log    Suite setup is complete!
+
+Teardown Suite
+    Log    Suite teardown is complete!
+
+Setup Test
+    Log    Test setup is complete!
+
+Teardown Test
+    Log    Test teardown is complete!
+
+Perform Task
     [Arguments]    ${url}
-    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    Call Method    ${chrome_options}    add_argument    --no-sandbox
-    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
-    Call Method    ${chrome_options}    add_argument    --headless
-    Call Method    ${chrome_options}    add_argument    --disable-gpu
-    Create WebDriver    Chrome    options=${chrome_options}
-    Set Window Size ${1920} ${1080}
-    Go To    ${url}
-    Maximize Browser Window
+    ${response}=   GET    ${url}
+    Should Be Equal As Numbers    ${response.status_code}    200
+    Log    Response content: ${response.body}
 
 *** Test Cases ***
-Search in Google
-    [Documentation]    This test case opens the browser, navigates to Google, performs a search, and verifies the search results.
-    Open Browser to Google    ${URL}
-    Input Text     name=q    ${SEARCH_TERM}
-    Press Keys     name=q    ENTER
-    Wait Until Page Contains    ${SEARCH_TERM}
-    [Teardown]      Close Browser
+Test Robot Get Data
+    Perform Task    ${BASE_URL}

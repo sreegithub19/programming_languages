@@ -1,0 +1,4 @@
+robotframework==4.0.3
+robotframework-requests==0.9.3  # For making HTTP requests in tests
+requests==2.26.0  # If you are using requests for some robot tasks
+pytest==6.2.5  # Optional: If you want to use pytest as well for integration
