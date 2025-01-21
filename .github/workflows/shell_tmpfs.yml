@@ -57,7 +57,7 @@ jobs:
     - name: Run Docker container with tmpfs
       #run: docker run --tmpfs /tmpfs:rw,exec,size=64m my-asm-app
       run: |
-        docker run --rm --tmpfs /tmpfs:rw,exec,size=64m --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777 \
+        docker run --rm --tmpfs /tmpfs:rw,exec,size=64m \
         debian:latest bash -c "
             apt-get update &&
             apt-get install -y nasm binutils &&
