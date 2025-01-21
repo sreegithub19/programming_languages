@@ -23,6 +23,9 @@ _start:
 EOF
 )
 
+# Escape new lines for ASM_CODE
+escaped_asm_code=$(printf "%s" "$asm_code" | sed ':a;N;$!ba;s/\n/\\n/g')
+
 # Create a Dockerfile content
 dockerfile_content=$(cat << 'EOF'
 # Use an official Ubuntu as a base image
@@ -39,7 +42,7 @@ WORKDIR /app
 
 # Create an entrypoint script that reads the assembly code from an environment variable
 RUN echo "#!/bin/sh" > /entrypoint.sh && \
-    echo "echo \"$ASM_CODE\" | nasm -f elf64 -o hello.o - && gcc -nostartfiles -no-pie -o hello hello.o && ./hello" >> /entrypoint.sh && \
+    echo "printf \"%s\" \"\$ASM_CODE\" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o && ./hello" >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
@@ -51,7 +54,7 @@ tmpdir=$(mktemp -d)
 echo "$dockerfile_content" > "$tmpdir/Dockerfile"
 
 # Build the Docker image
-docker build -t hello-asm "$tmpdir"
+docker build --build-arg ASM_CODE="$escaped_asm_code" -t hello-asm "$tmpdir"
 
 # Check if the image was built successfully
 if [ $? -ne 0 ]; then
@@ -60,7 +63,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Run the Docker container with the assembly code passed as an environment variable
-docker run --rm -e ASM_CODE="$asm_code" hello-asm
+docker run --rm -e ASM_CODE="$escaped_asm_code" hello-asm
 
 # Clean up
 rm -r "$tmpdir"
