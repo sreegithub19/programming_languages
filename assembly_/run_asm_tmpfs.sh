@@ -45,7 +45,6 @@ EOF
 # Create a temporary directory for the Docker context
 tmpdir=$(mktemp -d)
 echo "$dockerfile_content" > "$tmpdir/Dockerfile"
-echo "$asm_code" > "$tmpdir/hello.asm"
 
 # Build the Docker image
 docker build -t hello-asm "$tmpdir"
@@ -62,7 +61,9 @@ docker run --rm \
     --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777 \
     hello-asm bash -c "
         mkdir -p /tmp/my_tmpfs &&
-        cp /app/hello.asm /tmp/my_tmpfs/ &&
+        cat << 'ASM_EOF' > /tmp/my_tmpfs/hello.asm
+$asm_code
+ASM_EOF
         cd /tmp/my_tmpfs &&
         nasm -f elf64 -o hello.o hello.asm &&
         gcc -nostartfiles -no-pie -o hello hello.o &&
