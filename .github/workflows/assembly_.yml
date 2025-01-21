@@ -65,6 +65,7 @@ jobs:
       run: |
        #!/bin/bash
        cd assembly_
+       docker build -t hello-asm .
        chmod +x run_asm_tmpfs.sh && ./run_asm_tmpfs.sh
        cd ..
 
