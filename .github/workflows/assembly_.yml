@@ -60,12 +60,8 @@ jobs:
        ./run_asm.sh
        cd ..
 
-       # Build the Docker image
-        docker build -t hello-asm .
-
-        # Pass the assembly code directly to the script
-        echo 'section .data
-            fmt db "Hello, Docker Inline World!", 10, 0
+       echo 'section .data
+       fmt db "Hello, Docker Inline World!", 10, 0
 
         section .text
             global _start
@@ -79,8 +75,11 @@ jobs:
 
             mov rax, 60
             xor rdi, rdi
-            syscall' | docker run --rm -i hello-asm /app/run_asm.sh
-
+            syscall' | docker run --rm -i hello-asm sh -c "
+        nasm -f elf64 -o /app/hello.o /dev/stdin && \
+        gcc -nostartfiles -no-pie -o /app/hello /app/hello.o && \
+        /app/hello
+        "
 
 
     - name: Assemble the code, Link the object file, Run the program again in tmpfs
