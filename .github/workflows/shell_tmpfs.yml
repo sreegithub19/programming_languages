@@ -33,8 +33,8 @@ jobs:
     - name: Create entrypoint.sh
       run: |
         echo '#!/bin/bash' > entrypoint.sh
-        echo 'cp /tmpfs/main.cpp /usr/src/app/' >> entrypoint.sh
         echo 'g++ -o /tmpfs/myapp /tmpfs/main.cpp' >> entrypoint.sh
+        echo 'chmod +x /tmpfs/myapp' >> entrypoint.sh
         echo '/tmpfs/myapp' >> entrypoint.sh
 
     - name: Build Docker image
