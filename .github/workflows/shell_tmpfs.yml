@@ -1,0 +1,30 @@
+name: Docker tmpfs Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tmpfs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository (if needed)
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Create the executable file
+      - name: Create executable file
+        run: |
+          echo '#!/bin/bash' > hello.sh
+          echo 'echo "Hello from tmpfs!"' >> hello.sh
+          chmod +x hello.sh
+
+      # Step 3: Run Docker container with tmpfs and execute the file
+      - name: Run Docker with tmpfs
+        run: |
+          docker run --rm -it \
+            --tmpfs /mnt/tmpfs:rw,noexec,nosuid,size=64m \
+            ubuntu:latest \
+            bash -c "cat > /mnt/tmpfs/hello.sh && chmod +x /mnt/tmpfs/hello.sh && /mnt/tmpfs/hello.sh" < hello.sh
