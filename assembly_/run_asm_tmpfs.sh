@@ -37,6 +37,9 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory
 WORKDIR /app
 
+# Create a tmpfs mount point
+RUN mkdir -p /mnt/tmpfs
+
 # Command to keep the container running
 CMD ["tail", "-f", "/dev/null"]
 EOF
@@ -45,6 +48,7 @@ EOF
 # Create a temporary directory for the Docker context
 tmpdir=$(mktemp -d)
 echo "$dockerfile_content" > "$tmpdir/Dockerfile"
+echo "$asm_code" > "$tmpdir/hello.asm"
 
 # Build the Docker image
 docker build -t hello-asm "$tmpdir"
@@ -55,22 +59,36 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Running the Docker container with tmpfs..."
-# Run the Docker container with tmpfs mount
-docker run --rm --privileged \
-    --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777,tmpfs-size=64M \
-    hello-asm bash -c "
-        mkdir -p /tmp/my_tmpfs &&
-        cat << 'EOF' > /tmp/my_tmpfs/hello.asm
-$asm_code
-EOF
-        cd /tmp/my_tmpfs &&
-        nasm -f elf64 -o hello.o hello.asm &&
-        gcc -nostartfiles -no-pie -o hello hello.o &&
-        chmod 777 hello &&
-        ls -l hello &&  # List file details to confirm permissions
-        ./hello
-    "
+# Run the Docker container with a tmpfs mount
+container_id=$(docker run -d --mount type=tmpfs,destination=/mnt/tmpfs hello-asm)
+
+# Wait for the container to start
+sleep 2
+
+echo "Copying assembly code to the container's tmpfs..."
+# Copy the assembly code into the tmpfs directory within the container
+docker cp "$tmpdir/hello.asm" "$container_id:/mnt/tmpfs/hello.asm"
+
+echo "Assembling and linking the assembly code inside the container..."
+# Assemble and link the assembly code inside the container
+docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
+
+# Ensure the executable has the correct permissions
+docker exec $container_id sh -c "chmod +x /mnt/tmpfs/hello"
+
+echo "Executing the assembly program within the container..."
+# Execute the assembly program within the container
+docker exec $container_id /mnt/tmpfs/hello
+
+# Check if the assembly program exists and output its file details
+docker exec $container_id ls -l /mnt/tmpfs/hello
+
+# Copy the assembly code back to the host
+docker cp $container_id:/mnt/tmpfs/hello.asm "./hello.asm"
+
+# Stop and remove the container
+docker stop $container_id
+docker rm $container_id
 
 # Clean up
 rm -r "$tmpdir"
