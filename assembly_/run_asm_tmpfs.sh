@@ -25,8 +25,8 @@ EOF
 
 # Create a Dockerfile content
 dockerfile_content=$(cat << 'EOF'
-# Use an official Ubuntu as a base image for the build stage
-FROM ubuntu:latest AS builder
+# Use an official Ubuntu as a base image
+FROM ubuntu:latest
 
 # Install necessary tools
 RUN apt-get update && apt-get install -y \
@@ -37,24 +37,8 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory
 WORKDIR /app
 
-# Build the assembly code
-ARG ASM_CODE
-RUN printf "%s" "$ASM_CODE" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o
-
-# Use a lightweight base image for the final stage
-FROM ubuntu:latest
-
-# Copy the compiled binary from the build stage
-COPY --from=builder /app/hello /app/hello
-
-# Set the working directory
-WORKDIR /app
-
-# Ensure the executable has the correct permissions
-RUN chmod +x /app/hello
-
-# Command to execute the binary
-CMD ["/app/hello"]
+# Command to compile and execute the assembly code
+CMD ["sh", "-c", "printf \"%s\" \"$ASM_CODE\" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o && ./hello"]
 EOF
 )
 
