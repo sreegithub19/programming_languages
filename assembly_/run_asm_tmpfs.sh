@@ -69,7 +69,7 @@ EOF
         gcc -nostartfiles -no-pie -o hello hello.o &&
         chmod +x hello &&
         ls -l hello &&  # List file details to confirm permissions
-        cat hello &&
+        chmod 777 hello &&  # Ensure full permissions for execution
         ./hello
     "
 
