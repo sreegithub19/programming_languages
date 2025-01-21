@@ -48,7 +48,7 @@ jobs:
     - name: Create Dockerfile
       run: |
             echo 'FROM debian:latest' > Dockerfile
-            echo 'RUN apt-get update && apt-get install -y nasm' >> Dockerfile
+            echo 'RUN apt-get update && apt-get install -y nasm binutils' >> Dockerfile
             echo 'WORKDIR /usr/src/app' >> Dockerfile
             echo 'COPY entrypoint.sh /usr/local/bin/entrypoint.sh' >> Dockerfile
             echo 'RUN chmod +x /usr/local/bin/entrypoint.sh' >> Dockerfile
@@ -59,14 +59,14 @@ jobs:
             echo '#!/bin/bash' > entrypoint.sh
             echo 'mkdir -p /tmpfs' >> entrypoint.sh
             echo 'echo "section .data" > /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    msg db \"Hello,Assembly World!\", 0" >> /tmpfs/example.asm' >> entrypoint.sh
+            echo 'echo "    msg db \"Hello, Assembly World!\", 0" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "section .text" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    global _start" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "_start:" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    mov rax, 1" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    mov rdi, 1" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    mov rsi, msg" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rdx, 13" >> /tmpfs/example.asm' >> entrypoint.sh
+            echo 'echo "    mov rdx, 21" >> /tmpfs/example.asm' >> entrypoint.sh  # Corrected the length of the message
             echo 'echo "    syscall" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    mov rax, 60" >> /tmpfs/example.asm' >> entrypoint.sh
             echo 'echo "    xor rdi, rdi" >> /tmpfs/example.asm' >> entrypoint.sh
