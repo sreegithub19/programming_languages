@@ -1,4 +1,4 @@
-name: Docker tmpfs Example
+name: Build and Run C++ Code in Docker with tmpfs
 
 on:
   push:
@@ -17,20 +17,28 @@ jobs:
       run: |
         echo '#include <iostream>' > main.cpp
         echo 'int main() {' >> main.cpp
-        echo '    std::cout << "Hello, C++ World!" << std::endl;' >> main.cpp
+        echo '    std::cout << "Hello, World!" << std::endl;' >> main.cpp
         echo '    return 0;' >> main.cpp
         echo '}' >> main.cpp
 
     - name: Create Dockerfile
       run: |
         echo 'FROM gcc:latest' > Dockerfile
+        echo 'RUN apt-get update && apt-get install -y bash' >> Dockerfile
         echo 'WORKDIR /usr/src/app' >> Dockerfile
-        echo 'COPY . .' >> Dockerfile
-        echo 'RUN g++ -o myapp main.cpp' >> Dockerfile
-        echo 'CMD ["./myapp"]' >> Dockerfile
+        echo 'COPY entrypoint.sh /usr/local/bin/entrypoint.sh' >> Dockerfile
+        echo 'RUN chmod +x /usr/local/bin/entrypoint.sh' >> Dockerfile
+        echo 'ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' >> Dockerfile
+
+    - name: Create entrypoint.sh
+      run: |
+        echo '#!/bin/bash' > entrypoint.sh
+        echo 'cp /tmpfs/main.cpp /usr/src/app/' >> entrypoint.sh
+        echo 'g++ -o /tmpfs/myapp /tmpfs/main.cpp' >> entrypoint.sh
+        echo '/tmpfs/myapp' >> entrypoint.sh
 
     - name: Build Docker image
       run: docker build -t my-cpp-app .
 
-    - name: Run Docker container
-      run: docker run my-cpp-app
+    - name: Run Docker container with tmpfs
+      run: docker run --tmpfs /tmpfs:rw,size=64m -v $(pwd)/main.cpp:/tmpfs/main.cpp my-cpp-app
