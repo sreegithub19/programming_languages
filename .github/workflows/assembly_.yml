@@ -52,38 +52,6 @@ jobs:
 
         cd ../..
 
-    - name: Create and run inline assembly script
-      run: |
-          #!/bin/bash
-  
-          # Create assembly code as a string
-          asm_code='section .data
-                    msg db "Hello, Assembly!", 0
-  
-                    section .text
-                    global _start
-  
-                    _start:
-                      ; Write the message to stdout
-                      mov eax, 4            ; sys_write
-                      mov ebx, 1            ; file descriptor 1 (stdout)
-                      mov ecx, msg          ; message to write
-                      mov edx, 15           ; message length
-                      int 0x80              ; call kernel
-  
-                      ; Exit the program
-                      mov eax, 1            ; sys_exit
-                      xor ebx, ebx          ; exit code 0
-                      int 0x80              ; call kernel
-          '
-  
-          # Assemble the code and link it to create an executable
-          echo "$asm_code" | nasm -f elf32 -o inline_assembly.o -
-          ld -m elf_i386 inline_assembly.o -o inline_assembly
-  
-          # Run the executable
-          ./inline_assembly
-          
     - name: Assemble the code, Link the object file, Run the program again inline
       run: |
        #!/bin/bash
