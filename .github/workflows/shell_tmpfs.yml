@@ -17,7 +17,7 @@ jobs:
       run: |
         echo '#include <iostream>' > main.cpp
         echo 'int main() {' >> main.cpp
-        echo '    std::cout << "Hello, World!" << std::endl;' >> main.cpp
+        echo '    std::cout << "Hello, C++ World!" << std::endl;' >> main.cpp
         echo '    return 0;' >> main.cpp
         echo '}' >> main.cpp
 
@@ -42,3 +42,43 @@ jobs:
 
     - name: Run Docker container with tmpfs
       run: docker run --tmpfs /tmpfs:rw,exec,size=64m -v $(pwd)/main.cpp:/tmpfs/main.cpp my-cpp-app
+
+
+    - name: Create example.asm file
+      run: |
+        echo 'section .data' > example.asm
+        echo '    msg db "Hello,Assembly World!", 0' >> example.asm
+        echo 'section .text' >> example.asm
+        echo '    global _start' >> example.asm
+        echo '_start:' >> example.asm
+        echo '    mov rax, 1' >> example.asm
+        echo '    mov rdi, 1' >> example.asm
+        echo '    mov rsi, msg' >> example.asm
+        echo '    mov rdx, 13' >> example.asm
+        echo '    syscall' >> example.asm
+        echo '    mov rax, 60' >> example.asm
+        echo '    xor rdi, rdi' >> example.asm
+        echo '    syscall' >> example.asm
+
+    - name: Create Dockerfile
+      run: |
+        echo 'FROM debian:latest' > Dockerfile
+        echo 'RUN apt-get update && apt-get install -y nasm' >> Dockerfile
+        echo 'WORKDIR /usr/src/app' >> Dockerfile
+        echo 'COPY entrypoint.sh /usr/local/bin/entrypoint.sh' >> Dockerfile
+        echo 'RUN chmod +x /usr/local/bin/entrypoint.sh' >> Dockerfile
+        echo 'ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' >> Dockerfile
+
+    - name: Create entrypoint.sh
+      run: |
+        echo '#!/bin/bash' > entrypoint.sh
+        echo 'nasm -f elf64 /tmpfs/example.asm -o /tmpfs/example.o' >> entrypoint.sh
+        echo 'ld /tmpfs/example.o -o /tmpfs/example' >> entrypoint.sh
+        echo 'chmod +x /tmpfs/example' >> entrypoint.sh
+        echo '/tmpfs/example' >> entrypoint.sh
+
+    - name: Build Docker image
+      run: docker build -t my-asm-app .
+
+    - name: Run Docker container with tmpfs
+      run: docker run --tmpfs /tmpfs:rw,exec,size=64m -v $(pwd)/example.asm:/tmpfs/example.asm my-asm-app
