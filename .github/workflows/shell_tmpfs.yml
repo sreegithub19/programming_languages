@@ -49,35 +49,34 @@ jobs:
       run: |
                 echo 'FROM debian:latest
                 RUN apt-get update && apt-get install -y nasm binutils
-                WORKDIR /usr/src/app
-                COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-                RUN chmod +x /usr/local/bin/entrypoint.sh
-                ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' > Dockerfile
-
-    - name: Create entrypoint.sh
-      run: |
-            echo '#!/bin/bash' > entrypoint.sh
-            echo 'mkdir -p /tmpfs' >> entrypoint.sh
-            echo 'echo "section .data" > /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    msg db \"Hello, Assembly World!\", 0" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "section .text" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    global _start" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "_start:" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rax, 1" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rdi, 1" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rsi, msg" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rdx, 21" >> /tmpfs/example.asm' >> entrypoint.sh  # Corrected the length of the message
-            echo 'echo "    syscall" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    mov rax, 60" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    xor rdi, rdi" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'echo "    syscall" >> /tmpfs/example.asm' >> entrypoint.sh
-            echo 'nasm -f elf64 /tmpfs/example.asm -o /tmpfs/example.o' >> entrypoint.sh
-            echo 'ld /tmpfs/example.o -o /tmpfs/example' >> entrypoint.sh
-            echo 'chmod +x /tmpfs/example' >> entrypoint.sh
-            echo '/tmpfs/example' >> entrypoint.sh
+                WORKDIR /usr/src/app' > Dockerfile
 
     - name: Build Docker image
       run: docker build -t my-asm-app .
 
     - name: Run Docker container with tmpfs
-      run: docker run --tmpfs /tmpfs:rw,exec,size=64m my-asm-app
+      #run: docker run --tmpfs /tmpfs:rw,exec,size=64m my-asm-app
+      run: |
+        docker run --rm --tmpfs /tmpfs:rw,exec,size=64m --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777 \
+        debian:latest bash -c "
+            apt-get update &&
+            apt-get install -y nasm binutils &&
+            mkdir -p /tmp/my_tmpfs &&
+            echo 'section .data
+            msg db \"Hello, Assembly World!\", 0
+        section .text
+            global _start
+        _start:
+            mov rax, 1
+            mov rdi, 1
+            mov rsi, msg
+            mov rdx, 21
+            syscall
+            mov rax, 60
+            xor rdi, rdi
+            syscall' > /tmp/my_tmpfs/example.asm &&
+            nasm -f elf64 /tmp/my_tmpfs/example.asm -o /tmp/my_tmpfs/example.o &&
+            ld /tmp/my_tmpfs/example.o -o /tmp/my_tmpfs/example &&
+            chmod +x /tmp/my_tmpfs/example &&
+            /tmp/my_tmpfs/example
+        "
