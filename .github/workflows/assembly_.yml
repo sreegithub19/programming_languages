@@ -60,6 +60,27 @@ jobs:
        ./run_asm.sh
        cd ..
 
+
+       docker run --rm hello-asm sh -c "
+        echo 'section .data
+            fmt db \"Hello, Docker Inline World!\", 10, 0
+
+        section .text
+            global _start
+
+        _start:
+            mov rax, 1
+            mov rdi, 1
+            mov rsi, fmt
+            mov rdx, 20
+            syscall
+
+            mov rax, 60
+            xor rdi, rdi
+            syscall' | nasm -f elf64 -o /app/hello.o - && gcc -nostartfiles -no-pie -o /app/hello /app/hello.o && /app/hello
+        "
+
+
     - name: Assemble the code, Link the object file, Run the program again in tmpfs
       run: |
        #!/bin/bash
