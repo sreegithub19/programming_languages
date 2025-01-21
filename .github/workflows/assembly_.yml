@@ -60,6 +60,14 @@ jobs:
        ./run_asm.sh
        cd ..
 
+    - name: Assemble the code, Link the object file, Run the program again in tmpfs
+      run: |
+       #!/bin/bash
+       cd assembly_
+       chmod +x run_asm_tmpfs.sh
+       ./run_asm_tmpfs.sh
+       cd ..
+
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
       with:
