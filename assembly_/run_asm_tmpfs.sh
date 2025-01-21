@@ -61,13 +61,15 @@ docker run --rm \
     --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777 \
     hello-asm bash -c "
         mkdir -p /tmp/my_tmpfs &&
-        cat << 'ASM_EOF' > /tmp/my_tmpfs/hello.asm
+        cat << 'EOF' > /tmp/my_tmpfs/hello.asm
 $asm_code
-ASM_EOF
+EOF
         cd /tmp/my_tmpfs &&
         nasm -f elf64 -o hello.o hello.asm &&
         gcc -nostartfiles -no-pie -o hello hello.o &&
         chmod +x hello &&
+        ls -l hello &&  # List file details to confirm permissions
+        cat hello &&
         ./hello
     "
 
