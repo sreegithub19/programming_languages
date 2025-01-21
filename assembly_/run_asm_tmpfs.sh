@@ -23,6 +23,9 @@ _start:
 EOF
 )
 
+# Escape new lines for ASM_CODE
+escaped_asm_code=$(printf "%s" "$asm_code" | sed ':a;N;$!ba;s/\n/\\n/g')
+
 # Create a Dockerfile content
 dockerfile_content=$(cat << 'EOF'
 # Use an official Ubuntu as a base image
@@ -38,7 +41,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Command to compile and execute the assembly code
-CMD ["sh", "-c", "printf \"%s\" \"$ASM_CODE\" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o && ./hello"]
+CMD ["sh", "-c", "printf '%s' \"$ASM_CODE\" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o && ./hello"]
 EOF
 )
 
@@ -47,7 +50,7 @@ tmpdir=$(mktemp -d)
 echo "$dockerfile_content" > "$tmpdir/Dockerfile"
 
 # Build the Docker image
-docker build --build-arg ASM_CODE="$asm_code" -t hello-asm "$tmpdir"
+docker build --build-arg ASM_CODE="$escaped_asm_code" -t hello-asm "$tmpdir"
 
 # Check if the image was built successfully
 if [ $? -ne 0 ]; then
