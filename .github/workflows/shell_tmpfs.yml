@@ -6,25 +6,31 @@ on:
       - main
 
 jobs:
-  run-tmpfs:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository (if needed)
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      # Step 2: Create the executable file
-      - name: Create executable file
-        run: |
-          echo '#!/bin/bash' > hello.sh
-          echo 'echo "Hello from tmpfs!"' >> hello.sh
-          chmod +x hello.sh
+    - name: Create main.cpp file
+      run: |
+        echo '#include <iostream>' > main.cpp
+        echo 'int main() {' >> main.cpp
+        echo '    std::cout << "Hello, C++ World!" << std::endl;' >> main.cpp
+        echo '    return 0;' >> main.cpp
+        echo '}' >> main.cpp
 
-      # Step 3: Run Docker container with tmpfs and execute the file
-      - name: Run Docker with tmpfs
-        run: |
-          docker run --rm -i \
-            --tmpfs /mnt/tmpfs:rw,noexec,nosuid,size=64m,mode=1777 \
-            ubuntu:latest \
-            bash -c "echo 6555555 && cat > /mnt/tmpfs/hello.sh && chmod 777 /mnt/tmpfs/hello.sh && /mnt/tmpfs/hello.sh" < hello.sh
+    - name: Create Dockerfile
+      run: |
+        echo 'FROM gcc:latest' > Dockerfile
+        echo 'WORKDIR /usr/src/app' >> Dockerfile
+        echo 'COPY . .' >> Dockerfile
+        echo 'RUN g++ -o myapp main.cpp' >> Dockerfile
+        echo 'CMD ["./myapp"]' >> Dockerfile
+
+    - name: Build Docker image
+      run: docker build -t my-cpp-app .
+
+    - name: Run Docker container
+      run: docker run my-cpp-app
