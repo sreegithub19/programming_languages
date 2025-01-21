@@ -57,8 +57,8 @@ fi
 
 echo "Running the Docker container with tmpfs..."
 # Run the Docker container with tmpfs mount
-docker run --rm \
-    --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777 \
+docker run --rm --privileged \
+    --mount type=tmpfs,dst=/tmp/my_tmpfs,tmpfs-mode=1777,tmpfs-size=64M \
     hello-asm bash -c "
         mkdir -p /tmp/my_tmpfs &&
         cat << 'EOF' > /tmp/my_tmpfs/hello.asm
@@ -67,9 +67,8 @@ EOF
         cd /tmp/my_tmpfs &&
         nasm -f elf64 -o hello.o hello.asm &&
         gcc -nostartfiles -no-pie -o hello hello.o &&
-        chmod +x hello &&
+        chmod 777 hello &&
         ls -l hello &&  # List file details to confirm permissions
-        chmod 777 hello &&  # Ensure full permissions for execution
         ./hello
     "
 
