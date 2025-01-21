@@ -25,6 +25,6 @@ jobs:
       - name: Run Docker with tmpfs
         run: |
           docker run --rm -i \
-            --tmpfs /mnt/tmpfs:rw,noexec,nosuid,size=64m \
+            --tmpfs /mnt/tmpfs:rw,noexec,nosuid,size=64m,mode=1777 \
             ubuntu:latest \
             bash -c "cat > /mnt/tmpfs/hello.sh && chmod +x /mnt/tmpfs/hello.sh && /mnt/tmpfs/hello.sh" < hello.sh
