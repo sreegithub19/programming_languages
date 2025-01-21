@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define the assembly code
+# Define the assembly code as a multi-line string
 asm_code=$(cat << 'EOF'
 section .data
     fmt db "Hello, Docker World!", 10, 0
@@ -25,8 +25,8 @@ EOF
 
 # Create a Dockerfile content
 dockerfile_content=$(cat << 'EOF'
-# Use an official Ubuntu as a base image
-FROM ubuntu:latest
+# Use an official Ubuntu as a base image for the build stage
+FROM ubuntu:latest AS builder
 
 # Install necessary tools
 RUN apt-get update && apt-get install -y \
@@ -37,21 +37,33 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory
 WORKDIR /app
 
-# Create a tmpfs mount point
-RUN mkdir -p /mnt/tmpfs
+# Build the assembly code
+ARG ASM_CODE
+RUN echo "$ASM_CODE" | nasm -f elf64 -o hello.o - && gcc -nostartfiles -no-pie -o hello hello.o
 
-# Command to keep the container running
-CMD ["tail", "-f", "/dev/null"]
+# Use a lightweight base image for the final stage
+FROM ubuntu:latest
+
+# Copy the compiled binary from the build stage
+COPY --from=builder /app/hello /app/hello
+
+# Set the working directory
+WORKDIR /app
+
+# Ensure the executable has the correct permissions
+RUN chmod +x /app/hello
+
+# Command to execute the binary
+CMD ["/app/hello"]
 EOF
 )
 
 # Create a temporary directory for the Docker context
 tmpdir=$(mktemp -d)
 echo "$dockerfile_content" > "$tmpdir/Dockerfile"
-echo "$asm_code" > "$tmpdir/hello.asm"
 
 # Build the Docker image
-docker build -t hello-asm "$tmpdir"
+docker build --build-arg ASM_CODE="$asm_code" -t hello-asm "$tmpdir"
 
 # Check if the image was built successfully
 if [ $? -ne 0 ]; then
@@ -59,50 +71,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Run the Docker container with a tmpfs mount
-container_id=$(docker run -d --mount type=tmpfs,destination=/mnt/tmpfs hello-asm)
-
-# Wait for the container to start
-sleep 2
-
-# Ensure the container is running
-if [ "$(docker inspect -f '{{.State.Running}}' $container_id)" != "true" ]; then
-    echo "Docker container failed to start"
-    exit 1
-fi
-
-echo "Copying assembly code to the container's tmpfs..."
-# Copy the assembly code into the tmpfs directory within the container
-docker cp "$tmpdir/hello.asm" "$container_id:/mnt/tmpfs/hello.asm"
-
-echo "Assembling and linking the assembly code inside the container..."
-# Assemble and link the assembly code inside the container, with error checking
-docker exec $container_id sh -c "
-  nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm &&
-  gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o || echo 'Compilation failed'
-"
-
-# Ensure the executable has the correct permissions, with error checking
-docker exec $container_id sh -c "
-  chmod +x /mnt/tmpfs/hello && ls -l /mnt/tmpfs/hello || echo 'chmod failed'
-"
-
-# List files in the tmpfs directory to verify the presence of the executable
-docker exec $container_id ls -l /mnt/tmpfs
-
-echo "Executing the assembly program within the container..."
-# Execute the assembly program within the container and capture the output
-docker exec $container_id /mnt/tmpfs/hello
-
-# Check if the assembly program exists and output its file details
-docker exec $container_id ls -l /mnt/tmpfs/hello
-
-# Copy the assembly code back to the host
-docker cp $container_id:/mnt/tmpfs/hello.asm "./hello.asm"
-
-# Stop and remove the container
-docker stop $container_id
-docker rm $container_id
+# Run the Docker container
+docker run --rm hello-asm
 
 # Clean up
 rm -r "$tmpdir"
