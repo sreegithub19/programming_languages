@@ -1,4 +1,4 @@
-name: Build and Run C++ Code in Docker with tmpfs
+name: Build and Run Assembly Code in Docker with tmpfs
 
 on:
   push:
@@ -13,37 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Create main.cpp file
-      run: |
-        echo '#include <iostream>' > main.cpp
-        echo 'int main() {' >> main.cpp
-        echo '    std::cout << "Hello, C++ World!" << std::endl;' >> main.cpp
-        echo '    return 0;' >> main.cpp
-        echo '}' >> main.cpp
-
-    - name: Create Dockerfile
-      run: |
-        echo 'FROM gcc:latest' > Dockerfile
-        echo 'RUN apt-get update && apt-get install -y bash' >> Dockerfile
-        echo 'WORKDIR /usr/src/app' >> Dockerfile
-        echo 'COPY entrypoint.sh /usr/local/bin/entrypoint.sh' >> Dockerfile
-        echo 'RUN chmod +x /usr/local/bin/entrypoint.sh' >> Dockerfile
-        echo 'ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' >> Dockerfile
-
-    - name: Create entrypoint.sh
-      run: |
-        echo '#!/bin/bash' > entrypoint.sh
-        echo 'g++ -o /tmpfs/myapp /tmpfs/main.cpp' >> entrypoint.sh
-        echo 'chmod +x /tmpfs/myapp' >> entrypoint.sh
-        echo '/tmpfs/myapp' >> entrypoint.sh
-
-    - name: Build Docker image
-      run: docker build -t my-cpp-app .
-
-    - name: Run Docker container with tmpfs
-      run: docker run --tmpfs /tmpfs:rw,exec,size=64m -v $(pwd)/main.cpp:/tmpfs/main.cpp my-cpp-app
-
-################################# ASSEMBLY #################################
 
     - name: Create Dockerfile
       run: |
