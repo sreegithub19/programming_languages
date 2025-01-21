@@ -39,7 +39,7 @@ WORKDIR /app
 
 # Build the assembly code
 ARG ASM_CODE
-RUN echo "$ASM_CODE" | nasm -f elf64 -o hello.o - && gcc -nostartfiles -no-pie -o hello hello.o
+RUN printf "%s" "$ASM_CODE" | nasm -f elf64 -o hello.o && gcc -nostartfiles -no-pie -o hello hello.o
 
 # Use a lightweight base image for the final stage
 FROM ubuntu:latest
