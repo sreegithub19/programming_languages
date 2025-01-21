@@ -41,4 +41,4 @@ jobs:
       run: docker build -t my-cpp-app .
 
     - name: Run Docker container with tmpfs
-      run: docker run --tmpfs /tmpfs:rw,size=64m -v $(pwd)/main.cpp:/tmpfs/main.cpp my-cpp-app
+      run: docker run --tmpfs /tmpfs:rw,exec,size=64m -v $(pwd)/main.cpp:/tmpfs/main.cpp my-cpp-app
