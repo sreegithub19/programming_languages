@@ -47,12 +47,12 @@ jobs:
 
     - name: Create Dockerfile
       run: |
-            echo 'FROM debian:latest' > Dockerfile
-            echo 'RUN apt-get update && apt-get install -y nasm binutils' >> Dockerfile
-            echo 'WORKDIR /usr/src/app' >> Dockerfile
-            echo 'COPY entrypoint.sh /usr/local/bin/entrypoint.sh' >> Dockerfile
-            echo 'RUN chmod +x /usr/local/bin/entrypoint.sh' >> Dockerfile
-            echo 'ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' >> Dockerfile
+                echo 'FROM debian:latest
+                RUN apt-get update && apt-get install -y nasm binutils
+                WORKDIR /usr/src/app
+                COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+                RUN chmod +x /usr/local/bin/entrypoint.sh
+                ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]' > Dockerfile
 
     - name: Create entrypoint.sh
       run: |
