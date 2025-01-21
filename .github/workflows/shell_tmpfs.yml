@@ -24,7 +24,7 @@ jobs:
       # Step 3: Run Docker container with tmpfs and execute the file
       - name: Run Docker with tmpfs
         run: |
-          docker run --rm -it \
+          docker run --rm -i \
             --tmpfs /mnt/tmpfs:rw,noexec,nosuid,size=64m \
             ubuntu:latest \
             bash -c "cat > /mnt/tmpfs/hello.sh && chmod +x /mnt/tmpfs/hello.sh && /mnt/tmpfs/hello.sh" < hello.sh
