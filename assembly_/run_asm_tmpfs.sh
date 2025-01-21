@@ -65,19 +65,33 @@ container_id=$(docker run -d --mount type=tmpfs,destination=/mnt/tmpfs hello-asm
 # Wait for the container to start
 sleep 2
 
+# Ensure the container is running
+if [ "$(docker inspect -f '{{.State.Running}}' $container_id)" != "true" ]; then
+    echo "Docker container failed to start"
+    exit 1
+fi
+
 echo "Copying assembly code to the container's tmpfs..."
 # Copy the assembly code into the tmpfs directory within the container
 docker cp "$tmpdir/hello.asm" "$container_id:/mnt/tmpfs/hello.asm"
 
 echo "Assembling and linking the assembly code inside the container..."
-# Assemble and link the assembly code inside the container
-docker exec $container_id sh -c "nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm && gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o"
+# Assemble and link the assembly code inside the container, with error checking
+docker exec $container_id sh -c "
+  nasm -f elf64 -o /mnt/tmpfs/hello.o /mnt/tmpfs/hello.asm &&
+  gcc -nostartfiles -no-pie -o /mnt/tmpfs/hello /mnt/tmpfs/hello.o || echo 'Compilation failed'
+"
 
-# Ensure the executable has the correct permissions
-docker exec $container_id sh -c "chmod +x /mnt/tmpfs/hello"
+# Ensure the executable has the correct permissions, with error checking
+docker exec $container_id sh -c "
+  chmod +x /mnt/tmpfs/hello && ls -l /mnt/tmpfs/hello || echo 'chmod failed'
+"
+
+# List files in the tmpfs directory to verify the presence of the executable
+docker exec $container_id ls -l /mnt/tmpfs
 
 echo "Executing the assembly program within the container..."
-# Execute the assembly program within the container
+# Execute the assembly program within the container and capture the output
 docker exec $container_id /mnt/tmpfs/hello
 
 # Check if the assembly program exists and output its file details
