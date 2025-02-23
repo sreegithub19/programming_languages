@@ -26,3 +26,25 @@ jobs:
         pip install --upgrade pip
         pip install -r requirements.txt
         robot search_test.robot  # Run the .robot file
+        cd ../..
+
+
+    - name: Run rfdebug
+      run: |
+        pip install robotframework-debuglibrary
+        variable1=value1 variable2=value2 bash -c '
+        #!/bin/bash
+        # Accept variables as parameters
+        variable1=$variable1
+        variable2=$variable2
+
+        # Pass variables to rfdebug
+        rfdebug <<EOF
+        \${variable1}    Set Variable    ${variable1}
+        \${variable2}    Set Variable    ${variable2}
+
+        Log To Console    variable1: ${variable1}
+        Log To Console    variable2: ${variable2}
+        exit
+        EOF
+        '

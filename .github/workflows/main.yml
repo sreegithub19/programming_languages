@@ -128,6 +128,8 @@ jobs:
           cd QA/cypress_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing && git pull origin cypress_testing --allow-unrelated-histories && cd ../../..
           cd QA/cypress_1/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing_1 && git pull origin cypress_testing_1 --allow-unrelated-histories && cd ../../..
           cd R__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout R_ && git pull origin R_ --allow-unrelated-histories && cd ../..
+          cd AI_nization/bito1__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito1_ && git pull origin bito1_ --allow-unrelated-histories && cd ../../..
+          cd AI_nization/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito_ && git pull origin bito_ --allow-unrelated-histories && cd ../..
 
           git add .
 

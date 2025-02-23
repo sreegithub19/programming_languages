@@ -515,3 +515,11 @@
 	path = R__/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = R_
+[submodule "AI_nization/codeforces_script"]
+	path = AI_nization/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = bito_
+[submodule "AI_nization/bito1__/codeforces_script"]
+	path = AI_nization/bito1__/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = bito1_
