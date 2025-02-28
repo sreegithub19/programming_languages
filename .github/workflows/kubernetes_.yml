@@ -1,0 +1,46 @@
+name: Kubernetes Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-kind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up kind
+        uses: engineerd/setup-kind@v0.5.0
+        with:
+          version: v0.11.1
+
+      - name: Create a cluster
+        run: kind create cluster --name my-cluster
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.20.0'
+
+      - name: Get cluster info
+        run: kubectl cluster-info
+
+      - name: Apply Kubernetes manifests
+        run: kubectl apply -f k8s/
+
+      - name: Wait for deployment to be available
+        run: kubectl rollout status deployment/my-deployment
+
+      - name: Run tests against the cluster
+        run: |
+          kubectl get pods
+          kubectl get services
+          # Add any other kubectl commands or tests here
+
+      - name: Delete the cluster
+        if: always()
+        run: kind delete cluster --name my-cluster
