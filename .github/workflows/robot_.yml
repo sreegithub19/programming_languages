@@ -28,6 +28,18 @@ jobs:
         robot search_test.robot  # Run the .robot file
         cd ../..
 
+    - name: Run AI_generated image creation using Python (using Gemini)
+      run: |
+        mkdir imagery
+        python Python/ML_AI/images.py
+
+    - name: Upload file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+           name: captured-html-artifacts
+           path: |
+            imagery
+
 
     - name: Run rfdebug
       run: |
