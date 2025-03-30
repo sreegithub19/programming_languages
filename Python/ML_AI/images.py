@@ -30,7 +30,8 @@ API_KEY = "AIzaSyBVzuUlSigMSS1tvHKqKrCiNVMpbTGLhXE"  # Replace with your actual 
 PROMPTS = [
     "A photorealistic image of a fluffy white cat sitting on a red cushion in a sunlit garden.",
     "A futuristic cityscape at sunset, with flying cars and neon lights.",
-    "A majestic lion standing on a rocky outcrop, overlooking the African savanna."
+    "A majestic lion standing on a rocky outcrop, overlooking the African savanna.",
+    "Please generate a longer gopuram of temple in dravidian style of architecture , and it should be captured fully in the image in front view"
 ]
 
 for i, prompt in enumerate(PROMPTS):
