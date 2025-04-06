@@ -130,6 +130,7 @@ jobs:
           cd R__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout R_ && git pull origin R_ --allow-unrelated-histories && cd ../..
           cd AI_nization/bito1__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito1_ && git pull origin bito1_ --allow-unrelated-histories && cd ../../..
           cd AI_nization/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito_ && git pull origin bito_ --allow-unrelated-histories && cd ../..
+          cd cengage_lfs_programming && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
 
           git add .
 
