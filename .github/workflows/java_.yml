@@ -39,6 +39,7 @@ jobs:
     - name: Build with Java, and download PDF file with link
       run: |
        cd java/hello_world/src && javac Main.java && java Main
+       cd ../../..
        curl -L -o filename.pdf "https://drive.google.com/uc?export=download&id=1y5paE7FU9QdGHku6KD5ixWWCbHOr6AHG"
 
     - name: Upload file as artifact
