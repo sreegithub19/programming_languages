@@ -523,3 +523,7 @@
 	path = AI_nization/bito1__/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = bito1_
+[submodule "cengage_lfs_programming"]
+	path = cengage_lfs_programming
+	url = https://github.com/sreegithub19/cengage_lfs_programming.git
+	branch = main
