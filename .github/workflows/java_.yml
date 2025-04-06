@@ -1,0 +1,49 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [ '21' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v2
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+        java-package: 'jdk'
+        architecture: 'x64'
+        check-latest: false
+        overwrite-settings: true
+        job-status: 'success'
+
+    - name: Verify Java version
+      run: java -version
+
+    - name: Set up Maven
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: ${{ matrix.java-version }}
+
+    - name: Build with Java, and download PDF file with link
+      run: |
+       cd java/hello_world/src && javac Main.java && java Main
+       curl -L -o filename.pdf "https://drive.google.com/uc?export=download&id=1y5paE7FU9QdGHku6KD5ixWWCbHOr6AHG"
+
+    - name: Upload file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+           name: captured-html-artifacts
+           path: |
+            filename.pdf
