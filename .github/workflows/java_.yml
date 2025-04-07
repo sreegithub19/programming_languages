@@ -42,6 +42,7 @@ jobs:
        cd ../../..
        curl -L -o filename.pdf "https://drive.google.com/uc?export=download&id=1y5paE7FU9QdGHku6KD5ixWWCbHOr6AHG"
        curl -L -o tars.pdf "https://drive.google.com/uc?export=download&id=1PS4fwy_qxY7_Ie4Fu7NQgZsTxELG7JfX"
+       curl -L -o RD_Sharma_Class_12.zip "https://drive.google.com/uc?export=download&id=1AzFUXVvcSWurhUnnFXNtp0sP-MN3MXJF"
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
@@ -50,3 +51,4 @@ jobs:
            path: |
             filename.pdf
             tars.pdf
+            RD_Sharma_Class_12.zip
