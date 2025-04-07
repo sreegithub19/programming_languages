@@ -41,7 +41,7 @@ jobs:
        cd java/hello_world/src && javac Main.java && java Main
        cd ../../..
        curl -L -o filename.pdf "https://drive.google.com/uc?export=download&id=1y5paE7FU9QdGHku6KD5ixWWCbHOr6AHG"
-       curl -L -o tars.7z "https://drive.google.com/uc?export=download&id=1JAHrKykzdu1uXvky98NxpOMRpB-9q2m3"
+       curl -L -o tars.pdf "https://drive.google.com/uc?export=download&id=1PS4fwy_qxY7_Ie4Fu7NQgZsTxELG7JfX"
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
@@ -49,4 +49,4 @@ jobs:
            name: captured-html-artifacts
            path: |
             filename.pdf
-            tars.7z
+            tars.pdf
