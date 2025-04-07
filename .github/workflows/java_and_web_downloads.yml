@@ -54,6 +54,9 @@ jobs:
 
        # folders
        gdown --no-check-certificate --folder http://drive.google.com/drive/folders/15oF-eyPYyiwNCv3WgNMHyDJ6AnJuhdt6
+
+       # zip file
+       gdown --no-check-certificate "https://drive.google.com/uc?export=download&id=1AzFUXVvcSWurhUnnFXNtp0sP-MN3MXJF"
        
 
     - name: Upload file as artifact
@@ -64,3 +67,4 @@ jobs:
             filename.pdf
             tars.pdf
             Capstone_miscellaneous
+            RD_Sharma_Class_12.zip
