@@ -57,6 +57,9 @@ jobs:
 
        # zip file
        gdown --no-check-certificate "https://drive.google.com/uc?export=download&id=1AzFUXVvcSWurhUnnFXNtp0sP-MN3MXJF"
+
+       # files from another account
+       gdown --no-check-certificate "https://drive.google.com/uc?export=download&id=1Q13jzzt2Rg6MC3gDu2UfzvlC-hG-w9kg1m80DCd1g6s"
        
 
     - name: Upload file as artifact
