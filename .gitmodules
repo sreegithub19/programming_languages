@@ -525,5 +525,9 @@
 	branch = bito1_
 [submodule "cengage_lfs_programming"]
 	path = cengage_lfs_programming
-	url = https://github.com/sreegithub19/cengage_lfs_programming.git
+	url = https://github.com/sreegithub19/cengage_lfs.git
+	branch = main
+[submodule "typescript/ai-chatbot"]
+	path = typescript/ai-chatbot
+	url = https://github.com/sreegithub19/ai-chatbot.git
 	branch = main
