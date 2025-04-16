@@ -1,0 +1,51 @@
+name: Spring_boot_web_apps_gradle_java_applications
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+        matrix:
+          java-version: [ '21' ]
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v2
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+        java-package: 'jdk'
+        architecture: 'x64'
+        check-latest: false
+        overwrite-settings: true
+        job-status: 'success'
+
+    - name: Verify Java version
+      run: java -version
+
+    - name: Set up Maven
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: ${{ matrix.java-version }}
+
+    # Step 4: Build and test the project
+    - name: Build and test with Maven
+      run: |
+       cd java/spring_boot_web_apps_gradle
+       mvn clean install
+       mvn test
+       mvn clean package
