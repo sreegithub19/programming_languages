@@ -79,7 +79,7 @@ jobs:
          SNAPSHOT_PATH = 'website_snapshot.png'
          WAIT_SECONDS = 15
 
-         echo 'Waiting for application to be ready...'
+         print('Waiting for application to be ready...')
          time.sleep(WAIT_SECONDS)
 
          with sync_playwright() as p:
@@ -88,13 +88,13 @@ jobs:
             try:
                 page.goto(URL, timeout=10000) # Increased timeout
                 page.screenshot(path=SNAPSHOT_PATH, full_page=True)
-                echo f'Snapshot saved to {SNAPSHOT_PATH}'
+                print(f'Snapshot saved to {SNAPSHOT_PATH}')
             except Exception as e:
-                echo f'Error taking snapshot: {e}'
+                print(f'Error taking snapshot: {e}')
             finally:
                 browser.close()
 
-          echo 'Snapshotting complete.'
+          print('Snapshotting complete.')
           "
 
       # Step 5: Run Maven Tests
