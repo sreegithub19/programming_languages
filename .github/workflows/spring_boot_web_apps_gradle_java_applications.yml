@@ -51,6 +51,7 @@ jobs:
     # Step 4: Build and test the project
     - name: Build and test with Maven
       run: |
+       cd java/spring_boot_web_apps_gradle/java_applications
        mvn compile
        mvn exec:java
        mvn test
