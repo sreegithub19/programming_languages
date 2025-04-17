@@ -76,24 +76,28 @@ jobs:
          import os
 
          PORT = 8090
-         URL = f'http://localhost:{PORT}'
-         SNAPSHOT_PATH = 'website_snapshot.png'
-         WAIT_SECONDS = 15
 
-         print('Waiting for application to be ready...')
-         time.sleep(WAIT_SECONDS)
+         li = ["/" , "/chess" , "/calculator" , "/sass_" , "/maze" , "/codepen" , "/tilt_maze" , "/tic_tac_toe" , "/clock" , "/hangman" , "/puzzles" , "/sudoku" , "/virtual_keyboard" , "/solitaire" , "/dino"]
 
-         with sync_playwright() as p:
-            browser = p.chromium.launch()
-            page = browser.new_page()
-            try:
-                page.goto(URL, timeout=10000) # Increased timeout
-                page.screenshot(path=SNAPSHOT_PATH, full_page=True)
-                print(f'Snapshot saved to {SNAPSHOT_PATH}')
-            except Exception as e:
-                print(f'Error taking snapshot: {e}')
-            finally:
-                browser.close()
+         for i in li:
+            URL = f'http://localhost:{PORT}{i}'
+            SNAPSHOT_PATH = f'snapshots/website_snapshot_{i}.png'
+            WAIT_SECONDS = 7
+
+            print('Waiting for application to be ready...')
+            time.sleep(WAIT_SECONDS)
+
+            with sync_playwright() as p:
+                browser = p.chromium.launch()
+                page = browser.new_page()
+                try:
+                    page.goto(URL, timeout=10000) # Increased timeout
+                    page.screenshot(path=SNAPSHOT_PATH, full_page=True)
+                    print(f'Snapshot saved to {SNAPSHOT_PATH}')
+                except Exception as e:
+                    print(f'Error taking snapshot: {e}')
+                finally:
+                    browser.close()
 
          print('Snapshotting complete.')
           "
@@ -108,5 +112,5 @@ jobs:
       - name: Upload snapshot artifact
         uses: actions/upload-artifact@v4
         with:
-          name: website-snapshot
-          path: website_snapshot.png
+          name: snapshots
+          path: snapshots
