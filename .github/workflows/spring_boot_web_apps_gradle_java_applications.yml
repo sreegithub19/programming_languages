@@ -69,32 +69,32 @@ jobs:
       # Step 4: Take Website Snapshot
       - name: Take Website Snapshot
         run: |
-          python -c "
-            from playwright.sync_api import sync_playwright
-            import time
-            import os
+         python -c "
+         from playwright.sync_api import sync_playwright
+         import time
+         import os
 
-            PORT = 8090
-            URL = f'http://localhost:{PORT}'
-            SNAPSHOT_PATH = 'website_snapshot.png'
-            WAIT_SECONDS = 15
+         PORT = 8090
+         URL = f'http://localhost:{PORT}'
+         SNAPSHOT_PATH = 'website_snapshot.png'
+         WAIT_SECONDS = 15
 
-            echo 'Waiting for application to be ready...'
-            time.sleep(WAIT_SECONDS)
+         echo 'Waiting for application to be ready...'
+         time.sleep(WAIT_SECONDS)
 
-            with sync_playwright() as p:
-              browser = p.chromium.launch()
-              page = browser.new_page()
-              try:
+         with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            try:
                 page.goto(URL, timeout=10000) # Increased timeout
                 page.screenshot(path=SNAPSHOT_PATH, full_page=True)
                 echo f'Snapshot saved to {SNAPSHOT_PATH}'
-              except Exception as e:
+            except Exception as e:
                 echo f'Error taking snapshot: {e}'
-              finally:
+            finally:
                 browser.close()
 
-            echo 'Snapshotting complete.'
+          echo 'Snapshotting complete.'
           "
 
       # Step 5: Run Maven Tests
