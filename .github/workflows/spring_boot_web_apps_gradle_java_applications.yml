@@ -43,9 +43,15 @@ jobs:
         java-version: ${{ matrix.java-version }}
 
     # Step 4: Build and test the project
-    - name: Build and test with Maven
+    - name: Install Maven dependencies
       run: |
        cd java/spring_boot_web_apps_gradle/java_applications
        mvn clean install
+    
+    # Step 4: Build and test the project
+    - name: Build and test with Maven
+      run: |
+       mvn compile
+       mvn exec:java
        mvn test
        mvn clean package
