@@ -94,7 +94,7 @@ jobs:
             finally:
                 browser.close()
 
-          print('Snapshotting complete.')
+         print('Snapshotting complete.')
           "
 
       # Step 5: Run Maven Tests
