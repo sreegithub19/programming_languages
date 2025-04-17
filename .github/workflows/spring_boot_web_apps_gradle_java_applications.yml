@@ -77,7 +77,7 @@ jobs:
 
          PORT = 8090
 
-         li = ['/'' , '/chess' , '/calculator' , '/sass_' , '/maze' , '/codepen' , '/tilt_maze' , '/tic_tac_toe' , '/clock' , '/hangman' , '/puzzles' , '/sudoku' , '/virtual_keyboard' , '/solitaire' , '/dino']
+         li = ['/' , '/chess' , '/calculator' , '/sass_' , '/maze' , '/codepen' , '/tilt_maze' , '/tic_tac_toe' , '/clock' , '/hangman' , '/puzzles' , '/sudoku' , '/virtual_keyboard' , '/solitaire' , '/dino']
 
          for i in li:
             URL = f'http://localhost:{PORT}{i}'
