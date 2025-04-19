@@ -1,4 +1,4 @@
-name: Spring_boot_web_apps_gradle_java_applications
+name: Spring_boot_API_maven_java_applications
 
 on:
   push:
