@@ -1,0 +1,116 @@
+name: Spring_boot_web_apps_gradle_java_applications
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: ['21']
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+          java-package: 'jdk'
+          architecture: 'x64'
+          check-latest: false
+          overwrite-settings: true
+          job-status: 'success'
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install --with-deps
+
+      - name: Verify Java version
+        run: java -version
+
+      - name: Set up Maven
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java-version }}
+
+      # Step 2: Build the Spring Boot application
+      - name: Build Spring Boot Application
+        run: |
+          cd java/spring_boot_rest_API_app_maven
+          mvn clean package
+
+      # Step 3: Run Spring Boot Application in the Background
+      - name: Run Spring Boot App in Background
+        run: |
+          cd java/spring_boot_rest_API_app_maven
+          java -jar target/*.jar &
+          echo "Spring Boot app started in the background."
+          sleep 5 # Give the app a few seconds to start
+
+      # Step 4: Take Website Snapshot
+      - name: Take Website Snapshot
+        run: |
+         python -c "
+         from playwright.sync_api import sync_playwright
+         import time
+         import os
+
+         PORT = 8080
+
+         li = ['/' , '/product' , '/index.html']
+
+         for i in li:
+            URL = f'http://localhost:{PORT}{i}'
+            SNAPSHOT_PATH = f'snapshots/website_snapshot_{i}.png'
+            WAIT_SECONDS = 7
+
+            print('Waiting for application to be ready...')
+            time.sleep(WAIT_SECONDS)
+
+            with sync_playwright() as p:
+                browser = p.chromium.launch()
+                page = browser.new_page()
+                try:
+                    page.goto(URL, timeout=10000) # Increased timeout
+                    page.screenshot(path=SNAPSHOT_PATH, full_page=True)
+                    print(f'Snapshot saved to {SNAPSHOT_PATH}')
+                except Exception as e:
+                    print(f'Error taking snapshot: {e}')
+                finally:
+                    browser.close()
+
+         print('Snapshotting complete.')
+          "
+
+      # Step 5: Run Maven Tests
+      - name: Run Maven Tests
+        run: |
+          cd java/spring_boot_rest_API_app_maven
+          mvn test
+
+      # Step 6: Upload Snapshot Artifact
+      - name: Upload snapshot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots
+          path: snapshots
