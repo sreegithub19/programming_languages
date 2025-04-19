@@ -81,7 +81,10 @@ jobs:
 
          for i in li:
             URL = f'http://localhost:{PORT}{i}'
-            SNAPSHOT_PATH = f'snapshots/website_snapshot_{i}.png'
+            if(i == '/'):
+              SNAPSHOT_PATH = f'snapshots/website_snapshot_{i}_main.png'
+            else:
+              SNAPSHOT_PATH = f'snapshots/website_snapshot_{i}.png'
             WAIT_SECONDS = 7
 
             print('Waiting for application to be ready...')
