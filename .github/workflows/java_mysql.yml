@@ -1,0 +1,82 @@
+name: MySQL Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mysql-job:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root --password=example --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: sample_db
+          MYSQL_USER: sample_user
+          MYSQL_PASSWORD: sample_password
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL to be ready..."
+          for i in {1..30}; do
+            if mysqladmin ping -h 127.0.0.1 -u root --password=example --silent; then
+              echo "MySQL is ready!"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
+
+      - name: Create a table and insert data
+        run: |
+          echo "Connecting to MySQL and creating a table..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+          create TABLE EngineeringStudents(
+          Student_ID INT NOT NULL,
+          Department VARCHAR(25),
+          First_Name VARCHAR(25),
+          Last_Name VARCHAR(25),
+          PassOutYear INT NOT NULL,
+          UniversityRank INT NOT NULL,
+          PRIMARY KEY (Student_ID)
+          );
+
+          INSERT INTO EngineeringStudents VALUES
+          (10202, 'CSE', 'Kiren', 'Acharya',2018,1273),
+          (10203, 'CSE', 'Kiron', 'Acharya',2018,1274),
+          (10204, 'CSE', 'Karan', 'Acharya',2018,1275),
+          (10205, 'CSE', 'Karen', 'Acharya',2018,1276),
+          (10206, 'CSE', 'Karon', 'Acharya',2018,1277),
+          (10207, 'CSE', 'Karun', 'Acharya',2018,1278),
+          (10208, 'CSE', 'Karuna', 'Acharya',2018,1279),
+          (10209, 'CSE', 'Kirana', 'Acharya',2018,1280),
+          (10210, 'CSE', 'Kolar', 'Acharya',2018,1281),
+          (10211, 'CSE', 'Koala', 'Acharya',2018,1282);
+
+          
+          "
+
+      - name: Query the database
+        run: |
+          echo "Querying the database..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+          select * from EngineeringStudents;
+          "
+
