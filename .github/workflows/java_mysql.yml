@@ -90,8 +90,8 @@ jobs:
           unzip mysql-connector-j-9.3.0.zip
           cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar java/Java_DB_mysql/src
 
-      - name : Execute Java
+      - name: Execute Java
         run: |
-          cd java/Java_DB_mysql/src
-          javac javaMysql.java
-          java javaMysql
+            cd java/Java_DB_mysql/src
+            javac -cp ".:mysql-connector-j-9.3.0.jar" javaMysql.java
+            java -cp ".:mysql-connector-j-9.3.0.jar" javaMysql
