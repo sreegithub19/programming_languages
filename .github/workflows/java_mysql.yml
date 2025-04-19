@@ -29,6 +29,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
       - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
@@ -80,3 +84,14 @@ jobs:
           select * from EngineeringStudents;
           "
 
+      - name: Download MySQL Connector
+        run: |
+          wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.3.0.zip
+          unzip mysql-connector-j-9.3.0.zip
+          cp mysql-connector-j-9.3.0/mysql-connector-j-9.3.0.jar java/Java_DB_mysql/src
+
+      - name : Execute Java
+        run: |
+          cd java/Java_DB_mysql/src
+          javac javaMysql.java
+          java javaMysql
