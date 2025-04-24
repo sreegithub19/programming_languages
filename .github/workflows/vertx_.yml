@@ -1,0 +1,62 @@
+name: Run Vert.x Application
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Build the Vert.x application
+      - name: Build Java and Kotlin with Maven
+        run: |
+         #cd java/vertx_ && mvn clean package && java -jar target/vertx-application-1.0-SNAPSHOT.jar
+         #cd kotlin/vertx_ && mvn compile && mvn exec:java -Dexec.mainClass="com.example.MainVerticleKt"
+
+
+         # Step 1: Start the Java Vert.x application on localhost:8080
+          cd java/vertx_
+          mvn clean package &> /dev/null
+          java -jar target/vertx-application-1.0-SNAPSHOT.jar & # Run in the background
+          JAVA_PID=$!
+
+          # Step 2: Start the Kotlin Vert.x application on localhost:8090
+          cd ../../kotlin/vertx_
+          mvn compile &> /dev/null
+          mvn exec:java -Dexec.mainClass="com.example.MainVerticleKt" & # Run in the background
+          KOTLIN_PID=$!
+
+          # Wait for 10 seconds
+          sleep 10
+
+          # Kill both processes
+          kill $JAVA_PID $KOTLIN_PID
+
+          # Notify the user
+          echo "Both applications ran for 10 seconds and are now terminated."

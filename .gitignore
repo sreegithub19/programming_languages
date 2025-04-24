@@ -80,6 +80,13 @@ java/springboot_starter/target
 
 java/java_mysql/.idea
 java/java_mysql/out
+
+# vertx
+java/vertx_/target
+java/vertx_/dependency-reduced-pom.xml
+kotlin/vertx_/target
+kotlin/vertx_/dependency-reduced-pom.xml
+
 ##########################################
 # typescript -> cypress_automation
 
