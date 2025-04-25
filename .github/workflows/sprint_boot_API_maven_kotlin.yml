@@ -44,4 +44,9 @@ jobs:
           cd kotlin/spring_boot
           java -jar target/*.jar & 
           sleep 25 # Give the app a few seconds to start
-          curl -X GET http://localhost:8080/hello?name=GitHubActions
+
+
+      # Step 6: Test the Application
+      - name: Test Application with cURL
+        run: |
+            curl -X GET http://localhost:8080/hello?name=GitHubActions
