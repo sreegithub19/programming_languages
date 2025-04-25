@@ -92,7 +92,7 @@ jobs:
 
       - name: Execute Java
         run: |
-            cd java/Java_DB_mysql/src
+            cd kotlin/kotlin_db_mysql/src
             javac -cp ".:mysql-connector-j-9.3.0.jar" javaMysql.java
             java -cp ".:mysql-connector-j-9.3.0.jar" javaMysql
 
