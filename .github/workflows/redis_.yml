@@ -1,0 +1,52 @@
+name: Redis Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test-redis:
+    name: Test Redis Database
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Redis CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y redis-tools
+
+      - name: Wait for Redis to Start
+        run: |
+          for i in {1..10}; do
+            if redis-cli -h localhost ping; then
+              echo "Redis is up and running!"
+              break
+            fi
+            echo "Waiting for Redis to start..."
+            sleep 2
+          done
+
+      - name: Test Redis Commands
+        run: |
+          # Set a key in Redis
+          redis-cli -h localhost set mykey "Hello, Redis!"
+          # Get the key value
+          redis-cli -h localhost get mykey
+          # Delete the key
+          redis-cli -h localhost del mykey
