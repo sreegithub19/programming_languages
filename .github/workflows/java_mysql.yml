@@ -99,5 +99,5 @@ jobs:
       - name: Execute Kotlin
         run: |
             cd kotlin/kotlin_db_mysql/src
-            javac -cp ".:mysql-connector-j-9.3.0.jar" kotlinMysql.kt
+            kotlinc -cp ".:mysql-connector-j-9.3.0.jar" kotlinMysql.kt
             java -cp ".:mysql-connector-j-9.3.0.jar" kotlinMysql
