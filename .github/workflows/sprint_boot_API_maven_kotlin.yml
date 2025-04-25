@@ -36,7 +36,7 @@ jobs:
       - name: Build Application
         run: |
           cd kotlin/spring_boot
-          ./mvnw clean package
+          mvn clean package
 
       # Step 5: Run the Spring Boot Application
       - name: Run Application
