@@ -42,10 +42,6 @@ jobs:
       - name: Run Application
         run: |
           cd kotlin/spring_boot
-          nohup java -jar target/*.jar &
-          sleep 10 # Allow the application to start
-
-      # Step 6: Test the Application
-      - name: Test Application with cURL
-        run: |
+          java -jar target/*.jar & 
+          sleep 25 # Give the app a few seconds to start
           curl -X GET http://localhost:8080/hello?name=GitHubActions
