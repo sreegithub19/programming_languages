@@ -531,3 +531,11 @@
 	path = typescript/ai-chatbot
 	url = https://github.com/sreegithub19/ai-chatbot.git
 	branch = main
+[submodule "azure_/Microsoft_AZ-900"]
+	path = azure_/Microsoft_AZ-900
+	url = https://github.com/sreegithub19/Microsoft_AZ-900.git
+	branch = master
+[submodule "azure_/main_/Microsoft_AZ-900"]
+	path = azure_/main_/Microsoft_AZ-900
+	url = https://github.com/sreegithub19/Microsoft_AZ-900.git
+	branch = main
