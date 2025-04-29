@@ -19,7 +19,8 @@ class SeleniumTest(unittest.TestCase):
         search_box = self.driver.find_element(By.NAME, "q")
         search_box.send_keys("GitHub Copilot")
         search_box.submit()
-        self.assertTrue("GitHub Copilot" in self.driver.page_source)
+        self.assertIn("GitHub Copilot", self.driver.page_source)
+        #self.assertTrue("GitHub Copilot" in self.driver.page_source)
 
     def tearDown(self):
         self.driver.quit()
