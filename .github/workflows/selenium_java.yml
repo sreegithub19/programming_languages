@@ -1,0 +1,54 @@
+name: Run Selenium Tests with Java
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Java
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    # Step 3: Cache Maven dependencies
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-m2
+
+    # Step 4: Install Chrome browser
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
+    # Step 5: Install ChromeDriver
+    - name: Install ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+        wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        rm chromedriver_linux64.zip
+
+    # Step 6: Run Maven tests
+    - name: Run Selenium tests
+      run: |
+       cd java/selenium_
+       mvn test
