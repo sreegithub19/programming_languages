@@ -40,12 +40,20 @@ jobs:
     # Step 5: Install ChromeDriver
     - name: Install ChromeDriver
       run: |
-        CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-        wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-        unzip chromedriver_linux64.zip
-        sudo mv chromedriver /usr/local/bin/
-        rm chromedriver_linux64.zip
+            CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d'.' -f1)
+            if [ -z "$CHROME_VERSION" ]; then
+            echo "Failed to detect Chrome version."
+            exit 1
+            fi
+            CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+            if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            echo "Failed to retrieve ChromeDriver version for Chrome $CHROME_VERSION"
+            exit 1
+            fi
+            wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip || { echo "Failed to download ChromeDriver"; exit 1; }
+            unzip chromedriver_linux64.zip
+            sudo mv chromedriver /usr/local/bin/
+            rm chromedriver_linux64.zip
 
     # Step 6: Run Maven tests
     - name: Run Selenium tests
