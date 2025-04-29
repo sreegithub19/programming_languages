@@ -49,4 +49,4 @@ jobs:
     - name: Run Selenium tests
       run: |
        cd java/selenium_
-       mvn test
+       mvn test -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver -Dchrome.options.args="--headless --disable-dev-shm-usage --no-sandbox --remote-allow-origins=*"
