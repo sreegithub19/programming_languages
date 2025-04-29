@@ -50,4 +50,4 @@ jobs:
         sudo apt-get install -y xvfb
         Xvfb :99 -screen 0 1024x768x24 &
         sleep 7  # Give Xvfb some time to start
-        python -m unittest discover python/selenium_
+        python -m unittest discover Python/selenium_
