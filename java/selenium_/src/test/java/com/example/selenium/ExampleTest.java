@@ -11,8 +11,13 @@ public class ExampleTest {
         // Set up ChromeDriver
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
-        // Initialize WebDriver
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Run in headless mode
+        options.addArguments("--no-sandbox"); // Disable the sandbox for CI
+        options.addArguments("--disable-dev-shm-usage"); // Avoid /dev/shm size issues
+        options.addArguments("--remote-allow-origins=*"); // Allow remote origins
+
+        WebDriver driver = new ChromeDriver(options);
 
         // Open Google
         driver.get("https://www.google.com/");
