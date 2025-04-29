@@ -30,6 +30,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wget unzip
+        sudo apt-get install -y openscad mesa-utils libgl1-mesa-dri xvfb
         wget https://chromedriver.storage.googleapis.com/$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
@@ -41,5 +42,6 @@ jobs:
       run: |
         # Start a virtual display for running browser tests
         sudo apt-get install -y xvfb
-        Xvfb :99 &
+        Xvfb :99 -screen 0 1024x768x24 &
+        sleep 7  # Give Xvfb some time to start
         python -m unittest discover python/selenium_
