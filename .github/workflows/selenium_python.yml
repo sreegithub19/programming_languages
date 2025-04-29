@@ -35,11 +35,11 @@ jobs:
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
-    # - name: Run Selenium tests
-    #   env:
-    #     DISPLAY: :99
-    #   run: |
-    #     # Start a virtual display for running browser tests
-    #     sudo apt-get install -y xvfb
-    #     Xvfb :99 &
-    #     python -m unittest discover tests
+    - name: Run Selenium tests
+      env:
+        DISPLAY: :99
+      run: |
+        # Start a virtual display for running browser tests
+        sudo apt-get install -y xvfb
+        Xvfb :99 &
+        python -m unittest discover python/selenium_
