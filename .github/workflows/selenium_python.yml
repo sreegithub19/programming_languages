@@ -41,6 +41,12 @@ jobs:
         DISPLAY: :99
       run: |
         # Start a virtual display for running browser tests
+        # Set up environment variables for software rendering
+        export DISPLAY=:99
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export MESA_GL_VERSION_OVERRIDE=3.3
+        export MESA_GLSL_VERSION_OVERRIDE=330
+        # Start a virtual X server
         sudo apt-get install -y xvfb
         Xvfb :99 -screen 0 1024x768x24 &
         sleep 7  # Give Xvfb some time to start
