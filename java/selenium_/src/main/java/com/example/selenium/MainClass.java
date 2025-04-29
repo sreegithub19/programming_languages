@@ -1,10 +1,12 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class MainClass {
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        // Automatically set up ChromeDriver
+        WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // Run in headless mode
