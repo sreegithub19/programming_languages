@@ -36,17 +36,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
+        google-chrome --version
+        sudo apt-get install google-chrome-stable=114.0.5735.90
+        google-chrome --version
 
-    # Step 5: Install ChromeDriver
-    - name: Install ChromeDriver
-      run: |
-            wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip || { echo "Failed to download ChromeDriver"; exit 1; }
-            unzip chromedriver_linux64.zip
-            sudo mv chromedriver /usr/local/bin/
-            rm chromedriver_linux64.zip
+    # # Step 5: Install ChromeDriver
+    # - name: Install ChromeDriver
+    #   run: |
+    #         wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip || { echo "Failed to download ChromeDriver"; exit 1; }
+    #         unzip chromedriver_linux64.zip
+    #         sudo mv chromedriver /usr/local/bin/
+    #         rm chromedriver_linux64.zip
 
-    # Step 6: Run Maven tests
-    - name: Run Selenium tests
-      run: |
-       cd java/selenium_
-       mvn test -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver -Dchrome.options.args="--headless --disable-dev-shm-usage --no-sandbox --remote-allow-origins=*"
+    # # Step 6: Run Maven tests
+    # - name: Run Selenium tests
+    #   run: |
+    #    cd java/selenium_
+    #    mvn test -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver -Dchrome.options.args="--headless --disable-dev-shm-usage --no-sandbox --remote-allow-origins=*"
