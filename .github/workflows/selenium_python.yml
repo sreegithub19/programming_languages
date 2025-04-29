@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium
+        pip install selenium webdriver-manager
 
     - name: Download WebDriver
       run: |
