@@ -1,0 +1,54 @@
+name: Build and Deploy Kotlin/JS
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the 'main' branch
+#   pull_request:
+#     branches:
+#       - main  # Trigger the workflow for pull requests to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up JDK (required for Kotlin/JS projects)
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17' # Use Java 17 (or the version required for Kotlin)
+        distribution: 'temurin'
+
+    # Step 3: Cache Gradle dependencies
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    # Step 4: Build the Kotlin/JS project
+    - name: Build project
+      run: |
+       cd kotlin/kotlin_js
+       ./gradlew build
+
+    - name: Upload file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+           name: captured-html-artifacts
+           path: |
+            kotlin/kotlin_js/index.html
+
+    # # Step 5: Deploy to GitHub Pages (optional)
+    # - name: Deploy to GitHub Pages
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: build/distributions  # Path to the built JavaScript files
