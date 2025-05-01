@@ -3,7 +3,7 @@ plugins {
 }
 
 kotlin {
-    js {
+    js(IR) {
         browser {
             // Configuration for browser-specific projects
         }
