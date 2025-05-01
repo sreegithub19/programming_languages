@@ -37,7 +37,7 @@ jobs:
     - name: Build project
       run: |
        cd kotlin/kotlin_js
-       ./gradlew build
+       gradle build
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
