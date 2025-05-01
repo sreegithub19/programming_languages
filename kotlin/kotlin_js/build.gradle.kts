@@ -1,31 +1,12 @@
 plugins {
-    kotlin("js") version "1.9.0" // Use the Kotlin version you need
-}
-
-group = "com.example" // Replace with your group ID
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    testImplementation(kotlin("test-js"))
+    kotlin("js") version "1.8.22" // Use the Kotlin/JS plugin
 }
 
 kotlin {
-    js(IR) { // Use IR backend for Kotlin/JS
+    js {
         browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true // Enable CSS support
-            }
+            // Configuration for browser-specific projects
         }
-        binaries.executable()
+        binaries.executable() // Mark the project as an executable
     }
-}
-
-// Optional: Task to clean the build directory
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
 }
