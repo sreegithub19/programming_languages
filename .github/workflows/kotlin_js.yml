@@ -38,6 +38,7 @@ jobs:
       run: |
        cd kotlin/kotlin_js
        gradle build
+       mv build/distributions/DocumentWriteExample.js .
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
@@ -45,6 +46,7 @@ jobs:
            name: captured-html-artifacts
            path: |
             kotlin/kotlin_js/index.html
+            kotlin/kotlin_js/DocumentWriteExample.js
 
     # # Step 5: Deploy to GitHub Pages (optional)
     # - name: Deploy to GitHub Pages
