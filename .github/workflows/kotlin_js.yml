@@ -24,21 +24,15 @@ jobs:
         java-version: '17' # Use Java 17 (or the version required for Kotlin)
         distribution: 'temurin'
 
-    # Step 3: Cache Gradle dependencies
-    - name: Cache Gradle dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
+    - name: Set up Gradle
+      uses: gradle/gradle-build-action@v2
 
     # Step 4: Build the Kotlin/JS project
     - name: Build project
       run: |
        cd kotlin/kotlin_js
-       gradle build
-       mv build/distributions/DocumentWriteExample.js .
+       gradle browserProductionWebpack
+       mv build/distributions/kotlin_js.js .
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
@@ -46,7 +40,7 @@ jobs:
            name: captured-html-artifacts
            path: |
             kotlin/kotlin_js/index.html
-            kotlin/kotlin_js/DocumentWriteExample.js
+            kotlin/kotlin_js/kotlin_js.js
 
     # # Step 5: Deploy to GitHub Pages (optional)
     # - name: Deploy to GitHub Pages
