@@ -1,4 +1,4 @@
-const assert = require('assert');
+import assert from 'assert';
 
 describe('Google Page', () => {
     it('should have the correct title', async () => {
