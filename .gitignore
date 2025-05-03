@@ -99,3 +99,7 @@ typescript/cypress_automation/cypress/screenshots
 # Elm
 elm/elm-stuff
 .qodo
+
+
+# WebDriver
+javascript/webdriver_io/node_modules
