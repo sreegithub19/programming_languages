@@ -23,18 +23,24 @@ export const config = {
     // ============
     // Capabilities
     // ============
-    maxInstances: 10,
+    maxInstances: 10, // Adjust based on your CI resources
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                // Generate a unique and isolated user data directory
-                //`--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`,
-                // You can also add '--no-sandbox' and '--disable-dev-shm-usage' for more stability in CI environments
+                '--headless',
                 '--no-sandbox',
-                '--disable-dev-shm-usage'
-            ]
-        }
+                '--disable-dev-shm-usage',
+                '--window-size=1920,1080', // Set a consistent window size
+                '--disable-gpu', // Recommended for headless environments
+                '--disable-extensions', // Disable browser extensions
+                '--disable-dev-tools', // Disable DevTools (performance)
+                '--remote-debugging-port=9222' // Explicitly set a debugging port
+                // Consider removing the user-data-dir unless you have a specific reason
+                // and are handling its creation and cleanup properly.
+                // `--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`,
+            ],
+        },
     }],
 
     //
@@ -54,7 +60,7 @@ export const config = {
     reporters: ['spec'],
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
     },
 
     //

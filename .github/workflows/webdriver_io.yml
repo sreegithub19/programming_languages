@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: 18
 
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+            chrome-version: stable
+
       - name: Install dependencies and run
         run: |
          cd javascript/webdriver_io
