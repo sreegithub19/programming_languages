@@ -24,7 +24,9 @@ export const config = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: [`--user-data-dir=/tmp/unique-profile-${Date.now()}`] // Ensure unique user data directory
+            args: [
+                `--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`
+            ]
         }
     }],
 
