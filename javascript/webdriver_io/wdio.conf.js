@@ -28,7 +28,11 @@ export const config = {
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                `--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`
+                // Generate a unique and isolated user data directory
+                `--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`,
+                // You can also add '--no-sandbox' and '--disable-dev-shm-usage' for more stability in CI environments
+                '--no-sandbox',
+                '--disable-dev-shm-usage'
             ]
         }
     }],
