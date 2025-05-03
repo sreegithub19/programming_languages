@@ -29,7 +29,7 @@ export const config = {
         'goog:chromeOptions': {
             args: [
                 // Generate a unique and isolated user data directory
-                `--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`,
+                //`--user-data-dir=${path.join(os.tmpdir(), 'chrome-user-data', Date.now().toString())}`,
                 // You can also add '--no-sandbox' and '--disable-dev-shm-usage' for more stability in CI environments
                 '--no-sandbox',
                 '--disable-dev-shm-usage'
