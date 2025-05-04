@@ -37,3 +37,10 @@ jobs:
         run: |
           cd Python/big_data
           python big_data_processing.py
+
+      # Step 6: Upload the artifact to GitHub
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-file
+          path: Python/big_data/processed_data.csv
