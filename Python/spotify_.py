@@ -25,3 +25,4 @@ print("Tracks:")
 for item in playlist['tracks']['items']:
     track = item['track']
     print(f" - {track['name']} by {', '.join(artist['name'] for artist in track['artists'])}")
+    print(f"   Spotify Link: {track['external_urls']['spotify']}")
