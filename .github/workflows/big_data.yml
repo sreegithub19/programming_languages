@@ -38,6 +38,13 @@ jobs:
           cd Python/big_data
           python big_data_processing.py
 
+    # Step : Run the Spotify script
+      - name: Run big data processing script
+        run: |
+          cd Python
+          pip install spotipy
+          python spotify_.py
+
       # Step 6: Upload the artifact to GitHub
       - name: Upload artifact
         uses: actions/upload-artifact@v4
