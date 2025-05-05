@@ -2,12 +2,13 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 # Set up authentication
-# to get id and secret, and redirect URL: https://developer.spotify.com/dashboard/2e462572e9e74ae4bedf7fc0e6003cd9
+# Provide all the required credentials programmatically to avoid interactive input
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id="2e462572e9e74ae4bedf7fc0e6003cd9",
     client_secret="603eb483bf4e43e29a4181f8cd9cd0fa",
-    redirect_uri="https://developer.spotify.com/",
-    scope="playlist-read-private"
+    redirect_uri="http://localhost:8888/callback",  # Use a localhost callback URI suitable for automation
+    scope="playlist-read-private",
+    open_browser=False  # Disables the automatic opening of a browser window
 ))
 
 # Get the current user's playlists
