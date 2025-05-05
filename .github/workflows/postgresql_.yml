@@ -1,0 +1,64 @@
+name: PostgreSQL Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  postgresql-job:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          POSTGRES_USER: sample_user
+          POSTGRES_PASSWORD: sample_password
+          POSTGRES_DB: sample_db
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          echo "Waiting for PostgreSQL to be ready..."
+          for i in {1..30}; do
+            if pg_isready -h localhost -U sample_user; then
+              echo "PostgreSQL is ready!"
+              break
+            fi
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Create a table and insert data
+        run: |
+          echo "Connecting to PostgreSQL and creating a table..."
+          PGPASSWORD=sample_password psql -h localhost -U sample_user -d sample_db -c "
+          CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL
+          );
+          INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');
+          INSERT INTO users (name, email) VALUES ('Jane Smith', 'jane.smith@example.com');
+          "
+
+      - name: Query the database
+        run: |
+          echo "Querying the database..."
+          PGPASSWORD=sample_password psql -h localhost -U sample_user -d sample_db -c "
+          SELECT * FROM users;
+          "
