@@ -60,12 +60,30 @@ jobs:
           mvn clean package
 
       # Step 3: Run Spring Boot Application in the Background
-      - name: Run Spring Boot App in Background
+      - name: Run Spring Boot App in Background with ngrok
         run: |
+          # Start Spring Boot application
           cd java/spring_boot_web_apps_gradle/java_applications
           java -jar target/*.jar &
           echo "Spring Boot app started in the background."
           sleep 5 # Give the app a few seconds to start
+
+          # Install ngrok
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list >/dev/null
+          sudo apt update && sudo apt install ngrok
+
+          # Start ngrok to expose localhost:8090
+          ngrok http 8090 > /dev/null &
+
+          # Wait for ngrok to initialize and fetch public URL
+          sleep 5
+          NGROK_PUBLIC_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          echo "ngrok public URL: $NGROK_PUBLIC_URL"
+
+          # Keep Spring Boot and ngrok running for 5 minutes
+          echo "Spring Boot and ngrok are running. Open $NGROK_PUBLIC_URL in your browser."
+          sleep 300 # 5 minutes
 
       # Step 4: Take Website Snapshot
       - name: Take Website Snapshot
