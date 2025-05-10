@@ -1,0 +1,28 @@
+name: Run Vulnerability Scanner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Run Vulnerability Scanner
+      run: |
+        python Python_/cybersecurity_
+        python vulnerability_scanner.py --ip 127.0.0.1 --start-port 1 --end-port 1024
