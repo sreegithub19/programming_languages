@@ -31,5 +31,5 @@ jobs:
       env:
         USER_INPUT: "What is GitHub Actions?"
       run: |
-        cd Python_/langchain_
+        cd Python/langchain_
         python langchain_example_ci.py
