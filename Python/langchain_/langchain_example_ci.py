@@ -1,7 +1,7 @@
 import os
-from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_community.llms import OpenAI
+from langchain_community.prompts import PromptTemplate
+from langchain_community.chains import LLMChain
 
 # Step 1: Initialize the OpenAI LLM
 llm = OpenAI(temperature=0.7)

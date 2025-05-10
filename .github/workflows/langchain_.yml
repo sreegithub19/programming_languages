@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install langchain openai langchain_community
+        pip install langchain openai langchain-community langchain-core
 
     # Step 4: Run LangChain script
     - name: Run LangChain example
