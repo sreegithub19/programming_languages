@@ -54,11 +54,12 @@ jobs:
       run: |
         cd java/kafka_/target
         nohup java -jar kafka-example-1.0-SNAPSHOT.jar &
-
-    - name: Run Kafka Consumer
-      run: |
-        cd java/kafka_/target
         nohup java -jar kafka-consumer-example.jar &
+
+    # - name: Run Kafka Consumer
+    #   run: |
+    #     cd java/kafka_/target
+    #     nohup java -jar kafka-consumer-example.jar &
 
     # Optional: Wait for Kafka
     - name: Wait for Kafka
