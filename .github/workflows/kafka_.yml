@@ -50,25 +50,18 @@ jobs:
        cd java/kafka_
        mvn clean package
 
-    - name: Run Kafka Producer and Consumer
+    - name: Run Kafka Producer
+      run: |
+        cd java/kafka_/target
+        nohup java -jar kafka-example-1.0-SNAPSHOT.jar &
+
+    - name: Run Kafka Consumer
       run: |
         cd java/kafka_
-        nohup java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaProducerApp &
-        nohup java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp &
+        nohup java -cp kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp &
 
-    # Optional: Add a step to wait for Kafka to be ready before running your app
+    # Optional: Wait for Kafka
     - name: Wait for Kafka
       run: |
         echo "Waiting for Kafka to start..."
-        sleep 15 # Adjust the sleep time as needed
-
-    # More robust way to run (assuming JAR contains all dependencies)
-    - name: Run Kafka Producer (Robust)
-      run: |
-        cd java/kafka_/target
-        nohup java -jar kafka-example-1.0-SNAPSHOT.jar producer &
-
-    - name: Run Kafka Consumer (Robust)
-      run: |
-        cd java/kafka_/target
-        nohup java -jar kafka-example-1.0-SNAPSHOT.jar consumer &
+        sleep 15
