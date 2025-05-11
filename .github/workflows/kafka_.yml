@@ -1,0 +1,55 @@
+name: Build and Test Kafka Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      kafka:
+        image: confluentinc/cp-kafka:latest
+        ports:
+          - 9092:9092
+        options: >-
+          --env KAFKA_BROKER_ID=1
+          --env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+          --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+          --env KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      zookeeper:
+        image: confluentinc/cp-zookeeper:latest
+        ports:
+          - 2181:2181
+        options: >-
+          --env ZOOKEEPER_CLIENT_PORT=2181
+          --env ZOOKEEPER_TICK_TIME=2000
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: Build with Maven
+      run: mvn clean package
+
+    - name: Run Kafka Producer and Consumer
+      run: |
+        cd java/kafka_
+        java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaProducerApp &
+        java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp
