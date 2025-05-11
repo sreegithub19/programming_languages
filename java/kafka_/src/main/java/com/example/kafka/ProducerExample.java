@@ -14,7 +14,7 @@ public class ProducerExample {
             for (int i = 0; i < 5; i++) {
                 String key = "key-" + i;
                 String value = "value-" + i;
-                producer.send(new ProducerRecord<>("test-topic", key, value));
+                producer.send(new ProducerRecord<>("my-topic", key, value));
             }
         }
 

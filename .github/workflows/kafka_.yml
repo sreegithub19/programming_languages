@@ -32,6 +32,35 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+            java-version: '21'
+            distribution: 'temurin'
+
+      - name: Set up Maven
+        run: sudo apt-get install -y maven
+
+      - name: Build
+        run: |
+            cd java/kafka_
+            mvn clean compile
+
+      - name: Wait for Kafka to be Ready
+        run: |
+            echo "Waiting for Kafka..."
+            sleep 30
+
+      - name: Run Producer
+        run: |
+         cd java/kafka_
+         mvn exec:java -Dexec.mainClass="com.example.kafka.ProducerExample"
+
+      - name: Run Consumer
+        run: |
+         cd java/kafka_
+         mvn exec:java -Dexec.mainClass="com.example.kafka.ConsumerExample"
+
     #   - name: Install dependencies
     #     run: |
     #       python -m pip install --upgrade pip
