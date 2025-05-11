@@ -54,15 +54,23 @@ jobs:
       run: |
         cd java/kafka_/target
         nohup java -jar kafka-example-1.0-SNAPSHOT.jar &
+        echo "Kafka Producer started in the background, sending a message."
+        sleep 10
+
+    - name: Run Kafka Consumer
+      run: |
+        cd java/kafka_/target
         nohup java -jar kafka-consumer-example.jar &
+        echo "Kafka Consumer started in the background, listening for messages."
+        sleep 10
 
-    # - name: Run Kafka Consumer
-    #   run: |
-    #     cd java/kafka_/target
-    #     nohup java -jar kafka-consumer-example.jar &
+    - name: Check Consumer Output
+      run: |
+        echo "--- Consumer Output (last 30 lines) ---"
+        tail -n 30 nohup.out
 
-    # Optional: Wait for Kafka
+    # Optional: Wait for Kafka (can be reduced)
     - name: Wait for Kafka
       run: |
-        echo "Waiting for Kafka to start..."
-        sleep 15
+        echo "Waiting for Kafka to be ready..."
+        sleep 10
