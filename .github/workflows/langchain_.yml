@@ -3,7 +3,7 @@ name: LangChain CI
 on:
   push:
     branches:
-      - main
+      - main_
 
 jobs:
   langchain-run:
