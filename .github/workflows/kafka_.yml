@@ -1,76 +1,63 @@
-name: Build and Test Kafka Application
+name: Kafka Java CI
 
-on:
-  push:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  test:
+  kafka-test:
     runs-on: ubuntu-latest
-
     services:
-      kafka:
-        image: confluentinc/cp-kafka:latest
-        ports:
-          - 9092:9092
-        options: >-
-          --env KAFKA_BROKER_ID=1
-          --env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-          --env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-          --env KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       zookeeper:
-        image: confluentinc/cp-zookeeper:latest
+        image: confluentinc/cp-zookeeper:7.5.0
         ports:
           - 2181:2181
         options: >-
-          --env ZOOKEEPER_CLIENT_PORT=2181
-          --env ZOOKEEPER_TICK_TIME=2000
+          --health-cmd "echo ruok | nc localhost 2181 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      kafka:
+        image: confluentinc/cp-kafka:7.5.0
+        ports:
+          - 9092:9092
+        env:
+          KAFKA_BROKER_ID: 1
+          KAFKA_ZOOKEEPER_CONNECT: localhost:2181
+          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+          KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        options: >-
+          --health-cmd "kafka-topics --bootstrap-server localhost:9092 --list || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'adopt'
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
 
-    - name: Cache Maven dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('java/kafka_/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+      - name: Build project
+        run: |
+         cd java/kafka_
+         mvn clean compile
 
-    - name: Build with Maven
-      run: |
-       cd java/kafka_
-       mvn clean package
+      - name: Create Kafka topic
+        run: |
+          sleep 10
+          cd java/kafka_
+          kafka-topics --create --topic test-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
 
-    - name: Run Kafka Producer
-      run: |
-        cd java/kafka_/target
-        nohup java -jar kafka-example-1.0-SNAPSHOT.jar &
-        echo "Kafka Producer started in the background, sending a message."
-        sleep 10
+      - name: Run Producer
+        run: |
+         cd java/kafka_
+         mvn exec:java -Dexec.mainClass="com.example.kafka.ProducerExample"
 
-    - name: Run Kafka Consumer
-      run: |
-        cd java/kafka_/target
-        nohup java -jar kafka-consumer-example.jar &
-        echo "Kafka Consumer started in the background, listening for messages."
-        sleep 10
-
-    - name: Check Consumer Output
-      run: |
-        echo "--- Consumer Output (last 30 lines) ---"
-        tail -n 30 nohup.out
-
-    # Optional: Wait for Kafka (can be reduced)
-    - name: Wait for Kafka
-      run: |
-        echo "Waiting for Kafka to be ready..."
-        sleep 10
+      - name: Run Consumer
+        run: |
+         cd java/kafka_
+         mvn exec:java -Dexec.mainClass="com.example.kafka.ConsumerExample"
