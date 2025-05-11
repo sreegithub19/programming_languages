@@ -41,7 +41,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('java/kafka_/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
 
@@ -53,5 +53,22 @@ jobs:
     - name: Run Kafka Producer and Consumer
       run: |
         cd java/kafka_
-        java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaProducerApp &
-        java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp
+        nohup java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaProducerApp &
+        nohup java -cp target/kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp &
+
+    # Optional: Add a step to wait for Kafka to be ready before running your app
+    - name: Wait for Kafka
+      run: |
+        echo "Waiting for Kafka to start..."
+        sleep 15 # Adjust the sleep time as needed
+
+    # More robust way to run (assuming JAR contains all dependencies)
+    - name: Run Kafka Producer (Robust)
+      run: |
+        cd java/kafka_/target
+        nohup java -jar kafka-example-1.0-SNAPSHOT.jar producer &
+
+    - name: Run Kafka Consumer (Robust)
+      run: |
+        cd java/kafka_/target
+        nohup java -jar kafka-example-1.0-SNAPSHOT.jar consumer &
