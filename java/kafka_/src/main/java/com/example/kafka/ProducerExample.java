@@ -12,8 +12,8 @@ public class ProducerExample {
 
         try (KafkaProducer<String, String> producer = new KafkaProducer<>(props)) {
             for (int i = 0; i < 5; i++) {
-                String key = "key-" + i;
-                String value = "value-" + i;
+                String key = "key-" + i+1;
+                String value = "value-" + i+1;
                 producer.send(new ProducerRecord<>("my-topic", key, value));
             }
         }
