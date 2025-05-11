@@ -57,8 +57,8 @@ jobs:
 
     - name: Run Kafka Consumer
       run: |
-        cd java/kafka_
-        nohup java -cp kafka-example-1.0-SNAPSHOT.jar com.example.KafkaConsumerApp &
+        cd java/kafka_/target
+        nohup java -jar kafka-consumer-example.jar &
 
     # Optional: Wait for Kafka
     - name: Wait for Kafka
