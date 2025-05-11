@@ -15,7 +15,7 @@ public class ConsumerExample {
         props.put("auto.offset.reset", "earliest");
 
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {
-            consumer.subscribe(Collections.singletonList("m-topic"));
+            consumer.subscribe(Collections.singletonList("my-topic"));
             for (int i = 0; i < 5; i++) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
                 for (ConsumerRecord<String, String> record : records) {
