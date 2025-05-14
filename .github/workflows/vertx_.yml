@@ -99,6 +99,8 @@ jobs:
       - name: Build Ktor with Kotlinc piping
         run: |
           cd kotlin/ktor_
+          mvn clean -rf :my-ktor-app
+          mvn compile
           mvn package
           jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
 
