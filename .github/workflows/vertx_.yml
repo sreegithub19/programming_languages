@@ -80,6 +80,7 @@ jobs:
       - name: Build Ktor with Kotlinc
         run: |
           cd kotlin/ktor_
+          mvn package
           jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
           kotlinc -cp "$jars" src/main/kotlin/com/example/AppServer.kt -d target/classes
           kotlin -cp "target/classes:$jars" com.example.AppServerKt & # Run in the background
