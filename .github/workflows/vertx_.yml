@@ -159,7 +159,7 @@ jobs:
           }
 
           // Create an instance of AppServer
-          val server = AppServer(port = 8080)
+          val server = AppServer(port = 8100)
           // Call the start method to run the server
           server.start()
 
