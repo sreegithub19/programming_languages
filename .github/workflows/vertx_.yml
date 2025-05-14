@@ -172,11 +172,29 @@ jobs:
           
           KOTLIN_PID_2=$!
 
-          # Wait for 10 seconds
-          sleep 10
+          # Install ngrok
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list >/dev/null
+          sudo apt update && sudo apt install ngrok
+
+          # Authenticate ngrok using the authtoken from GitHub Secrets
+          ngrok authtoken 2whue6P5qFygcTJjinX37XDBpTN_YUPyCQTL9pWdzG5KQsTb
+
+          # Start ngrok to expose localhost:8090
+          ngrok http 8100 > /dev/null &
+
+          # Wait for ngrok to initialize and fetch public URL
+          sleep 5
+          NGROK_PUBLIC_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          echo "ngrok public URL: $NGROK_PUBLIC_URL"
+
+          # Keep Spring Boot and ngrok running for 5 minutes
+          echo "Ktor and ngrok are running. Open $NGROK_PUBLIC_URL in your browser."
+
+          sleep 60 # 1 minutes
 
           # Kill both processes
           kill $KOTLIN_PID_2
 
           # Notify the user
-          echo "Ran for 10 seconds and now terminated kotlinc piping."
+          echo "Ran for 60 seconds and now terminated kotlinc piping."
