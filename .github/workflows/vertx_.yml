@@ -74,7 +74,7 @@ jobs:
           kill $KOTLIN_PID_
 
           # Notify the user
-          echo "Ran for 10 seconds and now terminated."
+          echo "Ran for 10 seconds and now terminated maven."
 
 
       - name: Build Ktor with Kotlinc
@@ -93,4 +93,90 @@ jobs:
           kill $KOTLIN_PID_1
 
           # Notify the user
-          echo "Ran for 10 seconds and now terminated."
+          echo "Ran for 10 seconds and now terminated kotlinc."
+
+
+      - name: Build Ktor with Kotlinc piping
+        run: |
+          cd kotlin/ktor_
+          mvn package
+          jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
+
+          echo '
+          package com.example
+
+          import io.ktor.server.engine.*
+          import io.ktor.server.netty.*
+          import io.ktor.server.application.*
+          import io.ktor.server.response.*
+          import io.ktor.server.request.*
+          import io.ktor.server.routing.*
+
+          // Define the AppServer class
+          class AppServer(private val port: Int) {
+              fun start() {
+                  embeddedServer(Netty, port = port) {
+                      routing {
+                          get("/") {
+                              call.respondText("Hello from Ktor in AppServer!")
+                          }
+                          // You can add more routes here
+                          get("/hello") {
+                              call.respondText("Hello, World, from another route!")
+                          }
+
+                          get("/html_string") {
+                              val htmlContent = """
+                                  <!DOCTYPE html>
+                                  <html>
+                                  <head>
+                                      <meta charset="UTF-8">
+                                      <title>My HTML Page</title>
+                                  </head>
+                                  <body>
+                                      <script>
+                                          alert(2)
+                                      </script>
+                                      <div>
+                                          <h1>Hello from embedded HTML string!</h1>
+                                          <p>This HTML is directly included in the Kotlin code.</p>
+                                          <ul>
+                                              <li>Item 1</li>
+                                              <li>Item 2</li>
+                                              <li>Item 3</li>
+                                          </ul>
+                                      </div>
+                                  </body>
+                                  </html>
+                              """.trimIndent()
+                              call.respondText(htmlContent, io.ktor.http.ContentType.Text.Html)
+                          }
+                      }
+                  }.start(wait = true)
+              }
+          }
+
+          fun main() {
+              // Create an instance of AppServer
+              val server = AppServer(port = 8080)
+              // Call the start method to run the server
+              server.start()
+          }
+
+          '  | kotlinc -cp "$jars" -d target/classes
+
+          # Run the compiled Ktor server in the background
+          kotlin -cp "target/classes:$jars" com.example.AppServerKt &
+
+          
+          
+          KOTLIN_PID_2=$!
+
+          # Wait for 10 seconds
+          sleep 10
+
+          # Kill both processes
+          kill $KOTLIN_PID_2
+
+          # Notify the user
+          echo "Ran for 10 seconds and now terminated kotlinc piping."
