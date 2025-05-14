@@ -1,0 +1,60 @@
+name: Double the Sum of Numbers Workflow
+
+on:
+  push:
+    branches:
+        - main
+  workflow_dispatch:
+    inputs:
+      numbers:
+        description: 'Enter a list of numbers separated by commas (e.g., 5,10,3)'
+        required: true
+        type: string
+      numbers1:
+        description: 'Enter a list of numbers separated by commas (e.g., 5,10,3)'
+        required: false
+        type: string
+
+jobs:
+  calculate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Process numbers, sum and double using Python
+      id: python_processing
+      run: |
+        # Get the user-provided numbers (comma-separated)
+        # Run Python script to sum and double the sum directly
+        python3 -c "
+        import json
+
+        # Get the input strings from the environment
+        numbers_str = '${{ github.event.inputs.numbers }}'
+        numbers1_str = '${{ github.event.inputs.numbers1 }}'
+
+        # Split the input strings by commas and convert to integers, handling potential empty strings
+        numbers_list = [int(num.strip()) for num in numbers_str.split(',') if num.strip()]
+        numbers1_list = [int(num.strip()) for num in numbers1_str.split(',') if numbers1_str and num.strip()]
+
+        # Combine the lists
+        all_numbers = numbers_list + numbers1_list
+
+        # Calculate the sum of the numbers
+        sum_of_numbers = sum(all_numbers)
+
+        # Double the sum
+        doubled_sum = sum_of_numbers * 2
+
+        # Print the results
+        print(f'Sum of the numbers: {sum_of_numbers}')
+        print(f'Doubled sum: {doubled_sum}')
+
+        # Check if the doubled sum is even or odd
+        if doubled_sum % 2 == 0:
+            print('The doubled sum is even.')
+        else:
+            print('The doubled sum is odd.')
+        "
