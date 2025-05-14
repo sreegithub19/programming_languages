@@ -98,6 +98,7 @@ jobs:
 
       - name: Build Ktor with Kotlinc piping
         run: |
+          sleep 60 # to avoid ngrok overlap
           cd kotlin/ktor_
           mvn clean -rf :my-ktor-app
           mvn compile
@@ -191,7 +192,7 @@ jobs:
           # Keep Spring Boot and ngrok running for 5 minutes
           echo "Ktor and ngrok are running. Open $NGROK_PUBLIC_URL in your browser."
 
-          sleep 60 # 1 minutes
+          sleep 15
 
           # Kill both processes
           kill $KOTLIN_PID_2

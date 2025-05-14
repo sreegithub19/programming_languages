@@ -86,7 +86,7 @@ jobs:
 
           # Keep Spring Boot and ngrok running for 5 minutes
           echo "Spring Boot and ngrok are running. Open $NGROK_PUBLIC_URL in your browser."
-          sleep 60 # 1 minutes
+          sleep 20 # 1 minutes
 
       # Step 4: Take Website Snapshot
       - name: Take Website Snapshot
