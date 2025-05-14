@@ -62,7 +62,7 @@ typescript/webassembly_/2d_game_/jspm_packages
 
 
 ##########################################
-# java
+# java and kotlin
 
 java/.idea
 
@@ -87,6 +87,10 @@ java/vertx_/dependency-reduced-pom.xml
 kotlin/vertx_/target
 kotlin/vertx_/dependency-reduced-pom.xml
 kotlin/spring_boot/target
+
+# ktor
+kotlin/ktor_/lib
+kotlin/ktor_/target
 
 ##########################################
 # typescript -> cypress_automation

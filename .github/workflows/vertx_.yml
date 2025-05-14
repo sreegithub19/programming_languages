@@ -75,3 +75,21 @@ jobs:
 
           # Notify the user
           echo "Ran for 10 seconds and now terminated."
+
+
+      - name: Build Ktor with Kotlinc
+        run: |
+          cd kotlin/ktor_
+          jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
+          kotlinc -cp "$jars" src/main/kotlin/com/example/AppServer.kt -d target/classes
+          kotlin -cp "target/classes:$jars" com.example.AppServerKt & # Run in the background
+          KOTLIN_PID_1=$!
+
+          # Wait for 10 seconds
+          sleep 10
+
+          # Kill both processes
+          kill $KOTLIN_PID_1
+
+          # Notify the user
+          echo "Ran for 10 seconds and now terminated."
