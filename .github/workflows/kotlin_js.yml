@@ -30,6 +30,13 @@ jobs:
     # Step 4: Build the Kotlin/JS project
     - name: Build project
       run: |
+       cd kotlin/KotlinProject
+       ./gradlew clean build
+       ./gradlew run
+
+    # Step 4: Build the Kotlin/JS project
+    - name: Build project
+      run: |
        cd kotlin/kotlin_js
        gradle browserProductionWebpack
        mv build/distributions/kotlin_js.js .
