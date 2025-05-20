@@ -27,15 +27,6 @@ jobs:
     - name: Set up Gradle
       uses: gradle/gradle-build-action@v2
 
-    - name: Download CFR Decompiler
-      run: |
-        CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
-        CFR_URL="http://www.benf.org/other/cfr/cfr-${CFR_VERSION}.jar"
-        mkdir -p ./.github/tools # Create a directory for tools
-        wget -O ./.github/tools/cfr.jar "$CFR_URL"
-        echo "CFR downloaded to ./.github/tools/cfr.jar"
-        JAVA_CMD="java -jar ./.github/tools/cfr.jar"
-
     # Step 4: Build the Kotlin tutorial project using gradle
     - name: Build the Kotlin tutorial project using gradle
       run: |
@@ -50,6 +41,33 @@ jobs:
        jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
        kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
        kotlin -cp "target/classes:$jars" org.example.MainKt
+
+    - name: Download CFR Decompiler
+      run: |
+        CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
+        CFR_URL="http://www.benf.org/other/cfr/cfr-${CFR_VERSION}.jar"
+        mkdir -p ./.github/tools # Create a directory for tools
+        wget -O ./.github/tools/cfr.jar "$CFR_URL"
+        echo "CFR downloaded to ./.github/tools/cfr.jar"
+        JAVA_CMD="java -jar ./.github/tools/cfr.jar"
+        
+        cd kotlin/KotlinProject
+        CLASS_FILE="target/classes/org/example/MainKt.class" # Adjust path if different
+        OUTPUT_DIR="decompiled-java"
+        OUTPUT_FILE="${OUTPUT_DIR}/MainKt.java"
+
+        mkdir -p "$OUTPUT_DIR"
+        echo "Decompiling $CLASS_FILE to $OUTPUT_FILE"
+        "$JAVA_CMD" "$CLASS_FILE" > "$OUTPUT_FILE"
+
+        if [ $? -eq 0 ]; then
+          echo "Decompilation successful."
+          cat "$OUTPUT_FILE" # Print to log for immediate inspection
+        else
+          echo "Decompilation failed."
+          exit 1
+        fi
+
 
     # Step 4: Build the Kotlin/JS project
     - name: Build the Kotlin/JS project
