@@ -42,6 +42,14 @@ jobs:
        kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
        kotlin -cp "target/classes:$jars" org.example.MainKt
 
+    
+    # Step 2: Set up JDK
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
     - name: Download CFR Decompiler
       run: |
         CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
