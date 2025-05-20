@@ -27,12 +27,20 @@ jobs:
     - name: Set up Gradle
       uses: gradle/gradle-build-action@v2
 
-    # Step 4: Build the Kotlin/JS project
+    # Step 4: Build the Kotlin tutorial project using gradle
     - name: Build project
       run: |
        cd kotlin/KotlinProject
-       ./gradlew clean build
-       ./gradlew run
+       ./gradlew clean build && ./gradlew run
+
+    # Step 4: Build the Kotlin tutorial project using kotlinc (to convert to Java)
+    - name: Build project
+      run: |
+       cd kotlin/KotlinProject
+       ./gradlew copyDependencies
+       jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
+       kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
+       kotlin -cp "target/classes:$jars" org.example.MainKt
 
     # Step 4: Build the Kotlin/JS project
     - name: Build project
