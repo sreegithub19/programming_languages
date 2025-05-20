@@ -47,9 +47,9 @@ jobs:
         CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
         CFR_URL="http://www.benf.org/other/cfr/cfr-${CFR_VERSION}.jar"
         mkdir -p ./.github/tools # Create a directory for tools
-        wget -O ./.github/tools/cfr.jar "$CFR_URL"
-        echo "CFR downloaded to ./.github/tools/cfr.jar"
-        JAVA_CMD="java -jar ./.github/tools/cfr.jar"
+        wget -O cfr.jar "$CFR_URL"
+        echo "CFR downloaded"
+        JAVA_CMD="java -jar cfr.jar"
 
         CLASS_FILE="kotlin/KotlinProject/target/classes/org/example/MainKt.class" # Adjust path if different
         OUTPUT_DIR="decompiled-java"
