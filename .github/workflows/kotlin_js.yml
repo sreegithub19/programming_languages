@@ -27,23 +27,15 @@ jobs:
     - name: Set up Gradle
       uses: gradle/gradle-build-action@v2
 
-    # Step 4: Build the Kotlin tutorial project using gradle
-    - name: Build the Kotlin tutorial project using gradle
-      run: |
-       cd kotlin/KotlinProject
-       ./gradlew clean build && ./gradlew run
-
     # Step 4: Build the Kotlin tutorial project using kotlinc (to convert to Java)
     - name: Build the Kotlin tutorial project using kotlinc (to convert to Java)
       run: |
-       cd kotlin/KotlinProject
-       ./gradlew copyDependencies
-       jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
-       kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
-       kotlin -cp "target/classes:$jars" org.example.MainKt
+        cd kotlin/KotlinProject
+        ./gradlew copyDependencies
+        jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
+        kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
+        kotlin -cp "target/classes:$jars" org.example.MainKt
 
-    - name: Download CFR Decompiler
-      run: |
         CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
         CFR_URL="http://www.benf.org/other/cfr/cfr-${CFR_VERSION}.jar"
         mkdir -p ./.github/tools # Create a directory for tools
@@ -52,7 +44,7 @@ jobs:
 
         OUTPUT_DIR="decompiled-java"
         OUTPUT_FILE="${OUTPUT_DIR}/MainKt.java"
-  
+
         mkdir -p "$OUTPUT_DIR"
         echo "Decompiling $CLASS_FILE to $OUTPUT_FILE"
         java -jar cfr.jar kotlin/KotlinProject/target/classes/org/example/MainKt.class > "$OUTPUT_FILE"
@@ -65,6 +57,11 @@ jobs:
           exit 1
         fi
 
+    # Step 4: Build the Kotlin tutorial project using gradle
+    - name: Build the Kotlin tutorial project using gradle
+      run: |
+       cd kotlin/KotlinProject
+       ./gradlew clean build && ./gradlew run
 
     # Step 4: Build the Kotlin/JS project
     - name: Build the Kotlin/JS project
