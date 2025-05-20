@@ -45,6 +45,8 @@ jobs:
         OUTPUT_DIR="decompiled-java"
         OUTPUT_FILE="${OUTPUT_DIR}/MainKt.java"
 
+        cd ../..
+
         mkdir -p "$OUTPUT_DIR"
         echo "Decompiling $CLASS_FILE to $OUTPUT_FILE"
         java -jar cfr.jar kotlin/KotlinProject/target/classes/org/example/MainKt.class > "$OUTPUT_FILE"
