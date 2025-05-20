@@ -50,9 +50,8 @@ jobs:
         wget -O ./.github/tools/cfr.jar "$CFR_URL"
         echo "CFR downloaded to ./.github/tools/cfr.jar"
         JAVA_CMD="java -jar ./.github/tools/cfr.jar"
-        
-        cd kotlin/KotlinProject
-        CLASS_FILE="target/classes/org/example/MainKt.class" # Adjust path if different
+
+        CLASS_FILE="kotlin/KotlinProject/target/classes/org/example/MainKt.class" # Adjust path if different
         OUTPUT_DIR="decompiled-java"
         OUTPUT_FILE="${OUTPUT_DIR}/MainKt.java"
 
