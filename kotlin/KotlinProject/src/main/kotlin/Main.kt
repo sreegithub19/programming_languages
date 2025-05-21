@@ -1,7 +1,6 @@
 package org.example
 
 import io.vavr.API.*
-import io.vavr.control.*
 import java.util.Optional
 
 var name : kotlin.String = "Kotlin"
@@ -10,51 +9,110 @@ var nums  : kotlin.Int = 2
 var greeting : kotlin.String? = null
 
 fun main() {
-
+    // File 1
     Main()
+
+    // File 2
+    getters_setters()
+
+    // File 3
+    interfaces()
+
+    // File 4
+    inheritance()
+
+    // File 5
+    companion_objects()
+
+    // File 6
+    object_declaration()
+
+    // File 7
+    sealed_classes_and_data_classes_and_extension_functions_and_extension_properties()
+
+    // File 8
+    higher_order_functions()
+
 }
+
+class higher_order_functions(){
+    init{
+        HigherOrderFunctions_Kt()
+    }
+}
+
+class sealed_classes_and_data_classes_and_extension_functions_and_extension_properties(){
+    init{
+        SealedClassesDataClasses_Kt()
+    }
+}
+
+class interfaces(){
+    init{
+        BasicInfoProvider_Kt()
+    }
+}
+
+class inheritance(){
+    init{
+        FancyInfoProvider_Kt()
+
+        BasicInfoProvider_Kt()
+    }
+}
+
+class companion_objects(){
+    init{
+        EntityFactory_Kt()
+    }
+}
+
+class object_declaration(){
+    init{
+        ObjectDeclaration_Kt()
+    }
+}
+
+
+class getters_setters(){
+    init{
+        val object_ = Sub0();
+        object_.doSomething()
+        object_.nickName = "Peters"
+        object_.nickName = "Pesters"
+
+        object_.nickName
+        println(object_.nickName)
+
+        val object1 = Sub0_1();
+        object1.doSomething()
+        object1.setNickName("Peters")
+        object1.setNickName("Pesters")
+
+        object1.getNickName()
+        print(object1.getNickName())
+    }
+}
+
 
 class Main() {
     init{
         println("Hello main, " + name + "!")
         for(i in 1..5) println("i = $i")
         println("--------------------------")
-
         topics()
         classes()
+        nested()
+    }
+
+    fun nested(){
+        println("Nested function in class")
     }
 }
 
 
 fun classes() {
     // Primary constructor
-    class Person(_firstName: String, _lastName: String) {
-        val firstName: String = _firstName
-        val lastName: String = _lastName
-
-        init {
-            println("init 1 $firstName $lastName")
-            println("init 1 $_firstName $_lastName")
-        }
-
-        init {
-            println("init 2")
-        }
-
-        // Secondary constructor with default values
-        constructor() : this("Peter", "Parker") {
-            println("secondary constructor")
-        }
-
-        // Secondary constructor with named arguments (no longer conflicting)
-        constructor(_firstName: String, _lastName: String, swapNames: Boolean) : this(if (swapNames) _lastName else _firstName, if (swapNames) _firstName else _lastName) {
-            println("secondary constructor with swapNames = $swapNames")
-        }
-
-        init {
-            println("--------------------------")
-        }
-    }
 
     // Creating Person using primary constructor
     Person("test", "user")
@@ -65,7 +123,38 @@ fun classes() {
     Person("Alice", "Smith", true)
 }
 
+class Person(_firstName: String, _lastName: String) {
+    val firstName: String = _firstName
+    val lastName: String = _lastName
 
+    init {
+        println("init 1 $firstName $lastName")
+        println("init 1 $_firstName $_lastName")
+    }
+
+    init {
+        println("init 2")
+    }
+
+    // Secondary constructor with default values
+    constructor() : this("Peter", "Parker") {
+        println("secondary constructor")
+    }
+
+    // Secondary constructor with named arguments (no longer conflicting)
+    constructor(_firstName: String, _lastName: String, swapNames: Boolean) : this(if (swapNames) _lastName else _firstName, if (swapNames) _firstName else _lastName) {
+        println("secondary constructor with swapNames = $swapNames")
+    }
+
+    init {
+        println("--------------------------")
+    }
+
+    // New function to print first name and last name
+    fun printInfo() {
+        println("Name: $firstName $lastName")
+    }
+}
 
 
 
