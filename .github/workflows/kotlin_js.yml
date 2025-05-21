@@ -33,7 +33,7 @@ jobs:
         cd kotlin/KotlinProject
         ./gradlew copyDependencies
         jars=$(ls lib/*.jar | tr '\n' ':' | sed 's/:$//')
-        kotlinc -cp "$jars" src/main/kotlin/Main.kt -d target/classes
+        kotlinc -cp "$jars" src/main/kotlin -d target/classes
         kotlin -cp "target/classes:$jars" org.example.MainKt
 
         CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
@@ -48,6 +48,7 @@ jobs:
 
         mkdir -p "$OUTPUT_DIR"
         echo "Decompiling $CLASS_FILE to $OUTPUT_FILE"
+        ls kotlin/KotlinProject/target/classes/org/example
         java -jar cfr.jar kotlin/KotlinProject/target/classes/org/example/MainKt.class > "$OUTPUT_FILE"
 
         if [ $? -eq 0 ]; then
