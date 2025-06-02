@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   convert:
     runs-on: ubuntu-latest
@@ -33,6 +32,11 @@ jobs:
           export DISPLAY=:99
           Xvfb :99 -screen 0 1920x1080x24 &
           sleep 5
+          # Verify Xvfb is running
+          if ! xdpyinfo -display :99 >/dev/null 2>&1; then
+            echo "Xvfb failed to start. Exiting."
+            exit 1
+          fi
 
       # 5) Launch IntelliJ in the background (pointing at this workspace)
       #    and wait until it’s fully up and indexing
@@ -42,37 +46,32 @@ jobs:
           DISPLAY: :99
         run: |
           nohup ./idea/bin/idea.sh "$GITHUB_WORKSPACE" &> idea.log &
-          # Give it time to start and index. Adjust if your project is large.
-          sleep 60
+          # Give more time for indexing
+          sleep 120
 
       # 6) Use xdotool to open the IDE Scripting Console and run our Groovy script
       - name: Run Groovy Script via IDE Scripting Console
         env:
           DISPLAY: :99
         run: |
-          # 6.1 Focus IntelliJ by window name
-          #     (the "IntelliJ IDEA" title may differ slightly depending on version)
-          xdotool search --name "IntelliJ IDEA" windowactivate --sync
-
-          # 6.2 Open "Find Action" (Ctrl+Shift+A), type "IDE Scripting Console", press Enter
+          # Focus IntelliJ using a fallback method
+          xdotool search --name "IntelliJ IDEA" | head -n1 | while read WINDOW; do
+            xdotool windowactivate "$WINDOW" || echo "Window activation failed. Retrying..."
+          done
+          sleep 5
+          # Proceed with other commands
           xdotool key --window "$(xdotool search --name "IntelliJ IDEA" | head -n1)" ctrl+shift+a
           sleep 1
           xdotool type "IDE Scripting Console"
           sleep 1
           xdotool key Return
           sleep 2
-
-          # 6.3 In the console, type a Groovy command that loads & runs our script file
-          #       We assume our script path is "$GITHUB_WORKSPACE/.github/scripts/convert-java-to-kotlin.groovy"
           GROOVY_PATH="$GITHUB_WORKSPACE/.github/scripts/convert-java-to-kotlin.groovy"
-          # Run: runScript("absolute/path/to/groovyfile")
-          xdotool type "runScript('${GROOVY_PATH.replace(\"'\",\"\\\\'\")}')"
+          xdotool type "runScript('${GROOVY_PATH//\'/\\\'}')"
           sleep 1
           xdotool key Return
-          # Give it time to convert all files
           sleep 30
-
-          # 6.4 Close the IDE (Alt+F4)
+          # Close the IDE
           xdotool key alt+F4
 
       # 7) Collect all newly generated .kt files
