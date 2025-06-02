@@ -1,0 +1,91 @@
+name: "Convert Java to Kotlin"
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Check out your repository
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) Install dependencies (JDK, Xvfb, xdotool)
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk xvfb xdotool wget unzip
+
+      # 3) Download & extract IntelliJ IDEA Community Edition
+      - name: Download IntelliJ IDEA CE
+        run: |
+          wget https://download.jetbrains.com/idea/ideaIC-2023.2.4.tar.gz -O ideaIC.tar.gz
+          tar -xzf ideaIC.tar.gz
+          mv idea-IC-* idea
+
+      # 4) Start an Xvfb server so IntelliJ can launch a "virtual" display
+      - name: Start Xvfb
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 &
+          sleep 5
+
+      # 5) Launch IntelliJ in the background (pointing at this workspace)
+      #    and wait until it’s fully up and indexing
+      - name: Launch IntelliJ IDEA
+        env:
+          IDEA_JDK: /usr/lib/jvm/java-17-openjdk-amd64
+          DISPLAY: :99
+        run: |
+          nohup ./idea/bin/idea.sh "$GITHUB_WORKSPACE" &> idea.log &
+          # Give it time to start and index. Adjust if your project is large.
+          sleep 60
+
+      # 6) Use xdotool to open the IDE Scripting Console and run our Groovy script
+      - name: Run Groovy Script via IDE Scripting Console
+        env:
+          DISPLAY: :99
+        run: |
+          # 6.1 Focus IntelliJ by window name
+          #     (the "IntelliJ IDEA" title may differ slightly depending on version)
+          xdotool search --name "IntelliJ IDEA" windowactivate --sync
+
+          # 6.2 Open "Find Action" (Ctrl+Shift+A), type "IDE Scripting Console", press Enter
+          xdotool key --window "$(xdotool search --name "IntelliJ IDEA" | head -n1)" ctrl+shift+a
+          sleep 1
+          xdotool type "IDE Scripting Console"
+          sleep 1
+          xdotool key Return
+          sleep 2
+
+          # 6.3 In the console, type a Groovy command that loads & runs our script file
+          #       We assume our script path is "$GITHUB_WORKSPACE/.github/scripts/convert-java-to-kotlin.groovy"
+          GROOVY_PATH="$GITHUB_WORKSPACE/.github/scripts/convert-java-to-kotlin.groovy"
+          # Run: runScript("absolute/path/to/groovyfile")
+          xdotool type "runScript('${GROOVY_PATH.replace(\"'\",\"\\\\'\")}')"
+          sleep 1
+          xdotool key Return
+          # Give it time to convert all files
+          sleep 30
+
+          # 6.4 Close the IDE (Alt+F4)
+          xdotool key alt+F4
+
+      # 7) Collect all newly generated .kt files
+      - name: Archive converted Kotlin files
+        run: |
+          mkdir -p converted_kt
+          find . -type f -name "*.kt" -not -path "./.github/*" -exec cp --parents "{}" converted_kt/ \;
+          tar -czf converted_kotlin.tar.gz converted_kt
+
+      # 8) Upload the artifact (optional)
+      - name: Upload Kotlin files artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: converted-kotlin
+          path: converted_kotlin.tar.gz
