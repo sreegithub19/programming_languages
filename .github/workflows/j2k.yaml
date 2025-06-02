@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out your repository
       - name: Check out code
         uses: actions/checkout@v3
 
@@ -85,7 +84,7 @@ jobs:
 
       # 8) Upload the artifact (optional)
       - name: Upload Kotlin files artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: converted-kotlin
           path: converted_kotlin.tar.gz
