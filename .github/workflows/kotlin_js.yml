@@ -69,9 +69,9 @@ jobs:
         jars=$(ls $LIBS_PATH/*.jar | tr '\n' ':' | sed 's/:$//')
 
         # Remove lines with "void" used as a variable (not as a method)
-        sed -i '/^\s*void [a-zA-Z0-9$_]\+;/d' decompiled-java/MainKt.java
-        sed -i '/^\s*void [a-zA-Z0-9$_]\+ =/d' decompiled-java/MainKt.java
-        
+        sed -i '/^\s*void [a-zA-Z0-9$_]\+;/d' MainKt.java
+        sed -i '/^\s*void [a-zA-Z0-9$_]\+ =/d' MainKt.java
+
         javac -cp "$jars" MainKt.java
         ls -l
 
