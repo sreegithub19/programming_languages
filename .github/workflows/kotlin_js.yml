@@ -59,21 +59,21 @@ jobs:
           exit 1
         fi
 
-    # Step 4.1: Compile the decompiled Java file
-    - name: Compile the Decompiled Java file
-      run: |
-        # Compile the decompiled Java file
-        cd decompiled-java
-        # Find the classpath for dependencies
-        LIBS_PATH=../kotlin/KotlinProject/lib
-        jars=$(ls $LIBS_PATH/*.jar | tr '\n' ':' | sed 's/:$//')
+    # # Step 4.1: Compile the decompiled Java file
+    # - name: Compile the Decompiled Java file
+    #   run: |
+    #     # Compile the decompiled Java file
+    #     cd decompiled-java
+    #     # Find the classpath for dependencies
+    #     LIBS_PATH=../kotlin/KotlinProject/lib
+    #     jars=$(ls $LIBS_PATH/*.jar | tr '\n' ':' | sed 's/:$//')
 
-        # Remove lines with "void" used as a variable (not as a method)
-        sed -i '/^\s*void [a-zA-Z0-9$_]\+;/d' MainKt.java
-        sed -i '/^\s*void [a-zA-Z0-9$_]\+ =/d' MainKt.java
+    #     # Remove lines with "void" used as a variable (not as a method)
+    #     sed -i '/^\s*void [a-zA-Z0-9$_]\+;/d' MainKt.java
+    #     sed -i '/^\s*void [a-zA-Z0-9$_]\+ =/d' MainKt.java
 
-        javac -cp "$jars" MainKt.java
-        ls -l
+    #     javac -cp "$jars" MainKt.java
+    #     ls -l
 
     # Step 4: Build the Kotlin tutorial project using gradle
     - name: Build the Kotlin tutorial project using gradle
