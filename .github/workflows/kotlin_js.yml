@@ -59,6 +59,17 @@ jobs:
           exit 1
         fi
 
+    # Step 4.1: Compile the decompiled Java file
+    - name: Compile the Decompiled Java file
+      run: |
+        # Compile the decompiled Java file
+        cd decompiled-java
+        # Find the classpath for dependencies
+        LIBS_PATH=../kotlin/KotlinProject/lib
+        jars=$(ls $LIBS_PATH/*.jar | tr '\n' ':' | sed 's/:$//')
+        javac -cp "$jars" MainKt.java
+        ls -l
+
     # Step 4: Build the Kotlin tutorial project using gradle
     - name: Build the Kotlin tutorial project using gradle
       run: |
