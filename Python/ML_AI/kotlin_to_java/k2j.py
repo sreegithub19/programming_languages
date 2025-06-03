@@ -7,7 +7,7 @@ def convert_kotlin_to_java(api_key, kotlin_code, output_filename="ConvertedCode.
     Converts Kotlin code to Java code using the Gemini API and saves it to a file.
     Returns the filename if successful, None otherwise.
     """
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
     payload = {
         "contents": [
