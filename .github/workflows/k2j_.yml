@@ -1,0 +1,62 @@
+name: Kotlin to Java Conversion & Execution
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  convert-and-execute:
+    runs-on: ubuntu-latest # Use a Linux environment
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' # Specify the Python version
+
+    - name: Set up Java Development Kit (JDK)
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # Use a popular OpenJDK distribution
+        java-version: '17' # Specify the Java version needed
+
+    - name: Generate Java code from Kotlin
+      id: generate_java # Give this step an ID to access its outputs
+      run: |
+        cd Python/ML_AI/kotlin_to_java
+        python k2j.py
+
+
+    - name: Find the generated Java file
+      id: get_java_file
+      run: |
+        # Look for the .java file created by the previous step.
+        # This assumes only one .java file will be generated in the root.
+
+        cd Python/ML_AI/kotlin_to_java
+
+        GENERATED_JAVA_FILE=$(find . -maxdepth 1 -name "*.java" -print -quit)
+        if [ -z "$GENERATED_JAVA_FILE" ]; then
+          echo "Error: No .java file found after conversion."
+          exit 1
+        fi
+        echo "Generated Java file: $GENERATED_JAVA_FILE"
+        # Extract just the filename (e.g., ConvertedCode.java)
+        echo "JAVA_FILE=$(basename $GENERATED_JAVA_FILE)" >> $GITHUB_OUTPUT
+        # Extract the class name (e.g., ConvertedCode)
+        CLASS_NAME=$(basename $GENERATED_JAVA_FILE .java)
+        echo "CLASS_NAME=$CLASS_NAME" >> $GITHUB_OUTPUT
+
+    - name: Compile Java code
+      run: |
+        cd Python/ML_AI/kotlin_to_java
+        javac ${{ steps.get_java_file.outputs.JAVA_FILE }}
+
+    - name: Execute Java code
+      run: |
+        cd Python/ML_AI/kotlin_to_java
+        java ${{ steps.get_java_file.outputs.CLASS_NAME }}
