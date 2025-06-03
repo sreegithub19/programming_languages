@@ -51,6 +51,8 @@ jobs:
         CLASS_NAME=$(basename $GENERATED_JAVA_FILE .java)
         echo "CLASS_NAME=$CLASS_NAME" >> $GITHUB_OUTPUT
 
+        cat "$GENERATED_JAVA_FILE"
+
     - name: Compile Java code
       run: |
         cd Python/ML_AI/kotlin_to_java
