@@ -28,26 +28,30 @@ jobs:
 
       - name: Build Debug APK
         run: |
-         cd java/android_/MySingleFileApp
-         gradle :app:assembleDebug
+          cd java/android_/MySingleFileApp
+          ./gradlew :app:assembleDebug --no-daemon
 
       - name: Start Android Emulator and Take Screenshot
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           target: google_apis
-          arch: x86_64
+          arch: arm64-v8a
           profile: Nexus 6
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -accel off
+          adb-wait-for-emulator-timeout-minutes: 10
           script: |
             cd java/android_/MySingleFileApp
+            adb devices
             adb install -r app/build/outputs/apk/debug/app-debug.apk
             adb shell am start -n com.example.singlefilexml/.MainActivity
-            sleep 10 # wait for the UI to load
-            adb exec-out screencap -p > screenshot.png
+            sleep 15 # wait for the UI to load fully
+            adb shell screencap -p /sdcard/screenshot.png
+            adb pull /sdcard/screenshot.png screenshot.png
 
       - name: Upload Emulator Screenshot
         uses: actions/upload-artifact@v4
         with:
           name: emulator-screenshot
-          path: |
-           java/android_/MySingleFileApp/screenshot.png
+          path: java/android_/MySingleFileApp/screenshot.png
+          retention-days: 7
