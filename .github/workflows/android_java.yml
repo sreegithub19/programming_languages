@@ -1,135 +1,135 @@
-name: Android Emulator Screenshot
+# name: Android Emulator Screenshot
 
-on:
-  push:
-    branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
+#   # pull_request:
+#   #   branches: [ main ]
 
-jobs:
-  build-emulator-screenshot:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-emulator-screenshot:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+#       - name: Set up JDK
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: 'temurin'
+#           java-version: '17'
 
-      - name: Download Android SDK Tools
-        uses: android-actions/setup-android@v3
+#       - name: Download Android SDK Tools
+#         uses: android-actions/setup-android@v3
 
-      - name: Install Gradle
-        uses: gradle/gradle-build-action@v2
+#       - name: Install Gradle
+#         uses: gradle/gradle-build-action@v2
 
-      - name: Build Debug APK
-        run: |
-          # Ensure we are in the correct directory for Gradle build
-          cd java/android_/MySingleFileApp
-          # Use --debug for more detailed Gradle output in case of build failures
-          gradle :app:assembleDebug --no-daemon --debug
-        # If the build command fails, fail the step
-        # This is implicit with `run`, but good to remember
+#       - name: Build Debug APK
+#         run: |
+#           # Ensure we are in the correct directory for Gradle build
+#           cd java/android_/MySingleFileApp
+#           # Use --debug for more detailed Gradle output in case of build failures
+#           gradle :app:assembleDebug --no-daemon --debug
+#         # If the build command fails, fail the step
+#         # This is implicit with `run`, but good to remember
   
-      - name: Start Android Emulator and Wait for Boot
-        run: |
-          # Ensure platform-tools are in PATH for adb commands immediately
-          export PATH=$PATH:$ANDROID_HOME/platform-tools
+#       - name: Start Android Emulator and Wait for Boot
+#         run: |
+#           # Ensure platform-tools are in PATH for adb commands immediately
+#           export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-          # Install system image (ensure it's not already installed to save time)
-          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64" || true
+#           # Install system image (ensure it's not already installed to save time)
+#           echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64" || true
 
-          # Create AVD (force creation in case it exists from previous runs)
-          $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --force --device "Nexus 6"
+#           # Create AVD (force creation in case it exists from previous runs)
+#           $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --force --device "Nexus 6"
 
-          # Start emulator in background, redirecting all output to emulator.log
-          nohup $ANDROID_HOME/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -accel off > emulator.log 2>&1 &
+#           # Start emulator in background, redirecting all output to emulator.log
+#           nohup $ANDROID_HOME/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -accel off > emulator.log 2>&1 &
 
-          echo "Waiting for emulator to boot..."
-          boot_completed=""
-          attempts=0
-          max_attempts=360 # Increased to 6 minutes (360 * 1 second)
+#           echo "Waiting for emulator to boot..."
+#           boot_completed=""
+#           attempts=0
+#           max_attempts=360 # Increased to 6 minutes (360 * 1 second)
           
-          # Give ADB some time to connect before polling
-          sleep 10 
+#           # Give ADB some time to connect before polling
+#           sleep 10 
 
-          # Loop until boot_completed is '1' or max_attempts reached
-          until [[ "$boot_completed" == "1" || $attempts -ge $max_attempts ]]; do
-            echo "Attempt $((attempts + 1)) of $max_attempts: Checking boot status..."
-            boot_completed=$(adb -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
-            if [[ "$boot_completed" == "1" ]]; then
-              echo "Emulator boot completed!"
-              break
-            fi
-            sleep 5 # Check every 5 seconds to reduce log spam, but wait longer
-            attempts=$((attempts + 1))
-          done
+#           # Loop until boot_completed is '1' or max_attempts reached
+#           until [[ "$boot_completed" == "1" || $attempts -ge $max_attempts ]]; do
+#             echo "Attempt $((attempts + 1)) of $max_attempts: Checking boot status..."
+#             boot_completed=$(adb -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
+#             if [[ "$boot_completed" == "1" ]]; then
+#               echo "Emulator boot completed!"
+#               break
+#             fi
+#             sleep 5 # Check every 5 seconds to reduce log spam, but wait longer
+#             attempts=$((attempts + 1))
+#           done
 
-          if [[ "$boot_completed" != "1" ]]; then
-            echo "::error::Emulator failed to boot within $max_attempts seconds."
-            echo "--- Emulator Logs ---"
-            cat emulator.log # Dump emulator logs for debugging
-            echo "--- ADB Devices ---"
-            adb devices -l # List connected devices
-            echo "--- System Logs ---"
-            adb logcat -d # Dump system logs (may be empty if no boot)
-            exit 1
-          fi
+#           if [[ "$boot_completed" != "1" ]]; then
+#             echo "::error::Emulator failed to boot within $max_attempts seconds."
+#             echo "--- Emulator Logs ---"
+#             cat emulator.log # Dump emulator logs for debugging
+#             echo "--- ADB Devices ---"
+#             adb devices -l # List connected devices
+#             echo "--- System Logs ---"
+#             adb logcat -d # Dump system logs (may be empty if no boot)
+#             exit 1
+#           fi
 
-          echo "Emulator booted successfully. Waiting for services..."
-          # Give some additional time for system services to stabilize
-          sleep 10
-          # Ensure adb is still connected
-          adb devices -l
+#           echo "Emulator booted successfully. Waiting for services..."
+#           # Give some additional time for system services to stabilize
+#           sleep 10
+#           # Ensure adb is still connected
+#           adb devices -l
 
-      - name: Install and Launch App, Take Screenshot
-        run: |
-          export PATH=$PATH:$ANDROID_HOME/platform-tools # Ensure PATH is set for this step too
+#       - name: Install and Launch App, Take Screenshot
+#         run: |
+#           export PATH=$PATH:$ANDROID_HOME/platform-tools # Ensure PATH is set for this step too
 
-          echo "Installing app..."
-          cd java/android_/MySingleFileApp
-          adb install -r app/build/outputs/apk/debug/app-debug.apk
-          if [ $? -ne 0 ]; then
-            echo "::error::App installation failed."
-            adb logcat -d # Dump logcat for installation errors
-            exit 1
-          fi
-          echo "App installed. Launching activity..."
+#           echo "Installing app..."
+#           cd java/android_/MySingleFileApp
+#           adb install -r app/build/outputs/apk/debug/app-debug.apk
+#           if [ $? -ne 0 ]; then
+#             echo "::error::App installation failed."
+#             adb logcat -d # Dump logcat for installation errors
+#             exit 1
+#           fi
+#           echo "App installed. Launching activity..."
 
-          # It's good practice to ensure the app is stopped before starting if it was already running
-          adb shell am force-stop com.example.singlefilexml || true
-          adb shell am start -n com.example.singlefilexml/.MainActivity -S # -S kills existing instances
-          if [ $? -ne 0 ]; then
-            echo "::error::Failed to launch main activity. Check package/activity name and manifest."
-            adb logcat -d # Dump logcat for launch errors
-            exit 1
-          fi
-          echo "Activity launched. Waiting for UI to render..."
-          sleep 30 # Increased sleep for UI to load, especially on a slower emulator
+#           # It's good practice to ensure the app is stopped before starting if it was already running
+#           adb shell am force-stop com.example.singlefilexml || true
+#           adb shell am start -n com.example.singlefilexml/.MainActivity -S # -S kills existing instances
+#           if [ $? -ne 0 ]; then
+#             echo "::error::Failed to launch main activity. Check package/activity name and manifest."
+#             adb logcat -d # Dump logcat for launch errors
+#             exit 1
+#           fi
+#           echo "Activity launched. Waiting for UI to render..."
+#           sleep 30 # Increased sleep for UI to load, especially on a slower emulator
 
-          echo "Taking screenshot..."
-          adb shell screencap -p /sdcard/screenshot.png
-          if [ $? -ne 0 ]; then
-            echo "::error::Failed to take screenshot."
-            adb logcat -d # Dump logcat for screenshot errors
-            exit 1
-          fi
+#           echo "Taking screenshot..."
+#           adb shell screencap -p /sdcard/screenshot.png
+#           if [ $? -ne 0 ]; then
+#             echo "::error::Failed to take screenshot."
+#             adb logcat -d # Dump logcat for screenshot errors
+#             exit 1
+#           fi
 
-          echo "Pulling screenshot from emulator..."
-          adb pull /sdcard/screenshot.png screenshot.png
-          if [ $? -ne 0 ]; then
-            echo "::error::Failed to pull screenshot."
-            exit 1
-          fi
-          echo "Screenshot pulled: $(pwd)/screenshot.png" # Show where it is locally
+#           echo "Pulling screenshot from emulator..."
+#           adb pull /sdcard/screenshot.png screenshot.png
+#           if [ $? -ne 0 ]; then
+#             echo "::error::Failed to pull screenshot."
+#             exit 1
+#           fi
+#           echo "Screenshot pulled: $(pwd)/screenshot.png" # Show where it is locally
 
-      - name: Upload Emulator Screenshot
-        uses: actions/upload-artifact@v4
-        with:
-          name: emulator-screenshot
-          path: java/android_/MySingleFileApp/screenshot.png # Ensure this path is correct relative to the repo root
-          retention-days: 7
+#       - name: Upload Emulator Screenshot
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: emulator-screenshot
+#           path: java/android_/MySingleFileApp/screenshot.png # Ensure this path is correct relative to the repo root
+#           retention-days: 7
