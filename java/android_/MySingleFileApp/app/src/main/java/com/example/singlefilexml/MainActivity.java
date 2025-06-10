@@ -6,6 +6,7 @@ import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.LinearLayout;  // <-- ADD THIS IMPORT
 import java.io.StringReader;
 import org.xmlpull.v1.XmlPullParser;
 
