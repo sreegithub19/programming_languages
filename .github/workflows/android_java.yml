@@ -29,7 +29,7 @@ jobs:
       - name: Build Debug APK
         run: |
           cd java/android_/MySingleFileApp
-          ./gradlew :app:assembleDebug --no-daemon
+          gradle :app:assembleDebug --no-daemon
 
       - name: Start Android Emulator and Take Screenshot
         uses: reactivecircus/android-emulator-runner@v2
