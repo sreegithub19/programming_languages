@@ -36,16 +36,14 @@ jobs:
         with:
           api-level: 30
           target: google_apis
-          arch: arm64-v8a
+          arch: x86_64
           profile: Nexus 6
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -accel off
-          adb-wait-for-emulator-timeout-minutes: 10
           script: |
             cd java/android_/MySingleFileApp
-            adb devices
             adb install -r app/build/outputs/apk/debug/app-debug.apk
             adb shell am start -n com.example.singlefilexml/.MainActivity
-            sleep 15 # wait for the UI to load fully
+            sleep 15 # wait for the UI to load
             adb shell screencap -p /sdcard/screenshot.png
             adb pull /sdcard/screenshot.png screenshot.png
 
