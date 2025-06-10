@@ -42,9 +42,10 @@ public class MainActivity extends Activity {
             LayoutInflater inflater = LayoutInflater.from(this);
             View root = inflater.inflate(parser, null);
             setContentView(root);
-
-            TextView tv = root.findViewById(R.id.hello_text);
+            
+            TextView tv = (TextView) ((LinearLayout) root).getChildAt(0);
             tv.setText("Updated text from Java!");
+
         } catch (Exception e) {
             // fallback in case of error
             TextView tv = new TextView(this);
