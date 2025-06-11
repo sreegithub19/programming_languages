@@ -539,3 +539,7 @@
 	path = azure_/main_/Microsoft_AZ-900
 	url = https://github.com/sreegithub19/Microsoft_AZ-900.git
 	branch = main
+[submodule "java/android_/automated-build-android-app-with-github-action"]
+	path = java/android_/automated-build-android-app-with-github-action
+	url = https://github.com/sreegithub19/automated-build-android-app-with-github-action.git
+	branch = master
