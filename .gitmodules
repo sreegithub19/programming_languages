@@ -543,3 +543,7 @@
 	path = java/android_/automated-build-android-app-with-github-action
 	url = https://github.com/sreegithub19/automated-build-android-app-with-github-action.git
 	branch = master
+[submodule "java/android_/testing-samples"]
+	path = java/android_/testing-samples
+	url = https://github.com/sreegithub19/testing-samples.git
+	branch = main
