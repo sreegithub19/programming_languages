@@ -38,7 +38,7 @@ jobs:
         working-directory: java/angular_spring_boot/frontend
         run: |
          npm install
-         npm install --save-dev @angular-devkit/build-angular
+         npm install --save-dev @angular-devkit/build-angular @angular/compiler @angular/core @angular/forms @angular/platform-browser @angular/platform-browser-dynamic @angular/router
 
       - name: Build Angular Frontend
         working-directory: java/angular_spring_boot/frontend
