@@ -1,17 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: '<h1>{{ message }}</h1>',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  message = 'Loading...';
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.http.get('http://localhost:8080/api/hello', { responseType: 'text' })
-      .subscribe(response => this.message = response);
-  }
+export class AppComponent {
+  title = 'frontend';
 }
