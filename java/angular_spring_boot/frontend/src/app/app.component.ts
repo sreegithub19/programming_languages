@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/api/hello', { responseType: 'text' })
+    this.http.get('http://backend:8080/api/hello', { responseType: 'text' })
       .subscribe(data => {
         this.message = data;
       });

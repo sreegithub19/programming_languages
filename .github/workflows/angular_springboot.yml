@@ -1,5 +1,5 @@
 # .github/workflows/ci.yml
-name: Full Stack CI/CD with Ngrok (MySQL)
+name: Full Stack CI/CD with Docker Compose
 
 on:
   push:
@@ -9,94 +9,42 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h localhost -u root --password=example --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-        env:
-          MYSQL_ROOT_PASSWORD: example
-          MYSQL_DATABASE: sample_db
-          MYSQL_USER: sample_user
-          MYSQL_PASSWORD: sample_password
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Install Angular Dependencies
-        working-directory: java/angular_spring_boot/frontend
+      - name: Set up Docker Compose
+        run: sudo apt-get install -y docker-compose
+
+      - name: Build and Run with Docker Compose
+        run: docker-compose up --build -d
+
+      - name: Wait for Services to Start
         run: |
-         npm install
-         npm install @angular/common @angular/core @angular/platform-browser @angular/compiler @angular/platform-browser-dynamic @angular/router
-         npm install --save-dev @angular-devkit/build-angular typescript
+          echo "Waiting for backend to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/api/hello; then
+              echo "Backend is up!"
+              exit 0
+            fi
+            echo "Waiting for backend..."
+            sleep 5
+          done
+          echo "Backend did not start in time!"
+          exit 1
 
-      - name: Build Angular Frontend
-        working-directory: java/angular_spring_boot/frontend
-        run: npm run build -- --configuration=production
+      - name: Run Cypress or Frontend Tests (Optional)
+        run: echo "Run frontend/backend integration tests here if needed."
 
-      - name: Install Ngrok
-        run: npm install -g ngrok http-server
+      - name: Upload Logs (Optional)
+        if: always()
+        run: docker-compose logs > docker-logs.txt
 
-      - name: Start Angular Frontend
-        working-directory: java/angular_spring_boot/frontend
-        run: nohup npx http-server dist/frontend -p 4200 &
-
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-
-      - name: Set up Maven
-        run: sudo apt-get install -y maven
-
-      - name: Build Spring Boot Backend
-        working-directory: java/angular_spring_boot/backend
-        run: mvn clean package
-
-      - name: Start Spring Boot Backend
-        working-directory: java/angular_spring_boot/backend
-        run: nohup java -jar target/*.jar &
-
-      - name: Wait for Backend to Start
-        run: sleep 20
-
-      - name: Wait for Frontend to Start
-        run: |
-          sleep 300
-
-          # Install ngrok
-          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
-          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list >/dev/null
-          sudo apt update && sudo apt install ngrok
-
-          # Authenticate ngrok using the authtoken from GitHub Secrets
-          ngrok authtoken 2whue6P5qFygcTJjinX37XDBpTN_YUPyCQTL9pWdzG5KQsTb
-
-          # Start ngrok to expose localhost:4200
-          ngrok http 4200 > /dev/null &
-
-          # Wait for ngrok to initialize and fetch public URL
-          sleep 5
-          NGROK_PUBLIC_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
-          echo "ngrok public URL: $NGROK_PUBLIC_URL"
-
-          sleep 150
-
-      - name: Upload Ngrok URL Artifact
+      - name: Upload Logs Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ngrok-url
-          path: tunnels.json
+          name: docker-logs
+          path: docker-logs.txt
