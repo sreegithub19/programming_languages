@@ -2,7 +2,7 @@ FROM node:18 AS build
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install && npm install @angular/common @angular/core @angular/platform-browser @angular/compiler @angular/platform-browser-dynamic @angular/router && npm install --save-dev @angular-devkit/build-angular typescript
 COPY . .
 RUN npm run build -- --configuration=production
 
