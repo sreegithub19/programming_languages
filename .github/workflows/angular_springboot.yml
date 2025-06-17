@@ -39,11 +39,11 @@ jobs:
         run: sudo apt-get install -y maven
 
       - name: Build Spring Boot Backend
-        working-directory: backend
+        working-directory: java/angular_spring_boot/backend
         run: mvn clean package
 
       - name: Start Spring Boot Backend
-        working-directory: backend
+        working-directory: java/angular_spring_boot/backend
         run: nohup java -jar target/*.jar &
 
       - name: Wait for Backend to Start
@@ -55,18 +55,18 @@ jobs:
           node-version: '18'
 
       - name: Install Angular Dependencies
-        working-directory: frontend
+        working-directory: java/angular_spring_boot/frontend
         run: npm install
 
       - name: Build Angular Frontend
-        working-directory: frontend
+        working-directory: java/angular_spring_boot/frontend
         run: npm run build -- --configuration=production
 
       - name: Install Ngrok
         run: npm install -g ngrok http-server
 
       - name: Start Angular Frontend
-        working-directory: frontend
+        working-directory: java/angular_spring_boot/frontend
         run: nohup npx http-server dist/frontend -p 4200 &
 
       - name: Wait for Frontend to Start
