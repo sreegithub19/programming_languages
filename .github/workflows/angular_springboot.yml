@@ -29,6 +29,29 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Angular Dependencies
+        working-directory: java/angular_spring_boot/frontend
+        run: |
+         npm install
+         npm install --save-dev @angular-devkit/build-angular
+
+      - name: Build Angular Frontend
+        working-directory: java/angular_spring_boot/frontend
+        run: npm run build -- --configuration=production
+
+      - name: Install Ngrok
+        run: npm install -g ngrok http-server
+
+      - name: Start Angular Frontend
+        working-directory: java/angular_spring_boot/frontend
+        run: nohup npx http-server dist/frontend -p 4200 &
+
+
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
@@ -48,26 +71,6 @@ jobs:
 
       - name: Wait for Backend to Start
         run: sleep 20
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install Angular Dependencies
-        working-directory: java/angular_spring_boot/frontend
-        run: npm install
-
-      - name: Build Angular Frontend
-        working-directory: java/angular_spring_boot/frontend
-        run: npm run build -- --configuration=production
-
-      - name: Install Ngrok
-        run: npm install -g ngrok http-server
-
-      - name: Start Angular Frontend
-        working-directory: java/angular_spring_boot/frontend
-        run: nohup npx http-server dist/frontend -p 4200 &
 
       - name: Wait for Frontend to Start
         run: |
