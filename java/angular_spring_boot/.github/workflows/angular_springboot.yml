@@ -1,0 +1,96 @@
+# .github/workflows/ci.yml
+name: Full Stack CI/CD with Ngrok (MySQL)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root --password=example --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: sample_db
+          MYSQL_USER: sample_user
+          MYSQL_PASSWORD: sample_password
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Maven
+        run: sudo apt-get install -y maven
+
+      - name: Build Spring Boot Backend
+        working-directory: backend
+        run: mvn clean package
+
+      - name: Start Spring Boot Backend
+        working-directory: backend
+        run: nohup java -jar target/*.jar &
+
+      - name: Wait for Backend to Start
+        run: sleep 20
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Angular Dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Build Angular Frontend
+        working-directory: frontend
+        run: npm run build -- --configuration=production
+
+      - name: Install Ngrok
+        run: npm install -g ngrok http-server
+
+      - name: Start Angular Frontend
+        working-directory: frontend
+        run: nohup npx http-server dist/frontend -p 4200 &
+
+      - name: Wait for Frontend to Start
+        run: |
+          sleep 10
+
+          # Install ngrok
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list >/dev/null
+          sudo apt update && sudo apt install ngrok
+
+          # Authenticate ngrok using the authtoken from GitHub Secrets
+          ngrok authtoken 2whue6P5qFygcTJjinX37XDBpTN_YUPyCQTL9pWdzG5KQsTb
+
+          # Start ngrok to expose localhost:4200
+          ngrok http 4200 > /dev/null &
+
+          # Wait for ngrok to initialize and fetch public URL
+          sleep 5
+          NGROK_PUBLIC_URL=$(curl -s http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+          echo "ngrok public URL: $NGROK_PUBLIC_URL"
+
+      - name: Upload Ngrok URL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ngrok-url
+          path: tunnels.json
