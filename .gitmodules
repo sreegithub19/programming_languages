@@ -555,3 +555,7 @@
 	path = java/angular_springboot/angular-springboot-crud
 	url = https://github.com/sreegithub19/angular-springboot-crud.git
 	branch = main
+[submodule "java/angular_springboot/spring-boot-angular-15-mysql-example"]
+	path = java/angular_springboot/spring-boot-angular-15-mysql-example
+	url = https://github.com/sreegithub19/spring-boot-angular-15-mysql-example.git
+	branch = master
