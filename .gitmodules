@@ -551,3 +551,7 @@
 	path = java/angular_springboot/Expense_Tracker
 	url = https://github.com/sreegithub19/Expense_Tracker.git
 	branch = main
+[submodule "java/angular_springboot/angular-springboot-crud"]
+	path = java/angular_springboot/angular-springboot-crud
+	url = https://github.com/sreegithub19/angular-springboot-crud.git
+	branch = main
