@@ -1,3 +1,0 @@
-endpoints:
-- /
-- /api/hello

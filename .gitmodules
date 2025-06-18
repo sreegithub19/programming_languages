@@ -547,3 +547,7 @@
 	path = java/android_/testing-samples
 	url = https://github.com/sreegithub19/testing-samples.git
 	branch = main
+[submodule "java/angular_springboot/Expense_Tracker"]
+	path = java/angular_springboot/Expense_Tracker
+	url = https://github.com/sreegithub19/Expense_Tracker.git
+	branch = main
