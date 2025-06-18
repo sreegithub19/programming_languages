@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "Waiting for backend to start..."
           for i in {1..30}; do
-            if curl -s http://localhost:8080/api/hello; then
+            if curl -s http://backend:8080/api/hello; then
               echo "Backend is up!"
               exit 0
             fi
