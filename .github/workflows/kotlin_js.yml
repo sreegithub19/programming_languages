@@ -28,32 +28,43 @@ jobs:
       uses: gradle/gradle-build-action@v2
 
     # Step 4: Build the Kotlin tutorial project using kotlinc (to convert to Java)
-    - name: Build the Kotlin tutorial project using kotlinc (to convert to Java)
+    - name: Build the Kotlin tutorial project, run it, and decompile to Java
       run: |
         cd kotlin/KotlinProject
+
+        # Step 1: Build both Java & Kotlin sources with Gradle
+        ./gradlew build
+
+        # Step 2: Find all runtime dependencies
         ./gradlew copyDependencies
         jars=$(find build/lib -name "*.jar" | tr '\n' ':' | sed 's/:$//')
-        kotlinc -cp "$jars" src/main/kotlin -d target/classes
-        kotlin -cp "target/classes:$jars" org.example.MainKt
+        echo "Classpath: $jars"
 
-        CFR_VERSION="0.152" # Check http://www.benf.org/other/cfr/ for the latest version
+        # Step 3: Run the built Kotlin program
+        # Use classes from Gradle build + runtime jars
+        kotlin -cp "build/classes/java/main:build/classes/kotlin/main:$jars" org.example.MainKt
+
+        # Step 4: Download CFR decompiler
+        CFR_VERSION="0.152"
         CFR_URL="http://www.benf.org/other/cfr/cfr-${CFR_VERSION}.jar"
-        
-        cd ../..
         wget -O cfr.jar "$CFR_URL"
         echo "CFR downloaded"
 
+        # Step 5: Decompile MainKt.class to Java source
         OUTPUT_DIR="decompiled-java"
         OUTPUT_FILE="${OUTPUT_DIR}/MainKt.java"
-
         mkdir -p "$OUTPUT_DIR"
-        echo "Decompiling $CLASS_FILE to $OUTPUT_FILE"
-        ls kotlin/KotlinProject/target/classes/org/example
-        java -jar cfr.jar kotlin/KotlinProject/target/classes/org/example/MainKt.class > "$OUTPUT_FILE"
+
+        echo "Decompiling build/classes/kotlin/main/org/example/MainKt.class to $OUTPUT_FILE"
+        ls build/classes/kotlin/main/org/example
+
+        java -jar cfr.jar build/classes/kotlin/main/org/example/MainKt.class > "$OUTPUT_FILE"
 
         if [ $? -eq 0 ]; then
           echo "Decompilation successful."
-          cat "$OUTPUT_FILE" # Print to log for immediate inspection
+          echo "------------------- Decompiled Java -------------------"
+          cat "$OUTPUT_FILE"
+          echo "------------------------------------------------------"
         else
           echo "Decompilation failed."
           exit 1
