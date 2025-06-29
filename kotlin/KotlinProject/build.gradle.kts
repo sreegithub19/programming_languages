@@ -27,32 +27,11 @@ java {
 }
 
 application {
-    // Replace with your actual fully-qualified main class name
     mainClass.set("org.example.MainKt")
 }
 
-tasks.register("copyDependencies") {
-    dependsOn("build")
-
-    val outputDir = file("lib")
-
-    outputs.dir(outputDir)
-
-    doLast {
-        outputDir.mkdirs()
-
-        configurations.runtimeClasspath.get().resolvedConfiguration.lenientConfiguration.allModuleDependencies.forEach { dependency ->
-            dependency.moduleArtifacts.forEach { artifact ->
-                if (artifact.type == "jar") {
-                    val from = artifact.file
-                    val to = file("$outputDir/${from.name}")
-                    copy {
-                        from(from)
-                        into(to.parentFile)
-                    }
-                    println("Copied ${from.name} to ${to.path}")
-                }
-            }
-        }
-    }
+// ✅ Fixed copyDependencies task: copy all runtime jars to build/lib
+tasks.register<Copy>("copyDependencies") {
+    from(configurations.runtimeClasspath)
+    into("build/lib")
 }
