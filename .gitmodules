@@ -559,3 +559,7 @@
 	path = java/angular_springboot/spring-boot-angular-15-mysql-example
 	url = https://github.com/sreegithub19/spring-boot-angular-15-mysql-example.git
 	branch = master
+[submodule "clojure_/codeforces_script"]
+	path = clojure_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = clojure_

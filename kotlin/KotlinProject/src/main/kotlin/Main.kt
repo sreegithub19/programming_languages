@@ -2,6 +2,7 @@ package org.example
 
 import io.vavr.API.*
 import java.util.Optional
+import Collections_.List_.AbstractList_.*
 
 var name : kotlin.String = "Kotlin"
 val name1 : kotlin.String = "Kotlin"
@@ -32,6 +33,9 @@ fun main() {
 
     // File 8
     higher_order_functions()
+
+    // Java
+    ArrayList_.methods()
 
 }
 
