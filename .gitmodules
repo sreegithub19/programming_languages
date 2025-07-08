@@ -563,3 +563,11 @@
 	path = clojure_/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = clojure_
+[submodule "clojure_/clojure_script_/codeforces_script"]
+	path = clojure_/clojure_script_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = clojure_script
+[submodule "javascript/angular_/angular_live"]
+	path = javascript/angular_/angular_live
+	url = https://github.com/sreegithub19/angular_live.git
+	branch = main

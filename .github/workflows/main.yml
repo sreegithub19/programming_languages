@@ -39,6 +39,7 @@ jobs:
           git pull origin main --allow-unrelated-histories
           cd CPP/codeforces_script && git fetch --all &&  git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories && cd ../..
           cd azure_/Microsoft_AZ-900 && git fetch --all &&  git checkout master && git pull origin master --allow-unrelated-histories && cd ../..
+          cd javascript/angular_/angular_live && git fetch --all &&  git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd azure_/main_/Microsoft_AZ-900 && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&  git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd resumes && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
           cd gate && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
@@ -130,6 +131,8 @@ jobs:
           cd pascal/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout pascal_ && git pull origin pascal_ --allow-unrelated-histories && cd ../..
           cd QA/cypress_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing && git pull origin cypress_testing --allow-unrelated-histories && cd ../../..
           cd QA/cypress_1/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout cypress_testing_1 && git pull origin cypress_testing_1 --allow-unrelated-histories && cd ../../..
+          cd clojure_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout clojure_ && git pull origin clojure_ --allow-unrelated-histories && cd ../..
+          cd clojure_/clojure_script_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout clojure_script && git pull origin clojure_script --allow-unrelated-histories && cd ../../..
           cd R__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout R_ && git pull origin R_ --allow-unrelated-histories && cd ../..
           cd AI_nization/bito1__/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito1_ && git pull origin bito1_ --allow-unrelated-histories && cd ../../..
           cd AI_nization/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito_ && git pull origin bito_ --allow-unrelated-histories && cd ../..
