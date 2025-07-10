@@ -39,6 +39,7 @@ jobs:
           git pull origin main --allow-unrelated-histories
           cd CPP/codeforces_script && git fetch --all &&  git checkout cpp_ && git pull origin cpp_ --allow-unrelated-histories && cd ../..
           cd azure_/Microsoft_AZ-900 && git fetch --all &&  git checkout master && git pull origin master --allow-unrelated-histories && cd ../..
+          cd javascript/next_/nextjs_news_search_microservices && git fetch --all &&  git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd javascript/angular_/angular_live && git fetch --all &&  git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd azure_/main_/Microsoft_AZ-900 && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&  git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd resumes && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..

@@ -571,3 +571,7 @@
 	path = javascript/angular_/angular_live
 	url = https://github.com/sreegithub19/angular_live.git
 	branch = main
+[submodule "javascript/next_/nextjs_news_search_microservices"]
+	path = javascript/next_/nextjs_news_search_microservices
+	url = https://github.com/sreegithub19/nextjs_news_search_microservices.git
+	branch = main
