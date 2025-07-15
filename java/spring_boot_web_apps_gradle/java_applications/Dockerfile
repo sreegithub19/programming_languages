@@ -3,11 +3,11 @@ FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copy pom.xml and download dependencies first (better caching)
-COPY java/spring_boot_web_apps_gradle/java_applications/pom.xml ./
+COPY pom.xml ./
 RUN mvn dependency:go-offline
 
 # Copy the rest of the source code
-COPY java/spring_boot_web_apps_gradle/java_applications /app
+COPY . .
 
 # Build the application (skip tests for faster build)
 RUN mvn clean package -DskipTests
