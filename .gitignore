@@ -4,6 +4,7 @@ typescript/cypress_automation/node_modules
 typescript/.DS_Store
 
 .vscode
+java/.DS_Store
 
 ##########################################
 # javascript -> react_ -> myapp

@@ -111,6 +111,14 @@ public class HelloWorldController {
         }
     }
 
+    @RequestMapping("/add")
+    public String addNumbers() throws IOException {
+        int a = 7;
+        int b = 5;
+        int sum = a + b;
+        return String.valueOf(sum);
+    }
+
     @RequestMapping
     public String helloWorld() throws IOException {
         return loadHtml("helloWorld.html");
