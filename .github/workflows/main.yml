@@ -139,7 +139,8 @@ jobs:
           cd AI_nization/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito_ && git pull origin bito_ --allow-unrelated-histories && cd ../..
           cd cengage_lfs_programming && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
           cd typescript/ai-chatbot && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
-
+          cd certifications && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
+          
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then

@@ -575,3 +575,7 @@
 	path = javascript/next_/nextjs_news_search_microservices
 	url = https://github.com/sreegithub19/nextjs_news_search_microservices.git
 	branch = main
+[submodule "certifications"]
+	path = certifications
+	url = https://github.com/sreegithub19/certifications.git
+	branch = main
