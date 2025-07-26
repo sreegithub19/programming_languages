@@ -228,7 +228,7 @@ public class HelloWorldController {
             String expectedOutput = outputs[i];
             result.append("Input: ").append(Arrays.toString(input))
                 .append(" => Output (target ").append(target).append("): ");
-            result.append(res.length == 0 ? actualOutput).append("<br>")
+            result.append(actualOutput).append("<br>")
             .append(actualOutput.equals(expectedOutput))
             .append("<br><hr>");
         }
