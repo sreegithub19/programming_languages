@@ -215,15 +215,22 @@ public class HelloWorldController {
         int[] targets = {
                 6, -6, 2000000000, 12, 19, 0, 6, -8, 2000000000, 10, 3, 0, 0, 17, 15, 0, 9, 19, 16, 10, 6, 9, 0, 4000, 100, 199, 0, -150, -39, 110, 1100, 70, 3, 3000, 30000, 39, 99, 900, 33, 390, 1500, 21, 17, 0, 29, 38, 78, 0, 1999999999, 300, 100, 22, 53, -199, 1, 3, 1990, 59, 1111111110, 0, -11, 1999999997, -15, 0, 2000000000, 299, 59, -31, 60000, 39, 1000000000, 99, 49, 1999999989, 513, -18, 1300, -17, 1900, 0, 79, 4, 100, 62
         };
+        String[] outputs = {"[0, 1]", "None", "[0, 1]", "[0, 3]", "[0, 1]", "[0, 3]", "[0, 1]", "[7, 8]", "[2, 3]", "[0, 1]", "[0, 1]", "[8, 9]", "[1, 3]", "[0, 1]", "[1, 2]", "[2, 3]", "[0, 1]", "[18, 20]", "[24, 25]", "[98, 99]", "[4, 6]", "[6, 7]", "[18, 19]", "[26, 28]", "[4, 5]", "[16, 18]", "[18, 19]", "[18, 19]", "[13, 15]", "[13, 15]", "[18, 19]", "[49, 50]", "[43, 45]", "None", "[18, 19]", "[6, 7]", "[9, 10]", "[3, 5]", "[0, 1]", "[13, 14]", "[17, 19]", "None", "[0, 1]", "[0, 1]", "[13, 15]", "[24, 25]", "[1, 6]", "None", "[98, 99]", "[29, 30]", "[0, 1]", "[4, 5]", "[6, 7]", "[0, 1]", "[13, 15]", "[28, 29]", "[14, 15]", "None", "[18, 19]", "[2, 3]", "[48, 49]", "[23, 24]", "[4, 5]", "[6, 7]", "[0, 9]", "[7, 9]", "[5, 6]", "[7, 8]", "[8, 9]", "[0, 1]", "None", "[1, 4]", "None", "[0, 18]"
+        };
+
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < testInputs.length; i++) {
             int[] input = testInputs[i];
             int target = targets[i];
 
             int[] res = twoSum(input, target);
+            String actualOutput = res.length == 0 ? "None" : Arrays.toString(res);
+            String expectedOutput = outputs[i];
             result.append("Input: ").append(Arrays.toString(input))
                 .append(" => Output (target ").append(target).append("): ");
-            result.append(res.length == 0 ? "None" : Arrays.toString(res)).append("<br>");
+            result.append(res.length == 0 ? actualOutput).append("<br>")
+            .append(actualOutput.equals(expectedOutput))
+            .append("<br><hr>")
         }
         return result.toString();
     }
