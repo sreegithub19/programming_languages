@@ -125,25 +125,33 @@ public class HelloWorldController {
     @RequestMapping("/1A")
     public String testTwoSum() throws IOException {
         int[][] testInputs = {
-                {3, 3},
-                {-1, -2, -3, -4},
-                {1000000000, 1000000000},
-                {1, 5, 7, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-                {0, 4, 3, 0},
+                {3, 3},                      // target = 6
+                {-1, -2, -3, -4},            // target = -6 (-2 + -4)
+                {1000000000, 1000000000},    // target = 2000000000
+                {1, 5, 7, 9},                // target = 12 (5 + 7)
+                {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, // target = 19 (9 + 10)
+                {0, 4, 3, 0}                 // target = 0 (0 + 0 at 0,3)
         };
-
+        int[] targets = {
+                6,
+                -6,
+                2000000000,
+                12,
+                19,
+                0
+        };
         StringBuilder result = new StringBuilder();
+        for (int i = 0; i < testInputs.length; i++) {
+            int[] input = testInputs[i];
+            int target = targets[i];
 
-        for (int[] input : testInputs) {
-            int target = input.length > 1 ? input[0] + input[1] : 0;
             int[] res = twoSum(input, target);
             result.append("Input: ").append(Arrays.toString(input))
-                  .append(" => Output (target ").append(target).append("): ");
+                .append(" => Output (target ").append(target).append("): ");
             result.append(res.length == 0 ? "None" : Arrays.toString(res)).append("<br>");
         }
-
         return result.toString();
     }
+
 
 }

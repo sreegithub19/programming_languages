@@ -195,7 +195,14 @@ jobs:
           sleep 15
 
           # Kill both processes
-          kill $KOTLIN_PID_2
+          if kill -0 $KOTLIN_PID_2 2>/dev/null; then
+            kill $KOTLIN_PID_2
+            sleep 2
+            # Force kill if still alive
+            if kill -0 $KOTLIN_PID_2 2>/dev/null; then
+              kill -9 $KOTLIN_PID_2
+            fi
+          fi
 
           # Notify the user
           echo "Ran for 60 seconds and now terminated kotlinc piping."
