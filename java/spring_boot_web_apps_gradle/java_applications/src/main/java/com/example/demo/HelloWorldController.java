@@ -230,7 +230,7 @@ public class HelloWorldController {
                 .append(" => Output (target ").append(target).append("): ");
             result.append(res.length == 0 ? actualOutput).append("<br>")
             .append(actualOutput.equals(expectedOutput))
-            .append("<br><hr>")
+            .append("<br><hr>");
         }
         return result.toString();
     }
