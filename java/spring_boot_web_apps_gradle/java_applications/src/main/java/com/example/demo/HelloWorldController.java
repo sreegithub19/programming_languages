@@ -123,7 +123,7 @@ public class HelloWorldController {
     }
 
     @RequestMapping("/1A")
-    public String testTwoSum() {
+    public String testTwoSum() throws IOException {
         int[][] testInputs = {
                 {3, 3},
                 {-1, -2, -3, -4},
