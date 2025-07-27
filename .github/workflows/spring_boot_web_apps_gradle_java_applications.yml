@@ -13,6 +13,23 @@ jobs:
 
     runs-on: ubuntu-latest
 
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root --password=example --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: sample_db
+          MYSQL_USER: sample_user
+          MYSQL_PASSWORD: sample_password
+
     strategy:
       matrix:
         java-version: ['21']
@@ -52,6 +69,21 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL to be ready..."
+          for i in {1..30}; do
+            if mysqladmin ping -h 127.0.0.1 -u root --password=example --silent; then
+              echo "MySQL is ready!"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
 
       # Step 2: Build the Spring Boot application
       - name: Build Spring Boot Application

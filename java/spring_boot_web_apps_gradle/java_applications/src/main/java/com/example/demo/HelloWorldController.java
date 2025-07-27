@@ -44,7 +44,96 @@ public class HelloWorldController {
         int a = 7;
         int b = 5;
         int sum = a + b;
-        return String.valueOf(sum);
+
+        StringBuilder shellOutput = new StringBuilder();
+        try {
+            // Multi-line shell script as a string
+            String script = """
+echo "Running multi-line shell script"
+echo "Current directory: $(pwd)"
+echo "Date: $(date)"
+echo "User: $(whoami)"
+
+
+mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+Create table If Not Exists Employee (empId int, name varchar(255), supervisor int, salary int);
+Create table If Not Exists Bonus (empId int, bonus int);
+Truncate table Employee;
+insert into Employee (empId, name, supervisor, salary) values ('3', 'Brad', NULL, '4000');
+insert into Employee (empId, name, supervisor, salary) values ('1', 'John', '3', '1000');
+insert into Employee (empId, name, supervisor, salary) values ('2', 'Dan', '3', '2000');
+insert into Employee (empId, name, supervisor, salary) values ('4', 'Thomas', '3', '4000');
+Truncate table Bonus;
+insert into Bonus (empId, bonus) values ('2', '500');
+insert into Bonus (empId, bonus) values ('4', '2000');
+
+
+Create table If Not Exists SalesPerson (sales_id int, name varchar(255), salary int, commission_rate int, hire_date date);
+Create table If Not Exists Company (com_id int, name varchar(255), city varchar(255));
+Create table If Not Exists Orders (order_id int, order_date date, com_id int, sales_id int, amount int);
+Truncate table SalesPerson;
+insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('1', 'John', '100000', '6', '2006-04-01');
+insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('2', 'Amy', '12000', '5', '2010-05-01');
+insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('3', 'Mark', '65000', '12', '2008-12-25');
+insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('4', 'Pam', '25000', '25', '2005-01-01');
+insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('5', 'Alex', '5000', '10', '2007-02-03');
+
+Truncate table Company;
+insert into Company (com_id, name, city) values ('1', 'RED', 'Boston');
+insert into Company (com_id, name, city) values ('2', 'ORANGE', 'New York');
+insert into Company (com_id, name, city) values ('3', 'YELLOW', 'Boston');
+insert into Company (com_id, name, city) values ('4', 'GREEN', 'Austin');
+Truncate table Orders;
+insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('1', '2014-01-01', '3', '4', '10000');
+insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('2', '2014-01-02', '4', '5', '5000');
+insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('3', '2014-01-03', '1', '1', '50000');
+insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('4', '2014-01-04', '1', '4', '25000');
+
+
+Create table If Not Exists Sales (sale_id int, product_id int, year int, quantity int, price int);
+Create table If Not Exists Product (product_id int, product_name varchar(10));
+Truncate table Sales;
+insert into Sales (sale_id, product_id, year, quantity, price) values ('1', '100', '2008', '10', '5000');
+insert into Sales (sale_id, product_id, year, quantity, price) values ('2', '100', '2009', '12', '5000');
+insert into Sales (sale_id, product_id, year, quantity, price) values ('7', '200', '2011', '15', '9000');
+Truncate table Product;
+insert into Product (product_id, product_name) values ('100', 'Nokia');
+insert into Product (product_id, product_name) values ('200', 'Apple');
+insert into Product (product_id, product_name) values ('300', 'Samsung');
+
+
+
+
+SELECT e.name, b.bonus 
+FROM Employee e 
+LEFT JOIN Bonus b ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus IS NULL;
+
+
+select s.name
+from SalesPerson s
+where s.name not in
+(select sp.name
+from SalesPerson sp
+left join Orders o on sp.sales_id=o.sales_id
+left join Company c on o.com_id = c.com_id
+where c.name = 'Red');
+
+
+select p.product_name , s.year, s.price from Sales s join Product p on s.product_id = p.product_id;"
+                    """;
+
+            ProcessBuilder pb = new ProcessBuilder("bash", "-c", script);
+            Process process = pb.start();
+
+            InputStream is = process.getInputStream();
+            String output = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            shellOutput.append(output);
+        } catch (IOException e) {
+            shellOutput.append("Shell script failed: ").append(e.getMessage());
+        }
+
+        return "Sum: " + sum + "<br>Shell Output:<br>" + shellOutput.toString().replaceAll("\n", "<br>");
     }
 
     @RequestMapping
@@ -215,7 +304,7 @@ public class HelloWorldController {
         int[] targets = {
                 6, -6, 2000000000, 12, 19, 0, 6, -8, 2000000000, 10, 3, 0, 0, 17, 15, 0, 9, 19, 16, 10, 6, 9, 0, 4000, 100, 199, 0, -150, -39, 110, 1100, 70, 3, 3000, 30000, 39, 99, 900, 33, 390, 1500, 21, 17, 0, 29, 38, 78, 0, 1999999999, 300, 100, 22, 53, -199, 1, 3, 1990, 59, 1111111110, 0, -11, 1999999997, -15, 0, 2000000000, 299, 59, -31, 60000, 39, 1000000000, 99, 49, 1999999989, 513, -18, 1300, -17, 1900, 0, 79, 4, 100, 62
         };
-        //String[] outputs = { "[0, 1]", "[1, 3]", "[0, 1]", "[1, 3]", "[8, 9]", "[0, 3]", "[0, 1]", "None", "[0, 1]", "[0, 3]", "[0, 2]", "[0, 3]", "[0, 1]", "[7, 8]", "[1, 2]", "[0, 1]", "[0, 1]", "[8, 9]", "[2, 3]", "[0, 1]", "[0, 2]", "[1, 2]", "[2, 3]", "[19, 20]", "[0, 49]", "[98, 99]", "[5, 6]", "[6, 7]", "[18, 19]", "[0, 54]", "[9, 10]", "[16, 18]", "[0, 19]", "[14, 15]", "[14, 15]", "[18, 19]", "[48, 49]", "[44, 45]", "None", "[1, 6]", "[1, 2]", "[7, 8]", "[14, 15]", "[0, 9]", "[2, 3]", "[1, 2]", "[7, 8]", "None", "[0, 1]", "[1, 2]", "[18, 19]", "None", "[4, 5]", "[4, 10]", "[98, 99]", "[0, 1]", "[0, 24]", "[49, 50]", "[28, 29]", "[0, 1]", "[0, 1]", "None", "[7, 8]", "None", "[0, 1]", "[0, 1]", "[101, 102]", "[28, 29]", "[18, 19]", "None", "[18, 19]", "[0, 4]", "[48, 49]", "[23, 24]", "[8, 9]", "[8, 9]", "[8, 9]", "[0, 11]", "[8, 9]", "[8, 9]", "[0, 1]", "None", "[0, 4]", "[48, 49]", "[0, 18]" };
+        String[] outputs = { "[1, 0]", "[3, 1]", "[1, 0]", "[2, 1]", "[9, 8]", "[3, 0]", "[1, 0]", "None", "[1, 0]", "[3, 0]", "[1, 0]", "[3, 0]", "[1, 0]", "[8, 7]", "[3, 2]", "[1, 0]", "[1, 0]", "[9, 8]", "[3, 1]", "[1, 0]", "[2, 1]", "[3, 2]", "[1, 0]", "[20, 18]", "[25, 24]", "[99, 98]", "[6, 4]", "[7, 6]", "[19, 18]", "[28, 26]", "[5, 4]", "[18, 16]", "[19, 18]", "[15, 13]", "[15, 13]", "[19, 18]", "[50, 49]", "[45, 43]", "None", "[19, 18]", "[7, 6]", "[10, 9]", "[5, 3]", "[1, 0]", "[14, 13]", "[19, 17]", "None", "[1, 0]", "[1, 0]", "[15, 13]", "[25, 24]", "[6, 1]", "None", "[99, 98]", "[1, 0]", "[24, 23]", "[99, 98]", "[30, 29]", "[1, 0]", "[1, 0]", "[5, 4]", "[1, 0]", "[7, 6]", "[1, 0]", "[1, 0]", "[148, 147]", "[29, 28]", "[15, 14]", "None", "[19, 18]", "[3, 2]", "[49, 48]", "[24, 23]", "[5, 4]", "[9, 0]", "[9, 7]", "[6, 5]", "[8, 7]", "[9, 8]", "[1, 0]", "None", "[4, 1]", "None", "[18, 0]" };
 
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < testInputs.length; i++) {
@@ -224,15 +313,17 @@ public class HelloWorldController {
 
             int[] res = twoSum(input, target);
             String actualOutput = res.length == 0 ? "None" : Arrays.toString(res);
-            //String expectedOutput = outputs[i];
+            String expectedOutput = outputs[i];
             result.append("Input: ").append(Arrays.toString(input))
                 .append(" => Output (target ").append(target).append("): ");
             result.append(actualOutput).append("<br>")
-            //.append(actualOutput.equals(expectedOutput))
+            .append(actualOutput.equals(expectedOutput))
             .append("<br><hr>");
         }
         return result.toString();
     }
+
+
 
 
 }
