@@ -14,6 +14,10 @@ RUN mvn clean package -DskipTests
 
 # Step 2: Run stage
 FROM eclipse-temurin:21-jre
+
+# Install MySQL client
+# RUN apt-get update && apt-get install -y mysql-client && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Copy built jar from build stage

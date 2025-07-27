@@ -49,78 +49,10 @@ public class HelloWorldController {
         try {
             // Multi-line shell script as a string
             String script = """
-echo "Running multi-line shell script"
-echo "Current directory: $(pwd)"
-echo "Date: $(date)"
-echo "User: $(whoami)"
-
-
-mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
-Create table If Not Exists Employee (empId int, name varchar(255), supervisor int, salary int);
-Create table If Not Exists Bonus (empId int, bonus int);
-Truncate table Employee;
-insert into Employee (empId, name, supervisor, salary) values ('3', 'Brad', NULL, '4000');
-insert into Employee (empId, name, supervisor, salary) values ('1', 'John', '3', '1000');
-insert into Employee (empId, name, supervisor, salary) values ('2', 'Dan', '3', '2000');
-insert into Employee (empId, name, supervisor, salary) values ('4', 'Thomas', '3', '4000');
-Truncate table Bonus;
-insert into Bonus (empId, bonus) values ('2', '500');
-insert into Bonus (empId, bonus) values ('4', '2000');
-
-
-Create table If Not Exists SalesPerson (sales_id int, name varchar(255), salary int, commission_rate int, hire_date date);
-Create table If Not Exists Company (com_id int, name varchar(255), city varchar(255));
-Create table If Not Exists Orders (order_id int, order_date date, com_id int, sales_id int, amount int);
-Truncate table SalesPerson;
-insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('1', 'John', '100000', '6', '2006-04-01');
-insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('2', 'Amy', '12000', '5', '2010-05-01');
-insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('3', 'Mark', '65000', '12', '2008-12-25');
-insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('4', 'Pam', '25000', '25', '2005-01-01');
-insert into SalesPerson (sales_id, name, salary, commission_rate, hire_date) values ('5', 'Alex', '5000', '10', '2007-02-03');
-
-Truncate table Company;
-insert into Company (com_id, name, city) values ('1', 'RED', 'Boston');
-insert into Company (com_id, name, city) values ('2', 'ORANGE', 'New York');
-insert into Company (com_id, name, city) values ('3', 'YELLOW', 'Boston');
-insert into Company (com_id, name, city) values ('4', 'GREEN', 'Austin');
-Truncate table Orders;
-insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('1', '2014-01-01', '3', '4', '10000');
-insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('2', '2014-01-02', '4', '5', '5000');
-insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('3', '2014-01-03', '1', '1', '50000');
-insert into Orders (order_id, order_date, com_id, sales_id, amount) values ('4', '2014-01-04', '1', '4', '25000');
-
-
-Create table If Not Exists Sales (sale_id int, product_id int, year int, quantity int, price int);
-Create table If Not Exists Product (product_id int, product_name varchar(10));
-Truncate table Sales;
-insert into Sales (sale_id, product_id, year, quantity, price) values ('1', '100', '2008', '10', '5000');
-insert into Sales (sale_id, product_id, year, quantity, price) values ('2', '100', '2009', '12', '5000');
-insert into Sales (sale_id, product_id, year, quantity, price) values ('7', '200', '2011', '15', '9000');
-Truncate table Product;
-insert into Product (product_id, product_name) values ('100', 'Nokia');
-insert into Product (product_id, product_name) values ('200', 'Apple');
-insert into Product (product_id, product_name) values ('300', 'Samsung');
-
-
-
-
-SELECT e.name, b.bonus 
-FROM Employee e 
-LEFT JOIN Bonus b ON e.empId = b.empId
-WHERE b.bonus < 1000 OR b.bonus IS NULL;
-
-
-select s.name
-from SalesPerson s
-where s.name not in
-(select sp.name
-from SalesPerson sp
-left join Orders o on sp.sales_id=o.sales_id
-left join Company c on o.com_id = c.com_id
-where c.name = 'Red');
-
-
-select p.product_name , s.year, s.price from Sales s join Product p on s.product_id = p.product_id;"
+            echo "Running multi-line shell script"
+            echo "Current directory: $(pwd)"
+            echo "Date: $(date)"
+            echo "User: $(whoami)"
                     """;
 
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", script);
