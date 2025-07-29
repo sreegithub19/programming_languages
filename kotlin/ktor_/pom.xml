@@ -80,13 +80,15 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-                 <executions>
+                <executions>
                     <execution>
                         <id>default-compile</id>
-                        <phase>none</phase> </execution>
+                        <phase>none</phase>
+                    </execution>
                     <execution>
                         <id>default-testCompile</id>
-                        <phase>none</phase> </execution>
+                        <phase>none</phase>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -116,6 +118,8 @@
                                 </transformer>
                             </transformers>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <!-- Explicit output name -->
+                            <finalName>my-ktor-app</finalName>
                         </configuration>
                     </execution>
                 </executions>

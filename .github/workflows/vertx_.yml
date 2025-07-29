@@ -206,3 +206,15 @@ jobs:
 
           # Notify the user
           echo "Ran for 60 seconds and now terminated kotlinc piping."
+
+# To run Ktor locally:
+  # cd kotlin/ktor_
+  # mvn clean package
+  # java -jar target/my-ktor-app-1.0-SNAPSHOT.jar  (http://localhost:8080/)
+
+# To build and push Ktor into Docker hub:
+# (From root of the repo):
+  # docker build -t my-ktor-app kotlin/ktor_/
+  # docker run -p 8080:8080 my-ktor-app
+  # docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
+  # docker push sreedockerhub19/my-ktor-app:latest
