@@ -1,3 +1,6 @@
+# Render: https://dashboard.render.com/web/srv-d24fmqruibrs73btin9g
+# App URL: https://my-spring-app-ia5y.onrender.com/hello?name=hi
+
 # ---------- Step 1: Build Stage ----------
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
