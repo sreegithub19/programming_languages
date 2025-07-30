@@ -19,9 +19,9 @@ class MainVerticle : AbstractVerticle() {
 
         vertx.createHttpServer()
             .requestHandler(router)
-            .listen(8090) { res ->
+            .listen(8080) { res ->
                 if (res.succeeded()) {
-                    println("Server running at http://localhost:8090/")
+                    println("Server running at http://localhost:8080/")
                     startPromise.complete()
                 } else {
                     startPromise.fail(res.cause())

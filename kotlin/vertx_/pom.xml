@@ -17,16 +17,21 @@
     </properties>
 
     <dependencies>
+        <!-- Vert.x Core -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
             <version>${vertx.version}</version>
         </dependency>
+
+        <!-- Vert.x Web -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
             <version>${vertx.version}</version>
         </dependency>
+
+        <!-- Kotlin Standard Library -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -66,22 +71,27 @@
                 </configuration>
             </plugin>
 
-            <!-- Exec plugin -->
+            <!-- Shade Plugin: Creates a Fat JAR with all dependencies -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
-                            <goal>java</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <transformers>
+                                <!-- Sets the Main Class for java -jar -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.example.MainVerticleKt</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>com.example.MainVerticleKt</mainClass>
-                    <classpathScope>compile</classpathScope>
-                </configuration>
             </plugin>
         </plugins>
     </build>

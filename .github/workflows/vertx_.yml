@@ -207,6 +207,8 @@ jobs:
           # Notify the user
           echo "Ran for 60 seconds and now terminated kotlinc piping."
 
+####################################################################################
+
 # To run Ktor locally:
   # cd kotlin/ktor_
   # mvn clean package
@@ -218,3 +220,33 @@ jobs:
   # docker run -p 8080:8080 my-ktor-app
   # docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
   # docker push sreedockerhub19/my-ktor-app:latest
+
+####################################################################################
+
+# To run Vertx (Java) locally:
+  # cd java/vertx_
+  # mvn clean package -DskipTests
+  # java -jar target/vertx-application-1.0-SNAPSHOT.jar  (http://localhost:8080/)
+
+# To build and push Vertx (Java) into Docker hub:
+# (From root of the repo):
+  # docker build -t my-vertx-app java/vertx_/
+  # docker run -p 8080:8080 my-vertx-app
+  # docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
+  # docker push sreedockerhub19/my-vertx-app:latest
+
+####################################################################################
+
+# To run Vertx (Kotlin) locally:
+  # cd kotlin/vertx_
+  # mvn compile
+  # mvn exec:java -Dexec.mainClass="com.example.MainVerticleKt"  (http://localhost:8080/)
+
+# To build and push Vertx (Java) into Docker hub:
+# (From root of the repo):
+  # docker build -t my-vertx-app-kotlin kotlin/vertx_/
+  # docker run -p 8080:8080 my-vertx-app-kotlin
+  # docker tag my-vertx-app-kotlin sreedockerhub19/my-vertx-app-kotlin:latest
+  # docker push sreedockerhub19/my-vertx-app-kotlin:latest
+
+####################################################################################

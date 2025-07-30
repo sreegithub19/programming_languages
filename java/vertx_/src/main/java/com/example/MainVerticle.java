@@ -21,37 +21,37 @@ public class MainVerticle extends AbstractVerticle {
 
     @Override
     public void start(Promise<Void> startPromise) {
-        // Create a router object.
-        Router router = Router.router(vertx);
+        // Use Render's PORT if present; default to 8080
+        int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
 
-        // Define routes
+        // Create a router and routes
+        Router router = Router.router(vertx);
         router.get("/").handler(this::handleRoot);
         router.get("/hello/:name").handler(this::handleHello);
 
-        // Create the HTTP server and use the router to handle requests.
+        // Start HTTP server
         vertx.createHttpServer()
             .requestHandler(router)
-            .listen(8080, http -> {
+            .listen(port, http -> {
                 if (http.succeeded()) {
                     startPromise.complete();
-                    System.out.println("HTTP server started on port 8080");
+                    System.out.println("HTTP server started on port " + port);
                 } else {
                     startPromise.fail(http.cause());
                 }
             });
     }
 
-    private void handleRoot(RoutingContext routingContext) {
-        routingContext.response()
+    private void handleRoot(RoutingContext ctx) {
+        ctx.response()
             .putHeader("content-type", "text/plain")
             .end("Welcome to the application!");
     }
 
-    private void handleHello(RoutingContext routingContext) {
-        String name = routingContext.pathParam("name");
-        routingContext.response()
+    private void handleHello(RoutingContext ctx) {
+        String name = ctx.pathParam("name");
+        ctx.response()
             .putHeader("content-type", "text/plain")
             .end("Hello, " + name + "!");
     }
-
 }
