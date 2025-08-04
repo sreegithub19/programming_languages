@@ -18,22 +18,30 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Step 4: Build the Spring Boot Application
       - name: Build Application docker - 1
+        working-directory: ./kotlin/spring_boot
         run: |
-          cd kotlin/spring_boot
-          docker build -t sreedockerhub19/my-spring-app:latest .
-          docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
+          docker build -t my-spring-app:latest .
+          docker tag my-spring-app sreedockerhub19/my-spring-app:latest
           docker push sreedockerhub19/my-spring-app:latest
 
       - name: Build Application docker - 2
+        working-directory: ./java/vertx_
         run: |
-          docker build -t my-vertx-app java/vertx_/
+          docker build -t my-vertx-app .
           docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
           docker push sreedockerhub19/my-vertx-app:latest
 
       - name: Build Application docker - 3
+        working-directory: ./kotlin/vertx_
         run: |
-          docker build -t my-vertx-app-kotlin kotlin/vertx_/
+          docker build -t my-vertx-app-kotlin .
           docker tag my-vertx-app-kotlin sreedockerhub19/my-vertx-app-kotlin:latest
           docker push sreedockerhub19/my-vertx-app-kotlin:latest
+
+      - name: Build Application docker - 4
+        working-directory: ./kotlin/ktor_
+        run: |
+          docker build -t my-ktor-app .
+          docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
+          docker push sreedockerhub19/my-ktor-app:latest
