@@ -1,0 +1,39 @@
+name: Docker Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    name: Docker run workflow
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Step 4: Build the Spring Boot Application
+      - name: Build Application docker - 1
+        run: |
+          cd kotlin/spring_boot
+          docker build -t sreedockerhub19/my-spring-app:latest .
+          docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
+          docker push sreedockerhub19/my-spring-app:latest
+
+      - name: Build Application docker - 2
+        run: |
+          docker build -t my-vertx-app java/vertx_/
+          docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
+          docker push sreedockerhub19/my-vertx-app:latest
+
+      - name: Build Application docker - 3
+        run: |
+          docker build -t my-vertx-app-kotlin kotlin/vertx_/
+          docker tag my-vertx-app-kotlin sreedockerhub19/my-vertx-app-kotlin:latest
+          docker push sreedockerhub19/my-vertx-app-kotlin:latest
