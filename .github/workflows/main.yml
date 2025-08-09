@@ -139,8 +139,13 @@ jobs:
           cd AI_nization/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout bito_ && git pull origin bito_ --allow-unrelated-histories && cd ../..
           cd cengage_lfs_programming && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
           cd typescript/ai-chatbot && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
-          cd certifications && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..
-          
+          cd certifications && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ..      
+          cd java/android_/automated-build-android-app-with-github-action && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+          cd java/android_/testing-samples && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd java/angular_springboot/Expense_Tracker && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd java/angular_springboot/angular-springboot-crud && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd java/angular_springboot/spring-boot-angular-15-mysql-example && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
+
           git add .
 
           if [[ $(git diff --cached --quiet; echo $?) -ne 0 ]]; then

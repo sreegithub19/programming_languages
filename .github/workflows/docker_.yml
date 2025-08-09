@@ -3,7 +3,7 @@ name: Docker Workflow
 on:
   push:
     branches:
-      - main
+      - main_
 
 jobs:
   build-and-run:
