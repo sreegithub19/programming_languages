@@ -33,7 +33,7 @@ jobs:
       run: |
        cd kotlin/kotlin_js
        gradle browserProductionWebpack
-       ls build/js/packages/kotlin_js/
+       ls build/js/packages/kotlin_js/kotlin
        #ls build/distributions
        #mv build/distributions/kotlin_js.js .
        mv build/js/packages/kotlin_js/kotlin_js.js .
