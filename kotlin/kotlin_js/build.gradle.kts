@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.8.22" // Use the Kotlin/JS plugin
+    kotlin("js") version "2.1.20" // Use the Kotlin/JS plugin
 }
 
 repositories {
