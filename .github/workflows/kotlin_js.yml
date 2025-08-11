@@ -32,7 +32,7 @@ jobs:
     - name: Build the Kotlin/JS project
       run: |
        cd kotlin/kotlin_js
-       gradle wrapper --gradle-version 9.0.0
+       gradle wrapper --gradle-version 8.4.1
        chmod +x gradlew
        ./gradlew browserProductionWebpack
        mv build/distributions/kotlin_js.js .
