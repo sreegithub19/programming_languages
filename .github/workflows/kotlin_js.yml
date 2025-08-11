@@ -36,7 +36,7 @@ jobs:
        ls build/js/packages/kotlin_js/kotlin
        #ls build/distributions
        #mv build/distributions/kotlin_js.js .
-       mv build/js/packages/kotlin_js/kotlin_js.js .
+       mv build/js/packages/kotlin_js/kotlin/kotlin_js.js .
 
     # Step 4: Build the Kotlin tutorial project using kotlinc (to convert to Java)
     - name: Build the Kotlin tutorial project, run it, and decompile to Java
