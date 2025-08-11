@@ -33,7 +33,10 @@ jobs:
       run: |
        cd kotlin/kotlin_js
        gradle browserProductionWebpack
-       mv build/distributions/kotlin_js.js .
+       ls build/js/packages/kotlin_js/
+       #ls build/distributions
+       #mv build/distributions/kotlin_js.js .
+       mv build/js/packages/kotlin_js/kotlin_js.js .
 
     # Step 4: Build the Kotlin tutorial project using kotlinc (to convert to Java)
     - name: Build the Kotlin tutorial project, run it, and decompile to Java
