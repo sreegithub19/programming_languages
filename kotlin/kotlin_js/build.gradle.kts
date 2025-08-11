@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "2.2.0" // Use the Kotlin/JS plugin
+    kotlin("js") version "2.2.0" // Use the Kotlin/JS plugin
 }
 
 repositories {
