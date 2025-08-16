@@ -21,6 +21,27 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+############################### Java ###############################
+      # https://my-spring-boot-app-pzc1.onrender.com
+      - name: Build Application docker - 2
+        working-directory: ./java/spring_boot_web_apps_gradle/java_applications
+        run: |
+          docker build -t my-spring-boot-app .
+          # docker run -p 8080:8080 my-spring-boot-app
+          docker tag my-spring-boot-app sreedockerhub19/my-spring-boot-app:latest
+          docker push sreedockerhub19/my-spring-boot-app:latest
+
+      # https://my-vertx-app-w215.onrender.com
+      - name: Build Application docker - 0
+        working-directory: ./java/vertx_
+        run: |
+          docker build -t my-vertx-app .
+          docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
+          docker push sreedockerhub19/my-vertx-app:latest
+
+
+############################### Kotlin ###############################
+      # https://my-spring-app-ia5y.onrender.com
       - name: Build Application docker - 1
         working-directory: ./kotlin/spring_boot
         run: |
@@ -28,13 +49,7 @@ jobs:
           docker tag my-spring-app sreedockerhub19/my-spring-app:latest
           docker push sreedockerhub19/my-spring-app:latest
 
-      - name: Build Application docker - 2
-        working-directory: ./java/vertx_
-        run: |
-          docker build -t my-vertx-app .
-          docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
-          docker push sreedockerhub19/my-vertx-app:latest
-
+      # https://my-vertx-app-kotlin.onrender.com
       - name: Build Application docker - 3
         working-directory: ./kotlin/vertx_
         run: |
@@ -42,9 +57,15 @@ jobs:
           docker tag my-vertx-app-kotlin sreedockerhub19/my-vertx-app-kotlin:latest
           docker push sreedockerhub19/my-vertx-app-kotlin:latest
 
+      # https://my-ktor-app.onrender.com
       - name: Build Application docker - 4
         working-directory: ./kotlin/ktor_
         run: |
           docker build -t my-ktor-app .
           docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
           docker push sreedockerhub19/my-ktor-app:latest
+
+
+############################### TypeScript ###############################
+
+  # https://dashboard.render.com/web/srv-d1r5n10dl3ps73f3mo2g
