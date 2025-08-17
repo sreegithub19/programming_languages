@@ -3,7 +3,7 @@ name: Docker Workflow
 on:
   push:
     branches:
-      - main_
+      - main
 
 jobs:
   build-and-run:
@@ -39,6 +39,24 @@ jobs:
           docker tag my-vertx-app sreedockerhub19/my-vertx-app:latest
           docker push sreedockerhub19/my-vertx-app:latest
 
+      # https://my-javalin-app-latest.onrender.com/
+      - name: Build Application docker - 6
+        working-directory: ./java/javalin_
+        run: |
+          docker build -t javalin-java-app .
+          # docker run -p 8080:8080 javalin-java-app
+          docker tag javalin-java-app sreedockerhub19/javalin-java-app:latest
+          docker push sreedockerhub19/javalin-java-app:latest
+
+      # https://my-quarkus-java-app.onrender.com
+      - name: Build Application docker - 8
+        working-directory: ./java/quarkus_
+        run: |
+          docker build -t my-quarkus-java-app .
+          # docker run -p 8080:8080 my-quarkus-java-app
+          docker tag my-quarkus-java-app sreedockerhub19/my-quarkus-java-app:latest
+          docker push sreedockerhub19/my-quarkus-java-app:latest
+
 
 ############################### Kotlin ###############################
       # https://my-spring-app-ia5y.onrender.com
@@ -64,6 +82,24 @@ jobs:
           docker build -t my-ktor-app .
           docker tag my-ktor-app sreedockerhub19/my-ktor-app:latest
           docker push sreedockerhub19/my-ktor-app:latest
+
+      # https://my-javalin-app-latest.onrender.com/
+      - name: Build Application docker - 5
+        working-directory: ./kotlin/javalin_
+        run: |
+          docker build -t my-javalin-app .
+          # docker run -p 8080:8080 my-javalin-app
+          docker tag my-javalin-app sreedockerhub19/my-javalin-app:latest
+          docker push sreedockerhub19/my-javalin-app:latest
+
+      # https://my-quarkus-kotlin-app.onrender.com
+      - name: Build Application docker - 7
+        working-directory: ./kotlin/quarkus_
+        run: |
+          docker build -t my-quarkus-kotlin-app .
+          # docker run -p 8080:8080 my-quarkus-kotlin-app
+          docker tag my-quarkus-kotlin-app sreedockerhub19/my-quarkus-kotlin-app:latest
+          docker push sreedockerhub19/my-quarkus-kotlin-app:latest
 
 
 ############################### TypeScript ###############################
