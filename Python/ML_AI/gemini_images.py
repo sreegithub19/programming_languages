@@ -26,7 +26,7 @@ def generate_image(api_key, prompt, filename="gemini_native_image.png"):
         print(f"Error: {e}")
         return False
 
-API_KEY = "AIzaSyBVzuUlSigMSS1tvHKqKrCiNVMpbTGLhXE"  # Replace with your actual API key
+API_KEY = sys.argv[1]
 PROMPTS = [
     "A photorealistic image of a fluffy white cat sitting on a red cushion in a sunlit garden.",
     "A futuristic cityscape at sunset, with flying cars and neon lights.",
