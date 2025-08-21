@@ -1,5 +1,5 @@
 import subprocess
-import os
+import os, sys
 import json
 
 def convert_kotlin_to_java(api_key, kotlin_code, output_filename="ConvertedCode.java"):
@@ -78,7 +78,7 @@ def convert_kotlin_to_java(api_key, kotlin_code, output_filename="ConvertedCode.
         return None
 
 if __name__ == "__main__":
-    API_KEY = "AIzaSyBVzuUlSigMSS1tvHKqKrCiNVMpbTGLhXE"
+    API_KEY = sys.argv[1]
 
     if not API_KEY:
         print("Error: GEMINI_API_KEY environment variable not set.")

@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, sys
 
 def generate_image(api_key, prompt, filename="gemini_native_image.png"):
     """Generates an image from a text prompt using the Gemini API."""
