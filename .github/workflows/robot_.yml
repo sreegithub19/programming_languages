@@ -31,6 +31,7 @@ jobs:
 # To get API keys:
   # Chatgpt : https://platform.openai.com/api-keys
   # Gemini : https://console.cloud.google.com/apis/credentials?project=gen-lang-client-0816797577&pli=1
+  # New Gemini: https://console.cloud.google.com/apis/credentials?project=concise-decker-469715-q7&pli=1
   # Github copilot (uses OpenAI key) : https://platform.openai.com/api-keys
     - name: Run AI_generated image creation using Python (using Gemini)
       run: |
