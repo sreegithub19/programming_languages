@@ -28,7 +28,7 @@ jobs:
       id: generate_java # Give this step an ID to access its outputs
       run: |
         cd Python/ML_AI/kotlin_to_java
-        #python k2j.py ${{ secrets.GEMINI_SECRET }}
+        python k2j.py ${{ secrets.GEMINI_SECRET }}
 
 
     # - name: Find the generated Java file
