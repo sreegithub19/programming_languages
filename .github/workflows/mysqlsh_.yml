@@ -60,12 +60,8 @@ jobs:
       - name: Run multiline shell command via mysqlsh (SQL mode)
         run: |
           echo "Executing shell commands from MySQL Shell..."
-          mysqlsh root@127.0.0.1:3306 --password=sample_password --sql -e "
-            \! bash -c ' 
-              echo \"Hello from shell\"
-              echo \"Current user: $(whoami)\"
-              echo \"Date: $(date)\"
-              echo \"Listing files:\"
-              ls -la
-            '
-          "
+          mysqlsh root@127.0.0.1:3306 --sql <<'EOSQL'
+          \! bash <<'EOBASH'
+          ls -la
+          EOBASH
+          EOSQL
