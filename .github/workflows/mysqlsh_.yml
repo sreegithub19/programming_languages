@@ -56,12 +56,3 @@ jobs:
             INSERT INTO users(name, email) VALUES('Bob', 'bob@example.com');
             SELECT * FROM users;
           "
-
-      - name: Run multiline shell command via mysqlsh (SQL mode)
-        run: |
-          echo "Executing shell commands from MySQL Shell..."
-          mysqlsh root@127.0.0.1:3306 --password=sample_password --sql <<'EOSQL'
-          \! bash <<'EOBASH'
-          ls -la
-          EOBASH
-          EOSQL
