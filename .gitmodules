@@ -332,7 +332,7 @@
 	path = typescript/solid_/solid_ts/solid_app
 	url = https://github.com/sreegithub19/solid_app.git
 	branch = typescript
-	# https://solid-c3aqyyctd-sreegithub19.vercel.app/
+	# http://solid-app-alpha.vercel.app/
 	# #Video: https://user-images.githubusercontent.com/55496113/222207821-6a9d94c2-6f16-4043-83a0-8502ea9956e5.mp4
 [submodule "javascript/nuxt_/nuxtjs-boilerplate"]
 	path = javascript/nuxt_/nuxtjs-boilerplate
@@ -578,4 +578,12 @@
 [submodule "certifications"]
 	path = certifications
 	url = https://github.com/sreegithub19/certifications.git
+	branch = main
+[submodule "javascript/middleman_/middleman"]
+	path = javascript/middleman_/middleman
+	url = https://github.com/sreegithub19/middleman.git
+	branch = main
+[submodule "ruby/jekyll1"]
+	path = ruby/jekyll1
+	url = https://github.com/sreegithub19/jekyll1.git
 	branch = main
