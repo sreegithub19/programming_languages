@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mariadb:
-        image: mariadb:11.4
+        image: mariadb:10.6
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: testdb
