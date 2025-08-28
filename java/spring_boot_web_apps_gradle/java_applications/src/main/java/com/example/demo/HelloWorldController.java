@@ -100,7 +100,7 @@ public class HelloWorldController {
     It is explicit bean registration, as opposed to @Component which relies on component scanning.
     */
     //@Bean : @Bean is for Spring-managed objects, not for runtime computations.
-    @Autowired // "Find a matching bean in the ApplicationContext and inject it here.”
+    //@Autowired // "Find a matching bean in the ApplicationContext and inject it here.”
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> pairIdx = new HashMap<>();
 

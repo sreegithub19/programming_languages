@@ -44,19 +44,12 @@ jobs:
       - name: Install MySQL client
         run: sudo apt-get update && sudo apt-get install -y mysql-client
 
-
-      - name: Run multiline bash script via MySQL client (heredoc)
+      - name: Create a table and insert data
         run: |
-          echo "Running multiline bash script via MySQL client..."
-          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db <<'EOSQL'
-          \! bash <<'EOF'
-          echo "Hello from shell"
-          echo "Current user: $(whoami)"
-          echo "Date: $(date)"
-          EOF
-          EOSQL
-
-
+          echo "Connecting to MySQL and creating a table..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
+          \! ls -la
+          "
 
       - name: Create a table and insert data
         run: |
