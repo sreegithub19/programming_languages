@@ -1,4 +1,4 @@
-name: MariaDB + sys_exec Example
+name: MariaDB Example Workflow
 
 on:
   push:
@@ -22,51 +22,46 @@ jobs:
           --health-cmd="mysqladmin ping -h localhost -uroot -proot"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=10
-
+          --health-retries=5
     steps:
+      - name: Show running containers
+        run: docker ps
+
       - name: Wait for MariaDB to initialize
         run: |
-          echo "Waiting for MariaDB to be ready..."
-          for i in {1..30}; do
-            mysqladmin ping -hmariadb -uroot -proot && break
-            echo "MariaDB unavailable - sleeping"
-            sleep 2
-          done
+          echo "Sleeping for 30s to allow MariaDB to start..."
+          sleep 30
 
-      - name: Install build tools & compile sys_exec UDF
+      - name: Run SQL commands in MariaDB
         run: |
-          docker exec -i ${{ job.services.mariadb.id }} bash -c "
-            apt-get update && \
-            apt-get install -y mariadb-server-dev-11.4 build-essential git && \
-            cd /tmp && \
-            git clone https://github.com/mariadb-corporation/sys_exec_udf.git && \
-            cd sys_exec_udf && \
-            make && \
-            mysql -uroot -proot -e \"CREATE FUNCTION sys_exec RETURNS int SONAME 'sys_exec_udf.so';\"
-          "
+          docker exec -i ${{ job.services.mariadb.id }} \
+          mysql -uroot -proot testdb <<'EOF'
+          CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(50),
+            age INT
+          );
+          INSERT INTO users (name, age) VALUES ('Alice', 30);
+          INSERT INTO users (name, age) VALUES ('Bob', 25);
+          SELECT * FROM users;
+          EOF
 
-      - name: Run SQL commands including sys.exec and sys_exec()
+      - name: Run SQL commands in MariaDB again
         run: |
-          mysql -hmariadb -uroot -proot testdb <<'EOF'
-          -- Create table using sys.exec
+          docker exec -i ${{ job.services.mariadb.id }} \
+          mysql -uroot -proot testdb <<'EOF'
+          -- Use sys.exec for multiline SQL execution
           CALL sys.exec('
               CREATE TABLE IF NOT EXISTS users (
                   id INT AUTO_INCREMENT PRIMARY KEY,
                   name VARCHAR(50),
                   age INT
-              )
+              );
+
+              INSERT INTO users (name, age) VALUES (''Alice'', 40);
+              INSERT INTO users (name, age) VALUES (''Bob'', 35);
           ');
 
-          -- Insert data using sys.exec
-          CALL sys.exec('
-              INSERT INTO users (name, age) VALUES (''Alice'', 30);
-              INSERT INTO users (name, age) VALUES (''Bob'', 25);
-          ');
-
-          -- Select data normally
+          -- Verify the inserted data
           SELECT * FROM users;
-
-          -- Run OS command using sys_exec() UDF
-          SELECT sys_exec('ls -la /tmp') AS files;
           EOF
