@@ -43,22 +43,6 @@ jobs:
       - name: Install PostgreSQL client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
 
-
-      # Method 1: Using heredoc with PostgreSQL (cleanest approach)
-      - name: Use COPY ... PROGRAM with heredoc (no escaping needed)
-        run: |
-          PGPASSWORD=sample_password psql -h localhost -U sample_user -d sample_db << 'EOF'
-          -- Create table to store shell output
-          CREATE TABLE IF NOT EXISTS shell_output (
-            line TEXT
-          );
-
-          -- Load output using single quotes (no escaping needed)
-          COPY shell_output(line)
-          FROM PROGRAM 'echo 2+3'
-          WITH (FORMAT text);
-          EOF
-
       - name: Create a table and insert data
         run: |
           echo "Connecting to PostgreSQL and creating a table..."
