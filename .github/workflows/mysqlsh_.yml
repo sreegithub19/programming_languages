@@ -56,5 +56,3 @@ jobs:
             INSERT INTO users(name, email) VALUES('Bob', 'bob@example.com');
             SELECT * FROM users;
           "
-
-          mysqlsh root@127.0.0.1:3306 --password=sample_password --sql -e "\! bash -c 'echo Hello from shell; ls -la'"
