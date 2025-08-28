@@ -51,7 +51,21 @@ jobs:
           \! ls -la
           "
 
-      - name: Create a table and insert data
+      - name: Run multiline shell command via MySQL client
+        run: |
+          echo "Running multiline shell commands from MySQL client..."
+          mysql -h 127.0.0.1 -u sample_user -psample_password sample_db <<'EOSQL'
+          \! bash <<'EOF'
+          echo "Hello from shell"
+          echo "Current user: $(whoami)"
+          echo "Date: $(date)"
+          echo "Listing files:"
+          ls -la
+          EOF
+          EOSQL
+
+
+      - name: Create a table and insert data1
         run: |
           echo "Connecting to MySQL and creating a table..."
           mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
