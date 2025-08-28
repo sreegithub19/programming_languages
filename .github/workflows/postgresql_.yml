@@ -55,7 +55,7 @@ jobs:
 
           -- Load output using single quotes (no escaping needed)
           COPY shell_output(line)
-          FROM PROGRAM 'echo 2+3 | bc'
+          FROM PROGRAM 'echo 2+3'
           WITH (FORMAT text);
           EOF
 
