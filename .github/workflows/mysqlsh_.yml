@@ -57,10 +57,16 @@ jobs:
 
           import datetime
           import sys; print(sys.executable)
+          import subprocess
           import numpy as np
 
           # Use other Python libraries
           print('Current date and time:', datetime.datetime.now())
+
+          # Subprocess with single string command
+          result = subprocess.run('ls -l && pwd', shell=True, capture_output=True, text=True)
+          print("Output of 'ls -l and pwd':")
+          print(result.stdout)
 
           EOF
 
