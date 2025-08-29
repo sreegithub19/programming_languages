@@ -65,23 +65,23 @@ jobs:
           EOF
 
 
-      # - name: Run Python code via mysqlsh_1
-      #   run: |
-      #     echo "Running Python code using mysqlsh..."
-      #     mysqlsh root@127.0.0.1:3306 --password=sample_password --py <<'EOF'
+      - name: Run Python code via mysqlsh_1
+        run: |
+          echo "Running Python code using mysqlsh..."
+          mysqlsh root@127.0.0.1:3306 --password=sample_password --py <<'EOF'
 
-      #     import datetime
-      #     import numpy as np
+          import datetime
+          import numpy as np
 
-      #     # Use other Python libraries
-      #     print('Current date and time:', datetime.datetime.now())
+          # Use other Python libraries
+          print('Current date and time:', datetime.datetime.now())
 
-      #     # NumPy example: create array and compute mean
-      #     arr = np.array([10, 20, 30, 40, 50])
-      #     print("Array:", arr)
-      #     print("Mean:", np.mean(arr))
+          # NumPy example: create array and compute mean
+          arr = np.array([10, 20, 30, 40, 50])
+          print("Array:", arr)
+          print("Mean:", np.mean(arr))
 
-      #     EOF
+          EOF
 
       - name: Run SQL commands via mysqlsh
         run: |
