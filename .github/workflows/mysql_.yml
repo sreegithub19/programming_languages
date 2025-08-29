@@ -47,6 +47,18 @@ jobs:
       - name: Create a table and insert data
         run: |
           echo "Connecting to MySQL and creating a table..."
+
+          cat <<'CMDS' | sed 's/^/\\! /' | mysql -h 127.0.0.1 -u sample_user -psample_password sample_db
+          ls -la
+          echo 2+5
+          pwd
+          date
+          CMDS
+
+
+      - name: Create a table and insert data
+        run: |
+          echo "Connecting to MySQL and creating a table..."
           mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
           \! ls -la
           \! echo 2+5
