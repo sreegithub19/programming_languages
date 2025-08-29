@@ -27,8 +27,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
       - name: Install MySQL Shell
-        run: sudo apt-get update && sudo apt-get install -y mysql-shell
+        run: |
+         sudo apt-get update && sudo apt-get install -y mysql-shell
+         python -m pip install --upgrade pip
+         pip install numpy
 
       - name: Wait for MySQL to be ready
         run: |
@@ -45,10 +53,18 @@ jobs:
         run: |
           echo "Running Python code using mysqlsh..."
           mysqlsh root@127.0.0.1:3306 --password=sample_password --py <<'EOF'
+
           import datetime
+          import numpy as np
 
           # Use other Python libraries
           print('Current date and time:', datetime.datetime.now())
+
+          # NumPy example: create array and compute mean
+          arr = np.array([10, 20, 30, 40, 50])
+          print("Array:", arr)
+          print("Mean:", np.mean(arr))
+
           EOF
 
 
