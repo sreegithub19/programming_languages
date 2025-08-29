@@ -41,6 +41,17 @@ jobs:
             sleep 2
           done
 
+      - name: Run Python code via mysqlsh
+        run: |
+          echo "Running Python code using mysqlsh..."
+          mysqlsh root@127.0.0.1:3306 --py -e <<'EOF'
+          import datetime
+
+          # Use other Python libraries
+          print('Current date and time:', datetime.datetime.now())
+          EOF
+
+
       - name: Run SQL commands via mysqlsh
         run: |
           echo "Running SQL commands using mysqlsh..."

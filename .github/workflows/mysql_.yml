@@ -54,12 +54,6 @@ jobs:
           pwd
           date
 
-          cat <<'EOF'
-          Hello World
-          This is a multi-line string
-          Printed using a heredoc
-          EOF
-
           CMDS
 
 
