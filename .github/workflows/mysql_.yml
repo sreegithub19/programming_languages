@@ -49,6 +49,7 @@ jobs:
           echo "Connecting to MySQL and creating a table..."
           mysql -h 127.0.0.1 -u sample_user -psample_password sample_db -e "
           \! ls -la
+          \! echo 2+5
           "
 
       - name: Create a table and insert data1
