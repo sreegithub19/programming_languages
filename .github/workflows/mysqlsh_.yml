@@ -44,7 +44,7 @@ jobs:
       - name: Run Python code via mysqlsh
         run: |
           echo "Running Python code using mysqlsh..."
-          mysqlsh root@127.0.0.1:3306 --py <<'EOF'
+          mysqlsh root@127.0.0.1:3306 --password=sample_password --py <<'EOF'
           import datetime
 
           # Use other Python libraries
