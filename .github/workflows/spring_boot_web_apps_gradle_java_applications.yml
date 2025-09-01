@@ -92,6 +92,7 @@ jobs:
       - name: Run Spring Boot App in Background with ngrok
         run: |
           # Start Spring Boot application
+
           cd java/spring_boot_web_apps_gradle/java_applications
           java -jar target/*.jar &
           echo "Spring Boot app started in the background."
@@ -105,8 +106,8 @@ jobs:
           # Authenticate ngrok using the authtoken from GitHub Secrets
           ngrok authtoken 2whue6P5qFygcTJjinX37XDBpTN_YUPyCQTL9pWdzG5KQsTb
 
-          # Start ngrok to expose localhost:8090
-          ngrok http 8090 > /dev/null &
+          # Start ngrok to expose localhost:8080
+          ngrok http 8080 > /dev/null &
 
           # Wait for ngrok to initialize and fetch public URL
           sleep 5
@@ -125,7 +126,7 @@ jobs:
          import time
          import os
 
-         PORT = 8090
+         PORT = 8080
 
          li = ['/' , '/chess' , '/calculator' , '/sass_' , '/maze' , '/codepen' , '/tilt_maze' , '/tic_tac_toe' , '/clock' , '/hangman' , '/puzzles' , '/sudoku' , '/virtual_keyboard' , '/solitaire' , '/dino']
 
