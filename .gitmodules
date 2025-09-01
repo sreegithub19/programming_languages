@@ -587,3 +587,11 @@
 	path = ruby/jekyll1
 	url = https://github.com/sreegithub19/jekyll1.git
 	branch = main
+[submodule "java/micronaut_/codeforces_script"]
+	path = java/micronaut_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = micronaut_java_
+[submodule "kotlin/micronaut_/codeforces_script"]
+	path = kotlin/micronaut_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = micronaut_kotlin_

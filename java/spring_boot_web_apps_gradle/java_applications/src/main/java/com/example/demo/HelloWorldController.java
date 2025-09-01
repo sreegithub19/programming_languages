@@ -13,6 +13,8 @@ import java.lang.annotation.*;
 import java.nio.charset.StandardCharsets;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service  // @Service marks this class as a Spring-managed bean that can be injected anywhere.
 class GreetingService {
@@ -101,19 +103,90 @@ public class HelloWorldController {
     */
     //@Bean : @Bean is for Spring-managed objects, not for runtime computations.
     //@Autowired // "Find a matching bean in the ApplicationContext and inject it here.”
-    public int[] twoSum(int[] nums, int target) {
+    public int[] twoSum(int[] nums_, int target_) throws IOException {
         Map<Integer, Integer> pairIdx = new HashMap<>();
 
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            if (pairIdx.containsKey(target - num)) {
-                return new int[] { i, pairIdx.get(target - num) };
+        for (int i = 0; i < nums_.length; i++) {
+            int num = nums_[i];
+            if (pairIdx.containsKey(target_ - num)) {
+                return new int[] { i, pairIdx.get(target_ - num) };
             }
             pairIdx.put(num, i);
         }
 
-        return new int[] {};        
+        report(new int[]{5, 7, 7, 8, 8, 10}, 8);
+        return new int[] {};
     }
+
+    // Internal helper method — not a route
+    public String generateReport(int[] nums, int target) {
+        var list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        var list_reverse = list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        var first = list.indexOf(target);
+        var last = list_reverse.indexOf(target);
+
+        String report = String.format("""
+    --------------  <br>
+    %s <br> %s <br> %s <br> %s <br>
+    Target : %s <br>
+    %s <br> %s <br> %s <br>
+    %s <br> %s <br>
+    %s <br>
+    """,
+                Arrays.stream(nums).boxed().collect(Collectors.toList()) ,
+                Arrays.stream(nums).boxed().collect(Collectors.toList()).indexOf(target) ,
+                Arrays.stream(nums).boxed().sorted().collect(Collectors.toList()) ,
+                Arrays.stream(nums).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList()),
+                target,
+                list , first, (nums.length - last - 1),
+                Arrays.binarySearch(nums,6),
+                Arrays.binarySearch(nums,6)<0,
+                Stream.concat(Arrays.stream(nums).boxed(), Stream.of(target+100)).sorted().collect(Collectors.toList()).indexOf(target+100)
+        );
+        return (report);
+    }
+
+    // Controller route — calls internal method
+    @RequestMapping("/report")
+    public String report(@RequestParam(required = false) int[] nums , @RequestParam(required = false) Integer target) {
+        if (target == null) target = 8; // default target
+        if(nums == null) nums = new int[]{4,7,7,8,8,10};
+        return generateReport(nums, target);
+    }
+
+    @RequestMapping("/reportWithParams")
+    public String reportWithParams(@RequestParam int[] nums, @RequestParam Integer target) throws IOException{
+        //var nums = new int[]{4,7,7,8,8,10}; var target = 8;
+        var list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        var list_reverse = list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        var first = list.indexOf(target);
+        var last = list_reverse.indexOf(target);
+
+        String report = String.format("""
+    --------------  <br>
+    %s <br>
+    %s <br>
+    %s <br>
+    %s <br>
+    Target : %s <br>
+    %s <br>
+    %s <br>
+    %s <br>
+    %s <br>
+    %s <br>
+    """,
+                Arrays.stream(nums).boxed().collect(Collectors.toList()) ,
+                Arrays.stream(nums).boxed().collect(Collectors.toList()).indexOf(target) ,
+                Arrays.stream(nums).boxed().sorted().collect(Collectors.toList()) ,
+                Arrays.stream(nums).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList()),
+                target,
+                list , first, (nums.length - last - 1),
+                Arrays.binarySearch(nums,6),
+                Arrays.binarySearch(nums,6)<0
+        );
+        return (report);
+    }
+
 
     private String loadHtml(String filename) throws IOException {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("static/" + filename)) {
@@ -169,7 +242,6 @@ public class HelloWorldController {
     public String index1() throws IOException{
         return new GreetingService1().getGreeting();
     }
-
 
     // Dependency Injection (implementation of IoC (Inversion of Control)  principle)
     // 1. Field injection
