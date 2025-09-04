@@ -595,3 +595,15 @@
 	path = kotlin/micronaut_/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = micronaut_kotlin_
+[submodule "java/helidon/codeforces_script"]
+	path = java/helidon/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = helidon_java_
+[submodule "Python/selenium_/selenium_python_example"]
+	path = Python/selenium_/selenium_python_example
+	url = https://github.com/sreegithub19/selenium_python_example.git
+	branch = main
+[submodule "Python/selenium_/SeleniumBase"]
+	path = Python/selenium_/SeleniumBase
+	url = https://github.com/sreegithub19/SeleniumBase.git
+	branch = master

@@ -149,6 +149,9 @@ jobs:
           cd ruby/jekyll1 && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../..
           cd java/micronaut_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout micronaut_java_ && git pull origin micronaut_java_ --allow-unrelated-histories && cd ../../..
           cd kotlin/micronaut_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout micronaut_kotlin_ && git pull origin micronaut_kotlin_ --allow-unrelated-histories && cd ../../..
+          cd java/helidon/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout helidon_java_ && git pull origin helidon_java_ --allow-unrelated-histories && cd ../../..
+          cd Python/selenium_/selenium_python_example && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd Python/selenium_/SeleniumBase && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
 
           git add .
 
