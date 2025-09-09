@@ -17,7 +17,7 @@ RUN mvn dependency:go-offline
 COPY . .
 
 # Build the Kotlin Spring Boot project, skipping tests
-RUN mvn clean package -DskipTests
+RUN mvn clean package
 
 # ---------- Step 2: Runtime Stage ----------
 FROM eclipse-temurin:21-jre

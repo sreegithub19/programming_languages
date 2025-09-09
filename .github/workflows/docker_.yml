@@ -3,7 +3,7 @@ name: Docker Workflow
 on:
   push:
     branches:
-      - main_
+      - main
 
 jobs:
   build-and-run:
@@ -30,6 +30,14 @@ jobs:
           # docker run -p 8080:8080 my-spring-boot-app
           docker tag my-spring-boot-app sreedockerhub19/my-spring-boot-app:latest
           docker push sreedockerhub19/my-spring-boot-app:latest
+
+      - name: Build Application docker - 2.1
+        working-directory: ./java/spring_boot_rest_API_app_maven
+        run: |
+          docker build -t my-spring-boot-maven-app .
+          # docker run -p 8080:8080 my-spring-boot-maven-app
+          docker tag my-spring-boot-maven-app sreedockerhub19/my-spring-boot-maven-app:latest
+          docker push sreedockerhub19/my-spring-boot-maven-app:latest
 
       # https://my-vertx-app-w215.onrender.com
       - name: Build Application docker - 0

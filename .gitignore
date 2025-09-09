@@ -112,3 +112,7 @@ elm/elm-stuff
 
 # WebDriver
 javascript/webdriver_io/node_modules
+
+
+kotlin/spring_boot/.idea
+kotlin/annotations_/.idea
