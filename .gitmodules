@@ -607,3 +607,7 @@
 	path = Python/selenium_/SeleniumBase
 	url = https://github.com/sreegithub19/SeleniumBase.git
 	branch = master
+[submodule "kotlin/helidon_/codeforces_script"]
+	path = kotlin/helidon_/codeforces_script
+	url = https://github.com/sreegithub19/codeforces_script.git
+	branch = helidon_kotlin_
