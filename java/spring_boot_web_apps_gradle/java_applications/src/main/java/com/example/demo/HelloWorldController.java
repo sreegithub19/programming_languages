@@ -1,12 +1,15 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.*;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.InputStream;
 import java.io.IOException;
 import java.lang.annotation.*;
@@ -35,16 +38,22 @@ class GreetingService1 {
 @RequestMapping("/orders")
 class OrderController {
 
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
     private Map<Long, Order> orders = new HashMap<>();
+    private final ObjectMapper objectMapper; // Declare ObjectMapper
 
-    public OrderController() {
+    public OrderController(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
         orders.put(1L, new Order(1L, 1L, "Laptop"));
         orders.put(2L, new Order(2L, 2L, "Phone"));
     }
 
     // Get order by ID
     @GetMapping("/{id}")
-    public Order getOrder(@PathVariable Long id) {
+    public Order getOrder(@PathVariable Long id) throws JsonProcessingException {
+        log.info("""
+        id:{}, orders.get(id):{}
+        """,id, objectMapper.writeValueAsString(orders.get(id)));
         return orders.get(id);
     }
 
