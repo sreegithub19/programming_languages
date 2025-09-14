@@ -96,7 +96,9 @@ jobs:
           cd java/spring_boot_web_apps_gradle/java_applications
           java -jar target/*.jar &
           echo "Spring Boot app started in the background."
-          sleep 5 # Give the app a few seconds to start
+          sleep 30 # Give the app a few seconds to start
+
+          curl -f --max-time 10 http://localhost:8080/orders
 
           # Install ngrok
           curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
