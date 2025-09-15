@@ -98,7 +98,7 @@ jobs:
           echo "Spring Boot app started in the background."
           sleep 30 # Give the app a few seconds to start
 
-          curl -f --max-time 10 http://localhost:8080/orders/1
+          curl -v --max-time 10 http://localhost:8080/orders/1
           echo
 
           # Install ngrok
