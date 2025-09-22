@@ -611,3 +611,11 @@
 	path = kotlin/helidon_/codeforces_script
 	url = https://github.com/sreegithub19/codeforces_script.git
 	branch = helidon_kotlin_
+[submodule "java/http4j_/http4j_java"]
+	path = java/http4j_/http4j_java
+	url = https://github.com/sreegithub19/http4j_java.git
+	branch = main
+[submodule "kotlin/http4j_/http4j_java"]
+	path = kotlin/http4j_/http4j_java
+	url = https://github.com/sreegithub19/http4j_java.git
+	branch = kotlin_

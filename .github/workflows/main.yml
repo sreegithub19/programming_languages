@@ -153,6 +153,8 @@ jobs:
           cd Python/selenium_/selenium_python_example && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
           cd Python/selenium_/SeleniumBase && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout master && git pull origin master --allow-unrelated-histories && cd ../../..
           cd kotlin/helidon_/codeforces_script && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout helidon_kotlin_ && git pull origin helidon_kotlin_ --allow-unrelated-histories && cd ../../..
+          cd java/http4j_/http4j_java && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout main && git pull origin main --allow-unrelated-histories && cd ../../..
+          cd kotlin/http4j_/http4j_java && git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*' && git fetch --all &&   git checkout kotlin_ && git pull origin kotlin_ --allow-unrelated-histories && cd ../../..
 
           git add .
 
