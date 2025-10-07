@@ -20,7 +20,7 @@ jobs:
           ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
       - name: Checkout code with submodules
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
           token: ${{ secrets.CI_TOKEN }}  # Your PAT secret
@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Git submodules sync
         env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
         run: |
           git config --global user.email "cpadmaja2003@gmail.com"
           git config --global user.name "sreegithub19"
