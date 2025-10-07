@@ -23,8 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         cd Python/pytest_
         pip install -r requirements.txt
-        pytest && python app/decorator.pyy && pytest -m slow
-        # python3 -m pytest && python3 app/decorator.pyy && python3 -m pytest -m slow -> locally
+        pytest && python app/decorator.py && pytest -m slow
+        # python3 -m pytest && python3 app/decorator.py && python3 -m pytest -m slow -> locally
 
     - name: Install dependencies and Run Cucumber with behave and pytest_bdd
       run: |
