@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Git submodules sync
         env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --global user.email "cpadmaja2003@gmail.com"
           git config --global user.name "sreegithub19"
