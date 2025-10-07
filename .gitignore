@@ -116,3 +116,17 @@ javascript/webdriver_io/node_modules
 
 kotlin/spring_boot/.idea
 kotlin/annotations_/.idea
+
+#### Python
+Python/pytest_/app/__pycache__
+Python/pytest_/.venv
+Python/pytest_/.idea
+Python/pytest_/.pytest_cache
+Python/pytest_/app/*.pyc
+
+Python/pytest_/tests/__pycache__
+Python/pytest_/tests/*.pyc
+
+Python/cucumber_/.idea
+Python/cucumber_/features/__pycache__
+Python/cucumber_/.pytest_cache

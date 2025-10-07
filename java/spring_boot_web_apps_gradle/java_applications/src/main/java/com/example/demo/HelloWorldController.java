@@ -93,6 +93,23 @@ class UserController {
     }
 }
 
+
+@RestController
+@RequestMapping("/testing")
+class TestController{
+
+    @GetMapping("/value/{value}")
+    public Long testValue(@PathVariable Long value){return value;}
+
+    @GetMapping("/map/{map}")
+    public Map<Long,Long> testMap(@PathVariable Long map){return Map.of(map,map);}
+
+    @GetMapping("/{arrayList}")
+    public List<Long> testList(@PathVariable Long arrayList,@RequestParam Long a, @RequestParam Long b){
+        return new ArrayList<>(List.of(arrayList,a,b));
+    }
+}
+
 /***********************************************************************************************/
 @Indexed
 @Service  // (Business) @Service marks this class as a Spring-managed bean that can be injected anywhere.

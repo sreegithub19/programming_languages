@@ -12,6 +12,8 @@ def multiply(a, b):
 
 def divide(a, b):
     """Returns the division of a by b. Raises ZeroDivisionError if b is zero."""
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        raise TypeError("Inputs must be numbers")
     if b == 0:
         raise ZeroDivisionError("Cannot divide by zero.")
     return a / b
