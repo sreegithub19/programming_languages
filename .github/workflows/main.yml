@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code with submodules
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           token: ${{ secrets.CI_TOKEN }}  # Your PAT secret
 
 
