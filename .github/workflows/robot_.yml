@@ -26,7 +26,11 @@ jobs:
         pip install --upgrade pip
         pip install -r requirements.txt
         robot search_test.robot  # Run the .robot file
-        cd ../..
+
+        git clone git@github.com:ypasmk/robot-framework-docker.git
+        cd robot-framework-docker && chmod +x run_tests.sh && ./run_tests.sh
+        
+        cd ../.. 
 
 # To get API keys:
   # Chatgpt : https://platform.openai.com/api-keys
@@ -47,6 +51,7 @@ jobs:
            name: captured-html-artifacts
            path: |
             imagery
+            Python/robot_/robot-framework-docker/reports
 
 
     - name: Run rfdebug
