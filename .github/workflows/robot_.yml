@@ -37,13 +37,13 @@ jobs:
   # Gemini : https://console.cloud.google.com/apis/credentials?project=gen-lang-client-0816797577&pli=1
   # New Gemini: https://console.cloud.google.com/apis/credentials?project=concise-decker-469715-q7&pli=1
   # Github copilot (uses OpenAI key) : https://platform.openai.com/api-keys
-    - name: Run AI_generated image creation using Python (using Gemini)
-      run: |
-        pip install openai==0.28
-        mkdir imagery
-        # python Python/ML_AI/openai_prompt.py (Error: Connection error.) 
-        # python Python/ML_AI/github_copilot_prompt.py (pip install openai==0.28) (openai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded)
-        python Python/ML_AI/gemini_images.py ${{ secrets.GEMINI_SECRET }}
+    # - name: Run AI_generated image creation using Python (using Gemini)
+    #   run: |
+    #     pip install openai==0.28
+    #     mkdir imagery
+    #     # python Python/ML_AI/openai_prompt.py (Error: Connection error.) 
+    #     # python Python/ML_AI/github_copilot_prompt.py (pip install openai==0.28) (openai.error.APIConnectionError: Error communicating with OpenAI: HTTPSConnectionPool(host='api.openai.com', port=443): Max retries exceeded)
+    #     python Python/ML_AI/gemini_images.py ${{ secrets.GEMINI_SECRET }}
 
     - name: Upload file as artifact
       uses: actions/upload-artifact@v4
